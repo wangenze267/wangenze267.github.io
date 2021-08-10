@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Vue（2.x）Vue的环境配置Node.js的安装Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。 1node -v  npm&#x2F;yarnnpm（node package manager），俗称包管理器（类比于java里的maven），顾名思义，主要功能就是管理node包，包括：安装、卸载、更新等等。 他未经">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js基础环境的搭建以及简单使用Element-ui">
+<meta property="og:url" content="https://wangenze267.github.io/posts/3896443464.html/index.html">
+<meta property="og:site_name" content="Wangez-Blog">
+<meta property="og:description" content="Vue（2.x）Vue的环境配置Node.js的安装Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。 1node -v  npm&#x2F;yarnnpm（node package manager），俗称包管理器（类比于java里的maven），顾名思义，主要功能就是管理node包，包括：安装、卸载、更新等等。 他未经">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wangez.site/img/shangke/vueui.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/vue-ui.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/chuangjian.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/detail.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/gongneng1.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/gongneng2.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/peizhi.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/baocunyushe.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/yunxing.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/chuagnjiantrue.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/core-js.png">
+<meta property="og:image" content="https://wangez.site/img/shangke/element.png">
+<meta property="article:published_time" content="2021-06-13T01:46:39.568Z">
+<meta property="article:modified_time" content="2021-08-08T14:05:31.897Z">
+<meta property="article:author" content="Ned">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangez.site/img/shangke/vueui.png">
+
+<link rel="canonical" href="https://wangenze267.github.io/posts/3896443464.html/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vue.js基础环境的搭建以及简单使用Element-ui | Wangez-Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ebc804bb1afaa8fa7c3ca146640388cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Wangez-Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Wangez-Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>朋友</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/3896443464.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Ned">
+      <meta itemprop="description" content="小小前端成长日记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wangez-Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue.js基础环境的搭建以及简单使用Element-ui
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-13 09:46:39" itemprop="dateCreated datePublished" datetime="2021-06-13T09:46:39+08:00">2021-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-08 22:05:31" itemprop="dateModified" datetime="2021-08-08T22:05:31+08:00">2021-08-08</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/3896443464.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/3896443464.html/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Vue（2-x）"><a href="#Vue（2-x）" class="headerlink" title="Vue（2.x）"></a>Vue（2.x）</h1><h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="npm-yarn"><a href="#npm-yarn" class="headerlink" title="npm/yarn"></a>npm/yarn</h3><p>npm（node package manager），俗称包管理器（类比于java里的maven），顾名思义，主要功能就是管理node包，包括：安装、卸载、更新等等。</p>
+<p>他未经更改过的源，是国外的镜像，所以经常会有包丢失或者下载速度慢，建议自己换成淘宝源（阿里做的同步镜像）</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//临时</span><br><span class="line">npm --registry https://registry.npm.taobao.org install express</span><br><span class="line">//永久</span><br><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">npm install express</span><br></pre></td></tr></table></figure>
+
+<p>yarn的话，直接去官网下载安装就行。</p>
+<h3 id="Vue-cli"><a href="#Vue-cli" class="headerlink" title="Vue-cli"></a>Vue-cli</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>Vue CLI 是一个基于 Vue.js 进行快速开发的完整系统，提供：</p>
+<ul>
+<li><p>通过 <code>@vue/cli</code> 实现的交互式的项目脚手架。</p>
+</li>
+<li><p>通过 <code>@vue/cli</code> + <code>@vue/cli-service-global</code> 实现的零配置原型开发。</p>
+</li>
+<li><p>一个运行时依赖 (</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@vue/cli-service</span><br></pre></td></tr></table></figure>
+
+<p>)，该依赖：</p>
+<ul>
+<li>可升级！；</li>
+<li>基于 webpack 构建，并带有合理的默认配置！；</li>
+<li>可以通过项目内的配置文件进行配置！；</li>
+<li>可以通过插件进行扩展！。</li>
+</ul>
+</li>
+<li><p>一个丰富的官方插件集合，集成了前端生态中最好的工具。</p>
+</li>
+<li><p>一套完全图形化的创建和管理 Vue.js 项目的用户界面！ 。</p>
+</li>
+</ul>
+<p>Vue CLI 致力于将 Vue 生态中的工具基础标准化。它确保了各种构建工具能够基于智能的默认配置即可平稳衔接，这样你可以专注在撰写应用上，而不必花好几天去纠结配置的问题。</p>
+<p>到现在，Vue的环境可以说是暂时配置完成了！下面我们去new一个Vue项目吧。</p>
+<h2 id="Vue项目的搭建（Vue-ui）"><a href="#Vue项目的搭建（Vue-ui）" class="headerlink" title="Vue项目的搭建（Vue-ui）"></a>Vue项目的搭建（Vue-ui）</h2><p>首先打开vs-code，在终端中输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wangez.site/img/shangke/vueui.png" alt="vueui"></p>
+<p>等待一会，就会打开Vue的一个图形化管理界面。</p>
+<p><img src="https://wangez.site/img/shangke/vue-ui.png" alt="vue-ui"></p>
+<p>点击左下角那个小房子的按钮，进入到项目管理的主页</p>
+<p>点击创建项目。</p>
+<p><img src="https://wangez.site/img/shangke/chuangjian.png" alt="chuangjian"></p>
+<p>初始化git仓建议勾选打开，包管理器默认就好，接着我们只需要输入项目名字就可以点击下一步了</p>
+<p><img src="https://wangez.site/img/shangke/detail.png" alt="detail"></p>
+<p>他会让我们选择一套预设，图中的第一个，是Vue2的官方默认模板，第二个是Vue3的默认模板，第三个选项是让我们手动配置本项目的配置，并可以保存成模板，方便下次使用，最后一个就是从你的git仓库去拉取一套预设，作为本项目的预设。</p>
+<p>因为方便大家操作，所以我们选择手动配置。</p>
+<p><img src="https://wangez.site/img/shangke/gongneng1.png" alt="gongneng2"></p>
+<p><img src="https://wangez.site/img/shangke/gongneng2.png" alt="gongneng2"></p>
+<p>来详细说明一下这些选择都是什么意思。</p>
+<ul>
+<li>选择Vue版本，这个就是让你选择你项目到底是用Vue2还是Vue3来做开发</li>
+<li>Babel，是一个JavaScript编译器。</li>
+<li>TypeScript（微软开发），JavaScript的超集，可以编译成JavaScript。</li>
+<li>Router，vue-router，路由组件</li>
+<li>Vuex，提供vue中的状态管理</li>
+<li>CSS Pre-processors，CSS预处理，Less，Sass，Stylus。</li>
+<li>Linter/Formatter，代码质量检查，代码规范验证。（ESlint真的很烦人）</li>
+<li>使用配置文件，这个是中文的，我就不解释了，勾选就行！</li>
+</ul>
+<p>我勾选的有1、2、router、Linter/Formatter、使用配置文件。（因为Vuex，在本次演示中用不到）</p>
+<p>进入配置页面，</p>
+<p><img src="https://wangez.site/img/shangke/peizhi.png" alt="peizhi"></p>
+<p>第一个，我们看见后面2.x的时候就明白了，这个就是选择Vue2 or Vue3的一个选项。</p>
+<p>第二个，日常关闭就好，对我们作用不大。</p>
+<p>重点来了，第三个是让我们选择代码检查的一个严格程度。</p>
+<p>提供了四个选项：</p>
+<ul>
+<li>ESlint with error prevention only (友好)</li>
+<li>ESlint + Airbnb config (地狱)</li>
+<li>ESlint + Standard config (标准)</li>
+<li>ESlint + Prettier (美观？)</li>
+</ul>
+<p>我标注的备注都很明显的说出来了这几个标准是什么样子的，本人选的是第一个，但是不管选哪个都无所谓，这个可以进去从配置文件进行修改，只是有点麻烦的事情。</p>
+<p><img src="https://wangez.site/img/shangke/baocunyushe.png" alt="baocunyushe"></p>
+<p>点击创建，他会提示你是否保存此次预设，可以依据自己的情况来选择。</p>
+<p>这样，我们的项目就创建完成了！</p>
+<h3 id="Hello-Vue"><a href="#Hello-Vue" class="headerlink" title="Hello Vue"></a>Hello Vue</h3><p>打开你的开发工具（我使用的是Vs code）</p>
+<p>打开该项目的终端</p>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run serve 或者 yarn serve</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wangez.site/img/shangke/yunxing.png" alt="yunxing"></p>
+<p>第一个是本地地址</p>
+<p>第二个是网络地址</p>
+<p>我们在浏览器访问一下：</p>
+<p><img src="https://wangez.site/img/shangke/chuagnjiantrue.png" alt="chuagnjiantrue"></p>
+<p>至此，一个Vue项目就创建成功了。</p>
+<h2 id="Vue的目录结构"><a href="#Vue的目录结构" class="headerlink" title="Vue的目录结构"></a>Vue的目录结构</h2><ul>
+<li>node_moudules:依赖保存的地方</li>
+<li>public:静态资源保存的地方</li>
+<li>dist:项目打包过后，需要挂载的目录</li>
+<li>src:写代码的地方<ul>
+<li>assets：src中引用的静态资源（要区别于public static）</li>
+<li>componets：组件</li>
+<li>router：路由</li>
+<li>views：视图（页面）</li>
+<li>App.vue：页面共有</li>
+<li>main.js：全局依赖或者配置</li>
+</ul>
+</li>
+<li>package.json：配置项目的基本信息和依赖的大概版本，这里强调一下，该文件的依赖版本只是指定大概的范围，具体真是下载的版本以package-lock.json为主</li>
+<li>package-lock.json：记录node_modules依赖的真是版本</li>
+<li>README.md:项目说明</li>
+</ul>
+<h2 id="Element-ui"><a href="#Element-ui" class="headerlink" title="Element-ui"></a>Element-ui</h2><p>element-ui是饿了么团队基于Vue2，封装的一个组件库，截止到目前，他可以搭配Vue2，Vue3，React，Augular等框架进行开发。</p>
+<h3 id="我觉得它的好处"><a href="#我觉得它的好处" class="headerlink" title="我觉得它的好处"></a>我觉得它的好处</h3><p>他的官方文档对小白很友好，讲解的很细致，组件，组件的属性，提供的钩子，触发事件传的参数等等，都给出了详细的说明。</p>
+<p>他提供了自己的icon图标，这样我们在使用的时候就会很方便，不用每个图标都要去阿里矢量库去找。</p>
+<h3 id="我觉得它的坏处"><a href="#我觉得它的坏处" class="headerlink" title="我觉得它的坏处"></a>我觉得它的坏处</h3><p>成也组件，败也组件，他的UI，权重特别高，导致我们将他的样式进行转换的时候就会很麻烦。</p>
+<p>有时候组件会出bug，去年寒假我做一个Vue2+element-ui的项目时，他的<code>el-table</code>组件出了一个bug，在删减列后增加列，会导致index窜行或者窜位，导致有两排index同时出现的dom树中，后来向官方反应后，今年2月份的时候，我在看，bug已经消除了。</p>
+<h3 id="使用一下element-ui"><a href="#使用一下element-ui" class="headerlink" title="使用一下element-ui"></a>使用一下element-ui</h3><p>在使用之前，我们要先去给项目添加element的依赖，有两种方式，可以去到我们的vue-ui面板，去插件与依赖中分别搜索element，去安装，也可以使用终端的npm工具进行下载依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i element-ui -S</span><br></pre></td></tr></table></figure>
+
+<p>完后去element抄一段代码，随便写在页面中（我写在了app.vue中）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-row&gt;</span><br><span class="line">  &lt;el-button&gt;默认按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;primary&quot;&gt;主要按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;success&quot;&gt;成功按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;info&quot;&gt;信息按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;warning&quot;&gt;警告按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;danger&quot;&gt;危险按钮&lt;/el-button&gt;</span><br><span class="line">&lt;/el-row&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我直接复制过来了。</p>
+<p>粘贴完，直接<code>npm run serve</code></p>
+<p>是不是报错了？当然，因为我们还没有引入element到我们的项目中，我们只是安装了他的依赖而已。</p>
+<p>在main.js中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import ElementUI from &#x27;element-ui&#x27;</span><br><span class="line">import &#x27;element-ui/lib/theme-chalk/index.css&#x27;</span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure>
+
+<p>上面两句是引入，下面的那句是使用。缺一不可。</p>
+<p>假如在运行中遇到了这个错误，不要慌，这是你缺少了core.js的生产环境</p>
+<p><img src="https://wangez.site/img/shangke/core-js.png" alt="core-js"></p>
+<p>在终端运行这个之后，继续运行你的vue项目，就不会报错了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save core-js</span><br></pre></td></tr></table></figure>
+
+<p>好啦，让我们看看element的样子吧！</p>
+<p>我的app.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;el-row&gt;</span><br><span class="line">        &lt;el-button&gt;默认按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;primary&quot;&gt;主要按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;success&quot;&gt;成功按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;info&quot;&gt;信息按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;warning&quot;&gt;警告按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;danger&quot;&gt;危险按钮&lt;/el-button&gt;</span><br><span class="line">      &lt;/el-row&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>为了方便看效果，我把其他的都删了。</p>
+<p><img src="https://wangez.site/img/shangke/element.png" alt="element"></p>
+<p>这样，我们的element就是引用成功的。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>组件库提高了前端人员的开发效率，这个是肯定的，但是这并不是说前端开发就不需要掌握CSS的知识了，组件不是万能的，在项目中，肯定要依据项目状态对组件有或多或少的修改，所以还是建议想学前端的同学要学好CSS，打好基础很重要（以后封装一个自己的组件库，还不是想怎么改就怎么改）。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ned
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wangenze267.github.io/posts/3896443464.html/" title="Vue.js基础环境的搭建以及简单使用Element-ui">https://wangenze267.github.io/posts/3896443464.html/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/1559886533.html/" rel="prev" title="关于Hexo使用Next主题的一些优化">
+      <i class="fa fa-chevron-left"></i> 关于Hexo使用Next主题的一些优化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2624959054.html/" rel="next" title="框架简介之Vue.js">
+      框架简介之Vue.js <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue%EF%BC%882-x%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Vue（2.x）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">Vue的环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">Node.js的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-yarn"><span class="nav-number">1.1.2.</span> <span class="nav-text">npm&#x2F;yarn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-cli"><span class="nav-number">1.1.3.</span> <span class="nav-text">Vue-cli</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA%EF%BC%88Vue-ui%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Vue项目的搭建（Vue-ui）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-Vue"><span class="nav-number">1.2.1.</span> <span class="nav-text">Hello Vue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.</span> <span class="nav-text">Vue的目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Element-ui"><span class="nav-number">1.4.</span> <span class="nav-text">Element-ui</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E8%A7%89%E5%BE%97%E5%AE%83%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">我觉得它的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E8%A7%89%E5%BE%97%E5%AE%83%E7%9A%84%E5%9D%8F%E5%A4%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">我觉得它的坏处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%8Belement-ui"><span class="nav-number">1.4.3.</span> <span class="nav-text">使用一下element-ui</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">1.5.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ned"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ned</p>
+  <div class="site-description" itemprop="description">小小前端成长日记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/wang-enze" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;wang-enze" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+    
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ned</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">39k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">35 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span> 
+<script> 
+    var now = new Date(); 
+    function createtime() {
+    var grt= new Date("06/1/2021 00:00:00");
+    //此处修改你的建站时间或者网站上线时间 
+    now.setTime(now.getTime()+250); 
+    days = (now - grt ) / 1000 / 60 / 60 / 24; 
+    dnum = Math.floor(days); hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); 
+    hnum = Math.floor(hours); 
+    if(String(hnum).length ==1 ){
+        hnum = "0" + hnum;
+    } 
+    minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 )
+    {
+       mnum = "0" + mnum;
+    } 
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds);
+    if(String(snum).length ==1 ){snum = "0" + snum;} 
+    document.getElementById("timeDate").innerHTML = "  |  本站已安全运行 "+dnum+" 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+} 
+    setInterval("createtime()",250); 
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '3MMJqbdcNtEnRAvDBioROECS-gzGzoHsz',
+      appKey     : 'K4hk4upWc4PLUI7OOfdIfbVo',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

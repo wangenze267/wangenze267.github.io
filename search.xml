@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>JS中，函数原来有这么多种定义方法（暑假开始！）</title>
+    <url>/posts/1173819435.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在期末与暑假假期画饼之间不断奔波，很长时间没有记录了，今天在学习的时候看到了ES6的箭头函数，瞬间找到了写文的动力，那就来梳理一下在JavaScript中一共有几种定义函数的方式吧，最后再（微微）重点的介绍一下箭头函数✨</p>
+<p>过段时间，要加强算法学习了，这段时间也在力扣和牛客上找题做了一下，发现自己的算法真的烂，所以可能以后还会把算法题解写一写。（🍗+ 1）</p>
+<h3 id="JavaScript定义函数的几种方式"><a href="#JavaScript定义函数的几种方式" class="headerlink" title="JavaScript定义函数的几种方式"></a>JavaScript定义函数的几种方式</h3><p>以下是定义函数的几种方式，真正书写的话，个人觉得没有什么必须要用某种格式的情况，根据团队风格或者个人习惯来就好。</p>
+<span id="more"></span>
+
+<h4 id="最初的我们"><a href="#最初的我们" class="headerlink" title="最初的我们"></a>最初的我们</h4><p>我们刚接触js的时候，见到的就是它啦😎</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;hello javascript&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure>
+
+<p>这种方式大概也是陪伴我们时间最长的了吧？是不是呢？</p>
+<h4 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h4><p>函数都是Function的实例对象，也就可以说函数是值，与字符串，数字等是一样的。这种方法就是通过表达式来定义函数，也就是定义匿名函数，再将匿名函数交给变量。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> hello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;hello javascript&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><p>这种方法大家应该也都见过，它是定义匿名函数来作为对象属性的值，与函数表达式的理念相同。这种形式最早是在ES3中引入的。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="attr">fun</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ES5中，引入了访问器属性定义:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="keyword">get</span> <span class="title">name</span>() &#123;&#125;,</span><br><span class="line">	<span class="keyword">set</span> <span class="title">name</span>(<span class="params">name</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到get/set是不是感觉跟Java的类有一点像了，没错我也有这种感觉，继续往下看，类它来了！</p>
+<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p>在ES6中，有了类的概念（学过java的小伙伴们一定不会陌生），没错，js中也有类，而且也有构造方法等一些与Java类一样的东西。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.fun=<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;实例方法&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;构造方法&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="function"><span class="title">jingtai</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;静态方法&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="title">yuanxingfangfa</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;原型方法&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实例方法：定义在构造方法constructor中的this对象上，在类中，构造方法中的this指的是它的实例对象</li>
+<li>原型方法：与constructor方法同级，可以通过构造函数的原型链去调用，也可以通过实例对象来调用</li>
+<li>静态方法：通过static关键字定义，不能被实例调用，可以被构造函数调用。</li>
+</ul>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>终于到了我们这次文章的主角登场啦~  我去网上查了一些资料，浏览了CSDN和掘金的一些博客社区，很多人都觉得，它是ES2015最具有争议性的函数之一，但是它如今也已经变得众所周知，无处不在。它为函数声明提供了两种不同的格式，赋值表达式（箭头后无大括号”{}”）和函数体（代码种包括0到多个语句时）。这个语法还允许在描述单个参数的时候不加圆括号，0个或者1个以上的时候要加圆括号。这些语法结构允许箭头函数有着多种书写格式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 无参的赋值表达式</span></span><br><span class="line">(<span class="function">() =&gt;</span> <span class="number">2</span>*<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个参数，忽略括号的赋值表达式</span></span><br><span class="line">(<span class="function"><span class="params">x</span> =&gt;</span> x*<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 一个参数，忽略括号直接跟函数体</span></span><br><span class="line">(<span class="function"><span class="params">x</span> =&gt;</span> &#123; <span class="keyword">return</span> x *<span class="number">2</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 括号中为参数列表和赋值表达式</span></span><br><span class="line">(<span class="function">(<span class="params">x,y</span>) =&gt;</span> x*y);</span><br></pre></td></tr></table></figure>
+
+<p>来稍微解释一下箭头函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">x =&gt; x * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>箭头函数相当于匿名函数，并且简化了函数定义，使用起来非常的方便。</p>
+<p>但是使用箭头函数，我们要注意以下几点：</p>
+<ul>
+<li><p>箭头函数是没有this的，它的this是从外部获取的。</p>
+</li>
+<li><p>箭头函数不能做new操作，没有this意味着它不能用作构造，所以不能用new调用它们</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jiantou = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> jiantou();</span><br></pre></td></tr></table></figure>
+
+<p>这时候会报错，<code>jiantou is not a constructor</code></p>
+</li>
+<li><p>箭头函数没有arguments对象，但是同this一样，他可以访问外围函数的arguments对象</p>
+</li>
+<li><p>箭头函数没有原型和super，它没有原型，也就不能通过super来访问原型的属性，不过同之前的this、arguments一样，这些值由外围最近一层的非箭头函数决定</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jiantou = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(jiantou.prototype); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>🐱‍🐉终于水完了，溜了溜了。</p>
+<p>还是那句话，你可以暂时不使用这种方法来写代码，但是你不能不会用，因为你不会知道什么时候会突然要求你用这种方法去进行业务操作。</p>
+<p>快乐的暑假，开始了！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript变量提升</title>
+    <url>/posts/388126410.html/</url>
+    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
+<p>先从一个简单的例子来入手：</p>
+<blockquote>
+<p>a = 2;<br>var a;<br>console.log(a);</p>
+</blockquote>
+<span id="more"></span>
+
+<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
+<blockquote>
+<p>var a;<br>a = 2;<br>console.log(a);</p>
+</blockquote>
+<p>那么我们再看一个例子：</p>
+<blockquote>
+<p>console.log(a);<br>var a = 2;</p>
+</blockquote>
+<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
+<blockquote>
+<p>var a;<br>console.log(a);<br>a = 2;</p>
+</blockquote>
+<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
+</blockquote>
+<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
+<p>那么多个函数声明怎么办呢？</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
+</blockquote>
+<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
+<p>还有最后一个例子了：</p>
+<blockquote>
+<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
+</blockquote>
+<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue.js基础环境的搭建以及简单使用Element-ui</title>
+    <url>/posts/3896443464.html/</url>
+    <content><![CDATA[<h1 id="Vue（2-x）"><a href="#Vue（2-x）" class="headerlink" title="Vue（2.x）"></a>Vue（2.x）</h1><h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="npm-yarn"><a href="#npm-yarn" class="headerlink" title="npm/yarn"></a>npm/yarn</h3><p>npm（node package manager），俗称包管理器（类比于java里的maven），顾名思义，主要功能就是管理node包，包括：安装、卸载、更新等等。</p>
+<p>他未经更改过的源，是国外的镜像，所以经常会有包丢失或者下载速度慢，建议自己换成淘宝源（阿里做的同步镜像）</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//临时</span><br><span class="line">npm --registry https://registry.npm.taobao.org install express</span><br><span class="line">//永久</span><br><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">npm install express</span><br></pre></td></tr></table></figure>
+
+<p>yarn的话，直接去官网下载安装就行。</p>
+<h3 id="Vue-cli"><a href="#Vue-cli" class="headerlink" title="Vue-cli"></a>Vue-cli</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install vue-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>Vue CLI 是一个基于 Vue.js 进行快速开发的完整系统，提供：</p>
+<ul>
+<li><p>通过 <code>@vue/cli</code> 实现的交互式的项目脚手架。</p>
+</li>
+<li><p>通过 <code>@vue/cli</code> + <code>@vue/cli-service-global</code> 实现的零配置原型开发。</p>
+</li>
+<li><p>一个运行时依赖 (</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@vue/cli-service</span><br></pre></td></tr></table></figure>
+
+<p>)，该依赖：</p>
+<ul>
+<li>可升级！；</li>
+<li>基于 webpack 构建，并带有合理的默认配置！；</li>
+<li>可以通过项目内的配置文件进行配置！；</li>
+<li>可以通过插件进行扩展！。</li>
+</ul>
+</li>
+<li><p>一个丰富的官方插件集合，集成了前端生态中最好的工具。</p>
+</li>
+<li><p>一套完全图形化的创建和管理 Vue.js 项目的用户界面！ 。</p>
+</li>
+</ul>
+<p>Vue CLI 致力于将 Vue 生态中的工具基础标准化。它确保了各种构建工具能够基于智能的默认配置即可平稳衔接，这样你可以专注在撰写应用上，而不必花好几天去纠结配置的问题。</p>
+<p>到现在，Vue的环境可以说是暂时配置完成了！下面我们去new一个Vue项目吧。</p>
+<h2 id="Vue项目的搭建（Vue-ui）"><a href="#Vue项目的搭建（Vue-ui）" class="headerlink" title="Vue项目的搭建（Vue-ui）"></a>Vue项目的搭建（Vue-ui）</h2><p>首先打开vs-code，在终端中输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wangez.site/img/shangke/vueui.png" alt="vueui"></p>
+<p>等待一会，就会打开Vue的一个图形化管理界面。</p>
+<p><img src="https://wangez.site/img/shangke/vue-ui.png" alt="vue-ui"></p>
+<p>点击左下角那个小房子的按钮，进入到项目管理的主页</p>
+<p>点击创建项目。</p>
+<p><img src="https://wangez.site/img/shangke/chuangjian.png" alt="chuangjian"></p>
+<p>初始化git仓建议勾选打开，包管理器默认就好，接着我们只需要输入项目名字就可以点击下一步了</p>
+<p><img src="https://wangez.site/img/shangke/detail.png" alt="detail"></p>
+<p>他会让我们选择一套预设，图中的第一个，是Vue2的官方默认模板，第二个是Vue3的默认模板，第三个选项是让我们手动配置本项目的配置，并可以保存成模板，方便下次使用，最后一个就是从你的git仓库去拉取一套预设，作为本项目的预设。</p>
+<p>因为方便大家操作，所以我们选择手动配置。</p>
+<p><img src="https://wangez.site/img/shangke/gongneng1.png" alt="gongneng2"></p>
+<p><img src="https://wangez.site/img/shangke/gongneng2.png" alt="gongneng2"></p>
+<p>来详细说明一下这些选择都是什么意思。</p>
+<ul>
+<li>选择Vue版本，这个就是让你选择你项目到底是用Vue2还是Vue3来做开发</li>
+<li>Babel，是一个JavaScript编译器。</li>
+<li>TypeScript（微软开发），JavaScript的超集，可以编译成JavaScript。</li>
+<li>Router，vue-router，路由组件</li>
+<li>Vuex，提供vue中的状态管理</li>
+<li>CSS Pre-processors，CSS预处理，Less，Sass，Stylus。</li>
+<li>Linter/Formatter，代码质量检查，代码规范验证。（ESlint真的很烦人）</li>
+<li>使用配置文件，这个是中文的，我就不解释了，勾选就行！</li>
+</ul>
+<p>我勾选的有1、2、router、Linter/Formatter、使用配置文件。（因为Vuex，在本次演示中用不到）</p>
+<p>进入配置页面，</p>
+<p><img src="https://wangez.site/img/shangke/peizhi.png" alt="peizhi"></p>
+<p>第一个，我们看见后面2.x的时候就明白了，这个就是选择Vue2 or Vue3的一个选项。</p>
+<p>第二个，日常关闭就好，对我们作用不大。</p>
+<p>重点来了，第三个是让我们选择代码检查的一个严格程度。</p>
+<p>提供了四个选项：</p>
+<ul>
+<li>ESlint with error prevention only (友好)</li>
+<li>ESlint + Airbnb config (地狱)</li>
+<li>ESlint + Standard config (标准)</li>
+<li>ESlint + Prettier (美观？)</li>
+</ul>
+<p>我标注的备注都很明显的说出来了这几个标准是什么样子的，本人选的是第一个，但是不管选哪个都无所谓，这个可以进去从配置文件进行修改，只是有点麻烦的事情。</p>
+<p><img src="https://wangez.site/img/shangke/baocunyushe.png" alt="baocunyushe"></p>
+<p>点击创建，他会提示你是否保存此次预设，可以依据自己的情况来选择。</p>
+<p>这样，我们的项目就创建完成了！</p>
+<h3 id="Hello-Vue"><a href="#Hello-Vue" class="headerlink" title="Hello Vue"></a>Hello Vue</h3><p>打开你的开发工具（我使用的是Vs code）</p>
+<p>打开该项目的终端</p>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm run serve 或者 yarn serve</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wangez.site/img/shangke/yunxing.png" alt="yunxing"></p>
+<p>第一个是本地地址</p>
+<p>第二个是网络地址</p>
+<p>我们在浏览器访问一下：</p>
+<p><img src="https://wangez.site/img/shangke/chuagnjiantrue.png" alt="chuagnjiantrue"></p>
+<p>至此，一个Vue项目就创建成功了。</p>
+<h2 id="Vue的目录结构"><a href="#Vue的目录结构" class="headerlink" title="Vue的目录结构"></a>Vue的目录结构</h2><ul>
+<li>node_moudules:依赖保存的地方</li>
+<li>public:静态资源保存的地方</li>
+<li>dist:项目打包过后，需要挂载的目录</li>
+<li>src:写代码的地方<ul>
+<li>assets：src中引用的静态资源（要区别于public static）</li>
+<li>componets：组件</li>
+<li>router：路由</li>
+<li>views：视图（页面）</li>
+<li>App.vue：页面共有</li>
+<li>main.js：全局依赖或者配置</li>
+</ul>
+</li>
+<li>package.json：配置项目的基本信息和依赖的大概版本，这里强调一下，该文件的依赖版本只是指定大概的范围，具体真是下载的版本以package-lock.json为主</li>
+<li>package-lock.json：记录node_modules依赖的真是版本</li>
+<li>README.md:项目说明</li>
+</ul>
+<h2 id="Element-ui"><a href="#Element-ui" class="headerlink" title="Element-ui"></a>Element-ui</h2><p>element-ui是饿了么团队基于Vue2，封装的一个组件库，截止到目前，他可以搭配Vue2，Vue3，React，Augular等框架进行开发。</p>
+<h3 id="我觉得它的好处"><a href="#我觉得它的好处" class="headerlink" title="我觉得它的好处"></a>我觉得它的好处</h3><p>他的官方文档对小白很友好，讲解的很细致，组件，组件的属性，提供的钩子，触发事件传的参数等等，都给出了详细的说明。</p>
+<p>他提供了自己的icon图标，这样我们在使用的时候就会很方便，不用每个图标都要去阿里矢量库去找。</p>
+<h3 id="我觉得它的坏处"><a href="#我觉得它的坏处" class="headerlink" title="我觉得它的坏处"></a>我觉得它的坏处</h3><p>成也组件，败也组件，他的UI，权重特别高，导致我们将他的样式进行转换的时候就会很麻烦。</p>
+<p>有时候组件会出bug，去年寒假我做一个Vue2+element-ui的项目时，他的<code>el-table</code>组件出了一个bug，在删减列后增加列，会导致index窜行或者窜位，导致有两排index同时出现的dom树中，后来向官方反应后，今年2月份的时候，我在看，bug已经消除了。</p>
+<h3 id="使用一下element-ui"><a href="#使用一下element-ui" class="headerlink" title="使用一下element-ui"></a>使用一下element-ui</h3><p>在使用之前，我们要先去给项目添加element的依赖，有两种方式，可以去到我们的vue-ui面板，去插件与依赖中分别搜索element，去安装，也可以使用终端的npm工具进行下载依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i element-ui -S</span><br></pre></td></tr></table></figure>
+
+<p>完后去element抄一段代码，随便写在页面中（我写在了app.vue中）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-row&gt;</span><br><span class="line">  &lt;el-button&gt;默认按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;primary&quot;&gt;主要按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;success&quot;&gt;成功按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;info&quot;&gt;信息按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;warning&quot;&gt;警告按钮&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button type=&quot;danger&quot;&gt;危险按钮&lt;/el-button&gt;</span><br><span class="line">&lt;/el-row&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我直接复制过来了。</p>
+<p>粘贴完，直接<code>npm run serve</code></p>
+<p>是不是报错了？当然，因为我们还没有引入element到我们的项目中，我们只是安装了他的依赖而已。</p>
+<p>在main.js中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import ElementUI from &#x27;element-ui&#x27;</span><br><span class="line">import &#x27;element-ui/lib/theme-chalk/index.css&#x27;</span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure>
+
+<p>上面两句是引入，下面的那句是使用。缺一不可。</p>
+<p>假如在运行中遇到了这个错误，不要慌，这是你缺少了core.js的生产环境</p>
+<p><img src="https://wangez.site/img/shangke/core-js.png" alt="core-js"></p>
+<p>在终端运行这个之后，继续运行你的vue项目，就不会报错了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save core-js</span><br></pre></td></tr></table></figure>
+
+<p>好啦，让我们看看element的样子吧！</p>
+<p>我的app.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;el-row&gt;</span><br><span class="line">        &lt;el-button&gt;默认按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;primary&quot;&gt;主要按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;success&quot;&gt;成功按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;info&quot;&gt;信息按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;warning&quot;&gt;警告按钮&lt;/el-button&gt;</span><br><span class="line">        &lt;el-button type=&quot;danger&quot;&gt;危险按钮&lt;/el-button&gt;</span><br><span class="line">      &lt;/el-row&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>为了方便看效果，我把其他的都删了。</p>
+<p><img src="https://wangez.site/img/shangke/element.png" alt="element"></p>
+<p>这样，我们的element就是引用成功的。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>组件库提高了前端人员的开发效率，这个是肯定的，但是这并不是说前端开发就不需要掌握CSS的知识了，组件不是万能的，在项目中，肯定要依据项目状态对组件有或多或少的修改，所以还是建议想学前端的同学要学好CSS，打好基础很重要（以后封装一个自己的组件库，还不是想怎么改就怎么改）。</p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Axios踩坑日记</title>
+    <url>/posts/2698809561.html/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
+<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
+<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
+<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Axios</tag>
+        <tag>踩坑日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Hexo搭建自己的博客</title>
+    <url>/posts/735412972.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
+<h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
+<span id="more"></span>
+
+<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><p>在安装hexo前，电脑上具备有git与node两个环境才行</p>
+<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，我觉得建议每个人都去了解一下。廖雪峰老师的Git教程写的非常好，大家可以了解一下。<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></p>
+<p>windows：到git官网上下载,<a href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
+<p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p>Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。</p>
+<p>windows：<a href="https://nodejs.org/en/download/">nodejs</a>  </p>
+<p>linux:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+
+<p>安装完后，打开命令行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>检查一下有没有安装成功</p>
+<p>顺便说一下，windows在git安装完后，就可以直接使用git bash来敲命令行了。</p>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>现在我们就可以安装hexo了</p>
+<p>前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹blog，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
+<p>输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>依旧用<code>hexo -v</code>查看一下版本</p>
+<p>至此就全部安装完了。</p>
+<p>接下来初始化一个blog吧！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init myblog(myblog是你创建的文件夹的名字，可以随意命名)</span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd myblog //进入这个myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>新建完成后，指定文件夹目录下有：</p>
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：用来存放你的文章</li>
+<li>themes：主题</li>
+<li>_config.yml: 博客的配置文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>打开hexo的服务，在浏览器输入<code>localhost:4000</code>就可以看到你生成的博客了。</p>
+<p>使用ctrl+c可以把服务关掉。</p>
+<p>注：可以使用 <code>hexo command</code> 来查看hexo全部命令</p>
+<h3 id="准备好GitHub"><a href="#准备好GitHub" class="headerlink" title="准备好GitHub"></a>准备好GitHub</h3><p>首先，你先要有一个GitHub账户，去注册一个吧。</p>
+<p>注册完登录后，在GitHub.com中看到一个New repository，新建仓库</p>
+<p>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，xxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
+<p>点击create repository。</p>
+<p>回到你的git bash中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户。</p>
+<p>可以用以下两条，检查一下你有没有输对:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
+
+<h3 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h3><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，修改为<br>YourgithubName就是你的GitHub账户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加。<br><code>hexo generate</code> 顾名思义，生成静态文章，可以用 <code>hexo g</code>缩写<br><code>hexo deploy</code> 部署文章，可以用<code>hexo d</code>缩写</p>
+<p>注意deploy时可能要你输入username和password。</p>
+<p>过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！</p>
+<h3 id="关联个人域名"><a href="#关联个人域名" class="headerlink" title="关联个人域名"></a>关联个人域名</h3><p>如果你想自己的域名与博客也关联起来的话，可以看这里</p>
+<p>在source里创建一个叫CNAME的文件（注意没有任何后缀，名字就叫CNAME）</p>
+<p>在CNAME里面写上你的域名，例如：</p>
+<blockquote>
+<p>blog.wangez.site</p>
+</blockquote>
+<p>之后打开git bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>在GitHub上你创建的仓库里就会多一个叫做CNAME的文件了</p>
+<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
+]]></content>
+      <tags>
+        <tag>踩坑日记</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Hexo使用Next主题的一些优化</title>
+    <url>/posts/1559886533.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
+<p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
+<h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
+<span id="more"></span>
+
+<p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure>
+
+<p>记得将原有的permalink注释掉或者删掉</p>
+<p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<p>到这，关于优化文章链接的操作我们就做完啦！</p>
+<h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p>
+<p>需要打开这个文件进行修改。</p>
+<p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p>
+<p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p>
+<p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p>
+<h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p>
+<p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
+
+<p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p>
+<p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Hexo配置使用Next主题</title>
+    <url>/posts/2781919463.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
+<h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
+<p><code>Next8.2.0</code></p>
+<p>版本不同可能会有些差异</p>
+<span id="more"></span>
+
+<h3 id="安装next主题"><a href="#安装next主题" class="headerlink" title="安装next主题"></a>安装next主题</h3><p>去next团队的主页去下载一个zip压缩包</p>
+<p><img src="https://wangez.site/img/next.png" alt="image-20210216103416503"></p>
+<p>完后将他放在<code>themes</code>目录下并且解压，重命名文件夹为<code>next</code></p>
+<p><code>themes/</code>下是Hexo用来放主题的</p>
+<h3 id="修改站点配置文件"><a href="#修改站点配置文件" class="headerlink" title="修改站点配置文件"></a>修改站点配置文件</h3><p>站点配置文件：<code>_config.yml</code></p>
+<p>参考Hexo文档中的说明，我们需要给博客设定主标题以及副标题、作者名称、语言、时区等，你可以参考以下我的设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Wangez-Blog  #网站标题</span><br><span class="line">subtitle: &#x27;Ned的个人博客&#x27;  #网站副标题</span><br><span class="line">description: &#x27;Ned的个人博客&#x27;  #网站描述</span><br><span class="line">keywords:  #网站关键词</span><br><span class="line">author: Ned  #您的名字</span><br><span class="line">language: zh-CN  #语言</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;  #时区</span><br></pre></td></tr></table></figure>
+
+<h4 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h4><p>在站点配置文件中，找到 theme 属性，然后修改为 next 即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h3><p>主题配置文件：<code>themes/next/_config.yml</code></p>
+<h4 id="设定主题风格"><a href="#设定主题风格" class="headerlink" title="设定主题风格"></a>设定主题风格</h4><p>Next提供了4种风格样式供我们选择。我个人偏好最经典且极简的Muse风格。你可以4种都体验以下。选择哪个风格，就删除掉对应风格名所在行前面的# ，可以参考我的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line"># scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h4 id="博客主标题上方的logo"><a href="#博客主标题上方的logo" class="headerlink" title="博客主标题上方的logo"></a>博客主标题上方的logo</h4><p>这个我是没有设置的，有需要的可以自己设置一下，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Custom Logo (Warning: Do not support scheme Mist)主页logo</span><br><span class="line">custom_logo: /uploads/logo.png</span><br></pre></td></tr></table></figure>
+
+<p>顺便一提，后面我们还会遇到 引用图片地址 的类似设置。<code>/uploads/logo.png </code>对应的本地blog文件夹中位置是 <code>\blog\themes\next\source\uploads\logo.png</code> 其中 <code>uploads</code> 文件夹，和<code>logo.png</code>文件，都需要自己创建。</p>
+<h4 id="版权信息说明"><a href="#版权信息说明" class="headerlink" title="版权信息说明"></a>版权信息说明</h4><p>网上的太繁琐了，其实不用改太多。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
+
+<p>版权声明文本是可以修改的，后面会介绍到。</p>
+<h4 id="设置导航栏菜单"><a href="#设置导航栏菜单" class="headerlink" title="设置导航栏菜单"></a>设置导航栏菜单</h4><p>我觉得设置多了太麻烦，于是就保留了<code>主页</code> <code>标签</code> <code>关于</code> <code>归档</code>四个</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  #categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  #schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  #sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  #commonweal: /404/ || fa fa-heartbeat</span><br><span class="line"></span><br><span class="line"># Enable / Disable menu icons / item badges.</span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
+
+<p>启用哪个功能，就删除对应行前面的 # </p>
+<h4 id="侧边栏设置"><a href="#侧边栏设置" class="headerlink" title="侧边栏设置"></a>侧边栏设置</h4><p>我觉得左边挺好的，就没有改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  # position: right</span><br></pre></td></tr></table></figure>
+
+<p>设置侧边栏的头像，一般为作者的头像，和博客的logo有区别。</p>
+<p>可以是方形或圆形，还可以选择鼠标停留时，魔性的转动（我没设置）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: /uploads/avatar.jpg #头像图片地址 </span><br><span class="line">  # If true, the avatar will be dispalyed in circle.圆形选true 方形选false</span><br><span class="line">  rounded: true</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.魔性转动，打开选true</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
+
+<p>侧边栏外链，可以指向某篇文章，或某个网址。这里可以用来展示其他发布渠道。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  #GitHub: https://github.com/yourname || fab fa-github</span><br><span class="line">  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope</span><br><span class="line">  #Weibo: https://weibo.com/yourname || fab fa-weibo</span><br><span class="line">  #Google: https://plus.google.com/yourname || fab fa-google</span><br><span class="line">  #Twitter: https://twitter.com/yourname || fab fa-twitter</span><br><span class="line">  #FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><br><span class="line">  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><br><span class="line">  #YouTube: https://youtube.com/yourname || fab fa-youtube</span><br><span class="line">  #Instagram: https://instagram.com/yourname || fab fa-instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || fab fa-skype</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true  #用来控制是否显示图标的</span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
+
+<p>和外链样式不同的是友链。默认显示为<code>友情链接</code>我将其修改为<code>我的朋友</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 我的朋友</span><br><span class="line">  # Available values: block | inline</span><br><span class="line">  layout: block</span><br><span class="line">#友情链接</span><br><span class="line">links:</span><br><span class="line">  Ned: https://wangez.site</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回顶部按钮显示阅读进度"><a href="#返回顶部按钮显示阅读进度" class="headerlink" title="返回顶部按钮显示阅读进度"></a>返回顶部按钮显示阅读进度</h4><p>觉得没什么用，不过我还是用了（打脸ing）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭动画效果"><a href="#关闭动画效果" class="headerlink" title="关闭动画效果"></a>关闭动画效果</h4><p>我觉得博客，渲染的太华丽反而不好，于是就将其关了，如果想打开可以将enable的值设置为<code>true</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br></pre></td></tr></table></figure>
+
+<p>到此，配置差不多就结束了，如果你还想优化你的博客，可以继续看下去。</p>
+<h3 id="优化你的博客"><a href="#优化你的博客" class="headerlink" title="优化你的博客"></a>优化你的博客</h3><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
+<p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure>
+
+<p>记得将原有的permalink注释掉或者删掉</p>
+<p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<p>到这，关于优化文章链接的操作我们就做完啦！</p>
+<h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p>
+<p>需要打开这个文件进行修改。</p>
+<p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p>
+<p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p>
+<p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p>
+<h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p>
+<p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
+
+<p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p>
+<p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于作用域与作用域链的理解</title>
+    <url>/posts/1077228788.html/</url>
+    <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
+<p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
+<span id="more"></span>
+
+<p>在<strong>ES6</strong>之前，JavaScript中有两种作用域，分别叫做<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
+<ul>
+<li>全局作用域：<strong>全局作用域</strong>中的对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期，页面被关闭才会被销毁。</li>
+<li>函数作用域：<strong>函数作用域</strong>就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。</li>
+</ul>
+<p>作用域给我的最大感觉就是隔离变量，在不同作用域的<strong>同名变量</strong>是不会冲突的。</p>
+<p>在ES6中，提出了<strong>块级作用域</strong>的概念。</p>
+<ul>
+<li><p><strong>块级作用域的特点</strong>：在代码块内部定义的变量在外部是访问不到的，并且变量会在该代码块执行完后被销毁掉。</p>
+</li>
+<li><p><strong>块级作用域形式</strong>：就是使用大括号包裹的代码块<code>&#123;&#125;</code>，比如函数，判断语句，循环语句，甚至单独的一个<code>&#123;&#125;</code>，包裹的也可以看作是一个块级作用域。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// if块</span></span><br><span class="line"><span class="keyword">if</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// while 块</span></span><br><span class="line"><span class="keyword">while</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// 函数块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// for循环块</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;&#125;</span><br><span class="line"><span class="comment">// 单独的&#123;&#125;</span></span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>如何让块级作用域生效，ES6给我们提供了两个关键字：<strong>let和const</strong></p>
+<p>来看看例子吧</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>我们来思考一道题：每隔一秒钟，打印出来一个自然数，自然数递增。</p>
+<p>是不是用一个for循环，里面设置好一个定时器？</p>
+<p>是这样？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还是这样？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>let、const关键字解决var变量提升的问题</strong></p>
+<p>之前有说过变量提升的问题，现在来看一下let与const是怎么解决问题的。</p>
+<p>首先举一下都会产生什么问题：</p>
+<ul>
+<li><p>变量提升会导致变量值被覆盖</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;张三&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">var</span> a = <span class="string">&quot;李四&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">showA() <span class="comment">// undefined  undefined</span></span><br></pre></td></tr></table></figure></li>
+<li><p>该销毁的变量销毁不掉</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>那么let、const是如何解决问题的呢？</p>
+<p>先来看一下这段代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">11</span>;</span><br><span class="line">	<span class="keyword">let</span> b = <span class="number">22</span>;</span><br><span class="line">	&#123; 	</span><br><span class="line">		<span class="keyword">let</span> b = <span class="number">33</span>;</span><br><span class="line">		<span class="keyword">var</span> c = <span class="number">44</span>;</span><br><span class="line">        <span class="keyword">let</span> d = <span class="number">55</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line">        <span class="built_in">console</span>.log(b); <span class="comment">// 33</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 22</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 44</span></span><br><span class="line">	<span class="built_in">console</span>.log(d); <span class="comment">// not defined</span></span><br><span class="line">&#125; </span><br><span class="line">fun()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>let与const关键字创建的变量是存储在词法环境的，而var创建的变量是存储在变量环境中的，访问变量的时候，先从执行上下文的词法环境中查找，再到变量环境中进行查找。</p>
+</li>
+<li><p>当块级内部代码执行结束后，内部let与const创建的变量会被销毁。</p>
+</li>
+<li><p>let跟const创建的变量，初始化不提升，创建提升，所以会造成<strong>暂时性死区</strong></p>
+<p>来看一下什么是暂时性死区吧</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候，我们的浏览器报错与之前的not defined就不一样了，它会报 <code> Cannot access &#39;a&#39; before initialization</code>这个错误，告诉我们在初始化前不能访问a这个变量，这是因为let与const只有创建提升，没有初始化提升，所以造成了这个问题。</p>
+</li>
+</ul>
+<p><strong>再次说明一下变量提升的问题</strong></p>
+<ul>
+<li>var的创建和初始化被提升，赋值不会被提升</li>
+<li>let的创建被提升，初始化和赋值不会被提升，所以会有暂时性死区的问题（就是访问不到变量）</li>
+<li>function的创建、初始化、赋值都会被提升</li>
+</ul>
+<p><strong>作用域的特点：是代码编译阶段就决定好的，和函数是如何调用的没有关系</strong></p>
+<p>看下面这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">biqibao</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;海绵宝宝&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test1 = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span>) &#123; </span><br><span class="line">    	<span class="keyword">let</span> myName = <span class="string">&quot;派大星&quot;</span>; </span><br><span class="line">    	<span class="built_in">console</span>.log(test);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;章鱼哥&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test = <span class="number">2</span>;</span><br><span class="line">    &#123; </span><br><span class="line">    	<span class="keyword">let</span> test = <span class="number">3</span>;</span><br><span class="line">        biqibao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot;珊迪&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> myAge = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> test =<span class="number">1</span>;</span><br><span class="line">fn(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>解释一下流程，biqibao函数在fn函数中被调用，要打印test变量，首先查找biqibao函数的内部作用域，没有找到，于是去到全局作用域进行查找，找到了let test = 1这句话，于是，打印1。与fn函数中的let test = 2这句话，一点关系都没有。</p>
+<p>这就是在诠释上面<strong>作用域特点</strong>的那句话。</p>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><strong>作用域链</strong>：当一个函数中使用了某个变量，首先会在自己内部作用域查找，然后再向外部一层一层查找，直到全局作用域，这个链式查找就是作用域链</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(num);</span><br><span class="line">		&#125;</span><br><span class="line">		fn3();</span><br><span class="line">	&#125;</span><br><span class="line">	fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>fn3要打印num变量，于是他从fn3的函数作用域，找到fn2的函数作用域，再找到fn1的函数作用域，再找到全局作用域，终于找到了num变量，成功将其打印。</p>
+<h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于闭包的一些理解</title>
+    <url>/posts/400024894.html/</url>
+    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
+<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
+<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
+
+<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
+<p>先来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
+
+<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
+<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
+<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
+<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
+<p>而这，就是闭包。</p>
+<p><strong>闭包：这就是我</strong>✌</p>
+<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
+<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
+<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
+<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
+<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
+<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
+<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
+<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
+<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
+<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
+<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
+<p><strong>请注意：闭包一定要慎用</strong></p>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
+<ul>
+<li><p>模仿块级作用域</p>
+<ul>
+<li>计时器的一个应用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打印一组li的下标</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>埋点计数器</p>
+<ul>
+<li>产品让做的网站分析的一种常用的数据采集方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>柯里化</p>
+<ul>
+<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
+<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
+<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
+<p>因为全局变量会被污染或者被修改。</p>
+<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
+<p><strong>闭包能够造成内存泄漏</strong></p>
+<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
+    <url>/posts/2373844462.html/</url>
+    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
+
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
+<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
+<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;" />
+
+<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
+<ul>
+<li>轮播图，我这边建议打死</li>
+<li>我的简历：参考咱们自己写的简历</li>
+<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
+<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
+</ul>
+<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;" />
+
+<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
+<ul>
+<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
+<li>利用校招跟社招做一下数据筛选</li>
+<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
+</ul>
+<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>前端知识链条中少不了的一环--Ajax</title>
+    <url>/posts/1172116075.html/</url>
+    <content><![CDATA[<blockquote>
+<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
+<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
+<span id="more"></span>
+
+<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
+<li>通过异步模式，提升了用户体验</li>
+<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
+<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
+</ul>
+<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
+<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>open()</p>
+<blockquote>
+<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
+</blockquote>
+</li>
+<li><p>send()</p>
+<blockquote>
+<p>send()方法表示着发送请求，不需要任何参数</p>
+</blockquote>
+</li>
+<li><p>监听请求成功后的状态变化</p>
+<blockquote>
+<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
+<p>readyState：共有五个状态</p>
+<ul>
+<li>0：未初始化</li>
+<li>1：open方法成功调用后</li>
+<li>2：服务器已经答应客户端的请求</li>
+<li>3：交互中，http头信息已经接收，响应数据未接收</li>
+<li>4：完成</li>
+</ul>
+<p>responseText：服务器端返回的文本内容，默认是字符串</p>
+<p>status：服务器端返回的状态码</p>
+<p>statusText：服务器端返回的状态码文本说明信息</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
+</li>
+<li><p>setRequestHeader()：设置请求头</p>
+</li>
+<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
+</li>
+<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
+<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
+</ul>
+<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
+<blockquote>
+<p>每日一问：今日你卷了没？</p>
+</blockquote>
+<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>弹性盒模型-flex</title>
+    <url>/posts/3659327966.html/</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
+<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
+<span id="more"></span>
+
+<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
+<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
+<p>容器的属性有6个，我们下面一一介绍他们：</p>
+<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
+<ul>
+<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
+<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
+<li>center:项目靠近主轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
+<ul>
+<li>flex-start:项目靠近交叉轴首端的方向。</li>
+<li>flex-end:项目靠近交叉轴末端的方向。</li>
+<li>center:项目与交叉轴中线对齐。</li>
+<li>baseline:项目与第一行文字基线对齐。</li>
+<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
+</ul>
+<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
+<ul>
+<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
+<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
+<li>center:项目靠近交叉轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
+<ul>
+<li>row:默认值，水平方向从左往右排列。</li>
+<li>row-reverse:水平方向从右往左排列。</li>
+<li>column:垂直方向从上往下排列。</li>
+<li>column-reverse:垂直方向从下往上排列。</li>
+</ul>
+<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
+<ul>
+<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
+<li>wrap:项目超出容器尺寸时换行。</li>
+<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
+</ul>
+<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
+<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
+<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
+<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
+<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
+<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
+<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
+<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
+<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
+]]></content>
+      <tags>
+        <tag>Css</tag>
+        <tag>Flex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信小程序相关</title>
+    <url>/posts/2713850416.html/</url>
+    <content><![CDATA[<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
+<ul>
+<li>1.修改数据的行为始终是同步的</li>
+</ul>
+<p>3.数据流：</p>
+<ul>
+<li>1.单项： Model —&gt; View</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="2-Vue"><a href="#2-Vue" class="headerlink" title="2. Vue"></a>2. Vue</h4><p>1.data中初始化数据<br>2.修改数据: this.key = value<br>3.数据流：</p>
+<ul>
+<li>1.Vue是单项数据流： Model —&gt; View</li>
+<li>2.Vue中实现了双向数据绑定： v-model</li>
+</ul>
+<h4 id="3-React"><a href="#3-React" class="headerlink" title="3. React"></a>3. React</h4><p>1.state中初始化状态数据<br>2.修改数据: this.setState()</p>
+<ul>
+<li>1.自身钩子函数中(componentDidMount)异步的</li>
+<li>2.非自身的钩子函数中(定时器的回调)同步的</li>
+</ul>
+<p>3.数据流：</p>
+<ul>
+<li>1.单项： Model —&gt; View</li>
+</ul>
+<h2 id="2-获取用户基本信息"><a href="#2-获取用户基本信息" class="headerlink" title="2. 获取用户基本信息"></a>2. 获取用户基本信息</h2><p>1.用户未授权(首次登陆)</p>
+<ul>
+<li>1.button open-type=‘getUserInfo’</li>
+</ul>
+<p>2.用户已经授权(再次登陆)</p>
+<ul>
+<li>1.wx.getUserInfo</li>
+</ul>
+<h2 id="3-前后端交互"><a href="#3-前后端交互" class="headerlink" title="3. 前后端交互"></a>3. 前后端交互</h2><p>1.语法: wx.request()<br>2.注意点:</p>
+<ul>
+<li>1.协议必须是https协议</li>
+<li>2.一个接口最多配置20个域名</li>
+<li>3.并发限制上限是10个</li>
+<li><ol>
+<li><strong>开发过程中设置不校验合法域名</strong>： 开发工具 —&gt; 右上角详情 —-&gt; 本地设置 —&gt; 不校验</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-本地存储"><a href="#4-本地存储" class="headerlink" title="4. 本地存储"></a>4. 本地存储</h2><p>1.语法: wx.setStorage() || wx.setStorageSync() || …..<br>2.注意点：</p>
+<ul>
+<li>1.建议存储的数据为json数据</li>
+<li>2.单个 key 允许存储的最大数据长度为 1MB，所有数据存储上限为 10MB</li>
+<li>3.属于永久存储，同H5的localStorage一样</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>小程序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>框架简介之Vue.js</title>
+    <url>/posts/2624959054.html/</url>
+    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
+<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
+<span id="more"></span>
+
+<blockquote>
+<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
+</blockquote>
+<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
+<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
+<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
+<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
+<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
+<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
+<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
+<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
+<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
+<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
+<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
+<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
+<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
+<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
+<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
+<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
+<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
+<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
+<p>声明式渲染与命令式渲染区别</p>
+<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
+<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
+<p><strong>命令式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解构运算符的理解与运用</title>
+    <url>/posts/1586874348.html/</url>
+    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
+<p><strong>你可以不用，但是你不能不懂✔</strong></p>
+<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
+<span id="more"></span>
+
+<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
+<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li><p>基本使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>嵌套使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+<li><p>忽略</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
+<li><p>不完全解构</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>剩余运算符</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>字符串</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
+<li><p>解构默认值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
+<li><p>交换变量的值.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
+<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
+<p>第88题，合并两个有序数组。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
+<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
+<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨域的问题终于能解决了</title>
+    <url>/posts/876750285.html/</url>
+    <content><![CDATA[<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！</p>
+<blockquote>
+<p>（拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）</p>
+</blockquote>
+<p>跨域问题真的成了我一段时间的心里阴影，后来一谈到跨域，心里贼怕！</p>
+<p>最近复习网络部分，刷到了跨域的知识点，于是结合自己毕生所学（加上搜集的一丢资料），总结了一些关于跨域的知识。</p>
+<h2 id="什么是跨域？"><a href="#什么是跨域？" class="headerlink" title="什么是跨域？"></a>什么是跨域？</h2><p>先举个栗子🌰，我博客的网址是：<a href="https://blog.wangez.site:8080/">https://blog.wangez.site:8080</a><br>最前面的https叫做<strong>协议</strong>，随后的blog.wangez.site叫做域名，最后的8080叫做端口号<br>（注：真实的博客网址不带8080，<a href="https://blog.wangez.site/">我的博客</a>，都说了是举个栗子🌰，不会有人当真了吧！！！）。</p>
+<p>当前页面中的某个接口请求的地址和当前页面的地址如果<strong>协议、域名、端口其中有一项不同</strong>，就说该接口跨域了</p>
+<span id="more"></span>
+
+<h2 id="为什么有跨域？"><a href="#为什么有跨域？" class="headerlink" title="为什么有跨域？"></a>为什么有跨域？</h2><p><strong>浏览器</strong>为了保证网页的安全，出的<strong>同源协议策略</strong></p>
+<blockquote>
+<p>这部分以下摘录自MDN，想详细了解这部分可以去[MDN](<a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">浏览器的同源策略 - Web 安全 | MDN (mozilla.org)</a>)上看看。</p>
+</blockquote>
+<p><strong>同源策略</strong>是一个重要的安全策略，它用于限制一个origin的文档或者它加载的脚本如何能与另一个源的资源进行交互。它能帮助阻隔恶意文档，减少可能被攻击的媒介。</p>
+<p>如果两个 URL 的 protocol、port (en-US) (如果有指定的话)和 host 都相同的话，则这两个 URL 是<em>同源</em>。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。（“元组” 是指一组项目构成的整体，双重/三重/四重/五重/等的通用形式）。</p>
+<p>下表给出了与 URL <code>http://store.company.com/dir/page.html</code> 的源进行对比的示例:</p>
+<table>
+<thead>
+<tr>
+<th align="left">URL</th>
+<th align="left">结果</th>
+<th align="left">原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>http://store.company.com/dir2/other.html</code></td>
+<td align="left">同源</td>
+<td align="left">只有路径不同</td>
+</tr>
+<tr>
+<td align="left"><code>http://store.company.com/dir/inner/another.html</code></td>
+<td align="left">同源</td>
+<td align="left">只有路径不同</td>
+</tr>
+<tr>
+<td align="left"><code>https://store.company.com/secure.html</code></td>
+<td align="left">失败</td>
+<td align="left">协议不同</td>
+</tr>
+<tr>
+<td align="left"><code>http://store.company.com:81/dir/etc.html</code></td>
+<td align="left">失败</td>
+<td align="left">端口不同 ( <code>http://</code> 默认端口是80)</td>
+</tr>
+<tr>
+<td align="left"><code>http://news.company.com/dir/other.html</code></td>
+<td align="left">失败</td>
+<td align="left">主机不同</td>
+</tr>
+</tbody></table>
+<h2 id="跨域报错"><a href="#跨域报错" class="headerlink" title="跨域报错"></a>跨域报错</h2><p><img src="https://wangez.site/img/img/image-20210605180026687.png" alt="image-20210605180026687"></p>
+<p>当我们测接口的时候，看见数据并没有如约而至，打开我们万能的浏览器控制台，看见了这个报错，不要犹豫，就是遇见了跨域问题！</p>
+<h2 id="跨域解决办法"><a href="#跨域解决办法" class="headerlink" title="跨域解决办法"></a>跨域解决办法</h2><h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><p>  <strong>这是我目前写项目最常用的一种解决办法，也是当下最流行的方案，通过设置后端，来解决跨域，简单快捷</strong></p>
+<blockquote>
+<p>传说中的后端跨域！</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">res.setHeader(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>); <span class="comment">// 允许跨域的源地址是什么，可以设置为*，也可以设成你的源地址</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;Origin, X-Requested-With, Content-Type, Accept&quot;</span>); <span class="comment">// 设置返回数据类型</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;GET, PUT, OPTIONS, POST&quot;</span>); <span class="comment">// 控制哪种请求是可以跨域的</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>, <span class="literal">true</span>); <span class="comment">// 跨域的时候是否携带cookie</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p><strong>利用的原理是script标签可以跨域请求资源，将回调函数作为参数拼接在url中</strong></p>
+<blockquote>
+<p>传说中的前端跨域！但是需要后端的小伙伴们来配合我们一下哦🙄</p>
+</blockquote>
+<p>​         后端收到请求，调用该回调函数，并将数据作为参数返回去，注意设置响应头返回文档类型，应该设置成javascript</p>
+<blockquote>
+<p>res.setHeader(‘content-type’, ‘application/javascript’)     // 要注意不要忘了设置这个 ，否则会出错误！</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">JsonpCallback</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">             <span class="comment">// 在这里处理后端返回来的data数据</span></span><br><span class="line">             <span class="built_in">console</span>.log(data);</span><br><span class="line">         &#125;</span><br><span class="line">   &lt;/script&gt;</span><br><span class="line">   <span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://127.0.0.1:12345/jsonp/callback=JsonpCallback&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="postmessage"><a href="#postmessage" class="headerlink" title="postmessage"></a>postmessage</h3><p>这个是我没听说过的一种方法，它是利用html5的api进行的，具有特定的使用场景。      </p>
+<p>使用场景：一个页面中嵌入另一个iframe页面，</p>
+<p>​        在主页面中使用postmessage发送数据，在iframe页面中用监听器接收数据</p>
+<pre><code>   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 主页面</span><br><span class="line">iFrame.onload = function () &#123;</span><br><span class="line">	iFrame.contentWindow.postMessage(&#123; msg: &#x27;MessageFromIndexPage&#x27; &#125;, &#x27;\*&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">// iframe页面</span><br><span class="line">window.addEventListener(&quot;message&quot;, function (event) &#123;</span><br><span class="line"></span><br><span class="line">	console.log(&#x27;这里是接收到来自父页面的消息，消息内容在event.data属性中&#x27;, event)</span><br><span class="line"></span><br><span class="line">&#125;, false)</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h3 id="其他方法：node中间件、nginx反向代理、websocket等"><a href="#其他方法：node中间件、nginx反向代理、websocket等" class="headerlink" title="其他方法：node中间件、nginx反向代理、websocket等"></a>其他方法：node中间件、nginx反向代理、websocket等</h3><p>主要是因为同源策略是浏览器的限制，服务器和服务器之间没有限制</p>
+<p>这次我们举个菠萝🍍，小红想要小绿的新玩具<strong>（发出接口请求）</strong>，但是小绿不给他<strong>（同源策略）</strong>，于是小红去找了小兰，对小兰说，我想要小绿的新玩具<strong>（准备去搞中间件进行转发或者做代理了）</strong>，小兰去跟小绿要来了新玩具<strong>（拿到了想要的数据，说明方法成功）</strong>，并将新玩具交给了小红<strong>（解决了跨域）</strong>。</p>
+<blockquote>
+<p>在这里面我只接触过node中间件跟nginx反向代理，也不算很深入的了解，所以就先不献丑啦，等日后学有所成再来填上这个坑！</p>
+</blockquote>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>跨域是很常见的一个问题，也是出现在面试问题中频率比较高的问题，希望每个小伙伴们在遇到这个问题的时候都能顺利解决。虽然我们现在写项目的时候，框架中大都为我们配置了代理（Vue的proxyTable代理等），但是我想了解其根源对于我们的自我提高是非常有帮助的！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+</search>
