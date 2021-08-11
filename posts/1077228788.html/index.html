@@ -23,7 +23,7 @@
   <meta name="description" content="作用域与作用域链前言继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。 JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。 作用域作用域是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于作用域与作用域链的理解">
-<meta property="og:url" content="https://wangenze267.github.io/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html">
+<meta property="og:url" content="https://wangenze267.github.io/posts/1077228788.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
 <meta property="og:description" content="作用域与作用域链前言继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。 JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。 作用域作用域是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。">
 <meta property="og:locale" content="zh_CN">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wangenze267.github.io/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html">
+<link rel="canonical" href="https://wangenze267.github.io/posts/1077228788.html/">
 
 
 <script id="page-configurations">
@@ -210,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/1077228788.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -259,8 +259,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/1077228788.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/1077228788.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -377,7 +377,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html" title="关于作用域与作用域链的理解">https://wangenze267.github.io/关于作用域与作用域链的理解.html</a>
+    <a href="https://wangenze267.github.io/posts/1077228788.html/" title="关于作用域与作用域链的理解">https://wangenze267.github.io/posts/1077228788.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -422,11 +422,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/%E8%A7%A3%E6%9E%84%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E8%BF%90%E7%94%A8.html" rel="prev" title="解构运算符的理解与运用">
+    <a href="/posts/1586874348.html/" rel="prev" title="解构运算符的理解与运用">
       <i class="fa fa-chevron-left"></i> 解构运算符的理解与运用
     </a></div>
       <div class="post-nav-item">
-    <a href="/JS%E4%B8%AD%EF%BC%8C%E5%87%BD%E6%95%B0%E5%8E%9F%E6%9D%A5%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E7%A7%8D%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95%EF%BC%88%E6%9A%91%E5%81%87%E5%BC%80%E5%A7%8B%EF%BC%81%EF%BC%89.html" rel="next" title="JS中，函数原来有这么多种定义方法（暑假开始！）">
+    <a href="/posts/1173819435.html/" rel="next" title="JS中，函数原来有这么多种定义方法（暑假开始！）">
       JS中，函数原来有这么多种定义方法（暑假开始！） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>

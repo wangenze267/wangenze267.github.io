@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>JS中，函数原来有这么多种定义方法（暑假开始！）</title>
-    <url>/JS%E4%B8%AD%EF%BC%8C%E5%87%BD%E6%95%B0%E5%8E%9F%E6%9D%A5%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E7%A7%8D%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95%EF%BC%88%E6%9A%91%E5%81%87%E5%BC%80%E5%A7%8B%EF%BC%81%EF%BC%89.html</url>
+    <url>/posts/1173819435.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在期末与暑假假期画饼之间不断奔波，很长时间没有记录了，今天在学习的时候看到了ES6的箭头函数，瞬间找到了写文的动力，那就来梳理一下在JavaScript中一共有几种定义函数的方式吧，最后再（微微）重点的介绍一下箭头函数✨</p>
 <p>过段时间，要加强算法学习了，这段时间也在力扣和牛客上找题做了一下，发现自己的算法真的烂，所以可能以后还会把算法题解写一写。（🍗+ 1）</p>
 <h3 id="JavaScript定义函数的几种方式"><a href="#JavaScript定义函数的几种方式" class="headerlink" title="JavaScript定义函数的几种方式"></a>JavaScript定义函数的几种方式</h3><p>以下是定义函数的几种方式，真正书写的话，个人觉得没有什么必须要用某种格式的情况，根据团队风格或者个人习惯来就好。</p>
@@ -65,7 +65,7 @@
   </entry>
   <entry>
     <title>JavaScript变量提升</title>
-    <url>/JavaScript%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87.html</url>
+    <url>/posts/388126410.html/</url>
     <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
 <p>先从一个简单的例子来入手：</p>
 <blockquote>
@@ -109,7 +109,7 @@
   </entry>
   <entry>
     <title>Vue.js基础环境的搭建以及简单使用Element-ui</title>
-    <url>/Vue.js%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8Element-ui.html</url>
+    <url>/posts/3896443464.html/</url>
     <content><![CDATA[<h1 id="Vue（2-x）"><a href="#Vue（2-x）" class="headerlink" title="Vue（2.x）"></a>Vue（2.x）</h1><h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
 
@@ -255,7 +255,7 @@
   </entry>
   <entry>
     <title>Axios踩坑日记</title>
-    <url>/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html</url>
+    <url>/posts/2698809561.html/</url>
     <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
 <h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
 <p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
@@ -280,7 +280,7 @@
   </entry>
   <entry>
     <title>使用Hexo搭建自己的博客</title>
-    <url>/%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2.html</url>
+    <url>/posts/735412972.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
 <h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
 <span id="more"></span>
@@ -370,7 +370,7 @@
   </entry>
   <entry>
     <title>关于Hexo使用Next主题的一些优化</title>
-    <url>/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html</url>
+    <url>/posts/1559886533.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
 <p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
 <h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
@@ -412,7 +412,7 @@
   </entry>
   <entry>
     <title>关于Hexo配置使用Next主题</title>
-    <url>/%E5%85%B3%E4%BA%8EHexo%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98.html</url>
+    <url>/posts/2781919463.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
 <h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
 <p><code>Next8.2.0</code></p>
@@ -502,8 +502,171 @@
       </tags>
   </entry>
   <entry>
+    <title>关于闭包的一些理解</title>
+    <url>/posts/400024894.html/</url>
+    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
+<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
+<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
+
+<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
+<p>先来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
+
+<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
+<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
+<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
+<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
+<p>而这，就是闭包。</p>
+<p><strong>闭包：这就是我</strong>✌</p>
+<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
+<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
+<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
+<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
+<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
+<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
+<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
+<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
+<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
+<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
+<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
+<p><strong>请注意：闭包一定要慎用</strong></p>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
+<ul>
+<li><p>模仿块级作用域</p>
+<ul>
+<li>计时器的一个应用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打印一组li的下标</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>埋点计数器</p>
+<ul>
+<li>产品让做的网站分析的一种常用的数据采集方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>柯里化</p>
+<ul>
+<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
+<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
+<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
+<p>因为全局变量会被污染或者被修改。</p>
+<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
+<p><strong>闭包能够造成内存泄漏</strong></p>
+<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
+    <url>/posts/2373844462.html/</url>
+    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
+
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
+<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
+<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;" />
+
+<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
+<ul>
+<li>轮播图，我这边建议打死</li>
+<li>我的简历：参考咱们自己写的简历</li>
+<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
+<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
+</ul>
+<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;" />
+
+<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
+<ul>
+<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
+<li>利用校招跟社招做一下数据筛选</li>
+<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
+</ul>
+<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>前端知识链条中少不了的一环--Ajax</title>
+    <url>/posts/1172116075.html/</url>
+    <content><![CDATA[<blockquote>
+<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
+<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
+<span id="more"></span>
+
+<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
+<li>通过异步模式，提升了用户体验</li>
+<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
+<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
+</ul>
+<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
+<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>open()</p>
+<blockquote>
+<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
+</blockquote>
+</li>
+<li><p>send()</p>
+<blockquote>
+<p>send()方法表示着发送请求，不需要任何参数</p>
+</blockquote>
+</li>
+<li><p>监听请求成功后的状态变化</p>
+<blockquote>
+<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
+<p>readyState：共有五个状态</p>
+<ul>
+<li>0：未初始化</li>
+<li>1：open方法成功调用后</li>
+<li>2：服务器已经答应客户端的请求</li>
+<li>3：交互中，http头信息已经接收，响应数据未接收</li>
+<li>4：完成</li>
+</ul>
+<p>responseText：服务器端返回的文本内容，默认是字符串</p>
+<p>status：服务器端返回的状态码</p>
+<p>statusText：服务器端返回的状态码文本说明信息</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
+</li>
+<li><p>setRequestHeader()：设置请求头</p>
+</li>
+<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
+</li>
+<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
+<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
+</ul>
+<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
+<blockquote>
+<p>每日一问：今日你卷了没？</p>
+</blockquote>
+<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于作用域与作用域链的理解</title>
-    <url>/%E5%85%B3%E4%BA%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E7%9A%84%E7%90%86%E8%A7%A3.html</url>
+    <url>/posts/1077228788.html/</url>
     <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
 <p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
 <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
@@ -584,171 +747,8 @@
       </tags>
   </entry>
   <entry>
-    <title>关于闭包的一些理解</title>
-    <url>/%E5%85%B3%E4%BA%8E%E9%97%AD%E5%8C%85%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3.html</url>
-    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
-<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
-<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
-
-<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
-<p>先来看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
-
-<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
-<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
-<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
-<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
-<p>而这，就是闭包。</p>
-<p><strong>闭包：这就是我</strong>✌</p>
-<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
-<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
-<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
-<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
-<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
-<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
-<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
-<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
-<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
-<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
-<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
-<p><strong>请注意：闭包一定要慎用</strong></p>
-<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
-<ul>
-<li><p>模仿块级作用域</p>
-<ul>
-<li>计时器的一个应用</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>打印一组li的下标</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p>埋点计数器</p>
-<ul>
-<li>产品让做的网站分析的一种常用的数据采集方法</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>柯里化</p>
-<ul>
-<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
-<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
-<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
-<p>因为全局变量会被污染或者被修改。</p>
-<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
-<p><strong>闭包能够造成内存泄漏</strong></p>
-<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
-    <url>/%E5%86%99%E7%BB%99%E5%BC%A0%E6%B5%A9.html</url>
-    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
-
-<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
-<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
-<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;" />
-
-<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
-<ul>
-<li>轮播图，我这边建议打死</li>
-<li>我的简历：参考咱们自己写的简历</li>
-<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
-<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
-</ul>
-<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;" />
-
-<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
-<ul>
-<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
-<li>利用校招跟社招做一下数据筛选</li>
-<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
-</ul>
-<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>前端知识链条中少不了的一环--Ajax</title>
-    <url>/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E9%93%BE%E6%9D%A1%E4%B8%AD%E5%B0%91%E4%B8%8D%E4%BA%86%E7%9A%84%E4%B8%80%E7%8E%AF--Ajax.html</url>
-    <content><![CDATA[<blockquote>
-<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
-<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
-<span id="more"></span>
-
-<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
-<li>通过异步模式，提升了用户体验</li>
-<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
-<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
-</ul>
-<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
-<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>open()</p>
-<blockquote>
-<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
-</blockquote>
-</li>
-<li><p>send()</p>
-<blockquote>
-<p>send()方法表示着发送请求，不需要任何参数</p>
-</blockquote>
-</li>
-<li><p>监听请求成功后的状态变化</p>
-<blockquote>
-<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
-<p>readyState：共有五个状态</p>
-<ul>
-<li>0：未初始化</li>
-<li>1：open方法成功调用后</li>
-<li>2：服务器已经答应客户端的请求</li>
-<li>3：交互中，http头信息已经接收，响应数据未接收</li>
-<li>4：完成</li>
-</ul>
-<p>responseText：服务器端返回的文本内容，默认是字符串</p>
-<p>status：服务器端返回的状态码</p>
-<p>statusText：服务器端返回的状态码文本说明信息</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
-</li>
-<li><p>setRequestHeader()：设置请求头</p>
-</li>
-<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
-</li>
-<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
-<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
-</ul>
-<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
-<blockquote>
-<p>每日一问：今日你卷了没？</p>
-</blockquote>
-<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>弹性盒模型-flex</title>
-    <url>/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html</url>
+    <url>/posts/3659327966.html/</url>
     <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
 <h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
 <span id="more"></span>
@@ -816,7 +816,7 @@
   </entry>
   <entry>
     <title>微信小程序相关</title>
-    <url>/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3.html</url>
+    <url>/posts/2713850416.html/</url>
     <content><![CDATA[<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
 <ul>
 <li>1.修改数据的行为始终是同步的</li>
@@ -872,7 +872,7 @@
   </entry>
   <entry>
     <title>解构运算符的理解与运用</title>
-    <url>/%E8%A7%A3%E6%9E%84%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E8%BF%90%E7%94%A8.html</url>
+    <url>/posts/1586874348.html/</url>
     <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
 <p><strong>你可以不用，但是你不能不懂✔</strong></p>
 <p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
@@ -917,8 +917,58 @@
       </tags>
   </entry>
   <entry>
+    <title>框架简介之Vue.js</title>
+    <url>/posts/2624959054.html/</url>
+    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
+<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
+<span id="more"></span>
+
+<blockquote>
+<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
+</blockquote>
+<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
+<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
+<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
+<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
+<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
+<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
+<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
+<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
+<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
+<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
+<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
+<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
+<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
+<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
+<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
+<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
+<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
+<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
+<p>声明式渲染与命令式渲染区别</p>
+<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
+<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
+<p><strong>命令式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>跨域的问题终于能解决了</title>
-    <url>/%E8%B7%A8%E5%9F%9F%E7%9A%84%E9%97%AE%E9%A2%98%E7%BB%88%E4%BA%8E%E8%83%BD%E8%A7%A3%E5%86%B3%E4%BA%86.html</url>
+    <url>/posts/876750285.html/</url>
     <content><![CDATA[<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！</p>
 <blockquote>
 <p>（拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）</p>
@@ -1004,56 +1054,6 @@
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>框架简介之Vue.js</title>
-    <url>/%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B%E4%B9%8BVue.js.html</url>
-    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
-<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
-<span id="more"></span>
-
-<blockquote>
-<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
-</blockquote>
-<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
-<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
-<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
-<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
-<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
-<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
-<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
-<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
-<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
-<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
-<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
-<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
-<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
-<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
-<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
-<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
-<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
-<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
-<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
-<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
-<p>声明式渲染与命令式渲染区别</p>
-<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
-<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
-<p><strong>命令式渲染：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
-
-<p><strong>声明式渲染：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
 </search>

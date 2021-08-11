@@ -20,21 +20,20 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。 弹性盒模型简介弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。">
+  <meta name="description" content="1. 数据绑定1.小程序1.data中初始化数据2.修改数据： this.setData()  1.修改数据的行为始终是同步的  3.数据流：  1.单项： Model —&gt; View">
 <meta property="og:type" content="article">
-<meta property="og:title" content="弹性盒模型-flex">
-<meta property="og:url" content="https://wangenze267.github.io/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html">
+<meta property="og:title" content="微信小程序相关">
+<meta property="og:url" content="https://wangenze267.github.io/posts/2713850416.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="前言最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。 弹性盒模型简介弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。">
+<meta property="og:description" content="1. 数据绑定1.小程序1.data中初始化数据2.修改数据： this.setData()  1.修改数据的行为始终是同步的  3.数据流：  1.单项： Model —&gt; View">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-09T05:40:22.245Z">
-<meta property="article:modified_time" content="2021-08-08T14:05:42.098Z">
+<meta property="article:published_time" content="2021-06-09T05:40:42.578Z">
+<meta property="article:modified_time" content="2021-08-08T14:06:54.115Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="Css">
-<meta property="article:tag" content="Flex">
+<meta property="article:tag" content="小程序">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wangenze267.github.io/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html">
+<link rel="canonical" href="https://wangenze267.github.io/posts/2713850416.html/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>弹性盒模型-flex | Wangez-Blog</title>
+  <title>微信小程序相关 | Wangez-Blog</title>
   
 
 
@@ -210,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2713850416.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -223,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          弹性盒模型-flex
+          微信小程序相关
         </h1>
 
         <div class="post-meta">
@@ -233,14 +232,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-06-09 13:40:22" itemprop="dateCreated datePublished" datetime="2021-06-09T13:40:22+08:00">2021-06-09</time>
+              <time title="创建时间：2021-06-09 13:40:42" itemprop="dateCreated datePublished" datetime="2021-06-09T13:40:42+08:00">2021-06-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 22:05:42" itemprop="dateModified" datetime="2021-08-08T22:05:42+08:00">2021-08-08</time>
+                <time title="修改时间：2021-08-08 22:06:54" itemprop="dateModified" datetime="2021-08-08T22:06:54+08:00">2021-08-08</time>
               </span>
 
           
@@ -259,8 +258,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/2713850416.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/2713850416.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -270,14 +269,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
+              <span>638</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -289,65 +288,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
-<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
+        <h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
+<ul>
+<li>1.修改数据的行为始终是同步的</li>
+</ul>
+<p>3.数据流：</p>
+<ul>
+<li>1.单项： Model —&gt; View</li>
+</ul>
 <span id="more"></span>
 
-<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
-<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
-<p>容器的属性有6个，我们下面一一介绍他们：</p>
-<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
+<h4 id="2-Vue"><a href="#2-Vue" class="headerlink" title="2. Vue"></a>2. Vue</h4><p>1.data中初始化数据<br>2.修改数据: this.key = value<br>3.数据流：</p>
 <ul>
-<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
-<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
-<li>center:项目靠近主轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
+<li>1.Vue是单项数据流： Model —&gt; View</li>
+<li>2.Vue中实现了双向数据绑定： v-model</li>
 </ul>
-<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
+<h4 id="3-React"><a href="#3-React" class="headerlink" title="3. React"></a>3. React</h4><p>1.state中初始化状态数据<br>2.修改数据: this.setState()</p>
 <ul>
-<li>flex-start:项目靠近交叉轴首端的方向。</li>
-<li>flex-end:项目靠近交叉轴末端的方向。</li>
-<li>center:项目与交叉轴中线对齐。</li>
-<li>baseline:项目与第一行文字基线对齐。</li>
-<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
+<li>1.自身钩子函数中(componentDidMount)异步的</li>
+<li>2.非自身的钩子函数中(定时器的回调)同步的</li>
 </ul>
-<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
+<p>3.数据流：</p>
 <ul>
-<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
-<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
-<li>center:项目靠近交叉轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
+<li>1.单项： Model —&gt; View</li>
 </ul>
-<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
+<h2 id="2-获取用户基本信息"><a href="#2-获取用户基本信息" class="headerlink" title="2. 获取用户基本信息"></a>2. 获取用户基本信息</h2><p>1.用户未授权(首次登陆)</p>
 <ul>
-<li>row:默认值，水平方向从左往右排列。</li>
-<li>row-reverse:水平方向从右往左排列。</li>
-<li>column:垂直方向从上往下排列。</li>
-<li>column-reverse:垂直方向从下往上排列。</li>
+<li>1.button open-type=‘getUserInfo’</li>
 </ul>
-<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
+<p>2.用户已经授权(再次登陆)</p>
 <ul>
-<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
-<li>wrap:项目超出容器尺寸时换行。</li>
-<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
+<li>1.wx.getUserInfo</li>
 </ul>
-<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
-<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
-<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
-<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
-<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
-<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
-<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
-<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
-<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
+<h2 id="3-前后端交互"><a href="#3-前后端交互" class="headerlink" title="3. 前后端交互"></a>3. 前后端交互</h2><p>1.语法: wx.request()<br>2.注意点:</p>
+<ul>
+<li>1.协议必须是https协议</li>
+<li>2.一个接口最多配置20个域名</li>
+<li>3.并发限制上限是10个</li>
+<li><ol>
+<li><strong>开发过程中设置不校验合法域名</strong>： 开发工具 —&gt; 右上角详情 —-&gt; 本地设置 —&gt; 不校验</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-本地存储"><a href="#4-本地存储" class="headerlink" title="4. 本地存储"></a>4. 本地存储</h2><p>1.语法: wx.setStorage() || wx.setStorageSync() || …..<br>2.注意点：</p>
+<ul>
+<li>1.建议存储的数据为json数据</li>
+<li>2.单个 key 允许存储的最大数据长度为 1MB，所有数据存储上限为 10MB</li>
+<li>3.属于永久存储，同H5的localStorage一样</li>
+</ul>
 
     </div>
 
@@ -363,7 +351,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-flex.html" title="弹性盒模型-flex">https://wangenze267.github.io/弹性盒模型-flex.html</a>
+    <a href="https://wangenze267.github.io/posts/2713850416.html/" title="微信小程序相关">https://wangenze267.github.io/posts/2713850416.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -398,8 +386,7 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Css/" rel="tag"><i class="fa fa-tag"></i> Css</a>
-              <a href="/tags/Flex/" rel="tag"><i class="fa fa-tag"></i> Flex</a>
+              <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 小程序</a>
           </div>
 
         
@@ -407,10 +394,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/JavaScript%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87.html" rel="next" title="JavaScript变量提升">
-      JavaScript变量提升 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/2698809561.html/" rel="prev" title="Axios踩坑日记">
+      <i class="fa fa-chevron-left"></i> Axios踩坑日记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/735412972.html/" rel="next" title="使用Hexo搭建自己的博客">
+      使用Hexo搭建自己的博客 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -471,7 +461,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="nav-number"></span> <span class="nav-text">弹性盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-justify-content"><span class="nav-number">1.1.</span> <span class="nav-text">1.justify-content</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-align-items"><span class="nav-number">1.2.</span> <span class="nav-text">2.align-items</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-align-content"><span class="nav-number">1.3.</span> <span class="nav-text">3.align-content</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-flex-direction"><span class="nav-number">1.4.</span> <span class="nav-text">4.flex-direction</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-flex-wrap"><span class="nav-number">1.5.</span> <span class="nav-text">5.flex-wrap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-flex-flow"><span class="nav-number">1.6.</span> <span class="nav-text">6.flex-flow</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-order"><span class="nav-number">1.7.</span> <span class="nav-text">7.order</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-align-self"><span class="nav-number">1.8.</span> <span class="nav-text">8.align-self</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-flex-grow"><span class="nav-number">1.9.</span> <span class="nav-text">9.flex-grow</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-flex-shrink"><span class="nav-number">1.10.</span> <span class="nav-text">10.flex-shrink</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-flex-basis"><span class="nav-number">1.11.</span> <span class="nav-text">11.flex-basis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80"><span class="nav-number">2.</span> <span class="nav-text">基础布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%8D%95%E5%88%97%E5%B8%83%E5%B1%80"><span class="nav-number">2.1.</span> <span class="nav-text">1.单列布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E4%B8%A4%E5%88%97%E5%B8%83%E5%B1%80"><span class="nav-number">2.2.</span> <span class="nav-text">2.两列布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E4%B8%89%E5%88%97%E5%B8%83%E5%B1%80"><span class="nav-number">2.3.</span> <span class="nav-text">3.三列布局</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">1. 数据绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.小程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Vue"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-React"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. React</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">2. 获取用户基本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92"><span class="nav-number">3.</span> <span class="nav-text">3. 前后端交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-number">4.</span> <span class="nav-text">4. 本地存储</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

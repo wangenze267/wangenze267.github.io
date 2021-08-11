@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！ 那就来看看如何优化你的博客，让他变得更富有细节吧 ~ 优化文章链接优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况 插件：hexo-abbrlink">
+  <meta name="description" content="前言之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！ 确认一下版本号Hexo5.4.0 Next8.2.0 版本不同可能会有些差异">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Hexo使用Next主题的一些优化">
-<meta property="og:url" content="https://wangenze267.github.io/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html">
+<meta property="og:title" content="关于Hexo配置使用Next主题">
+<meta property="og:url" content="https://wangenze267.github.io/posts/2781919463.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="前言肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！ 那就来看看如何优化你的博客，让他变得更富有细节吧 ~ 优化文章链接优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况 插件：hexo-abbrlink">
+<meta property="og:description" content="前言之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！ 确认一下版本号Hexo5.4.0 Next8.2.0 版本不同可能会有些差异">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-09T09:04:16.381Z">
-<meta property="article:modified_time" content="2021-08-08T14:05:54.970Z">
+<meta property="og:image" content="https://wangez.site/img/next.png">
+<meta property="article:published_time" content="2021-06-09T09:04:16.379Z">
+<meta property="article:modified_time" content="2021-08-08T14:05:48.608Z">
 <meta property="article:author" content="Ned">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangez.site/img/next.png">
 
-<link rel="canonical" href="https://wangenze267.github.io/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html">
+<link rel="canonical" href="https://wangenze267.github.io/posts/2781919463.html/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>关于Hexo使用Next主题的一些优化 | Wangez-Blog</title>
+  <title>关于Hexo配置使用Next主题 | Wangez-Blog</title>
   
 
 
@@ -209,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2781919463.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -222,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          关于Hexo使用Next主题的一些优化
+          关于Hexo配置使用Next主题
         </h1>
 
         <div class="post-meta">
@@ -239,7 +241,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 22:05:54" itemprop="dateModified" datetime="2021-08-08T22:05:54+08:00">2021-08-08</time>
+                <time title="修改时间：2021-08-08 22:05:48" itemprop="dateModified" datetime="2021-08-08T22:05:48+08:00">2021-08-08</time>
               </span>
 
           
@@ -258,8 +260,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/2781919463.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/2781919463.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,14 +271,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>4.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -288,12 +290,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
-<p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
-<h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
-<p>插件：<code>hexo-abbrlink</code></p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
+<h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
+<p><code>Next8.2.0</code></p>
+<p>版本不同可能会有些差异</p>
 <span id="more"></span>
 
+<h3 id="安装next主题"><a href="#安装next主题" class="headerlink" title="安装next主题"></a>安装next主题</h3><p>去next团队的主页去下载一个zip压缩包</p>
+<p><img src="https://wangez.site/img/next.png" alt="image-20210216103416503"></p>
+<p>完后将他放在<code>themes</code>目录下并且解压，重命名文件夹为<code>next</code></p>
+<p><code>themes/</code>下是Hexo用来放主题的</p>
+<h3 id="修改站点配置文件"><a href="#修改站点配置文件" class="headerlink" title="修改站点配置文件"></a>修改站点配置文件</h3><p>站点配置文件：<code>_config.yml</code></p>
+<p>参考Hexo文档中的说明，我们需要给博客设定主标题以及副标题、作者名称、语言、时区等，你可以参考以下我的设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Wangez-Blog  #网站标题</span><br><span class="line">subtitle: &#x27;Ned的个人博客&#x27;  #网站副标题</span><br><span class="line">description: &#x27;Ned的个人博客&#x27;  #网站描述</span><br><span class="line">keywords:  #网站关键词</span><br><span class="line">author: Ned  #您的名字</span><br><span class="line">language: zh-CN  #语言</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;  #时区</span><br></pre></td></tr></table></figure>
+
+<h4 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h4><p>在站点配置文件中，找到 theme 属性，然后修改为 next 即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h3><p>主题配置文件：<code>themes/next/_config.yml</code></p>
+<h4 id="设定主题风格"><a href="#设定主题风格" class="headerlink" title="设定主题风格"></a>设定主题风格</h4><p>Next提供了4种风格样式供我们选择。我个人偏好最经典且极简的Muse风格。你可以4种都体验以下。选择哪个风格，就删除掉对应风格名所在行前面的# ，可以参考我的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line"># scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h4 id="博客主标题上方的logo"><a href="#博客主标题上方的logo" class="headerlink" title="博客主标题上方的logo"></a>博客主标题上方的logo</h4><p>这个我是没有设置的，有需要的可以自己设置一下，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Custom Logo (Warning: Do not support scheme Mist)主页logo</span><br><span class="line">custom_logo: /uploads/logo.png</span><br></pre></td></tr></table></figure>
+
+<p>顺便一提，后面我们还会遇到 引用图片地址 的类似设置。<code>/uploads/logo.png </code>对应的本地blog文件夹中位置是 <code>\blog\themes\next\source\uploads\logo.png</code> 其中 <code>uploads</code> 文件夹，和<code>logo.png</code>文件，都需要自己创建。</p>
+<h4 id="版权信息说明"><a href="#版权信息说明" class="headerlink" title="版权信息说明"></a>版权信息说明</h4><p>网上的太繁琐了，其实不用改太多。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
+
+<p>版权声明文本是可以修改的，后面会介绍到。</p>
+<h4 id="设置导航栏菜单"><a href="#设置导航栏菜单" class="headerlink" title="设置导航栏菜单"></a>设置导航栏菜单</h4><p>我觉得设置多了太麻烦，于是就保留了<code>主页</code> <code>标签</code> <code>关于</code> <code>归档</code>四个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  #categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  #schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  #sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  #commonweal: /404/ || fa fa-heartbeat</span><br><span class="line"></span><br><span class="line"># Enable / Disable menu icons / item badges.</span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
+
+<p>启用哪个功能，就删除对应行前面的 # </p>
+<h4 id="侧边栏设置"><a href="#侧边栏设置" class="headerlink" title="侧边栏设置"></a>侧边栏设置</h4><p>我觉得左边挺好的，就没有改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  # position: right</span><br></pre></td></tr></table></figure>
+
+<p>设置侧边栏的头像，一般为作者的头像，和博客的logo有区别。</p>
+<p>可以是方形或圆形，还可以选择鼠标停留时，魔性的转动（我没设置）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: /uploads/avatar.jpg #头像图片地址 </span><br><span class="line">  # If true, the avatar will be dispalyed in circle.圆形选true 方形选false</span><br><span class="line">  rounded: true</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.魔性转动，打开选true</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
+
+<p>侧边栏外链，可以指向某篇文章，或某个网址。这里可以用来展示其他发布渠道。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">social:</span><br><span class="line">  #GitHub: https://github.com/yourname || fab fa-github</span><br><span class="line">  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope</span><br><span class="line">  #Weibo: https://weibo.com/yourname || fab fa-weibo</span><br><span class="line">  #Google: https://plus.google.com/yourname || fab fa-google</span><br><span class="line">  #Twitter: https://twitter.com/yourname || fab fa-twitter</span><br><span class="line">  #FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><br><span class="line">  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><br><span class="line">  #YouTube: https://youtube.com/yourname || fab fa-youtube</span><br><span class="line">  #Instagram: https://instagram.com/yourname || fab fa-instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || fab fa-skype</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true  #用来控制是否显示图标的</span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
+
+<p>和外链样式不同的是友链。默认显示为<code>友情链接</code>我将其修改为<code>我的朋友</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 我的朋友</span><br><span class="line">  # Available values: block | inline</span><br><span class="line">  layout: block</span><br><span class="line">#友情链接</span><br><span class="line">links:</span><br><span class="line">  Ned: https://wangez.site</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回顶部按钮显示阅读进度"><a href="#返回顶部按钮显示阅读进度" class="headerlink" title="返回顶部按钮显示阅读进度"></a>返回顶部按钮显示阅读进度</h4><p>觉得没什么用，不过我还是用了（打脸ing）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭动画效果"><a href="#关闭动画效果" class="headerlink" title="关闭动画效果"></a>关闭动画效果</h4><p>我觉得博客，渲染的太华丽反而不好，于是就将其关了，如果想打开可以将enable的值设置为<code>true</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br></pre></td></tr></table></figure>
+
+<p>到此，配置差不多就结束了，如果你还想优化你的博客，可以继续看下去。</p>
+<h3 id="优化你的博客"><a href="#优化你的博客" class="headerlink" title="优化你的博客"></a>优化你的博客</h3><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
 <p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
 
@@ -337,7 +388,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/%E5%85%B3%E4%BA%8EHexo%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96.html" title="关于Hexo使用Next主题的一些优化">https://wangenze267.github.io/关于Hexo使用Next主题的一些优化.html</a>
+    <a href="https://wangenze267.github.io/posts/2781919463.html/" title="关于Hexo配置使用Next主题">https://wangenze267.github.io/posts/2781919463.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -381,12 +432,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/%E5%85%B3%E4%BA%8EHexo%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8Next%E4%B8%BB%E9%A2%98.html" rel="prev" title="关于Hexo配置使用Next主题">
-      <i class="fa fa-chevron-left"></i> 关于Hexo配置使用Next主题
+    <a href="/posts/735412972.html/" rel="prev" title="使用Hexo搭建自己的博客">
+      <i class="fa fa-chevron-left"></i> 使用Hexo搭建自己的博客
     </a></div>
       <div class="post-nav-item">
-    <a href="/Vue.js%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8Element-ui.html" rel="next" title="Vue.js基础环境的搭建以及简单使用Element-ui">
-      Vue.js基础环境的搭建以及简单使用Element-ui <i class="fa fa-chevron-right"></i>
+    <a href="/posts/1559886533.html/" rel="next" title="关于Hexo使用Next主题的一些优化">
+      关于Hexo使用Next主题的一些优化 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -447,7 +498,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text">优化文章链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">自定义文本内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1%E3%80%81%E8%AE%BF%E9%97%AE%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1%E3%80%81%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">添加访客统计、访问次数统计、文章阅读次数统计</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E4%B8%80%E4%B8%8B%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">确认一下版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85next%E4%B8%BB%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">安装next主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%AB%99%E7%82%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">修改站点配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8Next%E4%B8%BB%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">启用Next主题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">修改主题配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E4%B8%BB%E9%A2%98%E9%A3%8E%E6%A0%BC"><span class="nav-number">5.1.</span> <span class="nav-text">设定主题风格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E4%B8%BB%E6%A0%87%E9%A2%98%E4%B8%8A%E6%96%B9%E7%9A%84logo"><span class="nav-number">5.2.</span> <span class="nav-text">博客主标题上方的logo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF%E8%AF%B4%E6%98%8E"><span class="nav-number">5.3.</span> <span class="nav-text">版权信息说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AF%BC%E8%88%AA%E6%A0%8F%E8%8F%9C%E5%8D%95"><span class="nav-number">5.4.</span> <span class="nav-text">设置导航栏菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.5.</span> <span class="nav-text">侧边栏设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8%E6%8C%89%E9%92%AE%E6%98%BE%E7%A4%BA%E9%98%85%E8%AF%BB%E8%BF%9B%E5%BA%A6"><span class="nav-number">5.6.</span> <span class="nav-text">返回顶部按钮显示阅读进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C"><span class="nav-number">5.7.</span> <span class="nav-text">关闭动画效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2"><span class="nav-number">6.</span> <span class="nav-text">优化你的博客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5"><span class="nav-number">6.1.</span> <span class="nav-text">优化文章链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">6.2.</span> <span class="nav-text">自定义文本内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1%E3%80%81%E8%AE%BF%E9%97%AE%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1%E3%80%81%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="nav-number">6.3.</span> <span class="nav-text">添加访客统计、访问次数统计、文章阅读次数统计</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
