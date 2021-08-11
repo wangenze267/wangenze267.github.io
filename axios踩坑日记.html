@@ -20,22 +20,24 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="跨域写在最前啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！  （拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）  跨域问题真的成了我一段时">
+  <meta name="description" content="起因自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。 去找了axios的介绍 由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="跨域的问题终于能解决了">
-<meta property="og:url" content="https://wangenze267.github.io/posts/876750285.html/index.html">
+<meta property="og:title" content="Axios踩坑日记">
+<meta property="og:url" content="https://wangenze267.github.io/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="跨域写在最前啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！  （拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）  跨域问题真的成了我一段时">
+<meta property="og:description" content="起因自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。 去找了axios的介绍 由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangez.site/img/img/image-20210605180026687.png">
-<meta property="article:published_time" content="2021-08-03T10:39:53.917Z">
-<meta property="article:modified_time" content="2021-08-11T08:36:52.394Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-06-09T05:40:40.412Z">
+<meta property="article:modified_time" content="2021-08-08T14:05:09.316Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Axios">
+<meta property="article:tag" content="踩坑日记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wangez.site/img/img/image-20210605180026687.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/876750285.html/">
+<link rel="canonical" href="https://wangenze267.github.io/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>跨域的问题终于能解决了 | Wangez-Blog</title>
+  <title>Axios踩坑日记 | Wangez-Blog</title>
   
 
 
@@ -211,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/876750285.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -224,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          跨域的问题终于能解决了
+          Axios踩坑日记
         </h1>
 
         <div class="post-meta">
@@ -234,14 +236,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-03 18:39:53" itemprop="dateCreated datePublished" datetime="2021-08-03T18:39:53+08:00">2021-08-03</time>
+              <time title="创建时间：2021-06-09 13:40:40" itemprop="dateCreated datePublished" datetime="2021-06-09T13:40:40+08:00">2021-06-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-11 16:36:52" itemprop="dateModified" datetime="2021-08-11T16:36:52+08:00">2021-08-11</time>
+                <time title="修改时间：2021-08-08 22:05:09" itemprop="dateModified" datetime="2021-08-08T22:05:09+08:00">2021-08-08</time>
               </span>
 
           
@@ -260,8 +262,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/876750285.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/876750285.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -271,14 +273,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -290,88 +292,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！</p>
-<blockquote>
-<p>（拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）</p>
-</blockquote>
-<p>跨域问题真的成了我一段时间的心里阴影，后来一谈到跨域，心里贼怕！</p>
-<p>最近复习网络部分，刷到了跨域的知识点，于是结合自己毕生所学（加上搜集的一丢资料），总结了一些关于跨域的知识。</p>
+        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
+<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
+<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<h2 id="什么是跨域？"><a href="#什么是跨域？" class="headerlink" title="什么是跨域？"></a>什么是跨域？</h2><p>先举个栗子🌰，我博客的网址是：<a target="_blank" rel="noopener" href="https://blog.wangez.site:8080/">https://blog.wangez.site:8080</a><br>最前面的https叫做<strong>协议</strong>，随后的blog.wangez.site叫做域名，最后的8080叫做端口号<br>（注：真实的博客网址不带8080，<a target="_blank" rel="noopener" href="https://blog.wangez.site/">我的博客</a>，都说了是举个栗子🌰，不会有人当真了吧！！！）。</p>
-<p>当前页面中的某个接口请求的地址和当前页面的地址如果<strong>协议、域名、端口其中有一项不同</strong>，就说该接口跨域了</p>
-<h2 id="为什么有跨域？"><a href="#为什么有跨域？" class="headerlink" title="为什么有跨域？"></a>为什么有跨域？</h2><p><strong>浏览器</strong>为了保证网页的安全，出的<strong>同源协议策略</strong></p>
-<blockquote>
-<p>这部分以下摘录自MDN，想详细了解这部分可以去[MDN](<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">浏览器的同源策略 - Web 安全 | MDN (mozilla.org)</a>)上看看。</p>
-</blockquote>
-<p><strong>同源策略</strong>是一个重要的安全策略，它用于限制一个origin的文档或者它加载的脚本如何能与另一个源的资源进行交互。它能帮助阻隔恶意文档，减少可能被攻击的媒介。</p>
-<p>如果两个 URL 的 protocol、port (en-US) (如果有指定的话)和 host 都相同的话，则这两个 URL 是<em>同源</em>。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。（“元组” 是指一组项目构成的整体，双重/三重/四重/五重/等的通用形式）。</p>
-<p>下表给出了与 URL <code>http://store.company.com/dir/page.html</code> 的源进行对比的示例:</p>
-<table>
-<thead>
-<tr>
-<th align="left">URL</th>
-<th align="left">结果</th>
-<th align="left">原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>http://store.company.com/dir2/other.html</code></td>
-<td align="left">同源</td>
-<td align="left">只有路径不同</td>
-</tr>
-<tr>
-<td align="left"><code>http://store.company.com/dir/inner/another.html</code></td>
-<td align="left">同源</td>
-<td align="left">只有路径不同</td>
-</tr>
-<tr>
-<td align="left"><code>https://store.company.com/secure.html</code></td>
-<td align="left">失败</td>
-<td align="left">协议不同</td>
-</tr>
-<tr>
-<td align="left"><code>http://store.company.com:81/dir/etc.html</code></td>
-<td align="left">失败</td>
-<td align="left">端口不同 ( <code>http://</code> 默认端口是80)</td>
-</tr>
-<tr>
-<td align="left"><code>http://news.company.com/dir/other.html</code></td>
-<td align="left">失败</td>
-<td align="left">主机不同</td>
-</tr>
-</tbody></table>
-<h2 id="跨域报错"><a href="#跨域报错" class="headerlink" title="跨域报错"></a>跨域报错</h2><p><img src="https://wangez.site/img/img/image-20210605180026687.png" alt="image-20210605180026687"></p>
-<p>当我们测接口的时候，看见数据并没有如约而至，打开我们万能的浏览器控制台，看见了这个报错，不要犹豫，就是遇见了跨域问题！</p>
-<h2 id="跨域解决办法"><a href="#跨域解决办法" class="headerlink" title="跨域解决办法"></a>跨域解决办法</h2><h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><p>  <strong>这是我目前写项目最常用的一种解决办法，也是当下最流行的方案，通过设置后端，来解决跨域，简单快捷</strong></p>
-<blockquote>
-<p>传说中的后端跨域！</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>); <span class="comment">// 允许跨域的源地址是什么，可以设置为*，也可以设成你的源地址</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;Origin, X-Requested-With, Content-Type, Accept&quot;</span>); <span class="comment">// 设置返回数据类型</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;GET, PUT, OPTIONS, POST&quot;</span>); <span class="comment">// 控制哪种请求是可以跨域的</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>, <span class="literal">true</span>); <span class="comment">// 跨域的时候是否携带cookie</span></span><br></pre></td></tr></table></figure>
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p><strong>利用的原理是script标签可以跨域请求资源，将回调函数作为参数拼接在url中</strong></p>
-<blockquote>
-<p>传说中的前端跨域！但是需要后端的小伙伴们来配合我们一下哦🙄</p>
-</blockquote>
-<p>​         后端收到请求，调用该回调函数，并将数据作为参数返回去，注意设置响应头返回文档类型，应该设置成javascript</p>
-<blockquote>
-<p>res.setHeader(‘content-type’, ‘application/javascript’)     // 要注意不要忘了设置这个 ，否则会出错误！</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">JsonpCallback</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">             <span class="comment">// 在这里处理后端返回来的data数据</span></span><br><span class="line">             <span class="built_in">console</span>.log(data);</span><br><span class="line">         &#125;</span><br><span class="line">   &lt;/script&gt;</span><br><span class="line">   <span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://127.0.0.1:12345/jsonp/callback=JsonpCallback&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="postmessage"><a href="#postmessage" class="headerlink" title="postmessage"></a>postmessage</h3><p>这个是我没听说过的一种方法，它是利用html5的api进行的，具有特定的使用场景。      </p>
-<p>使用场景：一个页面中嵌入另一个iframe页面，</p>
-<p>​        在主页面中使用postmessage发送数据，在iframe页面中用监听器接收数据</p>
-<pre><code>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 主页面</span><br><span class="line">iFrame.onload = function () &#123;</span><br><span class="line">	iFrame.contentWindow.postMessage(&#123; msg: &#x27;MessageFromIndexPage&#x27; &#125;, &#x27;\*&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">// iframe页面</span><br><span class="line">window.addEventListener(&quot;message&quot;, function (event) &#123;</span><br><span class="line"></span><br><span class="line">	console.log(&#x27;这里是接收到来自父页面的消息，消息内容在event.data属性中&#x27;, event)</span><br><span class="line"></span><br><span class="line">&#125;, false)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h3 id="其他方法：node中间件、nginx反向代理、websocket等"><a href="#其他方法：node中间件、nginx反向代理、websocket等" class="headerlink" title="其他方法：node中间件、nginx反向代理、websocket等"></a>其他方法：node中间件、nginx反向代理、websocket等</h3><p>主要是因为同源策略是浏览器的限制，服务器和服务器之间没有限制</p>
-<p>这次我们举个菠萝🍍，小红想要小绿的新玩具<strong>（发出接口请求）</strong>，但是小绿不给他<strong>（同源策略）</strong>，于是小红去找了小兰，对小兰说，我想要小绿的新玩具<strong>（准备去搞中间件进行转发或者做代理了）</strong>，小兰去跟小绿要来了新玩具<strong>（拿到了想要的数据，说明方法成功）</strong>，并将新玩具交给了小红<strong>（解决了跨域）</strong>。</p>
-<blockquote>
-<p>在这里面我只接触过node中间件跟nginx反向代理，也不算很深入的了解，所以就先不献丑啦，等日后学有所成再来填上这个坑！</p>
-</blockquote>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>跨域是很常见的一个问题，也是出现在面试问题中频率比较高的问题，希望每个小伙伴们在遇到这个问题的时候都能顺利解决。虽然我们现在写项目的时候，框架中大都为我们配置了代理（Vue的proxyTable代理等），但是我想了解其根源对于我们的自我提高是非常有帮助的！</p>
+<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
+<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a target="_blank" rel="noopener" href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
 
     </div>
 
@@ -387,7 +322,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/876750285.html/" title="跨域的问题终于能解决了">https://wangenze267.github.io/posts/876750285.html/</a>
+    <a href="https://wangenze267.github.io/axios%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html" title="Axios踩坑日记">https://wangenze267.github.io/axios踩坑日记.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -422,7 +357,9 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+              <a href="/tags/Axios/" rel="tag"><i class="fa fa-tag"></i> Axios</a>
+              <a href="/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 踩坑日记</a>
           </div>
 
         
@@ -431,12 +368,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/1172116075.html/" rel="prev" title="前端知识链条中少不了的一环--Ajax">
-      <i class="fa fa-chevron-left"></i> 前端知识链条中少不了的一环--Ajax
+    <a href="/JavaScript%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87.html" rel="prev" title="JavaScript变量提升">
+      <i class="fa fa-chevron-left"></i> JavaScript变量提升
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/2373844462.html/" rel="next" title="咳咳咳，写给SZ的第一封。。。。项目草稿？？？">
-      咳咳咳，写给SZ的第一封。。。。项目草稿？？？ <i class="fa fa-chevron-right"></i>
+    <a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3.html" rel="next" title="微信小程序相关">
+      微信小程序相关 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -497,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%89%8D"><span class="nav-number">1.1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%9F%9F%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">什么是跨域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%B7%A8%E5%9F%9F%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">为什么有跨域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E6%8A%A5%E9%94%99"><span class="nav-number">1.4.</span> <span class="nav-text">跨域报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">跨域解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cors"><span class="nav-number">1.5.1.</span> <span class="nav-text">cors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">1.5.2.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postmessage"><span class="nav-number">1.5.3.</span> <span class="nav-text">postmessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95%EF%BC%9Anode%E4%B8%AD%E9%97%B4%E4%BB%B6%E3%80%81nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81websocket%E7%AD%89"><span class="nav-number">1.5.4.</span> <span class="nav-text">其他方法：node中间件、nginx反向代理、websocket等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">1.6.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E6%89%BE%E4%BA%86axios%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">去找了axios的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E5%A4%96"><span class="nav-number">3.</span> <span class="nav-text">另外</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
