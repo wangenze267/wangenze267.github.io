@@ -151,6 +151,13 @@
 
   
   <url>
+    <loc>https://wangenze267.github.io/tags/Node-js/</loc>
+    <lastmod>2021-08-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangenze267.github.io/tags/JavaScript/</loc>
     <lastmod>2021-08-11</lastmod>
     <changefreq>daily</changefreq>
@@ -159,13 +166,6 @@
   
   <url>
     <loc>https://wangenze267.github.io/tags/ES6/</loc>
-    <lastmod>2021-08-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangenze267.github.io/tags/Node-js/</loc>
     <lastmod>2021-08-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
