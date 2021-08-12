@@ -6,7 +6,7 @@
   <link href="https://wangenze267.github.io/atom.xml" rel="self"/>
   
   <link href="https://wangenze267.github.io/"/>
-  <updated>2021-08-12T11:14:45.942Z</updated>
+  <updated>2021-08-12T11:18:25.182Z</updated>
   <id>https://wangenze267.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://wangenze267.github.io/posts/3309484712.html/"/>
     <id>https://wangenze267.github.io/posts/3309484712.html/</id>
     <published>2021-08-12T11:14:12.556Z</published>
-    <updated>2021-08-12T11:14:45.942Z</updated>
+    <updated>2021-08-12T11:18:25.182Z</updated>
     
     
     
@@ -36,7 +36,7 @@
     <link href="https://wangenze267.github.io/posts/3168823204.html/"/>
     <id>https://wangenze267.github.io/posts/3168823204.html/</id>
     <published>2021-08-12T05:38:42.637Z</published>
-    <updated>2021-08-12T11:10:51.098Z</updated>
+    <updated>2021-08-12T11:18:25.183Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul><li><p>回调函数格式规范</p><ul><li>error-first callback</li><li>Node-style callback</li></ul></li><li><p>第一个参数是error，后面的参数才是结果</p></li></ul><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p><span id="more"></span><p>结果：</p><ul><li>过</li><li>不过</li></ul><p>ps：面试过了我们就笑一下，面试不过我们就哭！</p><p>先上代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">&#125;</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这是一个正常的面试流程：</p><ul><li>一面——&gt;挂掉</li><li>一面——-&gt;二面——&gt;挂掉</li><li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li><li>一面——-&gt;二面——&gt;三面——&gt;入职</li></ul><p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p><p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p><p>简单描述一下张三的代码结构：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p><ul><li><p>npm包：<code>async.js</code></p></li><li><p>thunk编程方式</p></li></ul><blockquote><p>现在好像这两个方式都不用了😭</p></blockquote>]]></content>
     
@@ -343,9 +343,9 @@
     
     
     
-    <category term="踩坑日记" scheme="https://wangenze267.github.io/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/"/>
-    
     <category term="Hexo" scheme="https://wangenze267.github.io/tags/Hexo/"/>
+    
+    <category term="踩坑日记" scheme="https://wangenze267.github.io/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/"/>
     
   </entry>
   
@@ -395,9 +395,9 @@
     
     <category term="Vue" scheme="https://wangenze267.github.io/tags/Vue/"/>
     
-    <category term="Axios" scheme="https://wangenze267.github.io/tags/Axios/"/>
-    
     <category term="踩坑日记" scheme="https://wangenze267.github.io/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/"/>
+    
+    <category term="Axios" scheme="https://wangenze267.github.io/tags/Axios/"/>
     
   </entry>
   
