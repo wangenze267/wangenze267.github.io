@@ -6,7 +6,7 @@
   <link href="https://wangenze267.github.io/atom.xml" rel="self"/>
   
   <link href="https://wangenze267.github.io/"/>
-  <updated>2021-08-11T14:33:34.472Z</updated>
+  <updated>2021-08-12T11:14:45.942Z</updated>
   <id>https://wangenze267.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Node.js之事件循环</title>
+    <link href="https://wangenze267.github.io/posts/3309484712.html/"/>
+    <id>https://wangenze267.github.io/posts/3309484712.html/</id>
+    <published>2021-08-12T11:14:12.556Z</published>
+    <updated>2021-08-12T11:14:45.942Z</updated>
+    
+    
+    
+    
+    
+    <category term="Node.js" scheme="https://wangenze267.github.io/tags/Node-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js学习笔记之异步编程部分（一）</title>
+    <link href="https://wangenze267.github.io/posts/3168823204.html/"/>
+    <id>https://wangenze267.github.io/posts/3168823204.html/</id>
+    <published>2021-08-12T05:38:42.637Z</published>
+    <updated>2021-08-12T11:10:51.098Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul><li><p>回调函数格式规范</p><ul><li>error-first callback</li><li>Node-style callback</li></ul></li><li><p>第一个参数是error，后面的参数才是结果</p></li></ul><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p><span id="more"></span><p>结果：</p><ul><li>过</li><li>不过</li></ul><p>ps：面试过了我们就笑一下，面试不过我们就哭！</p><p>先上代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(err)&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">&#125;</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这是一个正常的面试流程：</p><ul><li>一面——&gt;挂掉</li><li>一面——-&gt;二面——&gt;挂掉</li><li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li><li>一面——-&gt;二面——&gt;三面——&gt;入职</li></ul><p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p><p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p><p>简单描述一下张三的代码结构：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p><ul><li><p>npm包：<code>async.js</code></p></li><li><p>thunk编程方式</p></li></ul><blockquote><p>现在好像这两个方式都不用了😭</p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Node-js学习笔记之异步编程部分（一）&quot;&gt;&lt;a href=&quot;#Node-js学习笔记之异步编程部分（一）&quot; class=&quot;headerlink&quot; title=&quot;Node.js学习笔记之异步编程部分（一）&quot;&gt;&lt;/a&gt;Node.js学习笔记之异步编程部分（一）&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;回调函数格式规范&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;error-first callback&lt;/li&gt;
+&lt;li&gt;Node-style callback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;第一个参数是error，后面的参数才是结果&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;场景&quot;&gt;&lt;a href=&quot;#场景&quot; class=&quot;headerlink&quot; title=&quot;场景&quot;&gt;&lt;/a&gt;场景&lt;/h3&gt;&lt;p&gt;你在面试之后，面试官让你回去等消息。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Node.js" scheme="https://wangenze267.github.io/tags/Node-js/"/>
+    
+  </entry>
   
   <entry>
     <title>Node.js的非阻塞I/O</title>
@@ -49,7 +93,7 @@
     <published>2021-08-09T13:54:08.948Z</published>
     <updated>2021-08-10T16:01:07.626Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span><h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p><p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p><h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;" /><p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p><ul><li>轮播图，我这边建议打死</li><li>我的简历：参考咱们自己写的简历</li><li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li><li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li></ul><h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;" /><p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p><ul><li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li><li>利用校招跟社招做一下数据筛选</li><li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li></ul><h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span><h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p><p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p><h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;"><p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p><ul><li>轮播图，我这边建议打死</li><li>我的简历：参考咱们自己写的简历</li><li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li><li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li></ul><h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;"><p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p><ul><li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li><li>利用校招跟社招做一下数据筛选</li><li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li></ul><h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>]]></content>
     
     
     <summary type="html">&lt;h2 id=&quot;关于在线简历App，随时进行更新&quot;&gt;&lt;a href=&quot;#关于在线简历App，随时进行更新&quot; class=&quot;headerlink&quot; title=&quot;关于在线简历App，随时进行更新&quot;&gt;&lt;/a&gt;关于在线简历App，随时进行更新&lt;/h2&gt;</summary>
