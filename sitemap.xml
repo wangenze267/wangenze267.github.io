@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangenze267.github.io/about/index.html</loc>
+    
+    <lastmod>2021-08-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangenze267.github.io/posts/3309484712.html/</loc>
     
     <lastmod>2021-08-13</lastmod>
@@ -148,13 +155,6 @@
     
   </url>
   
-  <url>
-    <loc>https://wangenze267.github.io/about/index.html</loc>
-    
-    <lastmod>2021-08-08</lastmod>
-    
-  </url>
-  
 
   <url>
     <loc>https://wangenze267.github.io/</loc>
@@ -186,14 +186,14 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Vue/</loc>
+    <loc>https://wangenze267.github.io/tags/Axios/</loc>
     <lastmod>2021-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Axios/</loc>
+    <loc>https://wangenze267.github.io/tags/Vue/</loc>
     <lastmod>2021-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -214,6 +214,13 @@
   </url>
   
   <url>
+    <loc>https://wangenze267.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2021-08-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangenze267.github.io/tags/Css/</loc>
     <lastmod>2021-08-13</lastmod>
     <changefreq>daily</changefreq>
@@ -222,13 +229,6 @@
   
   <url>
     <loc>https://wangenze267.github.io/tags/Flex/</loc>
-    <lastmod>2021-08-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangenze267.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</loc>
     <lastmod>2021-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
