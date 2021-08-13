@@ -64,50 +64,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript变量提升</title>
-    <url>/posts/388126410.html/</url>
-    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
-<p>先从一个简单的例子来入手：</p>
-<blockquote>
-<p>a = 2;<br>var a;<br>console.log(a);</p>
-</blockquote>
-<span id="more"></span>
-
-<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
-<blockquote>
-<p>var a;<br>a = 2;<br>console.log(a);</p>
-</blockquote>
-<p>那么我们再看一个例子：</p>
-<blockquote>
-<p>console.log(a);<br>var a = 2;</p>
-</blockquote>
-<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
-<blockquote>
-<p>var a;<br>console.log(a);<br>a = 2;</p>
-</blockquote>
-<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
-<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
-</blockquote>
-<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
-<p>那么多个函数声明怎么办呢？</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
-</blockquote>
-<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
-<p>还有最后一个例子了：</p>
-<blockquote>
-<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
-</blockquote>
-<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Node.js学习笔记之异步编程部分（一）</title>
     <url>/posts/3168823204.html/</url>
     <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
@@ -160,101 +116,47 @@
       </tags>
   </entry>
   <entry>
-    <title>Node.js之事件循环</title>
-    <url>/posts/3309484712.html/</url>
-    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
+    <title>JavaScript变量提升</title>
+    <url>/posts/388126410.html/</url>
+    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
+<p>先从一个简单的例子来入手：</p>
+<blockquote>
+<p>a = 2;<br>var a;<br>console.log(a);</p>
+</blockquote>
 <span id="more"></span>
 
-<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
-<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
-<p>就先到这，下次见~</p>
+<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
+<blockquote>
+<p>var a;<br>a = 2;<br>console.log(a);</p>
+</blockquote>
+<p>那么我们再看一个例子：</p>
+<blockquote>
+<p>console.log(a);<br>var a = 2;</p>
+</blockquote>
+<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
+<blockquote>
+<p>var a;<br>console.log(a);<br>a = 2;</p>
+</blockquote>
+<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
+</blockquote>
+<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
+<p>那么多个函数声明怎么办呢？</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
+</blockquote>
+<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
+<p>还有最后一个例子了：</p>
+<blockquote>
+<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
+</blockquote>
+<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
 ]]></content>
       <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js的非阻塞I/O</title>
-    <url>/posts/212671180.html/</url>
-    <content><![CDATA[<h1 id="Node-js的非阻塞I-O"><a href="#Node-js的非阻塞I-O" class="headerlink" title="Node.js的非阻塞I/O"></a>Node.js的非阻塞I/O</h1><blockquote>
-<p>写在最前</p>
-<p>老早就想学Node.js了，觉得前端一定要是懂服务端知识，并且可以自己独立完成一个小型全栈项目的，但是碍于时间因素，上学期学了点基础之后，就再也没空学，正好今天科二过了，Node.js我又来卷你了！！！</p>
-</blockquote>
-<ul>
-<li>I/O就是input/output，一个系统的输入输出</li>
-<li>阻塞I/O和非阻塞I/O的区别就在于<strong>系统的接收输入，在到输出期间，能不能接收其他输入</strong></li>
-</ul>
-<span id="more"></span>
-
-<h2 id="举个栗子🌰"><a href="#举个栗子🌰" class="headerlink" title="举个栗子🌰"></a>举个栗子🌰</h2><ul>
-<li><p>去食堂吃饭：我们都要排队打饭</p>
-<p>我们的流程是：<font color="blue">排队——&gt;等前面的人打饭——–&gt;轮到我们自己打饭——-&gt;开始吃饭</font></p>
-</li>
-<li><p>出去吃饭：餐厅点菜</p>
-<p>现在我们的流程是：<font color="red">坐下——-&gt;点菜——-&gt;等待——–&gt;开始吃饭</font></p>
-<blockquote>
-<p>尝试开始在markdown中使用一些奇奇怪怪的东西</p>
-</blockquote>
-</li>
-<li><p><font color="red" size="5">排队打饭 vs 餐厅点菜</font></p>
-</li>
-<li><p><font>对于点菜人员的我们来说：</font></p>
-<ul>
-<li>排队打饭是阻塞I/O</li>
-<li>餐厅点菜是非阻塞I/O</li>
-</ul>
-</li>
-</ul>
-<p>继续来看最上面那句话：</p>
-<blockquote>
-<p>系统的接收输入，在到输出期间，能不能接收其他输入</p>
-</blockquote>
-<p>在栗子中，系统=食堂打饭的阿姨或者是餐厅服务生，输入=点菜，输出=端菜（上菜）</p>
-<p>食堂阿姨只能一份一份的打饭———&gt; <font color="red">阻塞I/O</font></p>
-<p>服务生点完菜之后还可以服务其他客人——-&gt;<font color="red">非阻塞I/O</font></p>
-<h3 id="其实，这个问题小学老师就教过我们"><a href="#其实，这个问题小学老师就教过我们" class="headerlink" title="其实，这个问题小学老师就教过我们"></a>其实，这个问题小学老师就教过我们</h3><blockquote>
-<p>小芳帮妈妈做家务，需要做：用洗衣机洗衣服（20分钟）、扫地（10分钟）、整理书桌（10分钟）、晾衣服（5分钟）。你能不能设计一个巧妙合理的新顺序，使小芳最少花（      ）分钟可以完成这些事？</p>
-<p>A.20</p>
-<p>B.25</p>
-<p>C.30</p>
-<p>D.35</p>
-</blockquote>
-<p>没想到吧？（其实我也没想到~）</p>
-<p>在这个过程中，我们用洗衣机洗衣服=输入，晾衣服=输出，在洗衣机洗衣服的过程中，我们是可以去做其他事情的，所以这个属于<strong>非阻塞I/O</strong>哟。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>理解非阻塞I/O，首先要确定的是什么？</p>
-<ul>
-<li>我们要确定有一个输入/输出（input/output）的系统。</li>
-<li>思考在I/O过程中，能不能进行其他I/O。<ul>
-<li>能——&gt;非阻塞</li>
-<li>不能——-&gt;阻塞</li>
-</ul>
-</li>
-</ul>
-<h3 id="写个栗子🌰"><a href="#写个栗子🌰" class="headerlink" title="写个栗子🌰"></a>写个栗子🌰</h3><p>先新建一个<code>index.js</code>，再打开我们前端人的vs-code，打开终端，执行<code>npm install glob</code>安装一个glob包，来帮我们更加方便去观察I/O是否阻塞。</p>
-<p><font size="4" color="red">先来看阻塞I/O</font></p>
-<p>代码先贴上：<code>index.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> glob = <span class="built_in">require</span>(<span class="string">&#x27;glob&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;glob&#x27;</span>)</span><br><span class="line">result = glob.sync(__dirname + <span class="string">&#x27;/**/*&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;glob&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(result)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>首先，先用require引入我们的glob包，接下来，用glob.sync去做一个打印目录的一个操作，将结果打印的同时，利用time/timeEnd，去记录时间，看node执行这个操作共花费多少时间。</p>
-<p>在终端输入<code>node index.js</code>直接运行这个文件</p>
-<p><img src="https://wangez.site/img/img/E4C%60~CXRE0ZX7OKAYH36QMX.png"></p>
-<p>看第一行，在我的电脑上执行共花费20.93毫秒啊，这个数量在一个服务端来说，已经不小了。</p>
-<p><font size="4" color="red">再看非阻塞I/O</font></p>
-<p>直接上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> glob = <span class="built_in">require</span>(<span class="string">&#x27;glob&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> result = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;glon&#x27;</span>)</span><br><span class="line">glob(__dirname + <span class="string">&#x27;/**/*&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">    result = res;</span><br><span class="line">    <span class="comment">// console.log(result)</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;got result&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;glob&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;今天你卷了没？&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这次采用一个回调函数的方式来进行操作，因为result的打印出来实在太多行了，我们将其替换为打印出’got result’，并在计时完成后进行一个打印语句的操作，让我们来看看结果：</p>
-<p><img src="https://wangez.site/img/img/1628690658.jpg" alt="1628690658"></p>
-<p>首先还是我们的时间：3.258ms，跟之前的20.93比起来，简直少了不要太多好嘛，完后是我们输出的语句，最后才打印了我们想要的操作结果，也就是说，它在输入输出之间进行了别的操作，对结果无影响，且用时少了好多！</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>我的理解🐱‍🐉：非阻塞I/O让我们减少了许多等待的时间，并且在等待时间内，我们还可以进行一些其他的操作</p>
-<blockquote>
-<p>凡事没有绝对，不是说非阻塞I/O就一定是好的，还是拿餐厅举例子，比如服务员中间发生意外，所有的客人都要等这一个服务员，这样就会影响餐厅整体质量（可以理解为服务器奔溃）；阻塞I/O由于有多个服务员，一对一的服务，即使有一个发生意外，也不会影响整体质量，而雇多个服务员也要相应的付出成本。</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>Node.js</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -404,6 +306,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Node.js之事件循环</title>
+    <url>/posts/3309484712.html/</url>
+    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
+<span id="more"></span>
+
+<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
+<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
+<p>就先到这，下次见~</p>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Axios踩坑日记</title>
     <url>/posts/2698809561.html/</url>
     <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
@@ -426,6 +344,88 @@
         <tag>Vue</tag>
         <tag>Axios</tag>
         <tag>踩坑日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js的非阻塞I/O</title>
+    <url>/posts/212671180.html/</url>
+    <content><![CDATA[<h1 id="Node-js的非阻塞I-O"><a href="#Node-js的非阻塞I-O" class="headerlink" title="Node.js的非阻塞I/O"></a>Node.js的非阻塞I/O</h1><blockquote>
+<p>写在最前</p>
+<p>老早就想学Node.js了，觉得前端一定要是懂服务端知识，并且可以自己独立完成一个小型全栈项目的，但是碍于时间因素，上学期学了点基础之后，就再也没空学，正好今天科二过了，Node.js我又来卷你了！！！</p>
+</blockquote>
+<ul>
+<li>I/O就是input/output，一个系统的输入输出</li>
+<li>阻塞I/O和非阻塞I/O的区别就在于<strong>系统的接收输入，在到输出期间，能不能接收其他输入</strong></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="举个栗子🌰"><a href="#举个栗子🌰" class="headerlink" title="举个栗子🌰"></a>举个栗子🌰</h2><ul>
+<li><p>去食堂吃饭：我们都要排队打饭</p>
+<p>我们的流程是：<font color="blue">排队——&gt;等前面的人打饭——–&gt;轮到我们自己打饭——-&gt;开始吃饭</font></p>
+</li>
+<li><p>出去吃饭：餐厅点菜</p>
+<p>现在我们的流程是：<font color="red">坐下——-&gt;点菜——-&gt;等待——–&gt;开始吃饭</font></p>
+<blockquote>
+<p>尝试开始在markdown中使用一些奇奇怪怪的东西</p>
+</blockquote>
+</li>
+<li><p><font color="red" size="5">排队打饭 vs 餐厅点菜</font></p>
+</li>
+<li><p><font>对于点菜人员的我们来说：</font></p>
+<ul>
+<li>排队打饭是阻塞I/O</li>
+<li>餐厅点菜是非阻塞I/O</li>
+</ul>
+</li>
+</ul>
+<p>继续来看最上面那句话：</p>
+<blockquote>
+<p>系统的接收输入，在到输出期间，能不能接收其他输入</p>
+</blockquote>
+<p>在栗子中，系统=食堂打饭的阿姨或者是餐厅服务生，输入=点菜，输出=端菜（上菜）</p>
+<p>食堂阿姨只能一份一份的打饭———&gt; <font color="red">阻塞I/O</font></p>
+<p>服务生点完菜之后还可以服务其他客人——-&gt;<font color="red">非阻塞I/O</font></p>
+<h3 id="其实，这个问题小学老师就教过我们"><a href="#其实，这个问题小学老师就教过我们" class="headerlink" title="其实，这个问题小学老师就教过我们"></a>其实，这个问题小学老师就教过我们</h3><blockquote>
+<p>小芳帮妈妈做家务，需要做：用洗衣机洗衣服（20分钟）、扫地（10分钟）、整理书桌（10分钟）、晾衣服（5分钟）。你能不能设计一个巧妙合理的新顺序，使小芳最少花（      ）分钟可以完成这些事？</p>
+<p>A.20</p>
+<p>B.25</p>
+<p>C.30</p>
+<p>D.35</p>
+</blockquote>
+<p>没想到吧？（其实我也没想到~）</p>
+<p>在这个过程中，我们用洗衣机洗衣服=输入，晾衣服=输出，在洗衣机洗衣服的过程中，我们是可以去做其他事情的，所以这个属于<strong>非阻塞I/O</strong>哟。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>理解非阻塞I/O，首先要确定的是什么？</p>
+<ul>
+<li>我们要确定有一个输入/输出（input/output）的系统。</li>
+<li>思考在I/O过程中，能不能进行其他I/O。<ul>
+<li>能——&gt;非阻塞</li>
+<li>不能——-&gt;阻塞</li>
+</ul>
+</li>
+</ul>
+<h3 id="写个栗子🌰"><a href="#写个栗子🌰" class="headerlink" title="写个栗子🌰"></a>写个栗子🌰</h3><p>先新建一个<code>index.js</code>，再打开我们前端人的vs-code，打开终端，执行<code>npm install glob</code>安装一个glob包，来帮我们更加方便去观察I/O是否阻塞。</p>
+<p><font size="4" color="red">先来看阻塞I/O</font></p>
+<p>代码先贴上：<code>index.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> glob = <span class="built_in">require</span>(<span class="string">&#x27;glob&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;glob&#x27;</span>)</span><br><span class="line">result = glob.sync(__dirname + <span class="string">&#x27;/**/*&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;glob&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(result)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首先，先用require引入我们的glob包，接下来，用glob.sync去做一个打印目录的一个操作，将结果打印的同时，利用time/timeEnd，去记录时间，看node执行这个操作共花费多少时间。</p>
+<p>在终端输入<code>node index.js</code>直接运行这个文件</p>
+<p><img src="https://wangez.site/img/img/E4C%60~CXRE0ZX7OKAYH36QMX.png"></p>
+<p>看第一行，在我的电脑上执行共花费20.93毫秒啊，这个数量在一个服务端来说，已经不小了。</p>
+<p><font size="4" color="red">再看非阻塞I/O</font></p>
+<p>直接上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> glob = <span class="built_in">require</span>(<span class="string">&#x27;glob&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> result = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.time(<span class="string">&#x27;glon&#x27;</span>)</span><br><span class="line">glob(__dirname + <span class="string">&#x27;/**/*&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,res</span>)</span>&#123;</span><br><span class="line">    result = res;</span><br><span class="line">    <span class="comment">// console.log(result)</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;got result&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.timeEnd(<span class="string">&#x27;glob&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;今天你卷了没？&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这次采用一个回调函数的方式来进行操作，因为result的打印出来实在太多行了，我们将其替换为打印出’got result’，并在计时完成后进行一个打印语句的操作，让我们来看看结果：</p>
+<p><img src="https://wangez.site/img/img/1628690658.jpg" alt="1628690658"></p>
+<p>首先还是我们的时间：3.258ms，跟之前的20.93比起来，简直少了不要太多好嘛，完后是我们输出的语句，最后才打印了我们想要的操作结果，也就是说，它在输入输出之间进行了别的操作，对结果无影响，且用时少了好多！</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>我的理解🐱‍🐉：非阻塞I/O让我们减少了许多等待的时间，并且在等待时间内，我们还可以进行一些其他的操作</p>
+<blockquote>
+<p>凡事没有绝对，不是说非阻塞I/O就一定是好的，还是拿餐厅举例子，比如服务员中间发生意外，所有的客人都要等这一个服务员，这样就会影响餐厅整体质量（可以理解为服务器奔溃）；阻塞I/O由于有多个服务员，一对一的服务，即使有一个发生意外，也不会影响整体质量，而雇多个服务员也要相应的付出成本。</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
       </tags>
   </entry>
   <entry>
@@ -561,6 +561,88 @@
       </tags>
   </entry>
   <entry>
+    <title>关于作用域与作用域链的理解</title>
+    <url>/posts/1077228788.html/</url>
+    <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
+<p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
+<span id="more"></span>
+
+<p>在<strong>ES6</strong>之前，JavaScript中有两种作用域，分别叫做<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
+<ul>
+<li>全局作用域：<strong>全局作用域</strong>中的对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期，页面被关闭才会被销毁。</li>
+<li>函数作用域：<strong>函数作用域</strong>就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。</li>
+</ul>
+<p>作用域给我的最大感觉就是隔离变量，在不同作用域的<strong>同名变量</strong>是不会冲突的。</p>
+<p>在ES6中，提出了<strong>块级作用域</strong>的概念。</p>
+<ul>
+<li><p><strong>块级作用域的特点</strong>：在代码块内部定义的变量在外部是访问不到的，并且变量会在该代码块执行完后被销毁掉。</p>
+</li>
+<li><p><strong>块级作用域形式</strong>：就是使用大括号包裹的代码块<code>&#123;&#125;</code>，比如函数，判断语句，循环语句，甚至单独的一个<code>&#123;&#125;</code>，包裹的也可以看作是一个块级作用域。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// if块</span></span><br><span class="line"><span class="keyword">if</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// while 块</span></span><br><span class="line"><span class="keyword">while</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// 函数块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// for循环块</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;&#125;</span><br><span class="line"><span class="comment">// 单独的&#123;&#125;</span></span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>如何让块级作用域生效，ES6给我们提供了两个关键字：<strong>let和const</strong></p>
+<p>来看看例子吧</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>我们来思考一道题：每隔一秒钟，打印出来一个自然数，自然数递增。</p>
+<p>是不是用一个for循环，里面设置好一个定时器？</p>
+<p>是这样？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还是这样？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>let、const关键字解决var变量提升的问题</strong></p>
+<p>之前有说过变量提升的问题，现在来看一下let与const是怎么解决问题的。</p>
+<p>首先举一下都会产生什么问题：</p>
+<ul>
+<li><p>变量提升会导致变量值被覆盖</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;张三&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">var</span> a = <span class="string">&quot;李四&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">showA() <span class="comment">// undefined  undefined</span></span><br></pre></td></tr></table></figure></li>
+<li><p>该销毁的变量销毁不掉</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>那么let、const是如何解决问题的呢？</p>
+<p>先来看一下这段代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">11</span>;</span><br><span class="line">	<span class="keyword">let</span> b = <span class="number">22</span>;</span><br><span class="line">	&#123; 	</span><br><span class="line">		<span class="keyword">let</span> b = <span class="number">33</span>;</span><br><span class="line">		<span class="keyword">var</span> c = <span class="number">44</span>;</span><br><span class="line">        <span class="keyword">let</span> d = <span class="number">55</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line">        <span class="built_in">console</span>.log(b); <span class="comment">// 33</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 22</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 44</span></span><br><span class="line">	<span class="built_in">console</span>.log(d); <span class="comment">// not defined</span></span><br><span class="line">&#125; </span><br><span class="line">fun()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>let与const关键字创建的变量是存储在词法环境的，而var创建的变量是存储在变量环境中的，访问变量的时候，先从执行上下文的词法环境中查找，再到变量环境中进行查找。</p>
+</li>
+<li><p>当块级内部代码执行结束后，内部let与const创建的变量会被销毁。</p>
+</li>
+<li><p>let跟const创建的变量，初始化不提升，创建提升，所以会造成<strong>暂时性死区</strong></p>
+<p>来看一下什么是暂时性死区吧</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候，我们的浏览器报错与之前的not defined就不一样了，它会报 <code> Cannot access &#39;a&#39; before initialization</code>这个错误，告诉我们在初始化前不能访问a这个变量，这是因为let与const只有创建提升，没有初始化提升，所以造成了这个问题。</p>
+</li>
+</ul>
+<p><strong>再次说明一下变量提升的问题</strong></p>
+<ul>
+<li>var的创建和初始化被提升，赋值不会被提升</li>
+<li>let的创建被提升，初始化和赋值不会被提升，所以会有暂时性死区的问题（就是访问不到变量）</li>
+<li>function的创建、初始化、赋值都会被提升</li>
+</ul>
+<p><strong>作用域的特点：是代码编译阶段就决定好的，和函数是如何调用的没有关系</strong></p>
+<p>看下面这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">biqibao</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;海绵宝宝&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test1 = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span>) &#123; </span><br><span class="line">    	<span class="keyword">let</span> myName = <span class="string">&quot;派大星&quot;</span>; </span><br><span class="line">    	<span class="built_in">console</span>.log(test);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;章鱼哥&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test = <span class="number">2</span>;</span><br><span class="line">    &#123; </span><br><span class="line">    	<span class="keyword">let</span> test = <span class="number">3</span>;</span><br><span class="line">        biqibao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot;珊迪&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> myAge = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> test =<span class="number">1</span>;</span><br><span class="line">fn(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>解释一下流程，biqibao函数在fn函数中被调用，要打印test变量，首先查找biqibao函数的内部作用域，没有找到，于是去到全局作用域进行查找，找到了let test = 1这句话，于是，打印1。与fn函数中的let test = 2这句话，一点关系都没有。</p>
+<p>这就是在诠释上面<strong>作用域特点</strong>的那句话。</p>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><strong>作用域链</strong>：当一个函数中使用了某个变量，首先会在自己内部作用域查找，然后再向外部一层一层查找，直到全局作用域，这个链式查找就是作用域链</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(num);</span><br><span class="line">		&#125;</span><br><span class="line">		fn3();</span><br><span class="line">	&#125;</span><br><span class="line">	fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>fn3要打印num变量，于是他从fn3的函数作用域，找到fn2的函数作用域，再找到fn1的函数作用域，再找到全局作用域，终于找到了num变量，成功将其打印。</p>
+<h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于Hexo配置使用Next主题</title>
     <url>/posts/2781919463.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
@@ -652,6 +734,33 @@
       </tags>
   </entry>
   <entry>
+    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
+    <url>/posts/2373844462.html/</url>
+    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
+
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
+<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
+<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;">
+
+<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
+<ul>
+<li>轮播图，我这边建议打死</li>
+<li>我的简历：参考咱们自己写的简历</li>
+<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
+<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
+</ul>
+<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;">
+
+<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
+<ul>
+<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
+<li>利用校招跟社招做一下数据筛选</li>
+<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
+</ul>
+<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>关于闭包的一些理解</title>
     <url>/posts/400024894.html/</url>
     <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
@@ -715,183 +824,6 @@
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于作用域与作用域链的理解</title>
-    <url>/posts/1077228788.html/</url>
-    <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
-<p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
-<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
-<span id="more"></span>
-
-<p>在<strong>ES6</strong>之前，JavaScript中有两种作用域，分别叫做<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
-<ul>
-<li>全局作用域：<strong>全局作用域</strong>中的对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期，页面被关闭才会被销毁。</li>
-<li>函数作用域：<strong>函数作用域</strong>就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。</li>
-</ul>
-<p>作用域给我的最大感觉就是隔离变量，在不同作用域的<strong>同名变量</strong>是不会冲突的。</p>
-<p>在ES6中，提出了<strong>块级作用域</strong>的概念。</p>
-<ul>
-<li><p><strong>块级作用域的特点</strong>：在代码块内部定义的变量在外部是访问不到的，并且变量会在该代码块执行完后被销毁掉。</p>
-</li>
-<li><p><strong>块级作用域形式</strong>：就是使用大括号包裹的代码块<code>&#123;&#125;</code>，比如函数，判断语句，循环语句，甚至单独的一个<code>&#123;&#125;</code>，包裹的也可以看作是一个块级作用域。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// if块</span></span><br><span class="line"><span class="keyword">if</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// while 块</span></span><br><span class="line"><span class="keyword">while</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// 函数块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// for循环块</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;&#125;</span><br><span class="line"><span class="comment">// 单独的&#123;&#125;</span></span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>如何让块级作用域生效，ES6给我们提供了两个关键字：<strong>let和const</strong></p>
-<p>来看看例子吧</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// not defined</span></span><br></pre></td></tr></table></figure>
-
-<p>我们来思考一道题：每隔一秒钟，打印出来一个自然数，自然数递增。</p>
-<p>是不是用一个for循环，里面设置好一个定时器？</p>
-<p>是这样？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还是这样？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>let、const关键字解决var变量提升的问题</strong></p>
-<p>之前有说过变量提升的问题，现在来看一下let与const是怎么解决问题的。</p>
-<p>首先举一下都会产生什么问题：</p>
-<ul>
-<li><p>变量提升会导致变量值被覆盖</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;张三&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">var</span> a = <span class="string">&quot;李四&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">showA() <span class="comment">// undefined  undefined</span></span><br></pre></td></tr></table></figure></li>
-<li><p>该销毁的变量销毁不掉</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>那么let、const是如何解决问题的呢？</p>
-<p>先来看一下这段代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">11</span>;</span><br><span class="line">	<span class="keyword">let</span> b = <span class="number">22</span>;</span><br><span class="line">	&#123; 	</span><br><span class="line">		<span class="keyword">let</span> b = <span class="number">33</span>;</span><br><span class="line">		<span class="keyword">var</span> c = <span class="number">44</span>;</span><br><span class="line">        <span class="keyword">let</span> d = <span class="number">55</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line">        <span class="built_in">console</span>.log(b); <span class="comment">// 33</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 22</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 44</span></span><br><span class="line">	<span class="built_in">console</span>.log(d); <span class="comment">// not defined</span></span><br><span class="line">&#125; </span><br><span class="line">fun()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>let与const关键字创建的变量是存储在词法环境的，而var创建的变量是存储在变量环境中的，访问变量的时候，先从执行上下文的词法环境中查找，再到变量环境中进行查找。</p>
-</li>
-<li><p>当块级内部代码执行结束后，内部let与const创建的变量会被销毁。</p>
-</li>
-<li><p>let跟const创建的变量，初始化不提升，创建提升，所以会造成<strong>暂时性死区</strong></p>
-<p>来看一下什么是暂时性死区吧</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>这个时候，我们的浏览器报错与之前的not defined就不一样了，它会报 <code> Cannot access &#39;a&#39; before initialization</code>这个错误，告诉我们在初始化前不能访问a这个变量，这是因为let与const只有创建提升，没有初始化提升，所以造成了这个问题。</p>
-</li>
-</ul>
-<p><strong>再次说明一下变量提升的问题</strong></p>
-<ul>
-<li>var的创建和初始化被提升，赋值不会被提升</li>
-<li>let的创建被提升，初始化和赋值不会被提升，所以会有暂时性死区的问题（就是访问不到变量）</li>
-<li>function的创建、初始化、赋值都会被提升</li>
-</ul>
-<p><strong>作用域的特点：是代码编译阶段就决定好的，和函数是如何调用的没有关系</strong></p>
-<p>看下面这段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">biqibao</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;海绵宝宝&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test1 = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span>) &#123; </span><br><span class="line">    	<span class="keyword">let</span> myName = <span class="string">&quot;派大星&quot;</span>; </span><br><span class="line">    	<span class="built_in">console</span>.log(test);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;章鱼哥&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test = <span class="number">2</span>;</span><br><span class="line">    &#123; </span><br><span class="line">    	<span class="keyword">let</span> test = <span class="number">3</span>;</span><br><span class="line">        biqibao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot;珊迪&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> myAge = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> test =<span class="number">1</span>;</span><br><span class="line">fn(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>解释一下流程，biqibao函数在fn函数中被调用，要打印test变量，首先查找biqibao函数的内部作用域，没有找到，于是去到全局作用域进行查找，找到了let test = 1这句话，于是，打印1。与fn函数中的let test = 2这句话，一点关系都没有。</p>
-<p>这就是在诠释上面<strong>作用域特点</strong>的那句话。</p>
-<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><strong>作用域链</strong>：当一个函数中使用了某个变量，首先会在自己内部作用域查找，然后再向外部一层一层查找，直到全局作用域，这个链式查找就是作用域链</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(num);</span><br><span class="line">		&#125;</span><br><span class="line">		fn3();</span><br><span class="line">	&#125;</span><br><span class="line">	fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>fn3要打印num变量，于是他从fn3的函数作用域，找到fn2的函数作用域，再找到fn1的函数作用域，再找到全局作用域，终于找到了num变量，成功将其打印。</p>
-<h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
-    <url>/posts/2373844462.html/</url>
-    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
-
-<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
-<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
-<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;">
-
-<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
-<ul>
-<li>轮播图，我这边建议打死</li>
-<li>我的简历：参考咱们自己写的简历</li>
-<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
-<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
-</ul>
-<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;">
-
-<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
-<ul>
-<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
-<li>利用校招跟社招做一下数据筛选</li>
-<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
-</ul>
-<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>弹性盒模型-flex</title>
-    <url>/posts/3659327966.html/</url>
-    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
-<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
-<span id="more"></span>
-
-<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
-<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
-<p>容器的属性有6个，我们下面一一介绍他们：</p>
-<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
-<ul>
-<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
-<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
-<li>center:项目靠近主轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
-</ul>
-<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
-<ul>
-<li>flex-start:项目靠近交叉轴首端的方向。</li>
-<li>flex-end:项目靠近交叉轴末端的方向。</li>
-<li>center:项目与交叉轴中线对齐。</li>
-<li>baseline:项目与第一行文字基线对齐。</li>
-<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
-</ul>
-<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
-<ul>
-<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
-<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
-<li>center:项目靠近交叉轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
-</ul>
-<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
-<ul>
-<li>row:默认值，水平方向从左往右排列。</li>
-<li>row-reverse:水平方向从右往左排列。</li>
-<li>column:垂直方向从上往下排列。</li>
-<li>column-reverse:垂直方向从下往上排列。</li>
-</ul>
-<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
-<ul>
-<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
-<li>wrap:项目超出容器尺寸时换行。</li>
-<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
-</ul>
-<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
-<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
-<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
-<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
-<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
-<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
-<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
-<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
-<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
-]]></content>
-      <tags>
-        <tag>Css</tag>
-        <tag>Flex</tag>
       </tags>
   </entry>
   <entry>
@@ -965,6 +897,124 @@
       </tags>
   </entry>
   <entry>
+    <title>弹性盒模型-flex</title>
+    <url>/posts/3659327966.html/</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
+<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
+<span id="more"></span>
+
+<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
+<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
+<p>容器的属性有6个，我们下面一一介绍他们：</p>
+<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
+<ul>
+<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
+<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
+<li>center:项目靠近主轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
+<ul>
+<li>flex-start:项目靠近交叉轴首端的方向。</li>
+<li>flex-end:项目靠近交叉轴末端的方向。</li>
+<li>center:项目与交叉轴中线对齐。</li>
+<li>baseline:项目与第一行文字基线对齐。</li>
+<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
+</ul>
+<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
+<ul>
+<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
+<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
+<li>center:项目靠近交叉轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
+<ul>
+<li>row:默认值，水平方向从左往右排列。</li>
+<li>row-reverse:水平方向从右往左排列。</li>
+<li>column:垂直方向从上往下排列。</li>
+<li>column-reverse:垂直方向从下往上排列。</li>
+</ul>
+<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
+<ul>
+<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
+<li>wrap:项目超出容器尺寸时换行。</li>
+<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
+</ul>
+<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
+<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
+<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
+<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
+<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
+<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
+<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
+<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
+<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
+]]></content>
+      <tags>
+        <tag>Css</tag>
+        <tag>Flex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>框架简介之Vue.js</title>
+    <url>/posts/2624959054.html/</url>
+    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
+<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
+<span id="more"></span>
+
+<blockquote>
+<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
+</blockquote>
+<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
+<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
+<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
+<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
+<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
+<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
+<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
+<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
+<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
+<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
+<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
+<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
+<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
+<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
+<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
+<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
+<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
+<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
+<p>声明式渲染与命令式渲染区别</p>
+<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
+<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
+<p><strong>命令式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>微信小程序相关</title>
     <url>/posts/2713850416.html/</url>
     <content><![CDATA[<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
@@ -1018,56 +1068,6 @@
 ]]></content>
       <tags>
         <tag>小程序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>框架简介之Vue.js</title>
-    <url>/posts/2624959054.html/</url>
-    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
-<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
-<span id="more"></span>
-
-<blockquote>
-<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
-</blockquote>
-<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
-<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
-<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
-<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
-<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
-<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
-<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
-<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
-<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
-<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
-<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
-<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
-<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
-<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
-<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
-<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
-<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
-<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
-<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
-<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
-<p>声明式渲染与命令式渲染区别</p>
-<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
-<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
-<p><strong>命令式渲染：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
-
-<p><strong>声明式渲染：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
