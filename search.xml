@@ -160,6 +160,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Node.js之事件循环</title>
+    <url>/posts/3309484712.html/</url>
+    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
+<span id="more"></span>
+
+<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
+<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
+<p>就先到这，下次见~</p>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Node.js的非阻塞I/O</title>
     <url>/posts/212671180.html/</url>
     <content><![CDATA[<h1 id="Node-js的非阻塞I-O"><a href="#Node-js的非阻塞I-O" class="headerlink" title="Node.js的非阻塞I/O"></a>Node.js的非阻塞I/O</h1><blockquote>
@@ -239,45 +255,6 @@
 ]]></content>
       <tags>
         <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js之事件循环</title>
-    <url>/posts/3309484712.html/</url>
-    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
-<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
-<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
-<p>就先到这，下次见~</p>
-]]></content>
-      <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Axios踩坑日记</title>
-    <url>/posts/2698809561.html/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
-<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
-<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
-<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
-]]></content>
-      <tags>
-        <tag>Axios</tag>
-        <tag>Vue</tag>
-        <tag>踩坑日记</tag>
       </tags>
   </entry>
   <entry>
@@ -427,6 +404,31 @@
       </tags>
   </entry>
   <entry>
+    <title>Axios踩坑日记</title>
+    <url>/posts/2698809561.html/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
+<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
+<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
+<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Axios</tag>
+        <tag>踩坑日记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Hexo搭建自己的博客</title>
     <url>/posts/735412972.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
@@ -513,6 +515,48 @@
 ]]></content>
       <tags>
         <tag>踩坑日记</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Hexo使用Next主题的一些优化</title>
+    <url>/posts/1559886533.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
+<p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
+<h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
+<span id="more"></span>
+
+<p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure>
+
+<p>记得将原有的permalink注释掉或者删掉</p>
+<p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<p>到这，关于优化文章链接的操作我们就做完啦！</p>
+<h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p>
+<p>需要打开这个文件进行修改。</p>
+<p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p>
+<p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p>
+<p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p>
+<h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p>
+<p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
+
+<p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p>
+<p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
+]]></content>
+      <tags>
         <tag>Hexo</tag>
       </tags>
   </entry>
@@ -608,45 +652,69 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Hexo使用Next主题的一些优化</title>
-    <url>/posts/1559886533.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
-<p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
-<h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
-<p>插件：<code>hexo-abbrlink</code></p>
-<span id="more"></span>
+    <title>关于闭包的一些理解</title>
+    <url>/posts/400024894.html/</url>
+    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
+<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
+<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
 
-<p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
+<p>先来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
 
-<p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure>
+<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
+<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
+<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
+<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
+<p>而这，就是闭包。</p>
+<p><strong>闭包：这就是我</strong>✌</p>
+<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
+<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
+<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
+<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
+<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
+<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
+<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
+<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
+<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
+<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
+<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
+<p><strong>请注意：闭包一定要慎用</strong></p>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
+<ul>
+<li><p>模仿块级作用域</p>
+<ul>
+<li>计时器的一个应用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>记得将原有的permalink注释掉或者删掉</p>
-<p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure>
-
-<p>到这，关于优化文章链接的操作我们就做完啦！</p>
-<h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p>
-<p>需要打开这个文件进行修改。</p>
-<p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p>
-<p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p>
-<p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p>
-<h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p>
-<p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
-
-<p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure>
-
-<p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p>
-<p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
+<ul>
+<li>打印一组li的下标</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>埋点计数器</p>
+<ul>
+<li>产品让做的网站分析的一种常用的数据采集方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>柯里化</p>
+<ul>
+<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
+<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
+<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
+<p>因为全局变量会被污染或者被修改。</p>
+<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
+<p><strong>闭包能够造成内存泄漏</strong></p>
+<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
 ]]></content>
       <tags>
-        <tag>Hexo</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -732,69 +800,98 @@
       </tags>
   </entry>
   <entry>
-    <title>关于闭包的一些理解</title>
-    <url>/posts/400024894.html/</url>
-    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
-<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
-<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
+    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
+    <url>/posts/2373844462.html/</url>
+    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
 
-<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
-<p>先来看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
+<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
+<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;">
 
-<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
-<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
-<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
-<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
-<p>而这，就是闭包。</p>
-<p><strong>闭包：这就是我</strong>✌</p>
-<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
-<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
-<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
-<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
-<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
-<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
-<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
-<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
-<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
-<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
-<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
-<p><strong>请注意：闭包一定要慎用</strong></p>
-<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
+<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
 <ul>
-<li><p>模仿块级作用域</p>
-<ul>
-<li>计时器的一个应用</li>
+<li>轮播图，我这边建议打死</li>
+<li>我的简历：参考咱们自己写的简历</li>
+<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
+<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;">
 
+<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
 <ul>
-<li>打印一组li的下标</li>
+<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
+<li>利用校招跟社招做一下数据筛选</li>
+<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
+<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>弹性盒模型-flex</title>
+    <url>/posts/3659327966.html/</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
+<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
+<span id="more"></span>
+
+<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
+<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
+<p>容器的属性有6个，我们下面一一介绍他们：</p>
+<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
 <ul>
-<li><p>埋点计数器</p>
+<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
+<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
+<li>center:项目靠近主轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
 <ul>
-<li>产品让做的网站分析的一种常用的数据采集方法</li>
+<li>flex-start:项目靠近交叉轴首端的方向。</li>
+<li>flex-end:项目靠近交叉轴末端的方向。</li>
+<li>center:项目与交叉轴中线对齐。</li>
+<li>baseline:项目与第一行文字基线对齐。</li>
+<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>柯里化</p>
+<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
 <ul>
-<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
+<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
+<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
+<li>center:项目靠近交叉轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
+<ul>
+<li>row:默认值，水平方向从左往右排列。</li>
+<li>row-reverse:水平方向从右往左排列。</li>
+<li>column:垂直方向从上往下排列。</li>
+<li>column-reverse:垂直方向从下往上排列。</li>
 </ul>
-<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
-<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
-<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
-<p>因为全局变量会被污染或者被修改。</p>
-<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
-<p><strong>闭包能够造成内存泄漏</strong></p>
-<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
+<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
+<ul>
+<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
+<li>wrap:项目超出容器尺寸时换行。</li>
+<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
+</ul>
+<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
+<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
+<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
+<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
+<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
+<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
+<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
+<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
+<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
 ]]></content>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>Css</tag>
+        <tag>Flex</tag>
       </tags>
   </entry>
   <entry>
@@ -866,33 +963,6 @@
       <tags>
         <tag>JavaScript</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
-    <url>/posts/2373844462.html/</url>
-    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
-
-<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
-<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
-<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;">
-
-<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
-<ul>
-<li>轮播图，我这边建议打死</li>
-<li>我的简历：参考咱们自己写的简历</li>
-<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
-<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
-</ul>
-<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;">
-
-<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
-<ul>
-<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
-<li>利用校招跟社招做一下数据筛选</li>
-<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
-</ul>
-<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
-]]></content>
   </entry>
   <entry>
     <title>微信小程序相关</title>
@@ -1001,71 +1071,49 @@
       </tags>
   </entry>
   <entry>
-    <title>弹性盒模型-flex</title>
-    <url>/posts/3659327966.html/</url>
-    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
-<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
+    <title>解构运算符的理解与运用</title>
+    <url>/posts/1586874348.html/</url>
+    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
+<p><strong>你可以不用，但是你不能不懂✔</strong></p>
+<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
 <span id="more"></span>
 
-<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
-<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
-<p>容器的属性有6个，我们下面一一介绍他们：</p>
-<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
-<ul>
-<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
-<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
-<li>center:项目靠近主轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
+<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
+<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li><p>基本使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>嵌套使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+<li><p>忽略</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
+<li><p>不完全解构</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
 <ul>
-<li>flex-start:项目靠近交叉轴首端的方向。</li>
-<li>flex-end:项目靠近交叉轴末端的方向。</li>
-<li>center:项目与交叉轴中线对齐。</li>
-<li>baseline:项目与第一行文字基线对齐。</li>
-<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
+<li><p>剩余运算符</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>字符串</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
+<li><p>解构默认值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
+<li><p>交换变量的值.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
-<ul>
-<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
-<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
-<li>center:项目靠近交叉轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
-</ul>
-<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
-<ul>
-<li>row:默认值，水平方向从左往右排列。</li>
-<li>row-reverse:水平方向从右往左排列。</li>
-<li>column:垂直方向从上往下排列。</li>
-<li>column-reverse:垂直方向从下往上排列。</li>
-</ul>
-<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
-<ul>
-<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
-<li>wrap:项目超出容器尺寸时换行。</li>
-<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
-</ul>
-<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
-<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
-<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
-<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
-<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
-<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
-<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
 
-<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
-<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
+<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
+<p>第88题，合并两个有序数组。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
-<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
+<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
+<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
+<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
 ]]></content>
       <tags>
-        <tag>Css</tag>
-        <tag>Flex</tag>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -1156,52 +1204,6 @@
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解构运算符的理解与运用</title>
-    <url>/posts/1586874348.html/</url>
-    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
-<p><strong>你可以不用，但是你不能不懂✔</strong></p>
-<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
-<span id="more"></span>
-
-<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
-<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
-<li><p>基本使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>嵌套使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
-<li><p>忽略</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
-<li><p>不完全解构</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p>剩余运算符</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>字符串</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
-<li><p>解构默认值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
-<li><p>交换变量的值.</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
-<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
-<p>第88题，合并两个有序数组。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
-<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
-<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ES6</tag>
       </tags>
   </entry>
 </search>
