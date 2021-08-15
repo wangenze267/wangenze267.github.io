@@ -6,7 +6,7 @@
   <link href="https://wangenze267.github.io/atom.xml" rel="self"/>
   
   <link href="https://wangenze267.github.io/"/>
-  <updated>2021-08-14T17:55:35.206Z</updated>
+  <updated>2021-08-15T14:31:03.093Z</updated>
   <id>https://wangenze267.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端也要学习基本的UI设计原则与实践套路</title>
+    <link href="https://wangenze267.github.io/posts/2086971120.html/"/>
+    <id>https://wangenze267.github.io/posts/2086971120.html/</id>
+    <published>2021-08-15T14:31:47.933Z</published>
+    <updated>2021-08-15T14:31:03.093Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前端也要学习基本的UI设计原则与实践套路"><a href="#前端也要学习基本的UI设计原则与实践套路" class="headerlink" title="前端也要学习基本的UI设计原则与实践套路"></a>前端也要学习基本的UI设计原则与实践套路</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>有的人可能说，我是技术研发人员，UI的事情我们团队内会有别的人去操心这个，我只管技术即可。</p><p>在一天之前，我也是这么觉得的，但是我今天听了字节的《给开发看的UI设计》这节课后，觉得一个前端工程师也是要具备一定的UI设计能力的。</p><p>依赖市面上的组件库已经不能让产品维持在好用的状态了，还需要将一些设计元素添加进去，才能让我们开发的作品，达到一个更好的层次，给与用户最好的体验。</p><p>你的团队可能没有UI同学，也可能有UI同学，但是不一定专业，他们经常会是外包人员，UI给出的设计稿通常只是静态文件，是某一交互切面的，很多的交互细节都体现不出来，在大厂中，许多的B端产品是没有专职UI角色的，前端可能要对产品最终呈现出的形态负责。</p><span id="more"></span><h3 id="设计中最重要的事情——交付功能"><a href="#设计中最重要的事情——交付功能" class="headerlink" title="设计中最重要的事情——交付功能"></a><strong>设计中最重要的事情——交付功能</strong></h3><p>工具：<a href="https://excalidraw.com/">最好用的白板——excaildraw</a></p><p>我们只需要简单粗略的设计大框就可以，设计细节可以后面在补充，在设计UI的时候永远不要忘了，我们归根结底还是要以实现需求，功能优先。</p><blockquote><p>可以使用别的设计工具去画原型图（figma），但是我觉得作为开发人员，简简单单的就可以，一切以方便为主</p></blockquote><p>要设计简单的、完整的功能</p><p>以MVP版本功能来作为设计目标</p><ul><li>MVP：Minimum Viable Product，最简化可实行产品</li></ul><p>所谓先让游戏开始，我们开发在做设计的时候，优先把主要场景设计完成，有迅速迭代能力就可以了，正所谓不需要太多花里胡哨，保持结构简单，功能完整就好。</p><h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p><strong>设计原则——层级</strong></p><p>层级——是我们可能唯一要关心的原则</p><p>层级区分，更是我们最需要掌握的原则和技巧。</p><ul><li>一个产品要好用，就要让用户很容易的抓住展品重点</li><li>在重点里，用户能自在地进入沉浸式阅读，和使用的转台</li><li>当用户想探索其他内容时，ta能轻松的识别网站的次要板块还有哪些，焦点能迅速转义，并迅速沉浸</li><li>辅助提示信息，精确而又不会打扰各主要板块的呈现</li></ul><p><strong>设计原则——一致性</strong></p><p>用户在站点的各个角落，观察到的颜色、间距、阴影、位置、字体和字重的运用，都在一套有限的框架里，一套能迅速建立起亲切感的框架内。</p><blockquote><p>当页面中，主要的交互、视觉元素都采用同一主题色来表示时，用户可以迅速知道：</p><ul><li>页面中哪些元素的可以交互的</li><li>我需要的提示信息在哪</li></ul></blockquote><p><strong>设计原则——《写给大家看的设计书》</strong></p><p>简单介绍一下《写给大家看的设计书》四原则：</p><ul><li>对比：如果两个元素内涵不同，请让它们截然不同</li><li>重复：设计的视觉要素应当在整个作品中重复出现</li><li>亲密性：彼此关联的元素应当靠近放置在一起</li><li>对齐：任何元素都不能随意安放，应当总与另外至少一个 元素有视觉上的关联</li></ul><p>这四个原则其实就对应着上面的一致性和层级。</p><ul><li>层级：就是亲密性+对比的目标，让用户抓重点、切视线，又快又稳。</li><li>一致性：就是对齐+重复，克制用户实现所感受的尺度，迅速与网站设计语言建立熟悉感。</li></ul><h3 id="设计体系"><a href="#设计体系" class="headerlink" title="设计体系"></a>设计体系</h3><p><strong>设计体系——布局</strong></p><p>最基本的布局技巧，内容居中放。</p><p>多列布局：</p><ul><li>主要内容弹性收缩（可以有最小宽度），次要列固定宽度</li></ul><p><strong>设计体系——间距</strong></p><p>保证元素间有基本的间距，是最基本的设计技巧。</p><p>间距——多留白</p><p>这是一个技巧：安排元素时先大大的留空，要从松到紧的调试间距。</p><blockquote><p>间距是远比色块、边框、分界线之类的更适合用来表达关联关系的工具。值得多加练习运用。</p></blockquote><p><strong>设计体系——文字</strong></p><p>文本是站点的主要内容载体，字体的设计自然也是重中之重。</p><p><strong>设计体系——色彩</strong></p><p>谁人不喜色彩？</p><p>你选择的色彩库要有10种左右的灰色度供你使用（黑–&gt;白），要有主题色，功能色等。</p><p>要学会使用色盘，来微调，使得你的颜色对用户使用的影响更好</p><p><strong>注意事项：</strong></p><ul><li>颜色虽好，使用不当会打破页面层级平衡</li><li>色盲消费不了颜色</li><li>颜色在不同文化中可能有不同的含义</li></ul><p><strong>设计体系——深度</strong></p><p>深度的感官来源于生活，类似于光照的效果，来打造一种层级。</p><blockquote><p>就是我们常用的阴影感</p></blockquote><h3 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h3><p><strong>实用技巧——图片上的层级</strong></p><p>图片上的色块斑驳不一，难以找到合适的前景色。咋办？</p><ul><li>增加蒙层，对比度不就上来了。</li><li>可以给文字加上阴影，增加文字部分的对比度，不影响整张图片。</li></ul><p><strong>实用技巧——明晰的用户头像</strong></p><p>上传头像的场景，如何清晰的展示内容？</p><ul><li>加点内阴影</li></ul><p><strong>实用技巧——干掉分界线</strong></p><p>阴影可以替代边框，不通的背景色块也可以。</p><p>间距清晰的话，也就不需要分界线了。</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听完了这节课真的觉得挺有用的，虽然说讲的是设计理念，没有一丝css代码在其中，可是我觉得我的css能力上升了一个层面~</p><p>最后留下这份笔记，留给以后的自己进行梳理，也顺便分享出来给更多的前端小伙伴们，让更多之前与我一样的人了解到，前端也要懂UI。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;前端也要学习基本的UI设计原则与实践套路&quot;&gt;&lt;a href=&quot;#前端也要学习基本的UI设计原则与实践套路&quot; class=&quot;headerlink&quot; title=&quot;前端也要学习基本的UI设计原则与实践套路&quot;&gt;&lt;/a&gt;前端也要学习基本的UI设计原则与实践套路&lt;/h2&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;有的人可能说，我是技术研发人员，UI的事情我们团队内会有别的人去操心这个，我只管技术即可。&lt;/p&gt;
+&lt;p&gt;在一天之前，我也是这么觉得的，但是我今天听了字节的《给开发看的UI设计》这节课后，觉得一个前端工程师也是要具备一定的UI设计能力的。&lt;/p&gt;
+&lt;p&gt;依赖市面上的组件库已经不能让产品维持在好用的状态了，还需要将一些设计元素添加进去，才能让我们开发的作品，达到一个更好的层次，给与用户最好的体验。&lt;/p&gt;
+&lt;p&gt;你的团队可能没有UI同学，也可能有UI同学，但是不一定专业，他们经常会是外包人员，UI给出的设计稿通常只是静态文件，是某一交互切面的，很多的交互细节都体现不出来，在大厂中，许多的B端产品是没有专职UI角色的，前端可能要对产品最终呈现出的形态负责。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="经历" scheme="https://wangenze267.github.io/tags/%E7%BB%8F%E5%8E%86/"/>
+    
+  </entry>
   
   <entry>
     <title>Node.js异步编程之Promise</title>
@@ -443,34 +465,11 @@
     
     
     
-    <category term="Vue" scheme="https://wangenze267.github.io/tags/Vue/"/>
-    
     <category term="Axios" scheme="https://wangenze267.github.io/tags/Axios/"/>
     
+    <category term="Vue" scheme="https://wangenze267.github.io/tags/Vue/"/>
+    
     <category term="踩坑日记" scheme="https://wangenze267.github.io/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript变量提升</title>
-    <link href="https://wangenze267.github.io/posts/388126410.html/"/>
-    <id>https://wangenze267.github.io/posts/388126410.html/</id>
-    <published>2021-06-09T05:40:37.697Z</published>
-    <updated>2021-08-08T14:05:17.724Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p><p>先从一个简单的例子来入手：</p><blockquote><p>a = 2;<br>var a;<br>console.log(a);</p></blockquote><span id="more"></span><p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p><blockquote><p>var a;<br>a = 2;<br>console.log(a);</p></blockquote><p>那么我们再看一个例子：</p><blockquote><p>console.log(a);<br>var a = 2;</p></blockquote><p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p><blockquote><p>var a;<br>console.log(a);<br>a = 2;</p></blockquote><h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p><h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p><blockquote><p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p></blockquote><p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p><p>那么多个函数声明怎么办呢？</p><blockquote><p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p></blockquote><p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p><p>还有最后一个例子了：</p><blockquote><p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p></blockquote><p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;js变量提升&quot;&gt;&lt;a href=&quot;#js变量提升&quot; class=&quot;headerlink&quot; title=&quot;js变量提升&quot;&gt;&lt;/a&gt;js变量提升&lt;/h2&gt;&lt;p&gt;JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。&lt;/p&gt;
-&lt;p&gt;先从一个简单的例子来入手：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;a = 2;&lt;br&gt;var a;&lt;br&gt;console.log(a);&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    
-    <category term="JavaScript" scheme="https://wangenze267.github.io/tags/JavaScript/"/>
     
   </entry>
   

@@ -328,6 +328,31 @@
       </tags>
   </entry>
   <entry>
+    <title>Axios踩坑日记</title>
+    <url>/posts/2698809561.html/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
+<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
+<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
+<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
+]]></content>
+      <tags>
+        <tag>Axios</tag>
+        <tag>Vue</tag>
+        <tag>踩坑日记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue.js基础环境的搭建以及简单使用Element-ui</title>
     <url>/posts/3896443464.html/</url>
     <content><![CDATA[<h1 id="Vue（2-x）"><a href="#Vue（2-x）" class="headerlink" title="Vue（2.x）"></a>Vue（2.x）</h1><h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
@@ -471,31 +496,6 @@
 ]]></content>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Axios踩坑日记</title>
-    <url>/posts/2698809561.html/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
-<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
-<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
-<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
-]]></content>
-      <tags>
-        <tag>Vue</tag>
-        <tag>Axios</tag>
-        <tag>踩坑日记</tag>
       </tags>
   </entry>
   <entry>
@@ -870,6 +870,108 @@
       </tags>
   </entry>
   <entry>
+    <title>前端也要学习基本的UI设计原则与实践套路</title>
+    <url>/posts/2086971120.html/</url>
+    <content><![CDATA[<h2 id="前端也要学习基本的UI设计原则与实践套路"><a href="#前端也要学习基本的UI设计原则与实践套路" class="headerlink" title="前端也要学习基本的UI设计原则与实践套路"></a>前端也要学习基本的UI设计原则与实践套路</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>有的人可能说，我是技术研发人员，UI的事情我们团队内会有别的人去操心这个，我只管技术即可。</p>
+<p>在一天之前，我也是这么觉得的，但是我今天听了字节的《给开发看的UI设计》这节课后，觉得一个前端工程师也是要具备一定的UI设计能力的。</p>
+<p>依赖市面上的组件库已经不能让产品维持在好用的状态了，还需要将一些设计元素添加进去，才能让我们开发的作品，达到一个更好的层次，给与用户最好的体验。</p>
+<p>你的团队可能没有UI同学，也可能有UI同学，但是不一定专业，他们经常会是外包人员，UI给出的设计稿通常只是静态文件，是某一交互切面的，很多的交互细节都体现不出来，在大厂中，许多的B端产品是没有专职UI角色的，前端可能要对产品最终呈现出的形态负责。</p>
+<span id="more"></span>
+
+<h3 id="设计中最重要的事情——交付功能"><a href="#设计中最重要的事情——交付功能" class="headerlink" title="设计中最重要的事情——交付功能"></a><strong>设计中最重要的事情——交付功能</strong></h3><p>工具：<a href="https://excalidraw.com/">最好用的白板——excaildraw</a></p>
+<p>我们只需要简单粗略的设计大框就可以，设计细节可以后面在补充，在设计UI的时候永远不要忘了，我们归根结底还是要以实现需求，功能优先。</p>
+<blockquote>
+<p>可以使用别的设计工具去画原型图（figma），但是我觉得作为开发人员，简简单单的就可以，一切以方便为主</p>
+</blockquote>
+<p>要设计简单的、完整的功能</p>
+<p>以MVP版本功能来作为设计目标</p>
+<ul>
+<li>MVP：Minimum Viable Product，最简化可实行产品</li>
+</ul>
+<p>所谓先让游戏开始，我们开发在做设计的时候，优先把主要场景设计完成，有迅速迭代能力就可以了，正所谓不需要太多花里胡哨，保持结构简单，功能完整就好。</p>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p><strong>设计原则——层级</strong></p>
+<p>层级——是我们可能唯一要关心的原则</p>
+<p>层级区分，更是我们最需要掌握的原则和技巧。</p>
+<ul>
+<li>一个产品要好用，就要让用户很容易的抓住展品重点</li>
+<li>在重点里，用户能自在地进入沉浸式阅读，和使用的转台</li>
+<li>当用户想探索其他内容时，ta能轻松的识别网站的次要板块还有哪些，焦点能迅速转义，并迅速沉浸</li>
+<li>辅助提示信息，精确而又不会打扰各主要板块的呈现</li>
+</ul>
+<p><strong>设计原则——一致性</strong></p>
+<p>用户在站点的各个角落，观察到的颜色、间距、阴影、位置、字体和字重的运用，都在一套有限的框架里，一套能迅速建立起亲切感的框架内。</p>
+<blockquote>
+<p>当页面中，主要的交互、视觉元素都采用同一主题色来表示时，用户可以迅速知道：</p>
+<ul>
+<li>页面中哪些元素的可以交互的</li>
+<li>我需要的提示信息在哪</li>
+</ul>
+</blockquote>
+<p><strong>设计原则——《写给大家看的设计书》</strong></p>
+<p>简单介绍一下《写给大家看的设计书》四原则：</p>
+<ul>
+<li>对比：如果两个元素内涵不同，请让它们截然不同</li>
+<li>重复：设计的视觉要素应当在整个作品中重复出现</li>
+<li>亲密性：彼此关联的元素应当靠近放置在一起</li>
+<li>对齐：任何元素都不能随意安放，应当总与另外至少一个 元素有视觉上的关联</li>
+</ul>
+<p>这四个原则其实就对应着上面的一致性和层级。</p>
+<ul>
+<li>层级：就是亲密性+对比的目标，让用户抓重点、切视线，又快又稳。</li>
+<li>一致性：就是对齐+重复，克制用户实现所感受的尺度，迅速与网站设计语言建立熟悉感。</li>
+</ul>
+<h3 id="设计体系"><a href="#设计体系" class="headerlink" title="设计体系"></a>设计体系</h3><p><strong>设计体系——布局</strong></p>
+<p>最基本的布局技巧，内容居中放。</p>
+<p>多列布局：</p>
+<ul>
+<li>主要内容弹性收缩（可以有最小宽度），次要列固定宽度</li>
+</ul>
+<p><strong>设计体系——间距</strong></p>
+<p>保证元素间有基本的间距，是最基本的设计技巧。</p>
+<p>间距——多留白</p>
+<p>这是一个技巧：安排元素时先大大的留空，要从松到紧的调试间距。</p>
+<blockquote>
+<p>间距是远比色块、边框、分界线之类的更适合用来表达关联关系的工具。值得多加练习运用。</p>
+</blockquote>
+<p><strong>设计体系——文字</strong></p>
+<p>文本是站点的主要内容载体，字体的设计自然也是重中之重。</p>
+<p><strong>设计体系——色彩</strong></p>
+<p>谁人不喜色彩？</p>
+<p>你选择的色彩库要有10种左右的灰色度供你使用（黑–&gt;白），要有主题色，功能色等。</p>
+<p>要学会使用色盘，来微调，使得你的颜色对用户使用的影响更好</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>颜色虽好，使用不当会打破页面层级平衡</li>
+<li>色盲消费不了颜色</li>
+<li>颜色在不同文化中可能有不同的含义</li>
+</ul>
+<p><strong>设计体系——深度</strong></p>
+<p>深度的感官来源于生活，类似于光照的效果，来打造一种层级。</p>
+<blockquote>
+<p>就是我们常用的阴影感</p>
+</blockquote>
+<h3 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h3><p><strong>实用技巧——图片上的层级</strong></p>
+<p>图片上的色块斑驳不一，难以找到合适的前景色。咋办？</p>
+<ul>
+<li>增加蒙层，对比度不就上来了。</li>
+<li>可以给文字加上阴影，增加文字部分的对比度，不影响整张图片。</li>
+</ul>
+<p><strong>实用技巧——明晰的用户头像</strong></p>
+<p>上传头像的场景，如何清晰的展示内容？</p>
+<ul>
+<li>加点内阴影</li>
+</ul>
+<p><strong>实用技巧——干掉分界线</strong></p>
+<p>阴影可以替代边框，不通的背景色块也可以。</p>
+<p>间距清晰的话，也就不需要分界线了。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听完了这节课真的觉得挺有用的，虽然说讲的是设计理念，没有一丝css代码在其中，可是我觉得我的css能力上升了一个层面~</p>
+<p>最后留下这份笔记，留给以后的自己进行梳理，也顺便分享出来给更多的前端小伙伴们，让更多之前与我一样的人了解到，前端也要懂UI。</p>
+]]></content>
+      <tags>
+        <tag>经历</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
     <url>/posts/2373844462.html/</url>
     <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
@@ -1184,52 +1286,6 @@
       </tags>
   </entry>
   <entry>
-    <title>解构运算符的理解与运用</title>
-    <url>/posts/1586874348.html/</url>
-    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
-<p><strong>你可以不用，但是你不能不懂✔</strong></p>
-<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
-<span id="more"></span>
-
-<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
-<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
-<li><p>基本使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>嵌套使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
-<li><p>忽略</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
-<li><p>不完全解构</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p>剩余运算符</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>字符串</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
-<li><p>解构默认值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
-<li><p>交换变量的值.</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
-<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
-<p>第88题，合并两个有序数组。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
-<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
-<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>框架简介之Vue.js</title>
     <url>/posts/2624959054.html/</url>
     <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
@@ -1277,6 +1333,52 @@
 ]]></content>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解构运算符的理解与运用</title>
+    <url>/posts/1586874348.html/</url>
+    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
+<p><strong>你可以不用，但是你不能不懂✔</strong></p>
+<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
+<span id="more"></span>
+
+<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
+<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li><p>基本使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>嵌套使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+<li><p>忽略</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
+<li><p>不完全解构</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>剩余运算符</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>字符串</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
+<li><p>解构默认值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
+<li><p>交换变量的值.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
+<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
+<p>第88题，合并两个有序数组。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
+<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
+<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>

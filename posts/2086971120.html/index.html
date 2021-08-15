@@ -20,24 +20,20 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="起因自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。 去找了axios的介绍 由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一">
+  <meta name="description" content="前端也要学习基本的UI设计原则与实践套路前言有的人可能说，我是技术研发人员，UI的事情我们团队内会有别的人去操心这个，我只管技术即可。 在一天之前，我也是这么觉得的，但是我今天听了字节的《给开发看的UI设计》这节课后，觉得一个前端工程师也是要具备一定的UI设计能力的。 依赖市面上的组件库已经不能让产品维持在好用的状态了，还需要将一些设计元素添加进去，才能让我们开发的作品，达到一个更好的层次，给与用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Axios踩坑日记">
-<meta property="og:url" content="https://wangenze267.github.io/posts/2698809561.html/index.html">
+<meta property="og:title" content="前端也要学习基本的UI设计原则与实践套路">
+<meta property="og:url" content="https://wangenze267.github.io/posts/2086971120.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="起因自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。 去找了axios的介绍 由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一">
+<meta property="og:description" content="前端也要学习基本的UI设计原则与实践套路前言有的人可能说，我是技术研发人员，UI的事情我们团队内会有别的人去操心这个，我只管技术即可。 在一天之前，我也是这么觉得的，但是我今天听了字节的《给开发看的UI设计》这节课后，觉得一个前端工程师也是要具备一定的UI设计能力的。 依赖市面上的组件库已经不能让产品维持在好用的状态了，还需要将一些设计元素添加进去，才能让我们开发的作品，达到一个更好的层次，给与用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-06-09T05:40:40.412Z">
-<meta property="article:modified_time" content="2021-08-08T14:05:09.316Z">
+<meta property="article:published_time" content="2021-08-15T14:31:47.933Z">
+<meta property="article:modified_time" content="2021-08-15T14:31:03.093Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="Axios">
-<meta property="article:tag" content="Vue">
-<meta property="article:tag" content="踩坑日记">
+<meta property="article:tag" content="经历">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/2698809561.html/">
+<link rel="canonical" href="https://wangenze267.github.io/posts/2086971120.html/">
 
 
 <script id="page-configurations">
@@ -50,7 +46,7 @@
   };
 </script>
 
-  <title>Axios踩坑日记 | Wangez-Blog</title>
+  <title>前端也要学习基本的UI设计原则与实践套路 | Wangez-Blog</title>
   
 
 
@@ -213,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2698809561.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2086971120.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -226,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Axios踩坑日记
+          前端也要学习基本的UI设计原则与实践套路
         </h1>
 
         <div class="post-meta">
@@ -235,16 +231,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-06-09 13:40:40" itemprop="dateCreated datePublished" datetime="2021-06-09T13:40:40+08:00">2021-06-09</time>
+              <time title="创建时间：2021-08-15 22:31:47 / 修改时间：22:31:03" itemprop="dateCreated datePublished" datetime="2021-08-15T22:31:47+08:00">2021-08-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 22:05:09" itemprop="dateModified" datetime="2021-08-08T22:05:09+08:00">2021-08-08</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -262,8 +252,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/2698809561.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/2698809561.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/2086971120.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/2086971120.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -273,7 +263,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -292,21 +282,100 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
-<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
-<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-
+        <h2 id="前端也要学习基本的UI设计原则与实践套路"><a href="#前端也要学习基本的UI设计原则与实践套路" class="headerlink" title="前端也要学习基本的UI设计原则与实践套路"></a>前端也要学习基本的UI设计原则与实践套路</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>有的人可能说，我是技术研发人员，UI的事情我们团队内会有别的人去操心这个，我只管技术即可。</p>
+<p>在一天之前，我也是这么觉得的，但是我今天听了字节的《给开发看的UI设计》这节课后，觉得一个前端工程师也是要具备一定的UI设计能力的。</p>
+<p>依赖市面上的组件库已经不能让产品维持在好用的状态了，还需要将一些设计元素添加进去，才能让我们开发的作品，达到一个更好的层次，给与用户最好的体验。</p>
+<p>你的团队可能没有UI同学，也可能有UI同学，但是不一定专业，他们经常会是外包人员，UI给出的设计稿通常只是静态文件，是某一交互切面的，很多的交互细节都体现不出来，在大厂中，许多的B端产品是没有专职UI角色的，前端可能要对产品最终呈现出的形态负责。</p>
 <span id="more"></span>
 
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
-<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a target="_blank" rel="noopener" href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
+<h3 id="设计中最重要的事情——交付功能"><a href="#设计中最重要的事情——交付功能" class="headerlink" title="设计中最重要的事情——交付功能"></a><strong>设计中最重要的事情——交付功能</strong></h3><p>工具：<a target="_blank" rel="noopener" href="https://excalidraw.com/">最好用的白板——excaildraw</a></p>
+<p>我们只需要简单粗略的设计大框就可以，设计细节可以后面在补充，在设计UI的时候永远不要忘了，我们归根结底还是要以实现需求，功能优先。</p>
+<blockquote>
+<p>可以使用别的设计工具去画原型图（figma），但是我觉得作为开发人员，简简单单的就可以，一切以方便为主</p>
+</blockquote>
+<p>要设计简单的、完整的功能</p>
+<p>以MVP版本功能来作为设计目标</p>
+<ul>
+<li>MVP：Minimum Viable Product，最简化可实行产品</li>
+</ul>
+<p>所谓先让游戏开始，我们开发在做设计的时候，优先把主要场景设计完成，有迅速迭代能力就可以了，正所谓不需要太多花里胡哨，保持结构简单，功能完整就好。</p>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p><strong>设计原则——层级</strong></p>
+<p>层级——是我们可能唯一要关心的原则</p>
+<p>层级区分，更是我们最需要掌握的原则和技巧。</p>
+<ul>
+<li>一个产品要好用，就要让用户很容易的抓住展品重点</li>
+<li>在重点里，用户能自在地进入沉浸式阅读，和使用的转台</li>
+<li>当用户想探索其他内容时，ta能轻松的识别网站的次要板块还有哪些，焦点能迅速转义，并迅速沉浸</li>
+<li>辅助提示信息，精确而又不会打扰各主要板块的呈现</li>
+</ul>
+<p><strong>设计原则——一致性</strong></p>
+<p>用户在站点的各个角落，观察到的颜色、间距、阴影、位置、字体和字重的运用，都在一套有限的框架里，一套能迅速建立起亲切感的框架内。</p>
+<blockquote>
+<p>当页面中，主要的交互、视觉元素都采用同一主题色来表示时，用户可以迅速知道：</p>
+<ul>
+<li>页面中哪些元素的可以交互的</li>
+<li>我需要的提示信息在哪</li>
+</ul>
+</blockquote>
+<p><strong>设计原则——《写给大家看的设计书》</strong></p>
+<p>简单介绍一下《写给大家看的设计书》四原则：</p>
+<ul>
+<li>对比：如果两个元素内涵不同，请让它们截然不同</li>
+<li>重复：设计的视觉要素应当在整个作品中重复出现</li>
+<li>亲密性：彼此关联的元素应当靠近放置在一起</li>
+<li>对齐：任何元素都不能随意安放，应当总与另外至少一个 元素有视觉上的关联</li>
+</ul>
+<p>这四个原则其实就对应着上面的一致性和层级。</p>
+<ul>
+<li>层级：就是亲密性+对比的目标，让用户抓重点、切视线，又快又稳。</li>
+<li>一致性：就是对齐+重复，克制用户实现所感受的尺度，迅速与网站设计语言建立熟悉感。</li>
+</ul>
+<h3 id="设计体系"><a href="#设计体系" class="headerlink" title="设计体系"></a>设计体系</h3><p><strong>设计体系——布局</strong></p>
+<p>最基本的布局技巧，内容居中放。</p>
+<p>多列布局：</p>
+<ul>
+<li>主要内容弹性收缩（可以有最小宽度），次要列固定宽度</li>
+</ul>
+<p><strong>设计体系——间距</strong></p>
+<p>保证元素间有基本的间距，是最基本的设计技巧。</p>
+<p>间距——多留白</p>
+<p>这是一个技巧：安排元素时先大大的留空，要从松到紧的调试间距。</p>
+<blockquote>
+<p>间距是远比色块、边框、分界线之类的更适合用来表达关联关系的工具。值得多加练习运用。</p>
+</blockquote>
+<p><strong>设计体系——文字</strong></p>
+<p>文本是站点的主要内容载体，字体的设计自然也是重中之重。</p>
+<p><strong>设计体系——色彩</strong></p>
+<p>谁人不喜色彩？</p>
+<p>你选择的色彩库要有10种左右的灰色度供你使用（黑–&gt;白），要有主题色，功能色等。</p>
+<p>要学会使用色盘，来微调，使得你的颜色对用户使用的影响更好</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>颜色虽好，使用不当会打破页面层级平衡</li>
+<li>色盲消费不了颜色</li>
+<li>颜色在不同文化中可能有不同的含义</li>
+</ul>
+<p><strong>设计体系——深度</strong></p>
+<p>深度的感官来源于生活，类似于光照的效果，来打造一种层级。</p>
+<blockquote>
+<p>就是我们常用的阴影感</p>
+</blockquote>
+<h3 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h3><p><strong>实用技巧——图片上的层级</strong></p>
+<p>图片上的色块斑驳不一，难以找到合适的前景色。咋办？</p>
+<ul>
+<li>增加蒙层，对比度不就上来了。</li>
+<li>可以给文字加上阴影，增加文字部分的对比度，不影响整张图片。</li>
+</ul>
+<p><strong>实用技巧——明晰的用户头像</strong></p>
+<p>上传头像的场景，如何清晰的展示内容？</p>
+<ul>
+<li>加点内阴影</li>
+</ul>
+<p><strong>实用技巧——干掉分界线</strong></p>
+<p>阴影可以替代边框，不通的背景色块也可以。</p>
+<p>间距清晰的话，也就不需要分界线了。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听完了这节课真的觉得挺有用的，虽然说讲的是设计理念，没有一丝css代码在其中，可是我觉得我的css能力上升了一个层面~</p>
+<p>最后留下这份笔记，留给以后的自己进行梳理，也顺便分享出来给更多的前端小伙伴们，让更多之前与我一样的人了解到，前端也要懂UI。</p>
 
     </div>
 
@@ -342,7 +411,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/2698809561.html/" title="Axios踩坑日记">https://wangenze267.github.io/posts/2698809561.html/</a>
+    <a href="https://wangenze267.github.io/posts/2086971120.html/" title="前端也要学习基本的UI设计原则与实践套路">https://wangenze267.github.io/posts/2086971120.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -377,9 +446,7 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Axios/" rel="tag"><i class="fa fa-tag"></i> Axios</a>
-              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
-              <a href="/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 踩坑日记</a>
+              <a href="/tags/%E7%BB%8F%E5%8E%86/" rel="tag"><i class="fa fa-tag"></i> 经历</a>
           </div>
 
         
@@ -388,13 +455,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/388126410.html/" rel="prev" title="JavaScript变量提升">
-      <i class="fa fa-chevron-left"></i> JavaScript变量提升
+    <a href="/posts/697311807.html/" rel="prev" title="Node.js异步编程之Promise">
+      <i class="fa fa-chevron-left"></i> Node.js异步编程之Promise
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2713850416.html/" rel="next" title="微信小程序相关">
-      微信小程序相关 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -454,7 +518,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E6%89%BE%E4%BA%86axios%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">去找了axios的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E5%A4%96"><span class="nav-number">3.</span> <span class="nav-text">另外</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%B9%9F%E8%A6%81%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E7%9A%84UI%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E5%AE%9E%E8%B7%B5%E5%A5%97%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">前端也要学习基本的UI设计原则与实践套路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E4%B8%AD%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%BA%8B%E6%83%85%E2%80%94%E2%80%94%E4%BA%A4%E4%BB%98%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">设计中最重要的事情——交付功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">1.3.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E4%BD%93%E7%B3%BB"><span class="nav-number">1.4.</span> <span class="nav-text">设计体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">1.5.</span> <span class="nav-text">实用技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">1.6.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
