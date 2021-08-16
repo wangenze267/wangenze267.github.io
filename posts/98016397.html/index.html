@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言课程记录笔记第三弹——《跟月影学JavaScript》  今天真被月影大佬讲的js干的有点自闭了，1小时50分钟的视频，我楞是花了将近3个多小时去理解，还一脸懵。  本次课题：如何写好JavaScript（上）  估计，如何写好JavaScript（下）我要后半夜更了，歇一会歇一会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何写好JavaScript（上）">
+<meta property="og:url" content="https://wangenze267.github.io/posts/98016397.html/index.html">
+<meta property="og:site_name" content="Wangez-Blog">
+<meta property="og:description" content="前言课程记录笔记第三弹——《跟月影学JavaScript》  今天真被月影大佬讲的js干的有点自闭了，1小时50分钟的视频，我楞是花了将近3个多小时去理解，还一脸懵。  本次课题：如何写好JavaScript（上）  估计，如何写好JavaScript（下）我要后半夜更了，歇一会歇一会">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-16T12:15:20.505Z">
+<meta property="article:modified_time" content="2021-08-16T12:15:12.146Z">
+<meta property="article:author" content="Ned">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="字节青训营">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wangenze267.github.io/posts/98016397.html/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何写好JavaScript（上） | Wangez-Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ebc804bb1afaa8fa7c3ca146640388cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Wangez-Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Wangez-Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>朋友</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/98016397.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Ned">
+      <meta itemprop="description" content="小小前端成长日记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wangez-Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何写好JavaScript（上）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-16 20:15:20 / 修改时间：20:15:12" itemprop="dateCreated datePublished" datetime="2021-08-16T20:15:20+08:00">2021-08-16</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/98016397.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/98016397.html/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>课程记录笔记第三弹——《跟月影学JavaScript》</p>
+<blockquote>
+<p>今天真被月影大佬讲的js干的有点自闭了，1小时50分钟的视频，我楞是花了将近3个多小时去理解，还一脸懵。</p>
+</blockquote>
+<p>本次课题：<strong>如何写好JavaScript（上）</strong></p>
+<blockquote>
+<p>估计，如何写好JavaScript（下）我要后半夜更了，歇一会歇一会</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="如何写好JavaScript（上）"><a href="#如何写好JavaScript（上）" class="headerlink" title="如何写好JavaScript（上）"></a>如何写好JavaScript（上）</h3><p><strong>写好JavaScript的一些原则</strong></p>
+<ul>
+<li>各司其责</li>
+<li>组件封装</li>
+<li>过程抽象</li>
+</ul>
+<h4 id="写一个🌰"><a href="#写一个🌰" class="headerlink" title="写一个🌰"></a>写一个🌰</h4><p>写一段js，控制一个网页，让他支持浅色和深色两种浏览模式。</p>
+<p>如果是你来实现，你会怎么做？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;modeBtn&#x27;</span>);</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> body = <span class="built_in">document</span>.body;</span><br><span class="line">    <span class="keyword">if</span>(e.target.innerHTML === <span class="string">&#x27;☀&#x27;</span>)&#123;</span><br><span class="line">        body.style.backgroundColor = <span class="string">&#x27;black&#x27;</span>;</span><br><span class="line">        body.style.color = <span class="string">&#x27;white&#x27;</span>;</span><br><span class="line">        e.target.innerHTML = <span class="string">&#x27;🌙&#x27;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        body.style.backgroundColor = <span class="string">&#x27;white&#x27;</span>;</span><br><span class="line">        body.style.color = <span class="string">&#x27;black&#x27;</span>;</span><br><span class="line">        e.target.innerHTML = <span class="string">&#x27;☀&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这是通过页面的一个<code>button</code>来改变的，这个代码也是最最最简单的一个例子。</p>
+<blockquote>
+<p>当然，这个代码是可以优化的，因为现在不便于进行维护</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;modeBtn&#x27;</span>);</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> body = <span class="built_in">document</span>.body;</span><br><span class="line">    <span class="keyword">if</span>(body.className !== <span class="string">&#x27;night&#x27;</span>)&#123;</span><br><span class="line">        body.className = <span class="string">&#x27;night&#x27;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        body.className = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>版本二，它来了。</p>
+<p>它将版本一js操作的一些html样式放到两个类中，最后通过js来改变他的类名做到绑定与解除样式。</p>
+<p>甚至，只用css也可以实现交互，版本三，他也来了。</p>
+<blockquote>
+<p>这是我从未有过的思路，在今天第一次见到</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#modeCheckBox</span>:&#123;</span><br><span class="line">    display:none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#modeCheckBox</span><span class="selector-pseudo">:checked</span>+ <span class="selector-class">.content</span>&#123;</span><br><span class="line">	<span class="attribute">background-color</span>: black;</span><br><span class="line">	<span class="attribute">color</span>: white;</span><br><span class="line">	<span class="attribute">transition</span>: all <span class="number">1s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用一个<code>checkbox</code>，的checked事件，首先将他隐藏起来，再用一个<code>lable</code>绑定上他，之后点击<code>lable</code>就会触发checked事件，利用选择器完成这个简单的交互</p>
+<blockquote>
+<p>这个确实是我没想到的，拿出小本本，圈起来</p>
+</blockquote>
+<p><strong>小笔记（总结）</strong></p>
+<ul>
+<li>html/css/js各司其责</li>
+<li>应当避免不必要的由js直接操作样式</li>
+<li>可以用class来表示状态</li>
+<li>纯展示类交互寻求零js解决方案</li>
+</ul>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p>组件是指Web页面上抽出来的一个个包含模板（HTML）、功能（js）和样式（css）的单元。好的组件具备封装性，正确性，扩展性，复用性。</p>
+<p><strong>用原生js写一个轮播图</strong></p>
+<ul>
+<li><p>结构—HTML：</p>
+<ul>
+<li>轮播图是一个典型的列表结构，我们可以使用无序列表<code>&lt;ul&gt;</code>元素来实现。</li>
+</ul>
+</li>
+<li><p>表现—CSS：</p>
+<ul>
+<li>使用css绝对定位将图片重叠在同一个位置</li>
+<li>轮播图切换的状态使用修饰符（modifier）</li>
+<li>轮播图的切换动画使用css transition</li>
+</ul>
+</li>
+<li><p>行为—JS</p>
+<ul>
+<li>API的设计应保证原子操作，职责单一，满足灵活性</li>
+</ul>
+</li>
+<li><p>行为—控制流</p>
+<ul>
+<li>使用自定义事件来解耦</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结：基本方法</strong></p>
+<ul>
+<li>结构设计</li>
+<li>展现效果</li>
+<li>行为设计<ul>
+<li>API（功能）</li>
+<li>Event（控制流）</li>
+</ul>
+</li>
+</ul>
+<h4 id="重构：插件化"><a href="#重构：插件化" class="headerlink" title="重构：插件化"></a><strong>重构：插件化</strong></h4><p>解耦：</p>
+<ul>
+<li>将控制元素抽取成插件</li>
+<li>插件与组件之间通过<strong>依赖注入</strong>方式建立联系</li>
+</ul>
+<h4 id="重构：模板化"><a href="#重构：模板化" class="headerlink" title="重构：模板化"></a><strong>重构：模板化</strong></h4><p>解耦：</p>
+<ul>
+<li>将html模板化，更易于扩展</li>
+</ul>
+<blockquote>
+<p>在插件中，抽象出来一个方法去渲染html</p>
+</blockquote>
+<h4 id="重构：组件框架"><a href="#重构：组件框架" class="headerlink" title="重构：组件框架"></a><strong>重构：组件框架</strong></h4><p>抽象：</p>
+<ul>
+<li>将通用的组件模型抽象出来</li>
+</ul>
+<h4 id="总结：组件封装"><a href="#总结：组件封装" class="headerlink" title="总结：组件封装"></a><strong>总结：组件封装</strong></h4><ul>
+<li>组件设计的原则：封装性、正确性、扩展性、复用性</li>
+<li>实现组件的步骤：结构设计、展现效果、行为设计</li>
+<li>三次重构：<ul>
+<li>插件化</li>
+<li>模板化</li>
+<li>抽象化（组件框架）</li>
+</ul>
+</li>
+</ul>
+<h3 id="过程抽象"><a href="#过程抽象" class="headerlink" title="过程抽象"></a><strong>过程抽象</strong></h3><ul>
+<li>用来处理局部细节控制的一些方法</li>
+<li>函数式编程思想的基础应用</li>
+</ul>
+<blockquote>
+<p>function(x){</p>
+<p>​    处理x;</p>
+<p>​    return x;</p>
+<p>}</p>
+</blockquote>
+<h4 id="写一个🌰："><a href="#写一个🌰：" class="headerlink" title="写一个🌰："></a>写一个🌰：</h4><p>一个列表（todolist），完成后点击会消失掉</p>
+<p>操作次数限制：</p>
+<ul>
+<li>一些异步交互</li>
+<li>一次性的HTTP请求</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;ul&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> buttons = list.querySelectorAll(<span class="string">&#x27;button&#x27;</span>);</span><br><span class="line">buttons.forEach(<span class="function">(<span class="params">button</span>)=&gt;</span>&#123;</span><br><span class="line">    button.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function">(<span class="params">evt</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> target = evt.target;</span><br><span class="line">        target.parentNode.className = <span class="string">&#x27;completed&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            list.removeChild(target.parentNode);</span><br><span class="line">        &#125;,<span class="number">2000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这个代码是可以实现的，但是却有bug，你连续点击按钮的话，他会调用多次<code>addEventListener</code>，最后会报错，因为此时节点已经被remove了。</p>
+<h4 id="Once"><a href="#Once" class="headerlink" title="Once"></a><strong>Once</strong></h4><ul>
+<li>为了能够让“只执行一次”的需求覆盖不同的事件处理，我们可以将这个需求剥离出来。这个过程我们称为<strong>过程抽象</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(fn)&#123;</span><br><span class="line">            <span class="keyword">const</span> ret = fn.apply(<span class="built_in">this</span>,args);</span><br><span class="line">            fn = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">button.addEventListener(<span class="string">&#x27;click&#x27;</span>,once(<span class="function">(<span class="params">evt</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> target = evt.target;</span><br><span class="line">    target.parentNode.className = <span class="string">&#x27;completed&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        list.removeChild(target.parentNode);</span><br><span class="line">    &#125;,<span class="number">2000</span>);</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<p>我们加一个once函数，以fn函数作为参数，第一次进来会调用this指针执行这个函数，执行过后会将fn=null，这样再次点击的时候就不会再次调用了。</p>
+<h4 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a><strong>高阶函数</strong></h4><ul>
+<li>以函数作为参数</li>
+<li>以函数作为返回值</li>
+<li>常用于作为函数装饰器</li>
+</ul>
+<h4 id="常用高阶函数"><a href="#常用高阶函数" class="headerlink" title="常用高阶函数"></a><strong>常用高阶函数</strong></h4><ul>
+<li>Once</li>
+<li>Throttle  节流函数</li>
+<li>Debounce  防抖函数</li>
+<li>Consumer / 2  异步消耗</li>
+<li>Iterative  迭代函数</li>
+</ul>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a><strong>思考</strong></h4><p>为什么要用高阶函数？</p>
+<h3 id="编程范式"><a href="#编程范式" class="headerlink" title="编程范式"></a><strong>编程范式</strong></h3><p>命令式与声明式</p>
+<ul>
+<li><p>命令式</p>
+<p>强调how，怎么做</p>
+</li>
+<li><p>声明式</p>
+<p>强调what，做什么</p>
+</li>
+</ul>
+<h4 id="编程范式—总结"><a href="#编程范式—总结" class="headerlink" title="编程范式—总结"></a><strong>编程范式—总结</strong></h4><ul>
+<li>过程抽象/HOF/装饰器</li>
+<li>命令式/声明式</li>
+</ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这次笔记记录的很匆忙，再加上理解的也不是很懂，所以导致后面的高阶函数部分基本没有自己的梳理，后面梳理过后会过来补上更新的。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>觉得文章对您有帮助请我喝杯蜜雪冰城吧^_^</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/uploads/wxpay.jpg" alt="Ned 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/uploads/zfbpay.jpg" alt="Ned 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ned
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wangenze267.github.io/posts/98016397.html/" title="如何写好JavaScript（上）">https://wangenze267.github.io/posts/98016397.html/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/%E5%AD%97%E8%8A%82%E9%9D%92%E8%AE%AD%E8%90%A5/" rel="tag"><i class="fa fa-tag"></i> 字节青训营</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2086971120.html/" rel="prev" title="前端也要学习基本的UI设计原则与实践套路">
+      <i class="fa fa-chevron-left"></i> 前端也要学习基本的UI设计原则与实践套路
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%86%99%E5%A5%BDJavaScript%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">如何写好JavaScript（上）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%F0%9F%8C%B0"><span class="nav-number">2.1.</span> <span class="nav-text">写一个🌰</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%EF%BC%9A%E6%8F%92%E4%BB%B6%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">重构：插件化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%EF%BC%9A%E6%A8%A1%E6%9D%BF%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">重构：模板化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%EF%BC%9A%E7%BB%84%E4%BB%B6%E6%A1%86%E6%9E%B6"><span class="nav-number">3.3.</span> <span class="nav-text">重构：组件框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85"><span class="nav-number">3.4.</span> <span class="nav-text">总结：组件封装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E6%8A%BD%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">过程抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%F0%9F%8C%B0%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">写一个🌰：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Once"><span class="nav-number">4.2.</span> <span class="nav-text">Once</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">4.4.</span> <span class="nav-text">常用高阶函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">4.5.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">编程范式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E2%80%94%E6%80%BB%E7%BB%93"><span class="nav-number">5.1.</span> <span class="nav-text">编程范式—总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ned"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ned</p>
+  <div class="site-description" itemprop="description">小小前端成长日记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/wang-enze" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;wang-enze" rel="noopener" target="_blank"><i class="fab fa-git fa-fw"></i>Gitee</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+    
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ned</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">54k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">49 分钟</span>
+</div>
+
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span> 
+<script> 
+    var now = new Date(); 
+    function createtime() {
+    var grt= new Date("06/1/2021 00:00:00");
+    //此处修改你的建站时间或者网站上线时间 
+    now.setTime(now.getTime()+250); 
+    days = (now - grt ) / 1000 / 60 / 60 / 24; 
+    dnum = Math.floor(days); hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); 
+    hnum = Math.floor(hours); 
+    if(String(hnum).length ==1 ){
+        hnum = "0" + hnum;
+    } 
+    minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+    mnum = Math.floor(minutes); if(String(mnum).length ==1 )
+    {
+       mnum = "0" + mnum;
+    } 
+    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+    snum = Math.round(seconds);
+    if(String(snum).length ==1 ){snum = "0" + snum;} 
+    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+} 
+    setInterval("createtime()",250); 
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '3MMJqbdcNtEnRAvDBioROECS-gzGzoHsz',
+      appKey     : 'K4hk4upWc4PLUI7OOfdIfbVo',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
