@@ -20,20 +20,24 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1. 数据绑定1.小程序1.data中初始化数据2.修改数据： this.setData()  1.修改数据的行为始终是同步的  3.数据流：  1.单项： Model —&gt; View">
+  <meta name="description" content="前言最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。  纯记录  渲染进程渲染进程的核心工作是将HTML,CSS和JavaScript转换为用户可以与之交互的网页。主要包括以下线程：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信小程序相关">
-<meta property="og:url" content="https://wangenze267.github.io/posts/2713850416.html/index.html">
+<meta property="og:title" content="关于浏览器的渲染进程">
+<meta property="og:url" content="https://wangenze267.github.io/posts/3321770798.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="1. 数据绑定1.小程序1.data中初始化数据2.修改数据： this.setData()  1.修改数据的行为始终是同步的  3.数据流：  1.单项： Model —&gt; View">
+<meta property="og:description" content="前言最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。  纯记录  渲染进程渲染进程的核心工作是将HTML,CSS和JavaScript转换为用户可以与之交互的网页。主要包括以下线程：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-09T05:40:42.578Z">
-<meta property="article:modified_time" content="2021-08-08T14:06:54.115Z">
+<meta property="og:image" content="https://wangenze267.github.io/posts/3321770798.html/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C.png">
+<meta property="og:image" content="https://wangenze267.github.io/posts/3321770798.html/image-20210615172629674.png">
+<meta property="og:image" content="https://wangenze267.github.io/posts/3321770798.html/image-20210615172906367.png">
+<meta property="article:published_time" content="2021-08-17T14:33:02.000Z">
+<meta property="article:modified_time" content="2021-08-17T14:59:02.193Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="小程序">
+<meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangenze267.github.io/posts/3321770798.html/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C.png">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/2713850416.html/">
+<link rel="canonical" href="https://wangenze267.github.io/posts/3321770798.html/">
 
 
 <script id="page-configurations">
@@ -46,7 +50,7 @@
   };
 </script>
 
-  <title>微信小程序相关 | Wangez-Blog</title>
+  <title>关于浏览器的渲染进程 | Wangez-Blog</title>
   
 
 
@@ -209,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2713850416.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/3321770798.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -222,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          微信小程序相关
+          关于浏览器的渲染进程
         </h1>
 
         <div class="post-meta">
@@ -231,16 +235,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-06-09 13:40:42" itemprop="dateCreated datePublished" datetime="2021-06-09T13:40:42+08:00">2021-06-09</time>
+              <time title="创建时间：2021-08-17 22:33:02 / 修改时间：22:59:02" itemprop="dateCreated datePublished" datetime="2021-08-17T22:33:02+08:00">2021-08-17</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 22:06:54" itemprop="dateModified" datetime="2021-08-08T22:06:54+08:00">2021-08-08</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -258,8 +256,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/2713850416.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/2713850416.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/3321770798.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/3321770798.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,14 +267,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>638</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -288,54 +286,74 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
-<ul>
-<li>1.修改数据的行为始终是同步的</li>
-</ul>
-<p>3.数据流：</p>
-<ul>
-<li>1.单项： Model —&gt; View</li>
-</ul>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。</p>
+<blockquote>
+<p>纯记录</p>
+</blockquote>
+<h3 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h3><p>渲染进程的<strong>核心工作是将HTML,CSS和JavaScript转换为用户可以与之交互的网页。</strong>主要包括以下线程：</p>
 <span id="more"></span>
 
-<h4 id="2-Vue"><a href="#2-Vue" class="headerlink" title="2. Vue"></a>2. Vue</h4><p>1.data中初始化数据<br>2.修改数据: this.key = value<br>3.数据流：</p>
+<h4 id="浏览器-GUI-渲染线程"><a href="#浏览器-GUI-渲染线程" class="headerlink" title="浏览器 GUI 渲染线程"></a>浏览器 GUI 渲染线程</h4><h5 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h5><p><img src="/posts/3321770798.html/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C.png" alt="image-20210615171514782"></p>
 <ul>
-<li>1.Vue是单项数据流： Model —&gt; View</li>
-<li>2.Vue中实现了双向数据绑定： v-model</li>
+<li>分层的目的：避免整个页面渲染，把页面分成多个图层，尤其是动画的时候，把动画独立出一个图层，渲染时只渲染该图层就ok，transform，z-index等，浏览器会自动优化生成图层</li>
+<li>光栅化：页面如果很长但是可视区很小，避免渲染非可视区的样式造成资源浪费，x以将每个图层又划分成多个小个子，当前只渲染可视区附近区域</li>
 </ul>
-<h4 id="3-React"><a href="#3-React" class="headerlink" title="3. React"></a>3. React</h4><p>1.state中初始化状态数据<br>2.修改数据: this.setState()</p>
-<ul>
-<li>1.自身钩子函数中(componentDidMount)异步的</li>
-<li>2.非自身的钩子函数中(定时器的回调)同步的</li>
-</ul>
-<p>3.数据流：</p>
-<ul>
-<li>1.单项： Model —&gt; View</li>
-</ul>
-<h2 id="2-获取用户基本信息"><a href="#2-获取用户基本信息" class="headerlink" title="2. 获取用户基本信息"></a>2. 获取用户基本信息</h2><p>1.用户未授权(首次登陆)</p>
-<ul>
-<li>1.button open-type=‘getUserInfo’</li>
-</ul>
-<p>2.用户已经授权(再次登陆)</p>
-<ul>
-<li>1.wx.getUserInfo</li>
-</ul>
-<h2 id="3-前后端交互"><a href="#3-前后端交互" class="headerlink" title="3. 前后端交互"></a>3. 前后端交互</h2><p>1.语法: wx.request()<br>2.注意点:</p>
-<ul>
-<li>1.协议必须是https协议</li>
-<li>2.一个接口最多配置20个域名</li>
-<li>3.并发限制上限是10个</li>
-<li><ol>
-<li><strong>开发过程中设置不校验合法域名</strong>： 开发工具 —&gt; 右上角详情 —-&gt; 本地设置 —&gt; 不校验</li>
-</ol>
+<h5 id="重排"><a href="#重排" class="headerlink" title="重排"></a>重排</h5><ul>
+<li><p>重排 ：当DOM的变化影响了元素的几何信息(元素的的位置和尺寸大小)，浏览器需要重新计算元素的几何属性，将其安放在界面中的正确位置，这个过程叫做重排</p>
+</li>
+<li><p>重排特点：style后面所有流程都更新</p>
 </li>
 </ul>
-<h2 id="4-本地存储"><a href="#4-本地存储" class="headerlink" title="4. 本地存储"></a>4. 本地存储</h2><p>1.语法: wx.setStorage() || wx.setStorageSync() || …..<br>2.注意点：</p>
+<p><img src="/posts/3321770798.html/image-20210615172629674.png" alt="image-20210615172629674"></p>
 <ul>
-<li>1.建议存储的数据为json数据</li>
-<li>2.单个 key 允许存储的最大数据长度为 1MB，所有数据存储上限为 10MB</li>
-<li>3.属于永久存储，同H5的localStorage一样</li>
+<li><p>触发重排的方法</p>
+<ul>
+<li><p>页面初始渲染，这是开销最大的一次重排</p>
+</li>
+<li><p>添加/删除可见的DOM元素</p>
+</li>
+<li><p>改变元素位置</p>
+</li>
+<li><p>改变元素尺寸，比如边距、填充、边框、宽度和高度等</p>
+</li>
+<li><p>改变元素内容，比如文字数量，图片大小等</p>
+</li>
+<li><p>改变元素字体大小</p>
+</li>
+<li><p>改变浏览器窗口尺寸，比如resize事件发生时</p>
+</li>
+<li><p>激活CSS伪类（例如：<code>:hover</code>）</p>
+</li>
+<li><p>设置 style 属性的值，因为通过设置style属性改变结点样式的话，每一次设置都会触发一次reflow</p>
+<p>查询某些属性或调用某些计算方法：offsetWidth、offsetHeight等</p>
+</li>
 </ul>
+</li>
+</ul>
+<h5 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h5><ul>
+<li><p>重绘：当一个元素的外观发生改变，但没有改变布局,重新把元素外观绘制出来的过程</p>
+</li>
+<li><p>重绘特点：跳过布局和分层阶段</p>
+</li>
+</ul>
+<p><img src="/posts/3321770798.html/image-20210615172906367.png" alt="image-20210615172906367"></p>
+<ul>
+<li>重排必重绘</li>
+</ul>
+<h5 id="避免重排的方法"><a href="#避免重排的方法" class="headerlink" title="避免重排的方法"></a>避免重排的方法</h5><ul>
+<li><p>样式集中改变</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> left = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> top = <span class="number">10</span>;</span><br><span class="line">el.style.left = left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">el.style.top = top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当top和left的值是动态计算而成时...</span></span><br><span class="line"><span class="comment">// better </span></span><br><span class="line">el.style.cssText += <span class="string">&quot;; left: &quot;</span> + left + <span class="string">&quot;px; top: &quot;</span> + top + <span class="string">&quot;px;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// better</span></span><br><span class="line">el.className += <span class="string">&quot; className&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 absolute 或 fixed 脱离文档流</p>
+<p>使用绝对定位会使的该元素单独成为渲染树中 <code>body</code> 的一个子元素，重排开销比较小，不会对其它节点造成太多影响。当你在这些节点上放置这个元素时，一些其它在这个区域内的节点可能需要重绘，但是不需要重排</p>
+</li>
+<li><p>GPU加速:transform</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 根据上面的结论</span></span><br><span class="line"><span class="comment">* 将 2d transform 换成 3d</span></span><br><span class="line"><span class="comment">* 就可以强制开启 GPU 加速</span></span><br><span class="line"><span class="comment">* 提高动画性能</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(<span class="number">10px</span>, <span class="number">10px</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="JavaScript-引擎线程"><a href="#JavaScript-引擎线程" class="headerlink" title="JavaScript 引擎线程"></a>JavaScript 引擎线程</h4><p>JS引擎线程负责解析Javascript脚本，运行代码 JS引擎一直等待着任务队列中任务的到来，然后加以处理，一个Tab页（renderer进程）中无论什么时候都只有一个JS线程在运行JS程序</p>
+<p>GUI渲染线程与JS引擎线程是互斥的，所以如果JS执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞</p>
+<h4 id="浏览器定时触发器线程"><a href="#浏览器定时触发器线程" class="headerlink" title="浏览器定时触发器线程"></a>浏览器定时触发器线程</h4><p>浏览器定时计数器并不是由 JavaScript 引擎计数的, 因为 JavaScript 引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确, 因此通过单独线程来计时并触发定时是更为合理的方案</p>
+<h4 id="浏览器事件触发线程"><a href="#浏览器事件触发线程" class="headerlink" title="浏览器事件触发线程"></a>浏览器事件触发线程</h4><p>当一个事件被触发时该线程会把事件添加到待处理队列的队尾，等待 JavaScript 引擎的处理。这些事件可以是当前执行的代码块如定时任务、也可来自浏览器内核的其他线程如鼠标点击、AJAX 异步请求等，但由于 JavaScript 的单线程关系所有这些事件都得排队等待 JavaScript 引擎处理。</p>
+<h4 id="浏览器-http-异步请求线程"><a href="#浏览器-http-异步请求线程" class="headerlink" title="浏览器 http 异步请求线程"></a>浏览器 http 异步请求线程</h4><p>在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求， 将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件放到 JavaScript 引擎的处理队列中等待处理。</p>
 
     </div>
 
@@ -371,7 +389,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/2713850416.html/" title="微信小程序相关">https://wangenze267.github.io/posts/2713850416.html/</a>
+    <a href="https://wangenze267.github.io/posts/3321770798.html/" title="关于浏览器的渲染进程">https://wangenze267.github.io/posts/3321770798.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -406,7 +424,7 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 小程序</a>
+              <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 浏览器</a>
           </div>
 
         
@@ -415,13 +433,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2698809561.html/" rel="prev" title="Axios踩坑日记">
-      <i class="fa fa-chevron-left"></i> Axios踩坑日记
+    <a href="/posts/3177970664.html/" rel="prev" title="如何写好JavaScript（下）">
+      <i class="fa fa-chevron-left"></i> 如何写好JavaScript（下）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/735412972.html/" rel="next" title="使用Hexo搭建自己的博客">
-      使用Hexo搭建自己的博客 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -481,7 +496,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">1. 数据绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.小程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Vue"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-React"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. React</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">2. 获取用户基本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92"><span class="nav-number">3.</span> <span class="nav-text">3. 前后端交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-number">4.</span> <span class="nav-text">4. 本地存储</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">渲染进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8-GUI-%E6%B8%B2%E6%9F%93%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">浏览器 GUI 渲染线程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">渲染流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E6%8E%92"><span class="nav-number">2.1.2.</span> <span class="nav-text">重排</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E7%BB%98"><span class="nav-number">2.1.3.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E9%87%8D%E6%8E%92%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.4.</span> <span class="nav-text">避免重排的方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript-%E5%BC%95%E6%93%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">JavaScript 引擎线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%9A%E6%97%B6%E8%A7%A6%E5%8F%91%E5%99%A8%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">浏览器定时触发器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">浏览器事件触发线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8-http-%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.5.</span> <span class="nav-text">浏览器 http 异步请求线程</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

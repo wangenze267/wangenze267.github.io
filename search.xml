@@ -1,50 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JavaScript变量提升</title>
-    <url>/posts/388126410.html/</url>
-    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
-<p>先从一个简单的例子来入手：</p>
-<blockquote>
-<p>a = 2;<br>var a;<br>console.log(a);</p>
-</blockquote>
-<span id="more"></span>
-
-<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
-<blockquote>
-<p>var a;<br>a = 2;<br>console.log(a);</p>
-</blockquote>
-<p>那么我们再看一个例子：</p>
-<blockquote>
-<p>console.log(a);<br>var a = 2;</p>
-</blockquote>
-<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
-<blockquote>
-<p>var a;<br>console.log(a);<br>a = 2;</p>
-</blockquote>
-<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
-<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
-</blockquote>
-<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
-<p>那么多个函数声明怎么办呢？</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
-</blockquote>
-<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
-<p>还有最后一个例子了：</p>
-<blockquote>
-<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
-</blockquote>
-<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS中，函数原来有这么多种定义方法（暑假开始！）</title>
     <url>/posts/1173819435.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在期末与暑假假期画饼之间不断奔波，很长时间没有记录了，今天在学习的时候看到了ES6的箭头函数，瞬间找到了写文的动力，那就来梳理一下在JavaScript中一共有几种定义函数的方式吧，最后再（微微）重点的介绍一下箭头函数✨</p>
@@ -108,55 +64,47 @@
       </tags>
   </entry>
   <entry>
-    <title>Node.js学习笔记之异步编程部分（一）</title>
-    <url>/posts/3168823204.html/</url>
-    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
-<li><p>回调函数格式规范</p>
-<ul>
-<li>error-first callback</li>
-<li>Node-style callback</li>
-</ul>
-</li>
-<li><p>第一个参数是error，后面的参数才是结果</p>
-</li>
-</ul>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p>
+    <title>JavaScript变量提升</title>
+    <url>/posts/388126410.html/</url>
+    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
+<p>先从一个简单的例子来入手：</p>
+<blockquote>
+<p>a = 2;<br>var a;<br>console.log(a);</p>
+</blockquote>
 <span id="more"></span>
 
-<p>结果：</p>
-<ul>
-<li>过</li>
-<li>不过</li>
-</ul>
-<p>ps：面试过了我们就笑一下，面试不过我们就哭！</p>
-<p>先上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">	interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(err)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">			callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是一个正常的面试流程：</p>
-<ul>
-<li>一面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;三面——&gt;入职</li>
-</ul>
-<p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p>
-<p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p>
-<p>简单描述一下张三的代码结构：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p>
-<ul>
-<li><p>npm包：<code>async.js</code></p>
-</li>
-<li><p>thunk编程方式</p>
-</li>
-</ul>
+<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
 <blockquote>
-<p>现在好像这两个方式都不用了😭</p>
+<p>var a;<br>a = 2;<br>console.log(a);</p>
 </blockquote>
+<p>那么我们再看一个例子：</p>
+<blockquote>
+<p>console.log(a);<br>var a = 2;</p>
+</blockquote>
+<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
+<blockquote>
+<p>var a;<br>console.log(a);<br>a = 2;</p>
+</blockquote>
+<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
+</blockquote>
+<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
+<p>那么多个函数声明怎么办呢？</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
+</blockquote>
+<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
+<p>还有最后一个例子了：</p>
+<blockquote>
+<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
+</blockquote>
+<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
 ]]></content>
       <tags>
-        <tag>Node.js</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -224,6 +172,74 @@
 <li>catch只能返回第一个面试挂的公司，如果都想知道就要存好所有的promise的状态并且打印出来哦。</li>
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>肝不动了，睡了睡了，总觉得上面那个例子，面试通过一家，第二家挂了他会给我返回到catch里面去呢，明天在研究一下。</p>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js学习笔记之异步编程部分（一）</title>
+    <url>/posts/3168823204.html/</url>
+    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
+<li><p>回调函数格式规范</p>
+<ul>
+<li>error-first callback</li>
+<li>Node-style callback</li>
+</ul>
+</li>
+<li><p>第一个参数是error，后面的参数才是结果</p>
+</li>
+</ul>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p>
+<span id="more"></span>
+
+<p>结果：</p>
+<ul>
+<li>过</li>
+<li>不过</li>
+</ul>
+<p>ps：面试过了我们就笑一下，面试不过我们就哭！</p>
+<p>先上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">	interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(err)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">			callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个正常的面试流程：</p>
+<ul>
+<li>一面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;三面——&gt;入职</li>
+</ul>
+<p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p>
+<p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p>
+<p>简单描述一下张三的代码结构：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p>
+<ul>
+<li><p>npm包：<code>async.js</code></p>
+</li>
+<li><p>thunk编程方式</p>
+</li>
+</ul>
+<blockquote>
+<p>现在好像这两个方式都不用了😭</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js之事件循环</title>
+    <url>/posts/3309484712.html/</url>
+    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
+<span id="more"></span>
+
+<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
+<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
+<p>就先到这，下次见~</p>
 ]]></content>
       <tags>
         <tag>Node.js</tag>
@@ -306,22 +322,6 @@
 <blockquote>
 <p>凡事没有绝对，不是说非阻塞I/O就一定是好的，还是拿餐厅举例子，比如服务员中间发生意外，所有的客人都要等这一个服务员，这样就会影响餐厅整体质量（可以理解为服务器奔溃）；阻塞I/O由于有多个服务员，一对一的服务，即使有一个发生意外，也不会影响整体质量，而雇多个服务员也要相应的付出成本。</p>
 </blockquote>
-]]></content>
-      <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js之事件循环</title>
-    <url>/posts/3309484712.html/</url>
-    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
-<span id="more"></span>
-
-<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
-<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
-<p>就先到这，下次见~</p>
 ]]></content>
       <tags>
         <tag>Node.js</tag>
@@ -499,63 +499,14 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Hexo配置使用Next主题</title>
-    <url>/posts/2781919463.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
-<h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
-<p><code>Next8.2.0</code></p>
-<p>版本不同可能会有些差异</p>
+    <title>关于Hexo使用Next主题的一些优化</title>
+    <url>/posts/1559886533.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
+<p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
+<h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
 <span id="more"></span>
 
-<h3 id="安装next主题"><a href="#安装next主题" class="headerlink" title="安装next主题"></a>安装next主题</h3><p>去next团队的主页去下载一个zip压缩包</p>
-<p><img src="https://wangez.site/img/next.png" alt="image-20210216103416503"></p>
-<p>完后将他放在<code>themes</code>目录下并且解压，重命名文件夹为<code>next</code></p>
-<p><code>themes/</code>下是Hexo用来放主题的</p>
-<h3 id="修改站点配置文件"><a href="#修改站点配置文件" class="headerlink" title="修改站点配置文件"></a>修改站点配置文件</h3><p>站点配置文件：<code>_config.yml</code></p>
-<p>参考Hexo文档中的说明，我们需要给博客设定主标题以及副标题、作者名称、语言、时区等，你可以参考以下我的设置。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Wangez-Blog  #网站标题</span><br><span class="line">subtitle: &#x27;Ned的个人博客&#x27;  #网站副标题</span><br><span class="line">description: &#x27;Ned的个人博客&#x27;  #网站描述</span><br><span class="line">keywords:  #网站关键词</span><br><span class="line">author: Ned  #您的名字</span><br><span class="line">language: zh-CN  #语言</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;  #时区</span><br></pre></td></tr></table></figure>
-
-<h4 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h4><p>在站点配置文件中，找到 theme 属性，然后修改为 next 即可</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h3><p>主题配置文件：<code>themes/next/_config.yml</code></p>
-<h4 id="设定主题风格"><a href="#设定主题风格" class="headerlink" title="设定主题风格"></a>设定主题风格</h4><p>Next提供了4种风格样式供我们选择。我个人偏好最经典且极简的Muse风格。你可以4种都体验以下。选择哪个风格，就删除掉对应风格名所在行前面的# ，可以参考我的配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line"># scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-<h4 id="博客主标题上方的logo"><a href="#博客主标题上方的logo" class="headerlink" title="博客主标题上方的logo"></a>博客主标题上方的logo</h4><p>这个我是没有设置的，有需要的可以自己设置一下，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Custom Logo (Warning: Do not support scheme Mist)主页logo</span><br><span class="line">custom_logo: /uploads/logo.png</span><br></pre></td></tr></table></figure>
-
-<p>顺便一提，后面我们还会遇到 引用图片地址 的类似设置。<code>/uploads/logo.png </code>对应的本地blog文件夹中位置是 <code>\blog\themes\next\source\uploads\logo.png</code> 其中 <code>uploads</code> 文件夹，和<code>logo.png</code>文件，都需要自己创建。</p>
-<h4 id="版权信息说明"><a href="#版权信息说明" class="headerlink" title="版权信息说明"></a>版权信息说明</h4><p>网上的太繁琐了，其实不用改太多。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
-
-<p>版权声明文本是可以修改的，后面会介绍到。</p>
-<h4 id="设置导航栏菜单"><a href="#设置导航栏菜单" class="headerlink" title="设置导航栏菜单"></a>设置导航栏菜单</h4><p>我觉得设置多了太麻烦，于是就保留了<code>主页</code> <code>标签</code> <code>关于</code> <code>归档</code>四个</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  #categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  #schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  #sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  #commonweal: /404/ || fa fa-heartbeat</span><br><span class="line"></span><br><span class="line"># Enable / Disable menu icons / item badges.</span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
-
-<p>启用哪个功能，就删除对应行前面的 # </p>
-<h4 id="侧边栏设置"><a href="#侧边栏设置" class="headerlink" title="侧边栏设置"></a>侧边栏设置</h4><p>我觉得左边挺好的，就没有改</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  # position: right</span><br></pre></td></tr></table></figure>
-
-<p>设置侧边栏的头像，一般为作者的头像，和博客的logo有区别。</p>
-<p>可以是方形或圆形，还可以选择鼠标停留时，魔性的转动（我没设置）。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: /uploads/avatar.jpg #头像图片地址 </span><br><span class="line">  # If true, the avatar will be dispalyed in circle.圆形选true 方形选false</span><br><span class="line">  rounded: true</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.魔性转动，打开选true</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
-
-<p>侧边栏外链，可以指向某篇文章，或某个网址。这里可以用来展示其他发布渠道。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  #GitHub: https://github.com/yourname || fab fa-github</span><br><span class="line">  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope</span><br><span class="line">  #Weibo: https://weibo.com/yourname || fab fa-weibo</span><br><span class="line">  #Google: https://plus.google.com/yourname || fab fa-google</span><br><span class="line">  #Twitter: https://twitter.com/yourname || fab fa-twitter</span><br><span class="line">  #FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><br><span class="line">  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><br><span class="line">  #YouTube: https://youtube.com/yourname || fab fa-youtube</span><br><span class="line">  #Instagram: https://instagram.com/yourname || fab fa-instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || fab fa-skype</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true  #用来控制是否显示图标的</span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
-
-<p>和外链样式不同的是友链。默认显示为<code>友情链接</code>我将其修改为<code>我的朋友</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 我的朋友</span><br><span class="line">  # Available values: block | inline</span><br><span class="line">  layout: block</span><br><span class="line">#友情链接</span><br><span class="line">links:</span><br><span class="line">  Ned: https://wangez.site</span><br></pre></td></tr></table></figure>
-
-<h4 id="返回顶部按钮显示阅读进度"><a href="#返回顶部按钮显示阅读进度" class="headerlink" title="返回顶部按钮显示阅读进度"></a>返回顶部按钮显示阅读进度</h4><p>觉得没什么用，不过我还是用了（打脸ing）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
-
-<h4 id="关闭动画效果"><a href="#关闭动画效果" class="headerlink" title="关闭动画效果"></a>关闭动画效果</h4><p>我觉得博客，渲染的太华丽反而不好，于是就将其关了，如果想打开可以将enable的值设置为<code>true</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br></pre></td></tr></table></figure>
-
-<p>到此，配置差不多就结束了，如果你还想优化你的博客，可以继续看下去。</p>
-<h3 id="优化你的博客"><a href="#优化你的博客" class="headerlink" title="优化你的博客"></a>优化你的博客</h3><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
-<p>插件：<code>hexo-abbrlink</code></p>
 <p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
 
@@ -680,14 +631,63 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Hexo使用Next主题的一些优化</title>
-    <url>/posts/1559886533.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p>
-<p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p>
-<h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
-<p>插件：<code>hexo-abbrlink</code></p>
+    <title>关于Hexo配置使用Next主题</title>
+    <url>/posts/2781919463.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
+<h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
+<p><code>Next8.2.0</code></p>
+<p>版本不同可能会有些差异</p>
 <span id="more"></span>
 
+<h3 id="安装next主题"><a href="#安装next主题" class="headerlink" title="安装next主题"></a>安装next主题</h3><p>去next团队的主页去下载一个zip压缩包</p>
+<p><img src="https://wangez.site/img/next.png" alt="image-20210216103416503"></p>
+<p>完后将他放在<code>themes</code>目录下并且解压，重命名文件夹为<code>next</code></p>
+<p><code>themes/</code>下是Hexo用来放主题的</p>
+<h3 id="修改站点配置文件"><a href="#修改站点配置文件" class="headerlink" title="修改站点配置文件"></a>修改站点配置文件</h3><p>站点配置文件：<code>_config.yml</code></p>
+<p>参考Hexo文档中的说明，我们需要给博客设定主标题以及副标题、作者名称、语言、时区等，你可以参考以下我的设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Wangez-Blog  #网站标题</span><br><span class="line">subtitle: &#x27;Ned的个人博客&#x27;  #网站副标题</span><br><span class="line">description: &#x27;Ned的个人博客&#x27;  #网站描述</span><br><span class="line">keywords:  #网站关键词</span><br><span class="line">author: Ned  #您的名字</span><br><span class="line">language: zh-CN  #语言</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;  #时区</span><br></pre></td></tr></table></figure>
+
+<h4 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h4><p>在站点配置文件中，找到 theme 属性，然后修改为 next 即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h3><p>主题配置文件：<code>themes/next/_config.yml</code></p>
+<h4 id="设定主题风格"><a href="#设定主题风格" class="headerlink" title="设定主题风格"></a>设定主题风格</h4><p>Next提供了4种风格样式供我们选择。我个人偏好最经典且极简的Muse风格。你可以4种都体验以下。选择哪个风格，就删除掉对应风格名所在行前面的# ，可以参考我的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line"># scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h4 id="博客主标题上方的logo"><a href="#博客主标题上方的logo" class="headerlink" title="博客主标题上方的logo"></a>博客主标题上方的logo</h4><p>这个我是没有设置的，有需要的可以自己设置一下，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Custom Logo (Warning: Do not support scheme Mist)主页logo</span><br><span class="line">custom_logo: /uploads/logo.png</span><br></pre></td></tr></table></figure>
+
+<p>顺便一提，后面我们还会遇到 引用图片地址 的类似设置。<code>/uploads/logo.png </code>对应的本地blog文件夹中位置是 <code>\blog\themes\next\source\uploads\logo.png</code> 其中 <code>uploads</code> 文件夹，和<code>logo.png</code>文件，都需要自己创建。</p>
+<h4 id="版权信息说明"><a href="#版权信息说明" class="headerlink" title="版权信息说明"></a>版权信息说明</h4><p>网上的太繁琐了，其实不用改太多。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
+
+<p>版权声明文本是可以修改的，后面会介绍到。</p>
+<h4 id="设置导航栏菜单"><a href="#设置导航栏菜单" class="headerlink" title="设置导航栏菜单"></a>设置导航栏菜单</h4><p>我觉得设置多了太麻烦，于是就保留了<code>主页</code> <code>标签</code> <code>关于</code> <code>归档</code>四个</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  #categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  #schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  #sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  #commonweal: /404/ || fa fa-heartbeat</span><br><span class="line"></span><br><span class="line"># Enable / Disable menu icons / item badges.</span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
+
+<p>启用哪个功能，就删除对应行前面的 # </p>
+<h4 id="侧边栏设置"><a href="#侧边栏设置" class="headerlink" title="侧边栏设置"></a>侧边栏设置</h4><p>我觉得左边挺好的，就没有改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  # position: right</span><br></pre></td></tr></table></figure>
+
+<p>设置侧边栏的头像，一般为作者的头像，和博客的logo有区别。</p>
+<p>可以是方形或圆形，还可以选择鼠标停留时，魔性的转动（我没设置）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: /uploads/avatar.jpg #头像图片地址 </span><br><span class="line">  # If true, the avatar will be dispalyed in circle.圆形选true 方形选false</span><br><span class="line">  rounded: true</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.魔性转动，打开选true</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
+
+<p>侧边栏外链，可以指向某篇文章，或某个网址。这里可以用来展示其他发布渠道。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  #GitHub: https://github.com/yourname || fab fa-github</span><br><span class="line">  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope</span><br><span class="line">  #Weibo: https://weibo.com/yourname || fab fa-weibo</span><br><span class="line">  #Google: https://plus.google.com/yourname || fab fa-google</span><br><span class="line">  #Twitter: https://twitter.com/yourname || fab fa-twitter</span><br><span class="line">  #FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><br><span class="line">  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><br><span class="line">  #YouTube: https://youtube.com/yourname || fab fa-youtube</span><br><span class="line">  #Instagram: https://instagram.com/yourname || fab fa-instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || fab fa-skype</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true  #用来控制是否显示图标的</span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
+
+<p>和外链样式不同的是友链。默认显示为<code>友情链接</code>我将其修改为<code>我的朋友</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 我的朋友</span><br><span class="line">  # Available values: block | inline</span><br><span class="line">  layout: block</span><br><span class="line">#友情链接</span><br><span class="line">links:</span><br><span class="line">  Ned: https://wangez.site</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回顶部按钮显示阅读进度"><a href="#返回顶部按钮显示阅读进度" class="headerlink" title="返回顶部按钮显示阅读进度"></a>返回顶部按钮显示阅读进度</h4><p>觉得没什么用，不过我还是用了（打脸ing）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭动画效果"><a href="#关闭动画效果" class="headerlink" title="关闭动画效果"></a>关闭动画效果</h4><p>我觉得博客，渲染的太华丽反而不好，于是就将其关了，如果想打开可以将enable的值设置为<code>true</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br></pre></td></tr></table></figure>
+
+<p>到此，配置差不多就结束了，如果你还想优化你的博客，可以继续看下去。</p>
+<h3 id="优化你的博客"><a href="#优化你的博客" class="headerlink" title="优化你的博客"></a>优化你的博客</h3><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
 <p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
 
@@ -801,6 +801,82 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于浏览器的渲染进程</title>
+    <url>/posts/3321770798.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。</p>
+<blockquote>
+<p>纯记录</p>
+</blockquote>
+<h3 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h3><p>渲染进程的<strong>核心工作是将HTML,CSS和JavaScript转换为用户可以与之交互的网页。</strong>主要包括以下线程：</p>
+<span id="more"></span>
+
+<h4 id="浏览器-GUI-渲染线程"><a href="#浏览器-GUI-渲染线程" class="headerlink" title="浏览器 GUI 渲染线程"></a>浏览器 GUI 渲染线程</h4><h5 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h5><p><img src="/posts/3321770798.html/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C.png" alt="image-20210615171514782"></p>
+<ul>
+<li>分层的目的：避免整个页面渲染，把页面分成多个图层，尤其是动画的时候，把动画独立出一个图层，渲染时只渲染该图层就ok，transform，z-index等，浏览器会自动优化生成图层</li>
+<li>光栅化：页面如果很长但是可视区很小，避免渲染非可视区的样式造成资源浪费，x以将每个图层又划分成多个小个子，当前只渲染可视区附近区域</li>
+</ul>
+<h5 id="重排"><a href="#重排" class="headerlink" title="重排"></a>重排</h5><ul>
+<li><p>重排 ：当DOM的变化影响了元素的几何信息(元素的的位置和尺寸大小)，浏览器需要重新计算元素的几何属性，将其安放在界面中的正确位置，这个过程叫做重排</p>
+</li>
+<li><p>重排特点：style后面所有流程都更新</p>
+</li>
+</ul>
+<p><img src="/posts/3321770798.html/image-20210615172629674.png" alt="image-20210615172629674"></p>
+<ul>
+<li><p>触发重排的方法</p>
+<ul>
+<li><p>页面初始渲染，这是开销最大的一次重排</p>
+</li>
+<li><p>添加/删除可见的DOM元素</p>
+</li>
+<li><p>改变元素位置</p>
+</li>
+<li><p>改变元素尺寸，比如边距、填充、边框、宽度和高度等</p>
+</li>
+<li><p>改变元素内容，比如文字数量，图片大小等</p>
+</li>
+<li><p>改变元素字体大小</p>
+</li>
+<li><p>改变浏览器窗口尺寸，比如resize事件发生时</p>
+</li>
+<li><p>激活CSS伪类（例如：<code>:hover</code>）</p>
+</li>
+<li><p>设置 style 属性的值，因为通过设置style属性改变结点样式的话，每一次设置都会触发一次reflow</p>
+<p>查询某些属性或调用某些计算方法：offsetWidth、offsetHeight等</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h5><ul>
+<li><p>重绘：当一个元素的外观发生改变，但没有改变布局,重新把元素外观绘制出来的过程</p>
+</li>
+<li><p>重绘特点：跳过布局和分层阶段</p>
+</li>
+</ul>
+<p><img src="/posts/3321770798.html/image-20210615172906367.png" alt="image-20210615172906367"></p>
+<ul>
+<li>重排必重绘</li>
+</ul>
+<h5 id="避免重排的方法"><a href="#避免重排的方法" class="headerlink" title="避免重排的方法"></a>避免重排的方法</h5><ul>
+<li><p>样式集中改变</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> left = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> top = <span class="number">10</span>;</span><br><span class="line">el.style.left = left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">el.style.top = top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当top和left的值是动态计算而成时...</span></span><br><span class="line"><span class="comment">// better </span></span><br><span class="line">el.style.cssText += <span class="string">&quot;; left: &quot;</span> + left + <span class="string">&quot;px; top: &quot;</span> + top + <span class="string">&quot;px;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// better</span></span><br><span class="line">el.className += <span class="string">&quot; className&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 absolute 或 fixed 脱离文档流</p>
+<p>使用绝对定位会使的该元素单独成为渲染树中 <code>body</code> 的一个子元素，重排开销比较小，不会对其它节点造成太多影响。当你在这些节点上放置这个元素时，一些其它在这个区域内的节点可能需要重绘，但是不需要重排</p>
+</li>
+<li><p>GPU加速:transform</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 根据上面的结论</span></span><br><span class="line"><span class="comment">* 将 2d transform 换成 3d</span></span><br><span class="line"><span class="comment">* 就可以强制开启 GPU 加速</span></span><br><span class="line"><span class="comment">* 提高动画性能</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(<span class="number">10px</span>, <span class="number">10px</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="JavaScript-引擎线程"><a href="#JavaScript-引擎线程" class="headerlink" title="JavaScript 引擎线程"></a>JavaScript 引擎线程</h4><p>JS引擎线程负责解析Javascript脚本，运行代码 JS引擎一直等待着任务队列中任务的到来，然后加以处理，一个Tab页（renderer进程）中无论什么时候都只有一个JS线程在运行JS程序</p>
+<p>GUI渲染线程与JS引擎线程是互斥的，所以如果JS执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞</p>
+<h4 id="浏览器定时触发器线程"><a href="#浏览器定时触发器线程" class="headerlink" title="浏览器定时触发器线程"></a>浏览器定时触发器线程</h4><p>浏览器定时计数器并不是由 JavaScript 引擎计数的, 因为 JavaScript 引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确, 因此通过单独线程来计时并触发定时是更为合理的方案</p>
+<h4 id="浏览器事件触发线程"><a href="#浏览器事件触发线程" class="headerlink" title="浏览器事件触发线程"></a>浏览器事件触发线程</h4><p>当一个事件被触发时该线程会把事件添加到待处理队列的队尾，等待 JavaScript 引擎的处理。这些事件可以是当前执行的代码块如定时任务、也可来自浏览器内核的其他线程如鼠标点击、AJAX 异步请求等，但由于 JavaScript 的单线程关系所有这些事件都得排队等待 JavaScript 引擎处理。</p>
+<h4 id="浏览器-http-异步请求线程"><a href="#浏览器-http-异步请求线程" class="headerlink" title="浏览器 http 异步请求线程"></a>浏览器 http 异步请求线程</h4><p>在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求， 将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件放到 JavaScript 引擎的处理队列中等待处理。</p>
+]]></content>
+      <tags>
+        <tag>浏览器</tag>
       </tags>
   </entry>
   <entry>
@@ -1000,6 +1076,76 @@
       </tags>
   </entry>
   <entry>
+    <title>前端知识链条中少不了的一环--Ajax</title>
+    <url>/posts/1172116075.html/</url>
+    <content><![CDATA[<blockquote>
+<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
+<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
+<span id="more"></span>
+
+<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
+<li>通过异步模式，提升了用户体验</li>
+<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
+<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
+</ul>
+<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
+<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>open()</p>
+<blockquote>
+<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
+</blockquote>
+</li>
+<li><p>send()</p>
+<blockquote>
+<p>send()方法表示着发送请求，不需要任何参数</p>
+</blockquote>
+</li>
+<li><p>监听请求成功后的状态变化</p>
+<blockquote>
+<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
+<p>readyState：共有五个状态</p>
+<ul>
+<li>0：未初始化</li>
+<li>1：open方法成功调用后</li>
+<li>2：服务器已经答应客户端的请求</li>
+<li>3：交互中，http头信息已经接收，响应数据未接收</li>
+<li>4：完成</li>
+</ul>
+<p>responseText：服务器端返回的文本内容，默认是字符串</p>
+<p>status：服务器端返回的状态码</p>
+<p>statusText：服务器端返回的状态码文本说明信息</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
+</li>
+<li><p>setRequestHeader()：设置请求头</p>
+</li>
+<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
+</li>
+<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
+<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
+</ul>
+<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
+<blockquote>
+<p>每日一问：今日你卷了没？</p>
+</blockquote>
+<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何写好JavaScript（上）</title>
     <url>/posts/98016397.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>课程记录笔记第三弹——《跟月影学JavaScript》</p>
@@ -1168,144 +1314,6 @@
       </tags>
   </entry>
   <entry>
-    <title>前端知识链条中少不了的一环--Ajax</title>
-    <url>/posts/1172116075.html/</url>
-    <content><![CDATA[<blockquote>
-<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
-<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
-<span id="more"></span>
-
-<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
-<li>通过异步模式，提升了用户体验</li>
-<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
-<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
-</ul>
-<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
-<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>open()</p>
-<blockquote>
-<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
-</blockquote>
-</li>
-<li><p>send()</p>
-<blockquote>
-<p>send()方法表示着发送请求，不需要任何参数</p>
-</blockquote>
-</li>
-<li><p>监听请求成功后的状态变化</p>
-<blockquote>
-<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
-<p>readyState：共有五个状态</p>
-<ul>
-<li>0：未初始化</li>
-<li>1：open方法成功调用后</li>
-<li>2：服务器已经答应客户端的请求</li>
-<li>3：交互中，http头信息已经接收，响应数据未接收</li>
-<li>4：完成</li>
-</ul>
-<p>responseText：服务器端返回的文本内容，默认是字符串</p>
-<p>status：服务器端返回的状态码</p>
-<p>statusText：服务器端返回的状态码文本说明信息</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
-</li>
-<li><p>setRequestHeader()：设置请求头</p>
-</li>
-<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
-</li>
-<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
-<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
-</ul>
-<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
-<blockquote>
-<p>每日一问：今日你卷了没？</p>
-</blockquote>
-<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>弹性盒模型-flex</title>
-    <url>/posts/3659327966.html/</url>
-    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
-<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
-<span id="more"></span>
-
-<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
-<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
-<p>容器的属性有6个，我们下面一一介绍他们：</p>
-<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
-<ul>
-<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
-<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
-<li>center:项目靠近主轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
-</ul>
-<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
-<ul>
-<li>flex-start:项目靠近交叉轴首端的方向。</li>
-<li>flex-end:项目靠近交叉轴末端的方向。</li>
-<li>center:项目与交叉轴中线对齐。</li>
-<li>baseline:项目与第一行文字基线对齐。</li>
-<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
-</ul>
-<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
-<ul>
-<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
-<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
-<li>center:项目靠近交叉轴的中间位置排列。</li>
-<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
-<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
-<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
-</ul>
-<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
-<ul>
-<li>row:默认值，水平方向从左往右排列。</li>
-<li>row-reverse:水平方向从右往左排列。</li>
-<li>column:垂直方向从上往下排列。</li>
-<li>column-reverse:垂直方向从下往上排列。</li>
-</ul>
-<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
-<ul>
-<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
-<li>wrap:项目超出容器尺寸时换行。</li>
-<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
-</ul>
-<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
-<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
-<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
-<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
-<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
-<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
-<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
-<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
-<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
-]]></content>
-      <tags>
-        <tag>Css</tag>
-        <tag>Flex</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何写好JavaScript（下）</title>
     <url>/posts/3177970664.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
@@ -1454,6 +1462,74 @@
       </tags>
   </entry>
   <entry>
+    <title>弹性盒模型-flex</title>
+    <url>/posts/3659327966.html/</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最开始接触flex布局的时候，还是在阮一峰老师的博客上学习的，最近在看一本书，上面有提及到，于是就来整理一下所学，有理解的不对的地方还请指正。</p>
+<h3 id="弹性盒模型"><a href="#弹性盒模型" class="headerlink" title="弹性盒模型"></a>弹性盒模型</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>弹性盒模型和盒模型的概念有一些区别，他不在是定义元素的，而是CSS3引入的一种布局方式，其核心思想是调整元素大小来适应不同空间，包含垂直方向的高度和水平方向的宽度。</p>
+<span id="more"></span>
+
+<p>弹性盒模型有两个重要的概念：容器（container）和项目（item）。其中容器属性用来设置项目的公共样式，比如排布方向、排布对齐方式；项目属性用来设置各个项目之间的相对关系，包括比例、顺序等。容器和项目是嵌套关系，一个容器可以有多个项目，其中容器的display的属性值应设为flex。</p>
+<p>标准盒模型的排布包括水平和垂直方向，弹性盒模型也是如此。我们可以将水平方向理解为主轴，垂直方向理解为交叉轴，与传统盒模型有所不同的是，弹性和模型在排列方向上除了从左到右和从上到下，还支持反序排列，即从右到左和从下到上。</p>
+<p>容器的属性有6个，我们下面一一介绍他们：</p>
+<h5 id="1-justify-content"><a href="#1-justify-content" class="headerlink" title="1.justify-content"></a>1.justify-content</h5><p>定义主轴上项目的对齐方式。</p>
+<ul>
+<li>flex-start:默认值。项目靠近主轴首端的方向排列。</li>
+<li>flex-end:项目靠近主轴末端首端的方向排列。</li>
+<li>center:项目靠近主轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴主轴首端，最后一个项目会紧贴主轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>space-evenly:可以使得相邻项目、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="2-align-items"><a href="#2-align-items" class="headerlink" title="2.align-items"></a>2.align-items</h5><p>定义多个项目单行排列下的交叉轴对齐方式。</p>
+<ul>
+<li>flex-start:项目靠近交叉轴首端的方向。</li>
+<li>flex-end:项目靠近交叉轴末端的方向。</li>
+<li>center:项目与交叉轴中线对齐。</li>
+<li>baseline:项目与第一行文字基线对齐。</li>
+<li>stretch:将项目拉伸至与交叉轴两端对齐。</li>
+</ul>
+<h5 id="3-align-content"><a href="#3-align-content" class="headerlink" title="3.align-content"></a>3.align-content</h5><p>定义多个项目多行情况下在交叉轴的对齐方式，和主轴一样，也支持六中队旗方式，只是个别的名称有所变化。</p>
+<ul>
+<li>flex-start:项目靠近交叉轴首端的方向排列。</li>
+<li>flex-end:项目靠近交叉轴末端的方向排列。</li>
+<li>center:项目靠近交叉轴的中间位置排列。</li>
+<li>space-between:两端对齐。第一个项目会紧贴交叉轴首端，最后一个项目会紧贴交叉轴末端，其余项目等间距排列。</li>
+<li>space-around:每个项目外边距相等，项目之间的间距是项目与边框间距的两倍。</li>
+<li>stretch:可以使得相邻箱门、项目与边框之间的间距相等。</li>
+</ul>
+<h5 id="4-flex-direction"><a href="#4-flex-direction" class="headerlink" title="4.flex-direction"></a>4.flex-direction</h5><p>定义容器主轴上项目的排列方向。</p>
+<ul>
+<li>row:默认值，水平方向从左往右排列。</li>
+<li>row-reverse:水平方向从右往左排列。</li>
+<li>column:垂直方向从上往下排列。</li>
+<li>column-reverse:垂直方向从下往上排列。</li>
+</ul>
+<h5 id="5-flex-wrap"><a href="#5-flex-wrap" class="headerlink" title="5.flex-wrap"></a>5.flex-wrap</h5><p>用来控制项目在主轴上是否换行。</p>
+<ul>
+<li>nowrap:默认值，项目超出容器尺寸时不换行。这个尺寸根据排列方向而定，对于水平排列方式为宽度，垂直排列方式为高度。</li>
+<li>wrap:项目超出容器尺寸时换行。</li>
+<li>wrap-reverse:项目超出容器尺寸时换行，不过是反序排列。例如水平方向布局的话先从下面一行开始往上换行。</li>
+</ul>
+<h5 id="6-flex-flow"><a href="#6-flex-flow" class="headerlink" title="6.flex-flow"></a>6.flex-flow</h5><p>这个属性是一个简写属性，其第一个属性值用来设置flex-direction的值，第二个属性值用来设置flex-wrap的值，两个值用空格做分隔符。默认值为“row nowrap”。<br>如果需要对不同项目进行定制化设置，那么还需要用到项目属性。项目属性可分为三类，一类和项目顺序有关(order)，另一类和项目对齐方式有关(align-self)，最后一类和项目的尺寸相关（flex-grow,flex-shrink-flex-basis,flex）,具体介绍如下。</p>
+<h5 id="7-order"><a href="#7-order" class="headerlink" title="7.order"></a>7.order</h5><p>它的值是一个整数，按照数值从大到小的顺序排列项目。默认值为零，即按照元素编写顺序排列。</p>
+<h5 id="8-align-self"><a href="#8-align-self" class="headerlink" title="8.align-self"></a>8.align-self</h5><p>可以覆盖容器定义的align-items属性，为当前项目单独设置交叉轴的对齐方式，可选值同align-items。</p>
+<h5 id="9-flex-grow"><a href="#9-flex-grow" class="headerlink" title="9.flex-grow"></a>9.flex-grow</h5><p>定义项目在容器拥有剩余空间时的放大比例。默认值为零，如果各个项目的值都相等，那么均分剩余空间，否则按照flex-grow定义的比例分配剩余空间。</p>
+<h5 id="10-flex-shrink"><a href="#10-flex-shrink" class="headerlink" title="10.flex-shrink"></a>10.flex-shrink</h5><p>定义项目在容器空间不足时的缩小比例。默认值为1，如果各个项目的值都相等，那么均匀缩小各个空间，否则按照flex-shrink定义的比例进行缩小。</p>
+<h5 id="11-flex-basis"><a href="#11-flex-basis" class="headerlink" title="11.flex-basis"></a>11.flex-basis</h5><p>定义项目的默认尺寸，可选值同width属性，默认值为auto。</p>
+<h4 id="基础布局"><a href="#基础布局" class="headerlink" title="基础布局"></a>基础布局</h4><h5 id="1-单列布局"><a href="#1-单列布局" class="headerlink" title="1.单列布局"></a>1.单列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;main&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  background-color:lightgrey;</span><br><span class="line">  justfy-content:center;</span><br><span class="line">&#125;</span><br><span class="line">.item &#123;</span><br><span class="line">  flex-basis:1000px;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路很简单，设置容器主轴项目对齐方式居中，同时设置好项目宽度即可。</p>
+<h5 id="2-两列布局"><a href="#2-两列布局" class="headerlink" title="2.两列布局"></a>2.两列布局</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- html --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;center&quot;&gt;center&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;left&quot;&gt;left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">/*css*/</span><br><span class="line">.container &#123;</span><br><span class="line">  display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.center &#123;</span><br><span class="line">  flex-grow:1;</span><br><span class="line">  background-color:yellow;</span><br><span class="line">  order:1;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">  background-color:red;</span><br><span class="line">  flex-basis:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
+<h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
+]]></content>
+      <tags>
+        <tag>Css</tag>
+        <tag>Flex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>微信小程序相关</title>
     <url>/posts/2713850416.html/</url>
     <content><![CDATA[<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
@@ -1507,56 +1583,6 @@
 ]]></content>
       <tags>
         <tag>小程序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>框架简介之Vue.js</title>
-    <url>/posts/2624959054.html/</url>
-    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
-<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
-<span id="more"></span>
-
-<blockquote>
-<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
-</blockquote>
-<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
-<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
-<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
-<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
-<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
-<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
-<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
-<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
-<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
-<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
-<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
-<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
-<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
-<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
-<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
-<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
-<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
-<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
-<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
-<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
-<p>声明式渲染与命令式渲染区别</p>
-<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
-<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
-<p><strong>命令式渲染：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
-
-<p><strong>声明式渲染：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -1650,6 +1676,56 @@
 <img src="https://img0.baidu.com/it/u=3335154325,3530608547&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="zoom" style="zoom:50%;">]]></content>
       <tags>
         <tag>经历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>框架简介之Vue.js</title>
+    <url>/posts/2624959054.html/</url>
+    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
+<h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
+<span id="more"></span>
+
+<blockquote>
+<p>声明式渲染——组件系统——客户端路由——-大数据状态管理——-构建工具</p>
+</blockquote>
+<h3 id="Augular（GitHub-No-3）"><a href="#Augular（GitHub-No-3）" class="headerlink" title="Augular（GitHub No.3）"></a>Augular（GitHub No.3）</h3><p>AngularJS 是一款开源JavaScript库，由Google维护，用来协助单一页面应用程序运行,它是基于ES6来开发的。</p>
+<p>它是前端/客户端JavaScript框架，由Google创建和维护，用于构建功能强大的单页应用程序，通过表达式绑定数据到 HTML。</p>
+<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><h3 id="Vue的核心点"><a href="#Vue的核心点" class="headerlink" title="Vue的核心点"></a>Vue的核心点</h3><h4 id="1-响应式数据绑定"><a href="#1-响应式数据绑定" class="headerlink" title="1.响应式数据绑定"></a>1.响应式数据绑定</h4><p>当数据发生变化时，Vue自动更新视图。</p>
+<p>原理是利用了 Object.definedProperty中的setter/getter代理数据，监控对数据的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;app&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      message: &#x27;Welcome to Your Vue.js App&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-可组合的视图组件"><a href="#2-可组合的视图组件" class="headerlink" title="2.可组合的视图组件"></a>2.可组合的视图组件</h4><p>一个页面被映射成组件树，将组件进行划分，方便维护，复用，测试，也就是说一个页面是由多个组件组合而成。</p>
+<p><img src="https://wangez.site/img/shangke/zujian.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/dom.png" alt="img"></p>
+<h4 id="3-虚拟Dom"><a href="#3-虚拟Dom" class="headerlink" title="3.虚拟Dom"></a>3.虚拟Dom</h4><p>虚拟Dom是随着时代发展而诞生的产物。</p>
+<p>在Web早期，页面的交互都十分简单，没有复杂的状态需要管理，也不需要频繁操作Dom，使用JQ来开发就能满足我们的需求。</p>
+<p>随着时代不断发展，功能越来越多，我们需要实现的需求就越来越复杂，程序中需要维护的状态也就越来越多，导致Dom操作越来越频繁。</p>
+<p>那么，我们再像以前那样，使用JQ来发开页面的时候，就会有一大部分代码是在操作Dom，程序中的状态也很难管理，代码的逻辑就会十分混乱。</p>
+<p>这其实是命令式操作Dom的问题，虽然简单，但是不好维护。</p>
+<p>现在，主流的前端的框架，都是声明式操作Dom。我们通过描述状态和Dom之间的映射关系是怎样的，就可以将状态渲染成视图，至于怎么渲染的，框架会帮我们去做，不用我们手动去操作Dom。</p>
+<p>运行的JavaScript代码速度是很快的，但是有大量的操作DOM就会很慢，时常在更新数据后会重新渲染页面，这样造成在没有改变数据的地方也重新渲染了DOM节点，这样就造成了很大程度上的资源浪费。</p>
+<p><strong>利用在内存中生成与真实DOM与之对应的数据结构，这个在内存中生成的结构称之为虚拟DOM</strong></p>
+<p>当数据发生变化时，能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上</p>
+<p><img src="https://wangez.site/img/shangke/xunidom1.png" alt="img"></p>
+<p><img src="https://wangez.site/img/shangke/xunidom2.png" alt="img"></p>
+<h4 id="4-MVVM"><a href="#4-MVVM" class="headerlink" title="4.MVVM"></a>4.MVVM</h4><p><strong>MVVM概述：</strong>M：Model数据模型 ， V：view 视图模板  ， VM：view-Model：视图模型</p>
+<p><img src="https://wangez.site/img/shangke/mvvm.png" alt="img"></p>
+<p>Vue中的MVVM实例（双向数据绑定）：当输入框输入数据的时候，相应的message也会改变</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; v-model=&quot;message&quot;/&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        message: &#x27;Welcome&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-声明式渲染"><a href="#5-声明式渲染" class="headerlink" title="5.声明式渲染"></a>5.声明式渲染</h4><p>Vue.js 的核心是一个允许采用简洁的模板语法来声明式的将数据渲染进 DOM，初始化根实例，vue自动将数据绑定在DOM模板上</p>
+<p>声明式渲染与命令式渲染区别</p>
+<p>声明式渲染：所谓声明式渲染只需要声明在哪里，做什么，而无需关心如何实现</p>
+<p>命令式渲染：需要具体代码表达在哪里，做什么，如何实践<br>需求：求数组中每一项的倍数，放在另一个数组中</p>
+<p><strong>命令式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = []</span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    newArr.push(arr[i] * 2)</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明式渲染：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
