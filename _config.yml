@@ -115,7 +115,7 @@ plugins: hexo-generate-feed
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: https://github.com/wangenze267/wangenze267.github.io.git
+  repository: git@github.com:wangenze267/wangenze267.github.io.git
   branch: master
 
 symbols_count_time:

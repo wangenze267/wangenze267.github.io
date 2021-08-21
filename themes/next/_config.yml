@@ -1023,7 +1023,7 @@ defaultlinks:
 friendslinks:
   - nickname: Cambria     # 昵称
     avatar: https://cambriad.github.io/medias/avatar.jpg  # 头像地址
-    site: https://blog.cambria.xyz #友链地址
+    site: https://cambriad.github.io/ #友链地址
     info: 
   - nickname: 良良的小窝     # 昵称
     avatar: https://blog.ghl.asia/uploads/avatar.jpg   # 头像地址
@@ -1053,3 +1053,11 @@ friendslinks:
     avatar: http://49.232.157.194/wordpress/wp-content/uploads/2021/05/logo.png
     site: http://49.232.157.194/
     info: 摸鱼ing
+  - nickname: 刘政驰
+    avatar: https://www.lzcwy.cn/img/avatar.jpg
+    site: https://www.lzcwy.cn/
+    info: 有理想在的地方，地狱就是天堂
+  - nickname: 你们的小f
+    avatar: https://avatars.githubusercontent.com/u/40832831?v=4
+    site: https://note.fzf404.top/#/
+    info: 小f的笔记本
