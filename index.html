@@ -205,6 +205,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/1196783753.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Ned">
+      <meta itemprop="description" content="小小前端成长日记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wangez-Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1196783753.html/" class="post-title-link" itemprop="url">分享一次踩坑，一次自己封装的uni官方api</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-22 16:35:11 / 修改时间：16:34:44" itemprop="dateCreated datePublished" datetime="2021-08-22T16:35:11+08:00">2021-08-22</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/1196783753.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/1196783753.html/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这几天在做一个app，用来打比赛用，使用的是uni+uView的组件库。这个组件库是半道加进来的，学弟推荐的，我看有组件的话确实会方便很多，而且他都是按需引入，不占用额外空间，挺好的，我也就直接拿来用了。</p>
+<p>使用感想：感觉这套技术栈跟vue+element差不多了emm，就是某些官方api还不太一样，还是比较顺手的。</p>
+<p>组件库传送门：<a target="_blank" rel="noopener" href="https://www.uviewui.com/components/intro.html"> uView - 多平台快速开发的UI框架 </a></p>
+<p>但是，不熟悉组件的api以及参数，让我踩了坑，非常难受emm，还是写个记录，长长记性。</p>
+<p>本次内容：分享一个踩坑，一个自己进行封装的uni官方api</p>
+<blockquote>
+<p>毕竟踩坑日记专栏好久没更新了。</p>
+</blockquote>
+<h3 id="坑：uView组件库，uToast组件"><a href="#坑：uView组件库，uToast组件" class="headerlink" title="坑：uView组件库，uToast组件"></a>坑：uView组件库，uToast组件</h3><p>传送门：<a target="_blank" rel="noopener" href="https://www.uviewui.com/components/toast.html">Toast 消息提示 </a></p>
+<p>使用方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将这个标签放在页面中</span></span><br><span class="line">&lt;u-toast ref=<span class="string">&quot;uToast&quot;</span> /&gt;</span><br><span class="line"><span class="comment">// 需要消息提示的话，加上如下代码</span></span><br><span class="line"><span class="built_in">this</span>.$refs.uToast.show(&#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;登录成功&#x27;</span>,</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;/pages/user/index&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><p><code>title</code>:消息提示显示的文本</p>
+</li>
+<li><p><code>type</code>:主题类型，不填默认为<code>default</code>（一共有6中主题色）</p>
+</li>
+<li><p><code>url</code>:toast结束跳转的url，不填不跳转</p>
+</li>
+</ul>
+<blockquote>
+<p>更多详细api请点击上方toast传送门去到该组件库官网看</p>
+</blockquote>
+<p>我遇到的坑，便是填写了url，他执行结束后不跳转。</p>
+<p>说一下我的大致使用情况：</p>
+<p>登录成功后弹出消息提示登录成功，完后跳转到一个tab页面上去。但是他只给弹出登录成功，不报错也不跳转。当时真的人傻了，找了好多地方，也打了断点，所有的事情都告诉我一切正常。于是我开始怀疑起我的电脑emm，我将整个程序打包，发给了我的学弟，让他在他电脑上帮我调试一下，结果与我电脑一致（nice！那就是电脑没坏，还能用），在我吃完饭回到电脑前准备跟这个问题决一死战的时候，学弟发来的一张截图让我人呆滞了。</p>
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>说明</strong></th>
+<th>类型</th>
+<th>默认值</th>
+<th>可选值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isTab</td>
+<td>toast结束后，跳转tab页面时需要配置为<code>true</code></td>
+<td>Boolean</td>
+<td>fasle</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<p>没错，就是这个表格。我才知道这个组件要是跳转到tab页面的话还需要额外配置一个参数，赶忙加上，于是我又从坑中站了起来。</p>
+<h4 id="关于toast结束跳转URL"><a href="#关于toast结束跳转URL" class="headerlink" title="关于toast结束跳转URL"></a>关于toast结束跳转URL</h4><ul>
+<li>如果配置了<code>url</code>参数，在toast结束的时候，就会用<code>uni.navigateTo</code>(默认)或者<code>uni.switchTab</code>(需另外设置<code>isTab</code>为<code>true</code>)</li>
+<li>如果配置了<code>params</code>参数，就会在跳转时自动在URL后面拼接上这些参数，具体用法如下：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$refs.uToast.show(&#123;</span><br><span class="line">	<span class="attr">title</span>: <span class="string">&#x27;操作成功&#x27;</span>,</span><br><span class="line">	<span class="attr">url</span>: <span class="string">&#x27;/pages/user/index&#x27;</span>,</span><br><span class="line">	<span class="attr">params</span>: &#123;</span><br><span class="line">		<span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">		<span class="attr">menu</span>: <span class="number">3</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这个故事告诉我们，大家使用之前一定要摸清楚api，不要学习泽泽！！！</p>
+<h3 id="封装uni-getStorage函数"><a href="#封装uni-getStorage函数" class="headerlink" title="封装uni.getStorage函数"></a>封装uni.getStorage函数</h3><p>这个应该不算坑，我只是觉得他这个使用起来不是很方便（好像是相当不方便）</p>
+<p>传送门：<a target="_blank" rel="noopener" href="https://uniapp.dcloud.io/api/storage/storage?id=getstorage">uni.getStorage </a></p>
+<p>它的作用就是从本地缓存中异步获取指定 key 对应的内容。</p>
+<p>我的需求就是要从缓存中获取一些我之前存入进去的东西，但是我取一个还好，某一处需要取两个的话要把这个函数写两次，反正我本人是觉得很麻烦的（即使CV不麻烦，但在程序员眼中，代码相似程度有点高），那为什么不尝试着封装一下呢？</p>
+<p>函数本来的样子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">uni.getStorage(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;storage_key&#x27;</span>,</span><br><span class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res.data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>他是根据<code>key</code>，去取缓存中的数据，完后返回值<code>res.data</code>中就是我们需要的数据了。</p>
+<p>思路就是：传一个<code>key</code>给他，同时接好<code>res.data</code>的值</p>
+<p>改造前：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">uni.getStorage(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;token&#x27;</span>,</span><br><span class="line">    <span class="attr">success</span>:<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;token:&#x27;</span>+ res.data)</span><br><span class="line">        <span class="built_in">this</span>.token = res.data</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">uni.getStorage(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;username&#x27;</span>,</span><br><span class="line">    <span class="attr">success</span>:<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;username&#x27;</span> + res.data)</span><br><span class="line">        <span class="built_in">this</span>.userInfo.username = res.data</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>改造后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">getCache</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> b = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;a:&#x27;</span>+a)</span><br><span class="line">    uni.getStorage(&#123;</span><br><span class="line">        <span class="attr">key</span>:a,</span><br><span class="line">        <span class="attr">success</span>:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;res.data:&#x27;</span>+res.data);</span><br><span class="line">            b = res.data;</span><br><span class="line">            <span class="keyword">return</span> res.data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>需要调用的时候这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> username = <span class="built_in">this</span>.getCache(<span class="string">&#x27;username&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>是不是非常的方便呢？</p>
+<blockquote>
+<p>封装，yyds</p>
+</blockquote>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>踩坑可以迟到，但永远不会缺席，我们能做的就是每次细心一点，并且把犯过的错，背过的锅记录在小本本上，再也不去犯第二次。</p>
+<p>毕竟，神也会犯错呀！</p>
+<p>祝愿天下的程序员都少一点bug吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/3321770798.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1102,106 +1266,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2373844462.html/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Ned">
-      <meta itemprop="description" content="小小前端成长日记">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wangez-Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/2373844462.html/" class="post-title-link" itemprop="url">咳咳咳，写给SZ的第一封。。。。项目草稿？？？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-09 21:54:08" itemprop="dateCreated datePublished" datetime="2021-08-09T21:54:08+08:00">2021-08-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-11 00:01:07" itemprop="dateModified" datetime="2021-08-11T00:01:07+08:00">2021-08-11</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/posts/2373844462.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/2373844462.html/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>466</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/2373844462.html/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1273,14 +1337,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1326,13 +1390,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">61k</span>
+    <span title="站点总字数">64k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">56 分钟</span>
+    <span title="站点阅读时长">58 分钟</span>
 </div>
 
 
