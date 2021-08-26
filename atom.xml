@@ -6,7 +6,7 @@
   <link href="https://wangenze267.github.io/atom.xml" rel="self"/>
   
   <link href="https://wangenze267.github.io/"/>
-  <updated>2021-08-23T00:38:21.873Z</updated>
+  <updated>2021-08-26T05:51:48.006Z</updated>
   <id>https://wangenze267.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript中的设计模式-单例模式</title>
+    <link href="https://wangenze267.github.io/posts/3322122302.html/"/>
+    <id>https://wangenze267.github.io/posts/3322122302.html/</id>
+    <published>2021-08-26T05:51:53.468Z</published>
+    <updated>2021-08-26T05:51:48.006Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p><p>第一次更新：<strong>单例模式</strong></p><blockquote><p>打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。</p><p>计网操作系统数据结构算法还没学</p><p>vue还没盘</p><p>我还有机会吗</p></blockquote><h3 id="什么是设计模式？"><a href="#什么是设计模式？" class="headerlink" title="什么是设计模式？"></a>什么是设计模式？</h3><p>在软件设计过程中，针对特定问题的简洁而优雅的解决方案。</p><p>把之前的经验总结并且合理运用到某处场景上，能够解决实际的问题。</p><h3 id="设计模式五大设计原则（SOLID）"><a href="#设计模式五大设计原则（SOLID）" class="headerlink" title="设计模式五大设计原则（SOLID）"></a>设计模式五大设计原则（SOLID）</h3><ul><li><p>S-单一职责原则</p><blockquote><p>即一个程序只做好一件事</p></blockquote></li><li><p>O-开放封闭原则</p><blockquote><p>可扩展开放，对修改封闭</p></blockquote></li><li><p>L-里氏置换原则</p><blockquote><p>子类能覆盖父类，并能出现在父类出现的地方</p></blockquote></li><li><p>I-接口独立原则</p><blockquote><p>保持接口的单一独立</p></blockquote></li><li><p>D-依赖导致原则</p><blockquote><p>使用方法只关注接口而不关注具体类的实现</p></blockquote></li></ul><h3 id="为什么需要设计模式？"><a href="#为什么需要设计模式？" class="headerlink" title="为什么需要设计模式？"></a>为什么需要设计模式？</h3><ul><li><p>易读性</p><blockquote><p>使用设计模式能够提升我们的代码可读性，提升后续开发效率</p></blockquote></li><li><p>可拓展性</p><blockquote><p>使用设计模式对代码解耦，能很好的增强代码的yi修改性和拓展性</p></blockquote></li><li><p>复用性</p><blockquote><p>使用设计模式可以复用已有的解决方案，无需重复相同工作</p></blockquote></li><li><p>可靠性</p><blockquote><p>使用设计模式能够增加系统的健壮性，使代码编写真正工程化</p></blockquote></li></ul><h3 id="常见设计模式"><a href="#常见设计模式" class="headerlink" title="常见设计模式"></a>常见设计模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>定义：<strong>唯一&amp;全局访问。保证一个类仅有一个实例，并提供一个访问它的全局访问点。</strong></p><blockquote><p>另外一种多例模式，通过一个类构造出多个不一样的实例，这就是多例模式。</p><p>单例模式与多例模式最本质的区别：实例的数量。</p><p>单例模式永远只有一个实例，这个实例可以被缓存起来，可以复用。</p></blockquote><p>应用场景：就是能被缓存的内容，例如登录弹窗。</p><blockquote><p>我觉得就是一个地方如果在你的项目中可以用到两次或两次以上，都可以尝试一下这个，能够减少很多代码。</p></blockquote><p>来看这段伪代码：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> creatLoginLayer = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    div.innerHtml = <span class="string">&quot;登录浮窗&quot;</span>;</span><br><span class="line">    div.style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line">    <span class="keyword">return</span> div;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;loginBtn&quot;</span>).onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> loginLayer = creatLoginLayer();</span><br><span class="line">    loginLayer.style.display = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><code>creatLoginLayer</code>的作用是创建一个登录浮窗并将节点添加到body上，下面做的是登录按钮的一个点击事件，点击登录按钮就会创建登录浮窗并将<code>display</code>从<code>none</code>改为<code>block</code>，将他显示出来。</p><p>这个逻辑是没毛病的，但是我们想一下，每点击一下登录按钮就要执行这些代码，一个项目中如果有很多地方要呢？我们上面这短短几行而已，如果是上百上千甚至上万呢？是不是就非常损耗性能，这个时候，我们的单例模式就派上了用场。</p><p>使用单例模式后：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getSingle = <span class="function">(<span class="params">fn</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> result;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">...rest</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> result || (result = fn.apply(<span class="built_in">this</span>.rest));</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> creatLoginLayer = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    div.innerHtml = <span class="string">&quot;登录浮窗&quot;</span>;</span><br><span class="line">    div.style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line">    <span class="keyword">return</span> div;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createSingleLoginLayer = getSingle(createLoginLayer);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;loginBtn&quot;</span>).onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> loginLayer = createSingleLoginLayer();</span><br><span class="line">    loginLayer.style.display = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>可以见到，增加了一个<code>getSingle</code>函数，这里有个闭包的概念，result变量只要一直在引用就不会被销毁，起到了一个缓存的作用，函数的参数是一个<code>function</code>，如果result是null或者undefined就执行后面的逻辑，将这个传进来的函数的返回值也就是这个<code>div</code>赋给result，这样我们下面的函数就执行一次就可以了，下次调用的时候result有值，所以就直接返回了，不会在执行后面的逻辑。</p><h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;学学设计模式，每次更一个，实在太多了。&lt;/p&gt;
+&lt;p&gt;第一次更新：&lt;strong&gt;单例模式&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote</summary>
+      
+    
+    
+    
+    
+    <category term="JavaScript" scheme="https://wangenze267.github.io/tags/JavaScript/"/>
+    
+    <category term="设计模式" scheme="https://wangenze267.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>分享一次踩坑，一次自己封装的uni官方api</title>
@@ -458,28 +484,6 @@
     
     
     <category term="Vue" scheme="https://wangenze267.github.io/tags/Vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于Hexo使用Next主题的一些优化</title>
-    <link href="https://wangenze267.github.io/posts/1559886533.html/"/>
-    <id>https://wangenze267.github.io/posts/1559886533.html/</id>
-    <published>2021-06-09T09:04:16.381Z</published>
-    <updated>2021-08-08T14:05:54.970Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！</p><p>那就来看看如何优化你的博客，让他变得更富有细节吧 ~</p><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p><p>插件：<code>hexo-abbrlink</code></p><span id="more"></span><p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure><p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure><p>记得将原有的permalink注释掉或者删掉</p><p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure><p>到这，关于优化文章链接的操作我们就做完啦！</p><h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p><p>需要打开这个文件进行修改。</p><p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p><p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p><p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p><h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p><p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure><p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure><p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p><p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure><p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;肯定还会跟我一样，使用主题之后还不满意的小伙伴，不光想要好，还想要更好！&lt;/p&gt;
-&lt;p&gt;那就来看看如何优化你的博客，让他变得更富有细节吧 ~&lt;/p&gt;
-&lt;h4 id=&quot;优化文章链接&quot;&gt;&lt;a href=&quot;#优化文章链接&quot; class=&quot;headerlink&quot; title=&quot;优化文章链接&quot;&gt;&lt;/a&gt;优化文章链接&lt;/h4&gt;&lt;p&gt;优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况&lt;/p&gt;
-&lt;p&gt;插件：&lt;code&gt;hexo-abbrlink&lt;/code&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Hexo" scheme="https://wangenze267.github.io/tags/Hexo/"/>
     
   </entry>
   

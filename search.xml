@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaScript中的设计模式-单例模式</title>
+    <url>/posts/3322122302.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p>
+<p>第一次更新：<strong>单例模式</strong></p>
+<blockquote>
+<p>打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。</p>
+<p>计网操作系统数据结构算法还没学</p>
+<p>vue还没盘</p>
+<p>我还有机会吗</p>
+</blockquote>
+<h3 id="什么是设计模式？"><a href="#什么是设计模式？" class="headerlink" title="什么是设计模式？"></a>什么是设计模式？</h3><p>在软件设计过程中，针对特定问题的简洁而优雅的解决方案。</p>
+<p>把之前的经验总结并且合理运用到某处场景上，能够解决实际的问题。</p>
+<h3 id="设计模式五大设计原则（SOLID）"><a href="#设计模式五大设计原则（SOLID）" class="headerlink" title="设计模式五大设计原则（SOLID）"></a>设计模式五大设计原则（SOLID）</h3><ul>
+<li><p>S-单一职责原则</p>
+<blockquote>
+<p>即一个程序只做好一件事</p>
+</blockquote>
+</li>
+<li><p>O-开放封闭原则</p>
+<blockquote>
+<p>可扩展开放，对修改封闭</p>
+</blockquote>
+</li>
+<li><p>L-里氏置换原则</p>
+<blockquote>
+<p>子类能覆盖父类，并能出现在父类出现的地方</p>
+</blockquote>
+</li>
+<li><p>I-接口独立原则</p>
+<blockquote>
+<p>保持接口的单一独立</p>
+</blockquote>
+</li>
+<li><p>D-依赖导致原则</p>
+<blockquote>
+<p>使用方法只关注接口而不关注具体类的实现</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="为什么需要设计模式？"><a href="#为什么需要设计模式？" class="headerlink" title="为什么需要设计模式？"></a>为什么需要设计模式？</h3><ul>
+<li><p>易读性</p>
+<blockquote>
+<p>使用设计模式能够提升我们的代码可读性，提升后续开发效率</p>
+</blockquote>
+</li>
+<li><p>可拓展性</p>
+<blockquote>
+<p>使用设计模式对代码解耦，能很好的增强代码的yi修改性和拓展性</p>
+</blockquote>
+</li>
+<li><p>复用性</p>
+<blockquote>
+<p>使用设计模式可以复用已有的解决方案，无需重复相同工作</p>
+</blockquote>
+</li>
+<li><p>可靠性</p>
+<blockquote>
+<p>使用设计模式能够增加系统的健壮性，使代码编写真正工程化</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="常见设计模式"><a href="#常见设计模式" class="headerlink" title="常见设计模式"></a>常见设计模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>定义：<strong>唯一&amp;全局访问。保证一个类仅有一个实例，并提供一个访问它的全局访问点。</strong></p>
+<blockquote>
+<p>另外一种多例模式，通过一个类构造出多个不一样的实例，这就是多例模式。</p>
+<p>单例模式与多例模式最本质的区别：实例的数量。</p>
+<p>单例模式永远只有一个实例，这个实例可以被缓存起来，可以复用。</p>
+</blockquote>
+<p>应用场景：就是能被缓存的内容，例如登录弹窗。</p>
+<blockquote>
+<p>我觉得就是一个地方如果在你的项目中可以用到两次或两次以上，都可以尝试一下这个，能够减少很多代码。</p>
+</blockquote>
+<p>来看这段伪代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> creatLoginLayer = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    div.innerHtml = <span class="string">&quot;登录浮窗&quot;</span>;</span><br><span class="line">    div.style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line">    <span class="keyword">return</span> div;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;loginBtn&quot;</span>).onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> loginLayer = creatLoginLayer();</span><br><span class="line">    loginLayer.style.display = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>creatLoginLayer</code>的作用是创建一个登录浮窗并将节点添加到body上，下面做的是登录按钮的一个点击事件，点击登录按钮就会创建登录浮窗并将<code>display</code>从<code>none</code>改为<code>block</code>，将他显示出来。</p>
+<p>这个逻辑是没毛病的，但是我们想一下，每点击一下登录按钮就要执行这些代码，一个项目中如果有很多地方要呢？我们上面这短短几行而已，如果是上百上千甚至上万呢？是不是就非常损耗性能，这个时候，我们的单例模式就派上了用场。</p>
+<p>使用单例模式后：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getSingle = <span class="function">(<span class="params">fn</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> result;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">...rest</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> result || (result = fn.apply(<span class="built_in">this</span>.rest));</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> creatLoginLayer = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    div.innerHtml = <span class="string">&quot;登录浮窗&quot;</span>;</span><br><span class="line">    div.style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line">    <span class="keyword">return</span> div;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createSingleLoginLayer = getSingle(createLoginLayer);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;loginBtn&quot;</span>).onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> loginLayer = createSingleLoginLayer();</span><br><span class="line">    loginLayer.style.display = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以见到，增加了一个<code>getSingle</code>函数，这里有个闭包的概念，result变量只要一直在引用就不会被销毁，起到了一个缓存的作用，函数的参数是一个<code>function</code>，如果result是null或者undefined就执行后面的逻辑，将这个传进来的函数的返回值也就是这个<code>div</code>赋给result，这样我们下面的函数就执行一次就可以了，下次调用的时候result有值，所以就直接返回了，不会在执行后面的逻辑。</p>
+<h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4>]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS中，函数原来有这么多种定义方法（暑假开始！）</title>
     <url>/posts/1173819435.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在期末与暑假假期画饼之间不断奔波，很长时间没有记录了，今天在学习的时候看到了ES6的箭头函数，瞬间找到了写文的动力，那就来梳理一下在JavaScript中一共有几种定义函数的方式吧，最后再（微微）重点的介绍一下箭头函数✨</p>
@@ -108,74 +195,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Node.js之事件循环</title>
-    <url>/posts/3309484712.html/</url>
-    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
-<span id="more"></span>
-
-<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
-<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
-<p>就先到这，下次见~</p>
-]]></content>
-      <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js学习笔记之异步编程部分（一）</title>
-    <url>/posts/3168823204.html/</url>
-    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
-<li><p>回调函数格式规范</p>
-<ul>
-<li>error-first callback</li>
-<li>Node-style callback</li>
-</ul>
-</li>
-<li><p>第一个参数是error，后面的参数才是结果</p>
-</li>
-</ul>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p>
-<span id="more"></span>
-
-<p>结果：</p>
-<ul>
-<li>过</li>
-<li>不过</li>
-</ul>
-<p>ps：面试过了我们就笑一下，面试不过我们就哭！</p>
-<p>先上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">	interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(err)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">			callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是一个正常的面试流程：</p>
-<ul>
-<li>一面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;三面——&gt;入职</li>
-</ul>
-<p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p>
-<p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p>
-<p>简单描述一下张三的代码结构：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p>
-<ul>
-<li><p>npm包：<code>async.js</code></p>
-</li>
-<li><p>thunk编程方式</p>
-</li>
-</ul>
-<blockquote>
-<p>现在好像这两个方式都不用了😭</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Node.js异步编程之Promise</title>
     <url>/posts/697311807.html/</url>
     <content><![CDATA[<h2 id="Node-js异步编程之Promise"><a href="#Node-js异步编程之Promise" class="headerlink" title="Node.js异步编程之Promise"></a>Node.js异步编程之Promise</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>先来介绍一下Promise是什么？</p>
@@ -240,6 +259,74 @@
 <li>catch只能返回第一个面试挂的公司，如果都想知道就要存好所有的promise的状态并且打印出来哦。</li>
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>肝不动了，睡了睡了，总觉得上面那个例子，面试通过一家，第二家挂了他会给我返回到catch里面去呢，明天在研究一下。</p>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js学习笔记之异步编程部分（一）</title>
+    <url>/posts/3168823204.html/</url>
+    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
+<li><p>回调函数格式规范</p>
+<ul>
+<li>error-first callback</li>
+<li>Node-style callback</li>
+</ul>
+</li>
+<li><p>第一个参数是error，后面的参数才是结果</p>
+</li>
+</ul>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p>
+<span id="more"></span>
+
+<p>结果：</p>
+<ul>
+<li>过</li>
+<li>不过</li>
+</ul>
+<p>ps：面试过了我们就笑一下，面试不过我们就哭！</p>
+<p>先上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">	interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(err)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">			callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个正常的面试流程：</p>
+<ul>
+<li>一面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;三面——&gt;入职</li>
+</ul>
+<p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p>
+<p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p>
+<p>简单描述一下张三的代码结构：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p>
+<ul>
+<li><p>npm包：<code>async.js</code></p>
+</li>
+<li><p>thunk编程方式</p>
+</li>
+</ul>
+<blockquote>
+<p>现在好像这两个方式都不用了😭</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js之事件循环</title>
+    <url>/posts/3309484712.html/</url>
+    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
+<span id="more"></span>
+
+<p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
+<h3 id="用代码实现一个简易版的事件循环"><a href="#用代码实现一个简易版的事件循环" class="headerlink" title="用代码实现一个简易版的事件循环"></a>用代码实现一个简易版的事件循环</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eventloop = &#123;</span><br><span class="line">    <span class="comment">// 事件队列</span></span><br><span class="line">    <span class="attr">queue</span>: [],</span><br><span class="line">    <span class="function"><span class="title">loop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">this</span>.queue.length)&#123;</span><br><span class="line">            <span class="comment">// 如果有事件就进行处理</span></span><br><span class="line">            <span class="keyword">var</span> callback = <span class="built_in">this</span>.queue.shift();</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 每50毫秒会检测一下事件</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="built_in">this</span>.loop.bind(<span class="built_in">this</span>),<span class="number">50</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加事件</span></span><br><span class="line">    <span class="function"><span class="title">add</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.queue.push(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">eventloop.loop();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别在 500毫秒跟800毫秒，往队列中加入两个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第一个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    eventloop.add(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;第二个&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,<span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
+<p>就先到这，下次见~</p>
 ]]></content>
       <tags>
         <tag>Node.js</tag>
@@ -804,6 +891,82 @@
       </tags>
   </entry>
   <entry>
+    <title>关于浏览器的渲染进程</title>
+    <url>/posts/3321770798.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。</p>
+<blockquote>
+<p>纯记录</p>
+</blockquote>
+<h3 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h3><p>渲染进程的<strong>核心工作是将HTML,CSS和JavaScript转换为用户可以与之交互的网页。</strong>主要包括以下线程：</p>
+<span id="more"></span>
+
+<h4 id="浏览器-GUI-渲染线程"><a href="#浏览器-GUI-渲染线程" class="headerlink" title="浏览器 GUI 渲染线程"></a>浏览器 GUI 渲染线程</h4><h5 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h5><p><img src="/posts/3321770798.html/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C.png" alt="image-20210615171514782"></p>
+<ul>
+<li>分层的目的：避免整个页面渲染，把页面分成多个图层，尤其是动画的时候，把动画独立出一个图层，渲染时只渲染该图层就ok，transform，z-index等，浏览器会自动优化生成图层</li>
+<li>光栅化：页面如果很长但是可视区很小，避免渲染非可视区的样式造成资源浪费，x以将每个图层又划分成多个小个子，当前只渲染可视区附近区域</li>
+</ul>
+<h5 id="重排"><a href="#重排" class="headerlink" title="重排"></a>重排</h5><ul>
+<li><p>重排 ：当DOM的变化影响了元素的几何信息(元素的的位置和尺寸大小)，浏览器需要重新计算元素的几何属性，将其安放在界面中的正确位置，这个过程叫做重排</p>
+</li>
+<li><p>重排特点：style后面所有流程都更新</p>
+</li>
+</ul>
+<p><img src="/posts/3321770798.html/image-20210615172629674.png" alt="image-20210615172629674"></p>
+<ul>
+<li><p>触发重排的方法</p>
+<ul>
+<li><p>页面初始渲染，这是开销最大的一次重排</p>
+</li>
+<li><p>添加/删除可见的DOM元素</p>
+</li>
+<li><p>改变元素位置</p>
+</li>
+<li><p>改变元素尺寸，比如边距、填充、边框、宽度和高度等</p>
+</li>
+<li><p>改变元素内容，比如文字数量，图片大小等</p>
+</li>
+<li><p>改变元素字体大小</p>
+</li>
+<li><p>改变浏览器窗口尺寸，比如resize事件发生时</p>
+</li>
+<li><p>激活CSS伪类（例如：<code>:hover</code>）</p>
+</li>
+<li><p>设置 style 属性的值，因为通过设置style属性改变结点样式的话，每一次设置都会触发一次reflow</p>
+<p>查询某些属性或调用某些计算方法：offsetWidth、offsetHeight等</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h5><ul>
+<li><p>重绘：当一个元素的外观发生改变，但没有改变布局,重新把元素外观绘制出来的过程</p>
+</li>
+<li><p>重绘特点：跳过布局和分层阶段</p>
+</li>
+</ul>
+<p><img src="/posts/3321770798.html/image-20210615172906367.png" alt="image-20210615172906367"></p>
+<ul>
+<li>重排必重绘</li>
+</ul>
+<h5 id="避免重排的方法"><a href="#避免重排的方法" class="headerlink" title="避免重排的方法"></a>避免重排的方法</h5><ul>
+<li><p>样式集中改变</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> left = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> top = <span class="number">10</span>;</span><br><span class="line">el.style.left = left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">el.style.top = top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当top和left的值是动态计算而成时...</span></span><br><span class="line"><span class="comment">// better </span></span><br><span class="line">el.style.cssText += <span class="string">&quot;; left: &quot;</span> + left + <span class="string">&quot;px; top: &quot;</span> + top + <span class="string">&quot;px;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// better</span></span><br><span class="line">el.className += <span class="string">&quot; className&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 absolute 或 fixed 脱离文档流</p>
+<p>使用绝对定位会使的该元素单独成为渲染树中 <code>body</code> 的一个子元素，重排开销比较小，不会对其它节点造成太多影响。当你在这些节点上放置这个元素时，一些其它在这个区域内的节点可能需要重绘，但是不需要重排</p>
+</li>
+<li><p>GPU加速:transform</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 根据上面的结论</span></span><br><span class="line"><span class="comment">* 将 2d transform 换成 3d</span></span><br><span class="line"><span class="comment">* 就可以强制开启 GPU 加速</span></span><br><span class="line"><span class="comment">* 提高动画性能</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(<span class="number">10px</span>, <span class="number">10px</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="JavaScript-引擎线程"><a href="#JavaScript-引擎线程" class="headerlink" title="JavaScript 引擎线程"></a>JavaScript 引擎线程</h4><p>JS引擎线程负责解析Javascript脚本，运行代码 JS引擎一直等待着任务队列中任务的到来，然后加以处理，一个Tab页（renderer进程）中无论什么时候都只有一个JS线程在运行JS程序</p>
+<p>GUI渲染线程与JS引擎线程是互斥的，所以如果JS执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞</p>
+<h4 id="浏览器定时触发器线程"><a href="#浏览器定时触发器线程" class="headerlink" title="浏览器定时触发器线程"></a>浏览器定时触发器线程</h4><p>浏览器定时计数器并不是由 JavaScript 引擎计数的, 因为 JavaScript 引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确, 因此通过单独线程来计时并触发定时是更为合理的方案</p>
+<h4 id="浏览器事件触发线程"><a href="#浏览器事件触发线程" class="headerlink" title="浏览器事件触发线程"></a>浏览器事件触发线程</h4><p>当一个事件被触发时该线程会把事件添加到待处理队列的队尾，等待 JavaScript 引擎的处理。这些事件可以是当前执行的代码块如定时任务、也可来自浏览器内核的其他线程如鼠标点击、AJAX 异步请求等，但由于 JavaScript 的单线程关系所有这些事件都得排队等待 JavaScript 引擎处理。</p>
+<h4 id="浏览器-http-异步请求线程"><a href="#浏览器-http-异步请求线程" class="headerlink" title="浏览器 http 异步请求线程"></a>浏览器 http 异步请求线程</h4><p>在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求， 将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件放到 JavaScript 引擎的处理队列中等待处理。</p>
+]]></content>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于闭包的一些理解</title>
     <url>/posts/400024894.html/</url>
     <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
@@ -868,33 +1031,6 @@
       <tags>
         <tag>JavaScript</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
-    <url>/posts/2373844462.html/</url>
-    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
-
-<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
-<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
-<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;">
-
-<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
-<ul>
-<li>轮播图，我这边建议打死</li>
-<li>我的简历：参考咱们自己写的简历</li>
-<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
-<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
-</ul>
-<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;">
-
-<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
-<ul>
-<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
-<li>利用校招跟社招做一下数据筛选</li>
-<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
-</ul>
-<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
-]]></content>
   </entry>
   <entry>
     <title>分享一次踩坑，一次自己封装的uni官方api</title>
@@ -1001,80 +1137,31 @@
       </tags>
   </entry>
   <entry>
-    <title>关于浏览器的渲染进程</title>
-    <url>/posts/3321770798.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。</p>
-<blockquote>
-<p>纯记录</p>
-</blockquote>
-<h3 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h3><p>渲染进程的<strong>核心工作是将HTML,CSS和JavaScript转换为用户可以与之交互的网页。</strong>主要包括以下线程：</p>
-<span id="more"></span>
+    <title>咳咳咳，写给SZ的第一封。。。。项目草稿？？？</title>
+    <url>/posts/2373844462.html/</url>
+    <content><![CDATA[<h2 id="关于在线简历App，随时进行更新"><a href="#关于在线简历App，随时进行更新" class="headerlink" title="关于在线简历App，随时进行更新"></a>关于在线简历App，随时进行更新</h2><span id="more"></span>
 
-<h4 id="浏览器-GUI-渲染线程"><a href="#浏览器-GUI-渲染线程" class="headerlink" title="浏览器 GUI 渲染线程"></a>浏览器 GUI 渲染线程</h4><h5 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h5><p><img src="/posts/3321770798.html/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%B7%A5%E4%BD%9C.png" alt="image-20210615171514782"></p>
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p><img src="https://wangez.site/img/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86/%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE.png"></p>
+<p>四大模块对应着App四个底部tab，在其次是里面的大致功能板块。</p>
+<h3 id="首先是简历"><a href="#首先是简历" class="headerlink" title="首先是简历"></a>首先是简历</h3><img src="https://wangez.site/img/在线简历/简历01.jpg" style="zoom: 30%;">
+
+<p>从上到下依次为：轮播图，我的简历（可新建，最好可以输出为pdf），大厂内推，求职推荐  共四个板块，其中求职推荐的数据结构等同于求职页面。</p>
 <ul>
-<li>分层的目的：避免整个页面渲染，把页面分成多个图层，尤其是动画的时候，把动画独立出一个图层，渲染时只渲染该图层就ok，transform，z-index等，浏览器会自动优化生成图层</li>
-<li>光栅化：页面如果很长但是可视区很小，避免渲染非可视区的样式造成资源浪费，x以将每个图层又划分成多个小个子，当前只渲染可视区附近区域</li>
+<li>轮播图，我这边建议打死</li>
+<li>我的简历：参考咱们自己写的简历</li>
+<li>大厂内推，我想做成点击可以看到该厂招聘的各个职位，（该厂的求职页面  对对对 这个感觉 ，再次点开卡片可以进行投递）</li>
+<li>求职推荐，少了一层，点开直接可以进行投递，数据同第二个tab，求职页面</li>
 </ul>
-<h5 id="重排"><a href="#重排" class="headerlink" title="重排"></a>重排</h5><ul>
-<li><p>重排 ：当DOM的变化影响了元素的几何信息(元素的的位置和尺寸大小)，浏览器需要重新计算元素的几何属性，将其安放在界面中的正确位置，这个过程叫做重排</p>
-</li>
-<li><p>重排特点：style后面所有流程都更新</p>
-</li>
-</ul>
-<p><img src="/posts/3321770798.html/image-20210615172629674.png" alt="image-20210615172629674"></p>
+<h3 id="完后是求职"><a href="#完后是求职" class="headerlink" title="完后是求职"></a>完后是求职</h3><img src="https://wangez.site/img/在线简历/求职.jpg" style="zoom: 30%;">
+
+<p>最上方可以添加求职意向，之后根据求职意向进行职位推荐（当前页面数据仅供参考，所以会多样化），分为校招和社招两个类别，（在卡片信息上有了小标签，进行简略信息显示）</p>
 <ul>
-<li><p>触发重排的方法</p>
-<ul>
-<li><p>页面初始渲染，这是开销最大的一次重排</p>
-</li>
-<li><p>添加/删除可见的DOM元素</p>
-</li>
-<li><p>改变元素位置</p>
-</li>
-<li><p>改变元素尺寸，比如边距、填充、边框、宽度和高度等</p>
-</li>
-<li><p>改变元素内容，比如文字数量，图片大小等</p>
-</li>
-<li><p>改变元素字体大小</p>
-</li>
-<li><p>改变浏览器窗口尺寸，比如resize事件发生时</p>
-</li>
-<li><p>激活CSS伪类（例如：<code>:hover</code>）</p>
-</li>
-<li><p>设置 style 属性的值，因为通过设置style属性改变结点样式的话，每一次设置都会触发一次reflow</p>
-<p>查询某些属性或调用某些计算方法：offsetWidth、offsetHeight等</p>
-</li>
+<li>求职意向， 城市，学历，校招/社招，，这些是不是能当成筛选条件（只是想法）</li>
+<li>利用校招跟社招做一下数据筛选</li>
+<li>点击卡片进入详情页面，点击投递按钮进行投递（参考BOSS）</li>
 </ul>
-</li>
-</ul>
-<h5 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h5><ul>
-<li><p>重绘：当一个元素的外观发生改变，但没有改变布局,重新把元素外观绘制出来的过程</p>
-</li>
-<li><p>重绘特点：跳过布局和分层阶段</p>
-</li>
-</ul>
-<p><img src="/posts/3321770798.html/image-20210615172906367.png" alt="image-20210615172906367"></p>
-<ul>
-<li>重排必重绘</li>
-</ul>
-<h5 id="避免重排的方法"><a href="#避免重排的方法" class="headerlink" title="避免重排的方法"></a>避免重排的方法</h5><ul>
-<li><p>样式集中改变</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> left = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> top = <span class="number">10</span>;</span><br><span class="line">el.style.left = left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">el.style.top = top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当top和left的值是动态计算而成时...</span></span><br><span class="line"><span class="comment">// better </span></span><br><span class="line">el.style.cssText += <span class="string">&quot;; left: &quot;</span> + left + <span class="string">&quot;px; top: &quot;</span> + top + <span class="string">&quot;px;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// better</span></span><br><span class="line">el.className += <span class="string">&quot; className&quot;</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>使用 absolute 或 fixed 脱离文档流</p>
-<p>使用绝对定位会使的该元素单独成为渲染树中 <code>body</code> 的一个子元素，重排开销比较小，不会对其它节点造成太多影响。当你在这些节点上放置这个元素时，一些其它在这个区域内的节点可能需要重绘，但是不需要重排</p>
-</li>
-<li><p>GPU加速:transform</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 根据上面的结论</span></span><br><span class="line"><span class="comment">* 将 2d transform 换成 3d</span></span><br><span class="line"><span class="comment">* 就可以强制开启 GPU 加速</span></span><br><span class="line"><span class="comment">* 提高动画性能</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(<span class="number">10px</span>, <span class="number">10px</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="JavaScript-引擎线程"><a href="#JavaScript-引擎线程" class="headerlink" title="JavaScript 引擎线程"></a>JavaScript 引擎线程</h4><p>JS引擎线程负责解析Javascript脚本，运行代码 JS引擎一直等待着任务队列中任务的到来，然后加以处理，一个Tab页（renderer进程）中无论什么时候都只有一个JS线程在运行JS程序</p>
-<p>GUI渲染线程与JS引擎线程是互斥的，所以如果JS执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞</p>
-<h4 id="浏览器定时触发器线程"><a href="#浏览器定时触发器线程" class="headerlink" title="浏览器定时触发器线程"></a>浏览器定时触发器线程</h4><p>浏览器定时计数器并不是由 JavaScript 引擎计数的, 因为 JavaScript 引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确, 因此通过单独线程来计时并触发定时是更为合理的方案</p>
-<h4 id="浏览器事件触发线程"><a href="#浏览器事件触发线程" class="headerlink" title="浏览器事件触发线程"></a>浏览器事件触发线程</h4><p>当一个事件被触发时该线程会把事件添加到待处理队列的队尾，等待 JavaScript 引擎的处理。这些事件可以是当前执行的代码块如定时任务、也可来自浏览器内核的其他线程如鼠标点击、AJAX 异步请求等，但由于 JavaScript 的单线程关系所有这些事件都得排队等待 JavaScript 引擎处理。</p>
-<h4 id="浏览器-http-异步请求线程"><a href="#浏览器-http-异步请求线程" class="headerlink" title="浏览器 http 异步请求线程"></a>浏览器 http 异步请求线程</h4><p>在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求， 将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件放到 JavaScript 引擎的处理队列中等待处理。</p>
+<h3 id="社区页面（明日更）"><a href="#社区页面（明日更）" class="headerlink" title="社区页面（明日更）"></a>社区页面（明日更）</h3><h3 id="我的页面（明日更）"><a href="#我的页面（明日更）" class="headerlink" title="我的页面（明日更）"></a>我的页面（明日更）</h3><h3 id="具体的信息详情页面"><a href="#具体的信息详情页面" class="headerlink" title="具体的信息详情页面"></a>具体的信息详情页面</h3><p>我觉得这个可以参考，超级简历 牛客 BOSS 都可以。字段按照大体通用的来就行。</p>
 ]]></content>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
   </entry>
   <entry>
     <title>前端也要学习基本的UI设计原则与实践套路</title>
@@ -1250,6 +1337,154 @@
       </tags>
   </entry>
   <entry>
+    <title>如何写好JavaScript（下）</title>
+    <url>/posts/3177970664.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
+<p>有听懂的，有没懂的，先记下来，留着梳理。</p>
+<h3 id="看一段代码"><a href="#看一段代码" class="headerlink" title="看一段代码"></a>看一段代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断一个mat2d矩阵是否是单位矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUnitMatrix2d</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">0</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">1</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">2</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">3</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">4</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">5</span>] === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码好不好？ 为什么？</p>
+<span id="more"></span>
+
+<blockquote>
+<p>这个代码从优雅程度上来说确实是有些过于长了，看起来不是十分的美观，我们可以使用类似于for循环的方式将其变得美观起来。</p>
+<p>但是如果他是写在代码底层（spritejs）的话，这么写的性能是最好的，因为他直接拿到索引就可以来比较，是循环所比拟不了的。</p>
+</blockquote>
+<p><strong>月影大佬：我们所有的代码风格，都是根据场合来的，如果是一些框架或者开源的库中，看见了不是很优雅的代码，我们应该结合场景去分析，因为有的时候这么写是有理由的。</strong></p>
+<p>写代码最应关注什么？</p>
+<ul>
+<li><p>风格：</p>
+<blockquote>
+<p>很重要，尤其是多人协作。关键在于风格要统一，否则会增加代码维护的成本。</p>
+</blockquote>
+</li>
+<li><p>效率：</p>
+<blockquote>
+<p>要在心中明白，什么样子的代码效率是最高的，尽量结合场景选择最合适的代码（效率or可读性）。</p>
+</blockquote>
+</li>
+<li><p>约定</p>
+</li>
+<li><p>使用场景</p>
+</li>
+<li><p>设计</p>
+</li>
+</ul>
+<h3 id="当年的left-pad事件"><a href="#当年的left-pad事件" class="headerlink" title="当年的left-pad事件"></a><strong>当年的left-pad事件</strong></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="built_in">String</span>(str);</span><br><span class="line">    <span class="keyword">var</span> i = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!ch &amp;&amp; ch !== <span class="number">0</span>) ch=<span class="string">&quot; &quot;</span>;</span><br><span class="line">    len = len - str.length;</span><br><span class="line">    <span class="keyword">while</span>(++i&lt;len)&#123;</span><br><span class="line">        str = ch + str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件本身的槽点"><a href="#事件本身的槽点" class="headerlink" title="事件本身的槽点"></a><strong>事件本身的槽点</strong></h4><ul>
+<li><p>NPM模块粒度</p>
+<blockquote>
+<p>说npm模块粒度太细了，单个函数的模块。</p>
+<p>当年模块化跟打包工具不是很成熟</p>
+</blockquote>
+</li>
+<li><p>代码风格</p>
+<blockquote>
+<p>可读性还好</p>
+</blockquote>
+</li>
+<li><p>代码质量/效率</p>
+<blockquote>
+<p>这个效率还可以，因为正常场景中不会拼接太长的字符串</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="提高效率与代码简洁性"><a href="#提高效率与代码简洁性" class="headerlink" title="提高效率与代码简洁性"></a><strong>提高效率与代码简洁性</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="string">&quot;&quot;</span> + str;</span><br><span class="line">    <span class="keyword">const</span> padLen = len - str.length;</span><br><span class="line">    <span class="keyword">if</span>(padLen &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&quot;&quot;</span>+ch).repeat(padLen) + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="交通灯：状态切换"><a href="#交通灯：状态切换" class="headerlink" title="交通灯：状态切换"></a><strong>交通灯：状态切换</strong></h3><p>实现一个切换<strong>多个</strong>交通灯<strong>状态切换</strong>的功能</p>
+<h4 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h4><blockquote>
+<p>不知道为什么听这个课，我现在觉得版本一就等于很垃圾</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    traffic.className = <span class="string">&#x27;s1&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        traffic.className = <span class="string">&#x27;s2&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            traffic.className = <span class="string">&#x27;s3&#x27;</span>;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                traffic.className = <span class="string">&#x27;s4&#x27;</span>;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    traffic.className = <span class="string">&#x27;s5&#x27;</span>;</span><br><span class="line">                    <span class="built_in">setTimeout</span>(reset,<span class="number">1000</span>)</span><br><span class="line">                &#125;,<span class="number">1000</span>)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>setTimeout本身是异步，将代码这样嵌套，会造成回调地狱的问题，而且代码很丑，可读性差，不方便维护。</p>
+<p>看来跟我上边说的一样，版本一，都是垃圾，哈哈哈哈</p>
+</blockquote>
+<h4 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> stateList = [</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;wait&#x27;</span>, <span class="attr">last</span>: <span class="number">1000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;stop&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;pass&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">traffic,stateList</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">applyState</span>(<span class="params">steteIdx</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state,last&#125; = stateList[stateIdx];</span><br><span class="line">        traffic.className = state;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            applyState((stateIdx + <span class="number">1</span>) % stateList.length);</span><br><span class="line">        &#125;,last)</span><br><span class="line">    &#125;</span><br><span class="line">    applyState(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">start(traffic,stateList);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>采用的函数封装的方法</p>
+</blockquote>
+<h4 id="版本三"><a href="#版本三" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">...fnList</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stateIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fn = fnList[stateIndex++ % fnList.length];</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> trafficStatePoll = poll(setState.bind(<span class="literal">null</span>,<span class="string">&#x27;wait&#x27;</span>),</span><br><span class="line">setState.bind(<span class="literal">null</span>,<span class="string">&#x27;stop&#x27;</span>),setState.bind(<span class="literal">null</span>,<span class="string">&#x27;pass&#x27;</span>));</span><br><span class="line"><span class="built_in">setInterval</span>(trafficStatePoll,<span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>抽象出一个轮巡的方法，采用高阶函数</p>
+</blockquote>
+<h4 id="版本四"><a href="#版本四" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve,time));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        setState(<span class="string">&#x27;wait&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">1000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;stop&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>知道了异步，就肯定好做了呀，用async和await，命令式的写法。</p>
+<p>可以继续保持异步采用声明式的封装继续去做出版本567.</p>
+</blockquote>
+<h3 id="判断是否是4的幂"><a href="#判断是否是4的幂" class="headerlink" title="判断是否是4的幂"></a><strong>判断是否是4的幂</strong></h3><h4 id="版本一-1"><a href="#版本一-1" class="headerlink" title="版本一"></a>版本一</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">4</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        num /= <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>很中规中矩的写法，每次对4取余，结果还是要能被4整除。</p>
+</blockquote>
+<h4 id="版本二-1"><a href="#版本二-1" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="keyword">if</span>(num&amp; <span class="number">0b11</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       num &gt;&gt;&gt;=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将对4取余数变成了判断二进制数的后两位，后两位是00就肯定是4的倍数，除以四变成右移两位。</p>
+</blockquote>
+<h4 id="版本三-1"><a href="#版本三-1" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">return</span> num &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp;(num - <span class="number">1</span>)) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp; <span class="number">0xAAAAAAAA</span>) === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>刚刚是 log的复杂度算法，这个是常数复杂度的算法</p>
+<p>如果一个数是4的幂的话，转化二进制肯定只有首位是1的，并且后面跟着偶数个0，所以在这种情况下，判断只有一个1，并且还有偶数个0即可。</p>
+</blockquote>
+<h4 id="版本四-1"><a href="#版本四-1" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num).toString(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1(?:00)*$/</span>.test(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>理论与上一个同理，但是我真的震惊了，原来一个思路可以有这么多种解决方法。</p>
+<p>但是相对来说，正则的开销会比数值的要大，但是在这个情景中还是可以接受的。</p>
+</blockquote>
+<h3 id="洗牌"><a href="#洗牌" class="headerlink" title="洗牌"></a><strong>洗牌</strong></h3><p>简单实现</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(shuffle(cards));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果这是个抽奖程序的话，是会被打的。</p>
+<p>因为不公平。和原来的位置相关。</p>
+</blockquote>
+<p>我们来验证一下</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>我们来调用上面的洗牌算法一万次，完后将每个位置上出现牌的点数都相加，如果他公平，我们相加的结果应该都差不多，对吧。</p>
+<blockquote>
+<p>[<br> 38511, 38548, 45148,<br> 46416, 46551, 44174,<br> 43456, 46877, 48894,<br> 51425<br>]</p>
+</blockquote>
+<p>这确是我打印出来的数据，连续跑了好几组都是某某要大，你将一万次改的越大，最后位置的数字就会越大，也就是说，小数字会出现在靠前的位置，大数字会出现在靠后的位置。</p>
+<p>如果还不确认的小伙伴可以去做一下概率统计。</p>
+<blockquote>
+<p>这是因为sort会两两交换，每个位置上交换的次数是不同的，所以最后的数字在交换到前面的概率是比较小的，当次数被无限放大的时候，这个差距就是越来越大。所以导致刚刚的洗牌算法是不公平的。</p>
+</blockquote>
+<p>如果想要公平的话，有一种算法是这样的，每次随机抽取一张牌把它放到最后的位置去。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> c =[...cards];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = c.length; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">const</span> pIdx = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * i);</span><br><span class="line">        [c[pIdx],c[i-<span class="number">1</span>]] = [c[i-<span class="number">1</span>], c[pIdx]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>[<br> 45466, 44956, 44753,<br> 45253, 45179, 44765,<br> 45147, 44469, 45404,<br> 44608<br>]</p>
+</blockquote>
+<p>可以看出这个打印出来的结果，大小都是差不大多的。</p>
+<h4 id="分红包"><a href="#分红包" class="headerlink" title="分红包"></a><strong>分红包</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generate</span>(<span class="params">amount, count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ret = [amount];</span><br><span class="line">    <span class="keyword">while</span>(count &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">// 挑选出最大的一块进行切分</span></span><br><span class="line">        <span class="keyword">let</span> cake = <span class="built_in">Math</span>.max(...ret),</span><br><span class="line">            idx = ret.indexOf(cake),</span><br><span class="line">            part = <span class="number">1</span> + <span class="built_in">Math</span>.floor((cake/<span class="number">2</span>) * <span class="built_in">Math</span>.random()),</span><br><span class="line">            rest = cake - part;</span><br><span class="line">        ret.splice(idx,<span class="number">1</span>,part,rest);</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不停的切分最大的金额。</p>
+<blockquote>
+<p>这个会带来一个问题，就是金额很平均。</p>
+<p>不会有人拿了很大的红包，少了一丝趣味性。</p>
+<p>不够刺激~</p>
+</blockquote>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
+<p>是我菜了，继续加油！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>字节青训营</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何写好JavaScript（上）</title>
     <url>/posts/98016397.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>课程记录笔记第三弹——《跟月影学JavaScript》</p>
@@ -1411,154 +1646,6 @@
 <li>命令式/声明式</li>
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这次笔记记录的很匆忙，再加上理解的也不是很懂，所以导致后面的高阶函数部分基本没有自己的梳理，后面梳理过后会过来补上更新的。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>字节青训营</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何写好JavaScript（下）</title>
-    <url>/posts/3177970664.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
-<p>有听懂的，有没懂的，先记下来，留着梳理。</p>
-<h3 id="看一段代码"><a href="#看一段代码" class="headerlink" title="看一段代码"></a>看一段代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断一个mat2d矩阵是否是单位矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUnitMatrix2d</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">0</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">1</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">2</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">3</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">4</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">5</span>] === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段代码好不好？ 为什么？</p>
-<span id="more"></span>
-
-<blockquote>
-<p>这个代码从优雅程度上来说确实是有些过于长了，看起来不是十分的美观，我们可以使用类似于for循环的方式将其变得美观起来。</p>
-<p>但是如果他是写在代码底层（spritejs）的话，这么写的性能是最好的，因为他直接拿到索引就可以来比较，是循环所比拟不了的。</p>
-</blockquote>
-<p><strong>月影大佬：我们所有的代码风格，都是根据场合来的，如果是一些框架或者开源的库中，看见了不是很优雅的代码，我们应该结合场景去分析，因为有的时候这么写是有理由的。</strong></p>
-<p>写代码最应关注什么？</p>
-<ul>
-<li><p>风格：</p>
-<blockquote>
-<p>很重要，尤其是多人协作。关键在于风格要统一，否则会增加代码维护的成本。</p>
-</blockquote>
-</li>
-<li><p>效率：</p>
-<blockquote>
-<p>要在心中明白，什么样子的代码效率是最高的，尽量结合场景选择最合适的代码（效率or可读性）。</p>
-</blockquote>
-</li>
-<li><p>约定</p>
-</li>
-<li><p>使用场景</p>
-</li>
-<li><p>设计</p>
-</li>
-</ul>
-<h3 id="当年的left-pad事件"><a href="#当年的left-pad事件" class="headerlink" title="当年的left-pad事件"></a><strong>当年的left-pad事件</strong></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="built_in">String</span>(str);</span><br><span class="line">    <span class="keyword">var</span> i = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!ch &amp;&amp; ch !== <span class="number">0</span>) ch=<span class="string">&quot; &quot;</span>;</span><br><span class="line">    len = len - str.length;</span><br><span class="line">    <span class="keyword">while</span>(++i&lt;len)&#123;</span><br><span class="line">        str = ch + str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="事件本身的槽点"><a href="#事件本身的槽点" class="headerlink" title="事件本身的槽点"></a><strong>事件本身的槽点</strong></h4><ul>
-<li><p>NPM模块粒度</p>
-<blockquote>
-<p>说npm模块粒度太细了，单个函数的模块。</p>
-<p>当年模块化跟打包工具不是很成熟</p>
-</blockquote>
-</li>
-<li><p>代码风格</p>
-<blockquote>
-<p>可读性还好</p>
-</blockquote>
-</li>
-<li><p>代码质量/效率</p>
-<blockquote>
-<p>这个效率还可以，因为正常场景中不会拼接太长的字符串</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="提高效率与代码简洁性"><a href="#提高效率与代码简洁性" class="headerlink" title="提高效率与代码简洁性"></a><strong>提高效率与代码简洁性</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="string">&quot;&quot;</span> + str;</span><br><span class="line">    <span class="keyword">const</span> padLen = len - str.length;</span><br><span class="line">    <span class="keyword">if</span>(padLen &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&quot;&quot;</span>+ch).repeat(padLen) + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="交通灯：状态切换"><a href="#交通灯：状态切换" class="headerlink" title="交通灯：状态切换"></a><strong>交通灯：状态切换</strong></h3><p>实现一个切换<strong>多个</strong>交通灯<strong>状态切换</strong>的功能</p>
-<h4 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h4><blockquote>
-<p>不知道为什么听这个课，我现在觉得版本一就等于很垃圾</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    traffic.className = <span class="string">&#x27;s1&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        traffic.className = <span class="string">&#x27;s2&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            traffic.className = <span class="string">&#x27;s3&#x27;</span>;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                traffic.className = <span class="string">&#x27;s4&#x27;</span>;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    traffic.className = <span class="string">&#x27;s5&#x27;</span>;</span><br><span class="line">                    <span class="built_in">setTimeout</span>(reset,<span class="number">1000</span>)</span><br><span class="line">                &#125;,<span class="number">1000</span>)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>setTimeout本身是异步，将代码这样嵌套，会造成回调地狱的问题，而且代码很丑，可读性差，不方便维护。</p>
-<p>看来跟我上边说的一样，版本一，都是垃圾，哈哈哈哈</p>
-</blockquote>
-<h4 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> stateList = [</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;wait&#x27;</span>, <span class="attr">last</span>: <span class="number">1000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;stop&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;pass&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">traffic,stateList</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">applyState</span>(<span class="params">steteIdx</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state,last&#125; = stateList[stateIdx];</span><br><span class="line">        traffic.className = state;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            applyState((stateIdx + <span class="number">1</span>) % stateList.length);</span><br><span class="line">        &#125;,last)</span><br><span class="line">    &#125;</span><br><span class="line">    applyState(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">start(traffic,stateList);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>采用的函数封装的方法</p>
-</blockquote>
-<h4 id="版本三"><a href="#版本三" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">...fnList</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stateIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fn = fnList[stateIndex++ % fnList.length];</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> trafficStatePoll = poll(setState.bind(<span class="literal">null</span>,<span class="string">&#x27;wait&#x27;</span>),</span><br><span class="line">setState.bind(<span class="literal">null</span>,<span class="string">&#x27;stop&#x27;</span>),setState.bind(<span class="literal">null</span>,<span class="string">&#x27;pass&#x27;</span>));</span><br><span class="line"><span class="built_in">setInterval</span>(trafficStatePoll,<span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>抽象出一个轮巡的方法，采用高阶函数</p>
-</blockquote>
-<h4 id="版本四"><a href="#版本四" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve,time));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        setState(<span class="string">&#x27;wait&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">1000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;stop&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>知道了异步，就肯定好做了呀，用async和await，命令式的写法。</p>
-<p>可以继续保持异步采用声明式的封装继续去做出版本567.</p>
-</blockquote>
-<h3 id="判断是否是4的幂"><a href="#判断是否是4的幂" class="headerlink" title="判断是否是4的幂"></a><strong>判断是否是4的幂</strong></h3><h4 id="版本一-1"><a href="#版本一-1" class="headerlink" title="版本一"></a>版本一</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">4</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        num /= <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>很中规中矩的写法，每次对4取余，结果还是要能被4整除。</p>
-</blockquote>
-<h4 id="版本二-1"><a href="#版本二-1" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="keyword">if</span>(num&amp; <span class="number">0b11</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       num &gt;&gt;&gt;=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将对4取余数变成了判断二进制数的后两位，后两位是00就肯定是4的倍数，除以四变成右移两位。</p>
-</blockquote>
-<h4 id="版本三-1"><a href="#版本三-1" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">return</span> num &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp;(num - <span class="number">1</span>)) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp; <span class="number">0xAAAAAAAA</span>) === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>刚刚是 log的复杂度算法，这个是常数复杂度的算法</p>
-<p>如果一个数是4的幂的话，转化二进制肯定只有首位是1的，并且后面跟着偶数个0，所以在这种情况下，判断只有一个1，并且还有偶数个0即可。</p>
-</blockquote>
-<h4 id="版本四-1"><a href="#版本四-1" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num).toString(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1(?:00)*$/</span>.test(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>理论与上一个同理，但是我真的震惊了，原来一个思路可以有这么多种解决方法。</p>
-<p>但是相对来说，正则的开销会比数值的要大，但是在这个情景中还是可以接受的。</p>
-</blockquote>
-<h3 id="洗牌"><a href="#洗牌" class="headerlink" title="洗牌"></a><strong>洗牌</strong></h3><p>简单实现</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(shuffle(cards));</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果这是个抽奖程序的话，是会被打的。</p>
-<p>因为不公平。和原来的位置相关。</p>
-</blockquote>
-<p>我们来验证一下</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
-
-<p>我们来调用上面的洗牌算法一万次，完后将每个位置上出现牌的点数都相加，如果他公平，我们相加的结果应该都差不多，对吧。</p>
-<blockquote>
-<p>[<br> 38511, 38548, 45148,<br> 46416, 46551, 44174,<br> 43456, 46877, 48894,<br> 51425<br>]</p>
-</blockquote>
-<p>这确是我打印出来的数据，连续跑了好几组都是某某要大，你将一万次改的越大，最后位置的数字就会越大，也就是说，小数字会出现在靠前的位置，大数字会出现在靠后的位置。</p>
-<p>如果还不确认的小伙伴可以去做一下概率统计。</p>
-<blockquote>
-<p>这是因为sort会两两交换，每个位置上交换的次数是不同的，所以最后的数字在交换到前面的概率是比较小的，当次数被无限放大的时候，这个差距就是越来越大。所以导致刚刚的洗牌算法是不公平的。</p>
-</blockquote>
-<p>如果想要公平的话，有一种算法是这样的，每次随机抽取一张牌把它放到最后的位置去。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> c =[...cards];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = c.length; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">const</span> pIdx = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * i);</span><br><span class="line">        [c[pIdx],c[i-<span class="number">1</span>]] = [c[i-<span class="number">1</span>], c[pIdx]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>[<br> 45466, 44956, 44753,<br> 45253, 45179, 44765,<br> 45147, 44469, 45404,<br> 44608<br>]</p>
-</blockquote>
-<p>可以看出这个打印出来的结果，大小都是差不大多的。</p>
-<h4 id="分红包"><a href="#分红包" class="headerlink" title="分红包"></a><strong>分红包</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generate</span>(<span class="params">amount, count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ret = [amount];</span><br><span class="line">    <span class="keyword">while</span>(count &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">// 挑选出最大的一块进行切分</span></span><br><span class="line">        <span class="keyword">let</span> cake = <span class="built_in">Math</span>.max(...ret),</span><br><span class="line">            idx = ret.indexOf(cake),</span><br><span class="line">            part = <span class="number">1</span> + <span class="built_in">Math</span>.floor((cake/<span class="number">2</span>) * <span class="built_in">Math</span>.random()),</span><br><span class="line">            rest = cake - part;</span><br><span class="line">        ret.splice(idx,<span class="number">1</span>,part,rest);</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不停的切分最大的金额。</p>
-<blockquote>
-<p>这个会带来一个问题，就是金额很平均。</p>
-<p>不会有人拿了很大的红包，少了一丝趣味性。</p>
-<p>不够刺激~</p>
-</blockquote>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
-<p>是我菜了，继续加油！</p>
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
@@ -1783,52 +1870,6 @@
       </tags>
   </entry>
   <entry>
-    <title>解构运算符的理解与运用</title>
-    <url>/posts/1586874348.html/</url>
-    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
-<p><strong>你可以不用，但是你不能不懂✔</strong></p>
-<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
-<span id="more"></span>
-
-<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
-<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
-<li><p>基本使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>嵌套使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
-<li><p>忽略</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
-<li><p>不完全解构</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p>剩余运算符</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>字符串</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
-<li><p>解构默认值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
-<li><p>交换变量的值.</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
-<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
-<p>第88题，合并两个有序数组。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
-<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
-<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>框架简介之Vue.js</title>
     <url>/posts/2624959054.html/</url>
     <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
@@ -1876,6 +1917,52 @@
 ]]></content>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解构运算符的理解与运用</title>
+    <url>/posts/1586874348.html/</url>
+    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
+<p><strong>你可以不用，但是你不能不懂✔</strong></p>
+<p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
+<span id="more"></span>
+
+<h2 id="解构符号的作用"><a href="#解构符号的作用" class="headerlink" title="解构符号的作用"></a>解构符号的作用</h2><p>解构赋值是对赋值运算符的扩展，他是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值</p>
+<p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为<strong>解构</strong></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ul>
+<li><p>基本使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a,b,c] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="comment">// let a = 1, b = 2, c = 3;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>嵌套使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, [[b], c]] = [<span class="number">1</span>, [[<span class="number">2</span>], <span class="number">3</span>]];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123;<span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span>&#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x,&#123; y &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+<li><p>忽略</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, , b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [<span class="string">&#x27;hello&#x27;</span>, &#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [x, &#123; &#125;] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure></li>
+<li><p>不完全解构</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">1</span>, b] = [];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: [&#123; <span class="attr">y</span>: <span class="string">&#x27;world&#x27;</span> &#125;] &#125;;</span><br><span class="line"> <span class="keyword">let</span> &#123; <span class="attr">x</span>: [&#123; y &#125;, x] &#125; = obj;</span><br><span class="line">	<span class="built_in">console</span>.log(x); <span class="comment">// undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(y); <span class="comment">// world</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>剩余运算符</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组</span></span><br><span class="line"> <span class="keyword">let</span> [a, ...b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// [2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"> <span class="keyword">let</span> &#123;a, b, ...rest&#125; = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>, <span class="attr">c</span>: <span class="number">30</span>, <span class="attr">d</span>: <span class="number">40</span>&#125;;</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 10</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 20</span></span><br><span class="line">	<span class="built_in">console</span>.log(rest); <span class="comment">// &#123; c: 30, d: 40 &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>字符串</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c, d, e] = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// h</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// e</span></span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(d); <span class="comment">// l</span></span><br><span class="line"><span class="built_in">console</span>.log(e); <span class="comment">// o</span></span><br></pre></td></tr></table></figure></li>
+<li><p>解构默认值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 当解构模式有匹配结果，且匹配结果是 undefined 时，会触发默认值作为返回结果。</span></span><br><span class="line"> <span class="keyword">let</span> [a = <span class="number">2</span>] = [<span class="literal">undefined</span>]; </span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">let</span> &#123;a = <span class="number">10</span>, b = <span class="number">5</span>&#125; = &#123;<span class="attr">a</span>: <span class="number">3</span>&#125;;</span><br><span class="line"> 	<span class="built_in">console</span>.log(a); <span class="comment">// 3</span></span><br><span class="line"> 	<span class="built_in">console</span>.log(b); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></li>
+<li><p>交换变量的值.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">[a,b] = [b,a];</span><br><span class="line">	<span class="built_in">console</span>.log(a); <span class="comment">// 2</span></span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="解构赋值的应用"><a href="#解构赋值的应用" class="headerlink" title="解构赋值的应用"></a>解构赋值的应用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 浅克隆与合并</span></span><br><span class="line"><span class="keyword">let</span> name = &#123; <span class="attr">name</span>: <span class="string">&quot;aaa&quot;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> age = &#123; <span class="attr">age</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123; ...name, ...age &#125;</span><br><span class="line"><span class="built_in">console</span>.log(person) <span class="comment">// &#123; name: &quot;aaa&quot;, age: &#x27;bbb&#x27; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> b = [<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> c = [...a,...b];</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// [1,2,3,4,5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 提取JSON数据</span></span><br><span class="line"><span class="keyword">let</span> JsonData = &#123; <span class="attr">id</span>: <span class="number">10</span>, <span class="attr">status</span>: <span class="string">&quot;OK&quot;</span>, <span class="attr">data</span>: [<span class="number">111</span>, <span class="number">222</span>] &#125; </span><br><span class="line"><span class="keyword">let</span> &#123; id, status, <span class="attr">data</span>: numbers &#125; = JsonData; </span><br><span class="line"><span class="built_in">console</span>.log(id, status, numbers); <span class="comment">//10 &quot;OK&quot; [111, 222]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 函数参数的定义</span></span><br><span class="line"><span class="comment">// 参数有序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params">[a, b, c]</span>) </span>&#123; <span class="built_in">console</span>.log(a, b, c) &#125; </span><br><span class="line">fun1([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数无序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params">&#123; x, y, z &#125;</span>) </span>&#123; <span class="built_in">console</span>.log(x, y, z) &#125; </span><br><span class="line">fun2(&#123; <span class="attr">z</span>: <span class="number">3</span>, <span class="attr">x</span>: <span class="number">2</span>, <span class="attr">y</span>: <span class="number">1</span> &#125;); <span class="comment">// 2 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数有默认值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun3</span> (<span class="params">[a=<span class="number">1</span>,b]</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(a,b);</span><br><span class="line">&#125;</span><br><span class="line">fun3([,<span class="number">3</span>]) <span class="comment">// 1 3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="浅谈应用"><a href="#浅谈应用" class="headerlink" title="浅谈应用"></a>浅谈应用</h2><h3 id="提取json数据"><a href="#提取json数据" class="headerlink" title="提取json数据"></a>提取json数据</h3><p>上面列出了几种解构赋值的应用，其中我们最常用的应该是第二种，<strong>提取json数据</strong>，后端传给前端的数据就是json数据，前端通常要将数据赋值给一个对象，就是使用的这种方法。</p>
+<h3 id="可扩展运算符"><a href="#可扩展运算符" class="headerlink" title="可扩展运算符..."></a>可扩展运算符<code>...</code></h3><p>我在leetcode上刷题的时候使用过，我是用<code>arr.push(...arr1)</code>来合并两个数组的，有点像上面的<strong>浅克隆与合并</strong>。比起以往我们合并数组的操作，这个简直不要太简单。</p>
+<p>第88题，合并两个有序数组。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, m, nums2, n</span>) </span>&#123;</span><br><span class="line">    nums1.length=m;</span><br><span class="line">    nums2.length=n;</span><br><span class="line">    nums1.push(...nums2);</span><br><span class="line">    <span class="keyword">let</span> arr=nums1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>...</code>这个运算符是将数组中的数据遍历出来，并拷贝到当前对象当中。</p>
+<p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
+<h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>

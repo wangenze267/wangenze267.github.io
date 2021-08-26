@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。 Hexo简介Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入h">
+  <meta name="description" content="前言学学设计模式，每次更一个，实在太多了。 第一次更新：单例模式  打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。 计网操作系统数据结构算法还没学 vue还没盘 我还有机会吗  什么是设计模式？在软件设计过程中，针对特定问题的简洁而优雅的解决方案。 把之前的经验总结并且合理运用到某处场景上，能够解决实际的问题。 设计模式五大设计原则（SOLID） S-单一职责原则  即一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo搭建自己的博客">
-<meta property="og:url" content="https://wangenze267.github.io/posts/735412972.html/index.html">
+<meta property="og:title" content="JavaScript中的设计模式-单例模式">
+<meta property="og:url" content="https://wangenze267.github.io/posts/3322122302.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="前言之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。 Hexo简介Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入h">
+<meta property="og:description" content="前言学学设计模式，每次更一个，实在太多了。 第一次更新：单例模式  打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。 计网操作系统数据结构算法还没学 vue还没盘 我还有机会吗  什么是设计模式？在软件设计过程中，针对特定问题的简洁而优雅的解决方案。 把之前的经验总结并且合理运用到某处场景上，能够解决实际的问题。 设计模式五大设计原则（SOLID） S-单一职责原则  即一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-09T07:34:50.488Z">
-<meta property="article:modified_time" content="2021-08-08T14:06:36.428Z">
+<meta property="article:published_time" content="2021-08-26T05:51:53.468Z">
+<meta property="article:modified_time" content="2021-08-26T05:51:48.006Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="踩坑日记">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/735412972.html/">
+<link rel="canonical" href="https://wangenze267.github.io/posts/3322122302.html/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>使用Hexo搭建自己的博客 | Wangez-Blog</title>
+  <title>JavaScript中的设计模式-单例模式 | Wangez-Blog</title>
   
 
 
@@ -210,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/735412972.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/3322122302.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -223,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用Hexo搭建自己的博客
+          JavaScript中的设计模式-单例模式
         </h1>
 
         <div class="post-meta">
@@ -232,16 +232,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-06-09 15:34:50" itemprop="dateCreated datePublished" datetime="2021-06-09T15:34:50+08:00">2021-06-09</time>
+              <time title="创建时间：2021-08-26 13:51:53 / 修改时间：13:51:48" itemprop="dateCreated datePublished" datetime="2021-08-26T13:51:53+08:00">2021-08-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 22:06:36" itemprop="dateModified" datetime="2021-08-08T22:06:36+08:00">2021-08-08</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -259,8 +253,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/735412972.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/735412972.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/3322122302.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/3322122302.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -270,7 +264,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -289,88 +283,85 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
-<h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
-<span id="more"></span>
-
-<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><p>在安装hexo前，电脑上具备有git与node两个环境才行</p>
-<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，我觉得建议每个人都去了解一下。廖雪峰老师的Git教程写的非常好，大家可以了解一下。<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></p>
-<p>windows：到git官网上下载,<a target="_blank" rel="noopener" href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
-<p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p>Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。</p>
-<p>windows：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">nodejs</a>  </p>
-<p>linux:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
-
-<p>安装完后，打开命令行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<p>检查一下有没有安装成功</p>
-<p>顺便说一下，windows在git安装完后，就可以直接使用git bash来敲命令行了。</p>
-<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>现在我们就可以安装hexo了</p>
-<p>前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹blog，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
-<p>输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>依旧用<code>hexo -v</code>查看一下版本</p>
-<p>至此就全部安装完了。</p>
-<p>接下来初始化一个blog吧！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init myblog(myblog是你创建的文件夹的名字，可以随意命名)</span><br></pre></td></tr></table></figure>
-
-<p>然后</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd myblog //进入这个myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>新建完成后，指定文件夹目录下有：</p>
-<ul>
-<li>node_modules: 依赖包</li>
-<li>public：存放生成的页面</li>
-<li>scaffolds：生成文章的一些模板</li>
-<li>source：用来存放你的文章</li>
-<li>themes：主题</li>
-<li>_config.yml: 博客的配置文件</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>打开hexo的服务，在浏览器输入<code>localhost:4000</code>就可以看到你生成的博客了。</p>
-<p>使用ctrl+c可以把服务关掉。</p>
-<p>注：可以使用 <code>hexo command</code> 来查看hexo全部命令</p>
-<h3 id="准备好GitHub"><a href="#准备好GitHub" class="headerlink" title="准备好GitHub"></a>准备好GitHub</h3><p>首先，你先要有一个GitHub账户，去注册一个吧。</p>
-<p>注册完登录后，在GitHub.com中看到一个New repository，新建仓库</p>
-<p>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，xxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
-<p>点击create repository。</p>
-<p>回到你的git bash中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
-
-<p>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户。</p>
-<p>可以用以下两条，检查一下你有没有输对:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
-
-<h3 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h3><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，修改为<br>YourgithubName就是你的GitHub账户</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>然后：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加。<br><code>hexo generate</code> 顾名思义，生成静态文章，可以用 <code>hexo g</code>缩写<br><code>hexo deploy</code> 部署文章，可以用<code>hexo d</code>缩写</p>
-<p>注意deploy时可能要你输入username和password。</p>
-<p>过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！</p>
-<h3 id="关联个人域名"><a href="#关联个人域名" class="headerlink" title="关联个人域名"></a>关联个人域名</h3><p>如果你想自己的域名与博客也关联起来的话，可以看这里</p>
-<p>在source里创建一个叫CNAME的文件（注意没有任何后缀，名字就叫CNAME）</p>
-<p>在CNAME里面写上你的域名，例如：</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p>
+<p>第一次更新：<strong>单例模式</strong></p>
 <blockquote>
-<p>blog.wangez.site</p>
+<p>打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。</p>
+<p>计网操作系统数据结构算法还没学</p>
+<p>vue还没盘</p>
+<p>我还有机会吗</p>
 </blockquote>
-<p>之后打开git bash</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h3 id="什么是设计模式？"><a href="#什么是设计模式？" class="headerlink" title="什么是设计模式？"></a>什么是设计模式？</h3><p>在软件设计过程中，针对特定问题的简洁而优雅的解决方案。</p>
+<p>把之前的经验总结并且合理运用到某处场景上，能够解决实际的问题。</p>
+<h3 id="设计模式五大设计原则（SOLID）"><a href="#设计模式五大设计原则（SOLID）" class="headerlink" title="设计模式五大设计原则（SOLID）"></a>设计模式五大设计原则（SOLID）</h3><ul>
+<li><p>S-单一职责原则</p>
+<blockquote>
+<p>即一个程序只做好一件事</p>
+</blockquote>
+</li>
+<li><p>O-开放封闭原则</p>
+<blockquote>
+<p>可扩展开放，对修改封闭</p>
+</blockquote>
+</li>
+<li><p>L-里氏置换原则</p>
+<blockquote>
+<p>子类能覆盖父类，并能出现在父类出现的地方</p>
+</blockquote>
+</li>
+<li><p>I-接口独立原则</p>
+<blockquote>
+<p>保持接口的单一独立</p>
+</blockquote>
+</li>
+<li><p>D-依赖导致原则</p>
+<blockquote>
+<p>使用方法只关注接口而不关注具体类的实现</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="为什么需要设计模式？"><a href="#为什么需要设计模式？" class="headerlink" title="为什么需要设计模式？"></a>为什么需要设计模式？</h3><ul>
+<li><p>易读性</p>
+<blockquote>
+<p>使用设计模式能够提升我们的代码可读性，提升后续开发效率</p>
+</blockquote>
+</li>
+<li><p>可拓展性</p>
+<blockquote>
+<p>使用设计模式对代码解耦，能很好的增强代码的yi修改性和拓展性</p>
+</blockquote>
+</li>
+<li><p>复用性</p>
+<blockquote>
+<p>使用设计模式可以复用已有的解决方案，无需重复相同工作</p>
+</blockquote>
+</li>
+<li><p>可靠性</p>
+<blockquote>
+<p>使用设计模式能够增加系统的健壮性，使代码编写真正工程化</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="常见设计模式"><a href="#常见设计模式" class="headerlink" title="常见设计模式"></a>常见设计模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>定义：<strong>唯一&amp;全局访问。保证一个类仅有一个实例，并提供一个访问它的全局访问点。</strong></p>
+<blockquote>
+<p>另外一种多例模式，通过一个类构造出多个不一样的实例，这就是多例模式。</p>
+<p>单例模式与多例模式最本质的区别：实例的数量。</p>
+<p>单例模式永远只有一个实例，这个实例可以被缓存起来，可以复用。</p>
+</blockquote>
+<p>应用场景：就是能被缓存的内容，例如登录弹窗。</p>
+<blockquote>
+<p>我觉得就是一个地方如果在你的项目中可以用到两次或两次以上，都可以尝试一下这个，能够减少很多代码。</p>
+</blockquote>
+<p>来看这段伪代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> creatLoginLayer = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    div.innerHtml = <span class="string">&quot;登录浮窗&quot;</span>;</span><br><span class="line">    div.style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line">    <span class="keyword">return</span> div;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;loginBtn&quot;</span>).onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> loginLayer = creatLoginLayer();</span><br><span class="line">    loginLayer.style.display = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>在GitHub上你创建的仓库里就会多一个叫做CNAME的文件了</p>
-<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
+<p><code>creatLoginLayer</code>的作用是创建一个登录浮窗并将节点添加到body上，下面做的是登录按钮的一个点击事件，点击登录按钮就会创建登录浮窗并将<code>display</code>从<code>none</code>改为<code>block</code>，将他显示出来。</p>
+<p>这个逻辑是没毛病的，但是我们想一下，每点击一下登录按钮就要执行这些代码，一个项目中如果有很多地方要呢？我们上面这短短几行而已，如果是上百上千甚至上万呢？是不是就非常损耗性能，这个时候，我们的单例模式就派上了用场。</p>
+<p>使用单例模式后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getSingle = <span class="function">(<span class="params">fn</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> result;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">...rest</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> result || (result = fn.apply(<span class="built_in">this</span>.rest));</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> creatLoginLayer = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    div.innerHtml = <span class="string">&quot;登录浮窗&quot;</span>;</span><br><span class="line">    div.style.display = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line">    <span class="keyword">return</span> div;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createSingleLoginLayer = getSingle(createLoginLayer);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;loginBtn&quot;</span>).onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> loginLayer = createSingleLoginLayer();</span><br><span class="line">    loginLayer.style.display = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>可以见到，增加了一个<code>getSingle</code>函数，这里有个闭包的概念，result变量只要一直在引用就不会被销毁，起到了一个缓存的作用，函数的参数是一个<code>function</code>，如果result是null或者undefined就执行后面的逻辑，将这个传进来的函数的返回值也就是这个<code>div</code>赋给result，这样我们下面的函数就执行一次就可以了，下次调用的时候result有值，所以就直接返回了，不会在执行后面的逻辑。</p>
+<h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4>
     </div>
 
     
@@ -405,7 +396,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/735412972.html/" title="使用Hexo搭建自己的博客">https://wangenze267.github.io/posts/735412972.html/</a>
+    <a href="https://wangenze267.github.io/posts/3322122302.html/" title="JavaScript中的设计模式-单例模式">https://wangenze267.github.io/posts/3322122302.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -440,8 +431,8 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 踩坑日记</a>
-              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
           </div>
 
         
@@ -450,13 +441,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2713850416.html/" rel="prev" title="微信小程序相关">
-      <i class="fa fa-chevron-left"></i> 微信小程序相关
+    <a href="/posts/1196783753.html/" rel="prev" title="分享一次踩坑，一次自己封装的uni官方api">
+      <i class="fa fa-chevron-left"></i> 分享一次踩坑，一次自己封装的uni官方api
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2781919463.html/" rel="next" title="关于Hexo配置使用Next主题">
-      关于Hexo配置使用Next主题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -516,7 +504,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">Hexo简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">开始搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85git"><span class="nav-number">3.1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85node"><span class="nav-number">3.2.</span> <span class="nav-text">安装node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo"><span class="nav-number">3.3.</span> <span class="nav-text">安装hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%A5%BDGitHub"><span class="nav-number">4.</span> <span class="nav-text">准备好GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86hexo%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="nav-number">5.</span> <span class="nav-text">将hexo部署到GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">关联个人域名</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是设计模式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BA%94%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%EF%BC%88SOLID%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">设计模式五大设计原则（SOLID）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">为什么需要设计模式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">常见设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">策略模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.4.</span> <span class="nav-text">发布订阅模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.5.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.6.</span> <span class="nav-text">组合模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.7.</span> <span class="nav-text">装饰器模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.8.</span> <span class="nav-text">适配器模式</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
