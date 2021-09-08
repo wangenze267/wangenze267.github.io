@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JS中，函数原来有这么多种定义方法（暑假开始！）</title>
+    <url>/posts/1173819435.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在期末与暑假假期画饼之间不断奔波，很长时间没有记录了，今天在学习的时候看到了ES6的箭头函数，瞬间找到了写文的动力，那就来梳理一下在JavaScript中一共有几种定义函数的方式吧，最后再（微微）重点的介绍一下箭头函数✨</p>
+<p>过段时间，要加强算法学习了，这段时间也在力扣和牛客上找题做了一下，发现自己的算法真的烂，所以可能以后还会把算法题解写一写。（🍗+ 1）</p>
+<h3 id="JavaScript定义函数的几种方式"><a href="#JavaScript定义函数的几种方式" class="headerlink" title="JavaScript定义函数的几种方式"></a>JavaScript定义函数的几种方式</h3><p>以下是定义函数的几种方式，真正书写的话，个人觉得没有什么必须要用某种格式的情况，根据团队风格或者个人习惯来就好。</p>
+<span id="more"></span>
+
+<h4 id="最初的我们"><a href="#最初的我们" class="headerlink" title="最初的我们"></a>最初的我们</h4><p>我们刚接触js的时候，见到的就是它啦😎</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;hello javascript&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure>
+
+<p>这种方式大概也是陪伴我们时间最长的了吧？是不是呢？</p>
+<h4 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h4><p>函数都是Function的实例对象，也就可以说函数是值，与字符串，数字等是一样的。这种方法就是通过表达式来定义函数，也就是定义匿名函数，再将匿名函数交给变量。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> hello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;hello javascript&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><p>这种方法大家应该也都见过，它是定义匿名函数来作为对象属性的值，与函数表达式的理念相同。这种形式最早是在ES3中引入的。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="attr">fun</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ES5中，引入了访问器属性定义:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="keyword">get</span> <span class="title">name</span>() &#123;&#125;,</span><br><span class="line">	<span class="keyword">set</span> <span class="title">name</span>(<span class="params">name</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到get/set是不是感觉跟Java的类有一点像了，没错我也有这种感觉，继续往下看，类它来了！</p>
+<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p>在ES6中，有了类的概念（学过java的小伙伴们一定不会陌生），没错，js中也有类，而且也有构造方法等一些与Java类一样的东西。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.fun=<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;实例方法&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;构造方法&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="function"><span class="title">jingtai</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;静态方法&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="title">yuanxingfangfa</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;原型方法&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实例方法：定义在构造方法constructor中的this对象上，在类中，构造方法中的this指的是它的实例对象</li>
+<li>原型方法：与constructor方法同级，可以通过构造函数的原型链去调用，也可以通过实例对象来调用</li>
+<li>静态方法：通过static关键字定义，不能被实例调用，可以被构造函数调用。</li>
+</ul>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>终于到了我们这次文章的主角登场啦~  我去网上查了一些资料，浏览了CSDN和掘金的一些博客社区，很多人都觉得，它是ES2015最具有争议性的函数之一，但是它如今也已经变得众所周知，无处不在。它为函数声明提供了两种不同的格式，赋值表达式（箭头后无大括号”{}”）和函数体（代码种包括0到多个语句时）。这个语法还允许在描述单个参数的时候不加圆括号，0个或者1个以上的时候要加圆括号。这些语法结构允许箭头函数有着多种书写格式。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 无参的赋值表达式</span></span><br><span class="line">(<span class="function">() =&gt;</span> <span class="number">2</span>*<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个参数，忽略括号的赋值表达式</span></span><br><span class="line">(<span class="function"><span class="params">x</span> =&gt;</span> x*<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 一个参数，忽略括号直接跟函数体</span></span><br><span class="line">(<span class="function"><span class="params">x</span> =&gt;</span> &#123; <span class="keyword">return</span> x *<span class="number">2</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 括号中为参数列表和赋值表达式</span></span><br><span class="line">(<span class="function">(<span class="params">x,y</span>) =&gt;</span> x*y);</span><br></pre></td></tr></table></figure>
+
+<p>来稍微解释一下箭头函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">x =&gt; x * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>箭头函数相当于匿名函数，并且简化了函数定义，使用起来非常的方便。</p>
+<p>但是使用箭头函数，我们要注意以下几点：</p>
+<ul>
+<li><p>箭头函数是没有this的，它的this是从外部获取的。</p>
+</li>
+<li><p>箭头函数不能做new操作，没有this意味着它不能用作构造，所以不能用new调用它们</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jiantou = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> jiantou();</span><br></pre></td></tr></table></figure>
+
+<p>这时候会报错，<code>jiantou is not a constructor</code></p>
+</li>
+<li><p>箭头函数没有arguments对象，但是同this一样，他可以访问外围函数的arguments对象</p>
+</li>
+<li><p>箭头函数没有原型和super，它没有原型，也就不能通过super来访问原型的属性，不过同之前的this、arguments一样，这些值由外围最近一层的非箭头函数决定</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jiantou = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(jiantou.prototype); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>🐱‍🐉终于水完了，溜了溜了。</p>
+<p>还是那句话，你可以暂时不使用这种方法来写代码，但是你不能不会用，因为你不会知道什么时候会突然要求你用这种方法去进行业务操作。</p>
+<p>快乐的暑假，开始了！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript中的设计模式-策略模式</title>
     <url>/posts/3322122302.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p>
@@ -104,69 +167,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS中，函数原来有这么多种定义方法（暑假开始！）</title>
-    <url>/posts/1173819435.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在期末与暑假假期画饼之间不断奔波，很长时间没有记录了，今天在学习的时候看到了ES6的箭头函数，瞬间找到了写文的动力，那就来梳理一下在JavaScript中一共有几种定义函数的方式吧，最后再（微微）重点的介绍一下箭头函数✨</p>
-<p>过段时间，要加强算法学习了，这段时间也在力扣和牛客上找题做了一下，发现自己的算法真的烂，所以可能以后还会把算法题解写一写。（🍗+ 1）</p>
-<h3 id="JavaScript定义函数的几种方式"><a href="#JavaScript定义函数的几种方式" class="headerlink" title="JavaScript定义函数的几种方式"></a>JavaScript定义函数的几种方式</h3><p>以下是定义函数的几种方式，真正书写的话，个人觉得没有什么必须要用某种格式的情况，根据团队风格或者个人习惯来就好。</p>
-<span id="more"></span>
-
-<h4 id="最初的我们"><a href="#最初的我们" class="headerlink" title="最初的我们"></a>最初的我们</h4><p>我们刚接触js的时候，见到的就是它啦😎</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;hello javascript&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure>
-
-<p>这种方式大概也是陪伴我们时间最长的了吧？是不是呢？</p>
-<h4 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h4><p>函数都是Function的实例对象，也就可以说函数是值，与字符串，数字等是一样的。这种方法就是通过表达式来定义函数，也就是定义匿名函数，再将匿名函数交给变量。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> hello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;hello javascript&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">hello();</span><br></pre></td></tr></table></figure>
-
-<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><p>这种方法大家应该也都见过，它是定义匿名函数来作为对象属性的值，与函数表达式的理念相同。这种形式最早是在ES3中引入的。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="attr">fun</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ES5中，引入了访问器属性定义:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">	<span class="keyword">get</span> <span class="title">name</span>() &#123;&#125;,</span><br><span class="line">	<span class="keyword">set</span> <span class="title">name</span>(<span class="params">name</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看到get/set是不是感觉跟Java的类有一点像了，没错我也有这种感觉，继续往下看，类它来了！</p>
-<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p>在ES6中，有了类的概念（学过java的小伙伴们一定不会陌生），没错，js中也有类，而且也有构造方法等一些与Java类一样的东西。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.fun=<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;实例方法&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;构造方法&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">static</span> <span class="function"><span class="title">jingtai</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;静态方法&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="title">yuanxingfangfa</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;原型方法&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>实例方法：定义在构造方法constructor中的this对象上，在类中，构造方法中的this指的是它的实例对象</li>
-<li>原型方法：与constructor方法同级，可以通过构造函数的原型链去调用，也可以通过实例对象来调用</li>
-<li>静态方法：通过static关键字定义，不能被实例调用，可以被构造函数调用。</li>
-</ul>
-<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>终于到了我们这次文章的主角登场啦~  我去网上查了一些资料，浏览了CSDN和掘金的一些博客社区，很多人都觉得，它是ES2015最具有争议性的函数之一，但是它如今也已经变得众所周知，无处不在。它为函数声明提供了两种不同的格式，赋值表达式（箭头后无大括号”{}”）和函数体（代码种包括0到多个语句时）。这个语法还允许在描述单个参数的时候不加圆括号，0个或者1个以上的时候要加圆括号。这些语法结构允许箭头函数有着多种书写格式。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 无参的赋值表达式</span></span><br><span class="line">(<span class="function">() =&gt;</span> <span class="number">2</span>*<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个参数，忽略括号的赋值表达式</span></span><br><span class="line">(<span class="function"><span class="params">x</span> =&gt;</span> x*<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 一个参数，忽略括号直接跟函数体</span></span><br><span class="line">(<span class="function"><span class="params">x</span> =&gt;</span> &#123; <span class="keyword">return</span> x *<span class="number">2</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 括号中为参数列表和赋值表达式</span></span><br><span class="line">(<span class="function">(<span class="params">x,y</span>) =&gt;</span> x*y);</span><br></pre></td></tr></table></figure>
-
-<p>来稍微解释一下箭头函数</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">x =&gt; x * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<p>等价于：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>箭头函数相当于匿名函数，并且简化了函数定义，使用起来非常的方便。</p>
-<p>但是使用箭头函数，我们要注意以下几点：</p>
-<ul>
-<li><p>箭头函数是没有this的，它的this是从外部获取的。</p>
-</li>
-<li><p>箭头函数不能做new操作，没有this意味着它不能用作构造，所以不能用new调用它们</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jiantou = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> jiantou();</span><br></pre></td></tr></table></figure>
-
-<p>这时候会报错，<code>jiantou is not a constructor</code></p>
-</li>
-<li><p>箭头函数没有arguments对象，但是同this一样，他可以访问外围函数的arguments对象</p>
-</li>
-<li><p>箭头函数没有原型和super，它没有原型，也就不能通过super来访问原型的属性，不过同之前的this、arguments一样，这些值由外围最近一层的非箭头函数决定</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jiantou = <span class="function">() =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(jiantou.prototype); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>🐱‍🐉终于水完了，溜了溜了。</p>
-<p>还是那句话，你可以暂时不使用这种方法来写代码，但是你不能不会用，因为你不会知道什么时候会突然要求你用这种方法去进行业务操作。</p>
-<p>快乐的暑假，开始了！</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -434,31 +434,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Axios踩坑日记</title>
-    <url>/posts/2698809561.html/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
-<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
-<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
-<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
-]]></content>
-      <tags>
-        <tag>Axios</tag>
-        <tag>Vue</tag>
-        <tag>踩坑日记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue.js基础环境的搭建以及简单使用Element-ui</title>
     <url>/posts/3896443464.html/</url>
     <content><![CDATA[<h1 id="Vue（2-x）"><a href="#Vue（2-x）" class="headerlink" title="Vue（2.x）"></a>Vue（2.x）</h1><h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
@@ -602,6 +577,31 @@
 ]]></content>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Axios踩坑日记</title>
+    <url>/posts/2698809561.html/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
+<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
+<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
+<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Axios</tag>
+        <tag>踩坑日记</tag>
       </tags>
   </entry>
   <entry>
@@ -749,97 +749,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于Hexo配置使用Next主题</title>
-    <url>/posts/2781919463.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
-<h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
-<p><code>Next8.2.0</code></p>
-<p>版本不同可能会有些差异</p>
-<span id="more"></span>
-
-<h3 id="安装next主题"><a href="#安装next主题" class="headerlink" title="安装next主题"></a>安装next主题</h3><p>去next团队的主页去下载一个zip压缩包</p>
-<p><img src="https://wangez.site/img/next.png" alt="image-20210216103416503"></p>
-<p>完后将他放在<code>themes</code>目录下并且解压，重命名文件夹为<code>next</code></p>
-<p><code>themes/</code>下是Hexo用来放主题的</p>
-<h3 id="修改站点配置文件"><a href="#修改站点配置文件" class="headerlink" title="修改站点配置文件"></a>修改站点配置文件</h3><p>站点配置文件：<code>_config.yml</code></p>
-<p>参考Hexo文档中的说明，我们需要给博客设定主标题以及副标题、作者名称、语言、时区等，你可以参考以下我的设置。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Wangez-Blog  #网站标题</span><br><span class="line">subtitle: &#x27;Ned的个人博客&#x27;  #网站副标题</span><br><span class="line">description: &#x27;Ned的个人博客&#x27;  #网站描述</span><br><span class="line">keywords:  #网站关键词</span><br><span class="line">author: Ned  #您的名字</span><br><span class="line">language: zh-CN  #语言</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;  #时区</span><br></pre></td></tr></table></figure>
-
-<h4 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h4><p>在站点配置文件中，找到 theme 属性，然后修改为 next 即可</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h3><p>主题配置文件：<code>themes/next/_config.yml</code></p>
-<h4 id="设定主题风格"><a href="#设定主题风格" class="headerlink" title="设定主题风格"></a>设定主题风格</h4><p>Next提供了4种风格样式供我们选择。我个人偏好最经典且极简的Muse风格。你可以4种都体验以下。选择哪个风格，就删除掉对应风格名所在行前面的# ，可以参考我的配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line"># scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-<h4 id="博客主标题上方的logo"><a href="#博客主标题上方的logo" class="headerlink" title="博客主标题上方的logo"></a>博客主标题上方的logo</h4><p>这个我是没有设置的，有需要的可以自己设置一下，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Custom Logo (Warning: Do not support scheme Mist)主页logo</span><br><span class="line">custom_logo: /uploads/logo.png</span><br></pre></td></tr></table></figure>
-
-<p>顺便一提，后面我们还会遇到 引用图片地址 的类似设置。<code>/uploads/logo.png </code>对应的本地blog文件夹中位置是 <code>\blog\themes\next\source\uploads\logo.png</code> 其中 <code>uploads</code> 文件夹，和<code>logo.png</code>文件，都需要自己创建。</p>
-<h4 id="版权信息说明"><a href="#版权信息说明" class="headerlink" title="版权信息说明"></a>版权信息说明</h4><p>网上的太繁琐了，其实不用改太多。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
-
-<p>版权声明文本是可以修改的，后面会介绍到。</p>
-<h4 id="设置导航栏菜单"><a href="#设置导航栏菜单" class="headerlink" title="设置导航栏菜单"></a>设置导航栏菜单</h4><p>我觉得设置多了太麻烦，于是就保留了<code>主页</code> <code>标签</code> <code>关于</code> <code>归档</code>四个</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  #categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  #schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  #sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  #commonweal: /404/ || fa fa-heartbeat</span><br><span class="line"></span><br><span class="line"># Enable / Disable menu icons / item badges.</span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
-
-<p>启用哪个功能，就删除对应行前面的 # </p>
-<h4 id="侧边栏设置"><a href="#侧边栏设置" class="headerlink" title="侧边栏设置"></a>侧边栏设置</h4><p>我觉得左边挺好的，就没有改</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  # position: right</span><br></pre></td></tr></table></figure>
-
-<p>设置侧边栏的头像，一般为作者的头像，和博客的logo有区别。</p>
-<p>可以是方形或圆形，还可以选择鼠标停留时，魔性的转动（我没设置）。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: /uploads/avatar.jpg #头像图片地址 </span><br><span class="line">  # If true, the avatar will be dispalyed in circle.圆形选true 方形选false</span><br><span class="line">  rounded: true</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.魔性转动，打开选true</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
-
-<p>侧边栏外链，可以指向某篇文章，或某个网址。这里可以用来展示其他发布渠道。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  #GitHub: https://github.com/yourname || fab fa-github</span><br><span class="line">  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope</span><br><span class="line">  #Weibo: https://weibo.com/yourname || fab fa-weibo</span><br><span class="line">  #Google: https://plus.google.com/yourname || fab fa-google</span><br><span class="line">  #Twitter: https://twitter.com/yourname || fab fa-twitter</span><br><span class="line">  #FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><br><span class="line">  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><br><span class="line">  #YouTube: https://youtube.com/yourname || fab fa-youtube</span><br><span class="line">  #Instagram: https://instagram.com/yourname || fab fa-instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || fab fa-skype</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true  #用来控制是否显示图标的</span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
-
-<p>和外链样式不同的是友链。默认显示为<code>友情链接</code>我将其修改为<code>我的朋友</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 我的朋友</span><br><span class="line">  # Available values: block | inline</span><br><span class="line">  layout: block</span><br><span class="line">#友情链接</span><br><span class="line">links:</span><br><span class="line">  Ned: https://wangez.site</span><br></pre></td></tr></table></figure>
-
-<h4 id="返回顶部按钮显示阅读进度"><a href="#返回顶部按钮显示阅读进度" class="headerlink" title="返回顶部按钮显示阅读进度"></a>返回顶部按钮显示阅读进度</h4><p>觉得没什么用，不过我还是用了（打脸ing）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
-
-<h4 id="关闭动画效果"><a href="#关闭动画效果" class="headerlink" title="关闭动画效果"></a>关闭动画效果</h4><p>我觉得博客，渲染的太华丽反而不好，于是就将其关了，如果想打开可以将enable的值设置为<code>true</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br></pre></td></tr></table></figure>
-
-<p>到此，配置差不多就结束了，如果你还想优化你的博客，可以继续看下去。</p>
-<h3 id="优化你的博客"><a href="#优化你的博客" class="headerlink" title="优化你的博客"></a>优化你的博客</h3><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
-<p>插件：<code>hexo-abbrlink</code></p>
-<p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-
-<p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure>
-
-<p>记得将原有的permalink注释掉或者删掉</p>
-<p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure>
-
-<p>到这，关于优化文章链接的操作我们就做完啦！</p>
-<h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p>
-<p>需要打开这个文件进行修改。</p>
-<p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p>
-<p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p>
-<p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p>
-<h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p>
-<p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
-
-<p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure>
-
-<p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p>
-<p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>假期总结（暑假结束！）</title>
     <url>/posts/1009533019.html/</url>
     <content><![CDATA[<h2 id="假期总结"><a href="#假期总结" class="headerlink" title="假期总结"></a>假期总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>短暂的暑假就这么结束了，简单做个复盘，看看自己暑假都做了什么。</p>
@@ -932,6 +841,97 @@
 <p>插件：<code>hexo-abbrlink</code></p>
 <span id="more"></span>
 
+<p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>打开站点配置文件<code>_config.yml</code>，修改permalink为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html/</span><br></pre></td></tr></table></figure>
+
+<p>记得将原有的permalink注释掉或者删掉</p>
+<p>在站点配置文件<code>_config.yml</code>中添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#abbrlink配置</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32 #support crc16(default) and crc32</span><br><span class="line">  rep: dec   #support dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<p>到这，关于优化文章链接的操作我们就做完啦！</p>
+<h4 id="自定义文本内容"><a href="#自定义文本内容" class="headerlink" title="自定义文本内容"></a>自定义文本内容</h4><p>文件路径：<code>themes/next/languages/zh-CN.yml</code></p>
+<p>需要打开这个文件进行修改。</p>
+<p>选择哪个语言文档取决于你的站点配置文件上的语言写的是什么！</p>
+<p>我将所有的<code>日志</code>换成了<code>文章</code>理由是我觉得日志怪怪的，还是文章比较正常。</p>
+<p>Ctrl+H 进行批量替换。（不会真有人一个一个改吧，不会吧不会吧）</p>
+<h4 id="添加访客统计、访问次数统计、文章阅读次数统计"><a href="#添加访客统计、访问次数统计、文章阅读次数统计" class="headerlink" title="添加访客统计、访问次数统计、文章阅读次数统计"></a>添加访客统计、访问次数统计、文章阅读次数统计</h4><p>打开主题配置文件</p>
+<p>搜索找到<code>busuanzi_count</code>，把<code>enable</code>设置为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Show Views / Visitors of the website / page with busuanzi.#展示访问数</span><br><span class="line"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true   #统计访客数</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true    #统计访问数</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true   #统计文章阅读数</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
+
+<p>同样是在主题配置文件下，搜索<code>footer</code>，在它底下添加<code>counter</code>，设值为<code>true</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#统计</span><br><span class="line">counter: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>这个我一开始配置了，但是不生效，最后将它删了才生效的，如果你配置完有问题也可以将其删了试一试</strong></p>
+<p>来到<code>themes\next\layout_partials</code>，找到<code>footer.swig</code>文件，打开编辑，在底下添加代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.counter %&#125;</span><br><span class="line">    &lt;script async src=&quot;//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Hexo配置使用Next主题</title>
+    <url>/posts/2781919463.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
+<h3 id="确认一下版本号"><a href="#确认一下版本号" class="headerlink" title="确认一下版本号"></a>确认一下版本号</h3><p><code>Hexo5.4.0</code></p>
+<p><code>Next8.2.0</code></p>
+<p>版本不同可能会有些差异</p>
+<span id="more"></span>
+
+<h3 id="安装next主题"><a href="#安装next主题" class="headerlink" title="安装next主题"></a>安装next主题</h3><p>去next团队的主页去下载一个zip压缩包</p>
+<p><img src="https://wangez.site/img/next.png" alt="image-20210216103416503"></p>
+<p>完后将他放在<code>themes</code>目录下并且解压，重命名文件夹为<code>next</code></p>
+<p><code>themes/</code>下是Hexo用来放主题的</p>
+<h3 id="修改站点配置文件"><a href="#修改站点配置文件" class="headerlink" title="修改站点配置文件"></a>修改站点配置文件</h3><p>站点配置文件：<code>_config.yml</code></p>
+<p>参考Hexo文档中的说明，我们需要给博客设定主标题以及副标题、作者名称、语言、时区等，你可以参考以下我的设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Wangez-Blog  #网站标题</span><br><span class="line">subtitle: &#x27;Ned的个人博客&#x27;  #网站副标题</span><br><span class="line">description: &#x27;Ned的个人博客&#x27;  #网站描述</span><br><span class="line">keywords:  #网站关键词</span><br><span class="line">author: Ned  #您的名字</span><br><span class="line">language: zh-CN  #语言</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;  #时区</span><br></pre></td></tr></table></figure>
+
+<h4 id="启用Next主题"><a href="#启用Next主题" class="headerlink" title="启用Next主题"></a>启用Next主题</h4><p>在站点配置文件中，找到 theme 属性，然后修改为 next 即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h3><p>主题配置文件：<code>themes/next/_config.yml</code></p>
+<h4 id="设定主题风格"><a href="#设定主题风格" class="headerlink" title="设定主题风格"></a>设定主题风格</h4><p>Next提供了4种风格样式供我们选择。我个人偏好最经典且极简的Muse风格。你可以4种都体验以下。选择哪个风格，就删除掉对应风格名所在行前面的# ，可以参考我的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line"># scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<h4 id="博客主标题上方的logo"><a href="#博客主标题上方的logo" class="headerlink" title="博客主标题上方的logo"></a>博客主标题上方的logo</h4><p>这个我是没有设置的，有需要的可以自己设置一下，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Custom Logo (Warning: Do not support scheme Mist)主页logo</span><br><span class="line">custom_logo: /uploads/logo.png</span><br></pre></td></tr></table></figure>
+
+<p>顺便一提，后面我们还会遇到 引用图片地址 的类似设置。<code>/uploads/logo.png </code>对应的本地blog文件夹中位置是 <code>\blog\themes\next\source\uploads\logo.png</code> 其中 <code>uploads</code> 文件夹，和<code>logo.png</code>文件，都需要自己创建。</p>
+<h4 id="版权信息说明"><a href="#版权信息说明" class="headerlink" title="版权信息说明"></a>版权信息说明</h4><p>网上的太繁琐了，其实不用改太多。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
+
+<p>版权声明文本是可以修改的，后面会介绍到。</p>
+<h4 id="设置导航栏菜单"><a href="#设置导航栏菜单" class="headerlink" title="设置导航栏菜单"></a>设置导航栏菜单</h4><p>我觉得设置多了太麻烦，于是就保留了<code>主页</code> <code>标签</code> <code>关于</code> <code>归档</code>四个</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  #categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  #schedule: /schedule/ || fa fa-calendar</span><br><span class="line">  #sitemap: /sitemap.xml || fa fa-sitemap</span><br><span class="line">  #commonweal: /404/ || fa fa-heartbeat</span><br><span class="line"></span><br><span class="line"># Enable / Disable menu icons / item badges.</span><br><span class="line">menu_settings:</span><br><span class="line">  icons: true</span><br><span class="line">  badges: false</span><br></pre></td></tr></table></figure>
+
+<p>启用哪个功能，就删除对应行前面的 # </p>
+<h4 id="侧边栏设置"><a href="#侧边栏设置" class="headerlink" title="侧边栏设置"></a>侧边栏设置</h4><p>我觉得左边挺好的，就没有改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  # position: right</span><br></pre></td></tr></table></figure>
+
+<p>设置侧边栏的头像，一般为作者的头像，和博客的logo有区别。</p>
+<p>可以是方形或圆形，还可以选择鼠标停留时，魔性的转动（我没设置）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: /uploads/avatar.jpg #头像图片地址 </span><br><span class="line">  # If true, the avatar will be dispalyed in circle.圆形选true 方形选false</span><br><span class="line">  rounded: true</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.魔性转动，打开选true</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
+
+<p>侧边栏外链，可以指向某篇文章，或某个网址。这里可以用来展示其他发布渠道。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">social:</span><br><span class="line">  #GitHub: https://github.com/yourname || fab fa-github</span><br><span class="line">  #E-Mail: mailto:yourname@gmail.com || fa fa-envelope</span><br><span class="line">  #Weibo: https://weibo.com/yourname || fab fa-weibo</span><br><span class="line">  #Google: https://plus.google.com/yourname || fab fa-google</span><br><span class="line">  #Twitter: https://twitter.com/yourname || fab fa-twitter</span><br><span class="line">  #FB Page: https://www.facebook.com/yourname || fab fa-facebook</span><br><span class="line">  #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow</span><br><span class="line">  #YouTube: https://youtube.com/yourname || fab fa-youtube</span><br><span class="line">  #Instagram: https://instagram.com/yourname || fab fa-instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || fab fa-skype</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true  #用来控制是否显示图标的</span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
+
+<p>和外链样式不同的是友链。默认显示为<code>友情链接</code>我将其修改为<code>我的朋友</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_settings:</span><br><span class="line">  icon: fa fa-link</span><br><span class="line">  title: 我的朋友</span><br><span class="line">  # Available values: block | inline</span><br><span class="line">  layout: block</span><br><span class="line">#友情链接</span><br><span class="line">links:</span><br><span class="line">  Ned: https://wangez.site</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回顶部按钮显示阅读进度"><a href="#返回顶部按钮显示阅读进度" class="headerlink" title="返回顶部按钮显示阅读进度"></a>返回顶部按钮显示阅读进度</h4><p>觉得没什么用，不过我还是用了（打脸ing）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭动画效果"><a href="#关闭动画效果" class="headerlink" title="关闭动画效果"></a>关闭动画效果</h4><p>我觉得博客，渲染的太华丽反而不好，于是就将其关了，如果想打开可以将enable的值设置为<code>true</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">motion:</span><br><span class="line">  enable: false</span><br><span class="line">  async: false</span><br></pre></td></tr></table></figure>
+
+<p>到此，配置差不多就结束了，如果你还想优化你的博客，可以继续看下去。</p>
+<h3 id="优化你的博客"><a href="#优化你的博客" class="headerlink" title="优化你的博客"></a>优化你的博客</h3><h4 id="优化文章链接"><a href="#优化文章链接" class="headerlink" title="优化文章链接"></a>优化文章链接</h4><p>优化文章链接，为了避免链接中出现中文导致太长或者死链的情况出现，可以使用一个插件来避免这种情况</p>
+<p>插件：<code>hexo-abbrlink</code></p>
 <p>首先在博客根目录运行Git Bash，输入以下指令安装<code>hexo-abbrlink</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
 
@@ -1124,6 +1124,72 @@
       </tags>
   </entry>
   <entry>
+    <title>关于闭包的一些理解</title>
+    <url>/posts/400024894.html/</url>
+    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
+<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
+<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
+
+<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
+<p>先来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
+
+<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
+<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
+<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
+<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
+<p>而这，就是闭包。</p>
+<p><strong>闭包：这就是我</strong>✌</p>
+<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
+<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
+<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
+<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
+<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
+<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
+<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
+<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
+<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
+<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
+<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
+<p><strong>请注意：闭包一定要慎用</strong></p>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
+<ul>
+<li><p>模仿块级作用域</p>
+<ul>
+<li>计时器的一个应用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打印一组li的下标</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>埋点计数器</p>
+<ul>
+<li>产品让做的网站分析的一种常用的数据采集方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>柯里化</p>
+<ul>
+<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
+<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
+<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
+<p>因为全局变量会被污染或者被修改。</p>
+<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
+<p><strong>闭包能够造成内存泄漏</strong></p>
+<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分享一次踩坑，一次自己封装的uni官方api</title>
     <url>/posts/1196783753.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这几天在做一个app，用来打比赛用，使用的是uni+uView的组件库。这个组件库是半道加进来的，学弟推荐的，我看有组件的话确实会方便很多，而且他都是按需引入，不占用额外空间，挺好的，我也就直接拿来用了。</p>
@@ -1225,72 +1291,6 @@
       <tags>
         <tag>踩坑日记</tag>
         <tag>uni-app</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于闭包的一些理解</title>
-    <url>/posts/400024894.html/</url>
-    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
-<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
-<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
-
-<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
-<p>先来看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
-
-<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
-<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
-<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
-<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
-<p>而这，就是闭包。</p>
-<p><strong>闭包：这就是我</strong>✌</p>
-<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
-<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
-<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
-<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
-<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
-<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
-<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
-<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
-<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
-<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
-<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
-<p><strong>请注意：闭包一定要慎用</strong></p>
-<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
-<ul>
-<li><p>模仿块级作用域</p>
-<ul>
-<li>计时器的一个应用</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>打印一组li的下标</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p>埋点计数器</p>
-<ul>
-<li>产品让做的网站分析的一种常用的数据采集方法</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>柯里化</p>
-<ul>
-<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
-<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
-<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
-<p>因为全局变量会被污染或者被修改。</p>
-<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
-<p><strong>闭包能够造成内存泄漏</strong></p>
-<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1397,151 +1397,73 @@
       </tags>
   </entry>
   <entry>
-    <title>如何写好JavaScript（下）</title>
-    <url>/posts/3177970664.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
-<p>有听懂的，有没懂的，先记下来，留着梳理。</p>
-<h3 id="看一段代码"><a href="#看一段代码" class="headerlink" title="看一段代码"></a>看一段代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断一个mat2d矩阵是否是单位矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUnitMatrix2d</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">0</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">1</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">2</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">3</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">4</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">5</span>] === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段代码好不好？ 为什么？</p>
+    <title>前端知识链条中少不了的一环--Ajax</title>
+    <url>/posts/1172116075.html/</url>
+    <content><![CDATA[<blockquote>
+<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
+<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
 <span id="more"></span>
 
-<blockquote>
-<p>这个代码从优雅程度上来说确实是有些过于长了，看起来不是十分的美观，我们可以使用类似于for循环的方式将其变得美观起来。</p>
-<p>但是如果他是写在代码底层（spritejs）的话，这么写的性能是最好的，因为他直接拿到索引就可以来比较，是循环所比拟不了的。</p>
-</blockquote>
-<p><strong>月影大佬：我们所有的代码风格，都是根据场合来的，如果是一些框架或者开源的库中，看见了不是很优雅的代码，我们应该结合场景去分析，因为有的时候这么写是有理由的。</strong></p>
-<p>写代码最应关注什么？</p>
+<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
+<li>通过异步模式，提升了用户体验</li>
+<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
+<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
+</ul>
+<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
+<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>风格：</p>
+<li><p>open()</p>
 <blockquote>
-<p>很重要，尤其是多人协作。关键在于风格要统一，否则会增加代码维护的成本。</p>
+<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
 </blockquote>
 </li>
-<li><p>效率：</p>
+<li><p>send()</p>
 <blockquote>
-<p>要在心中明白，什么样子的代码效率是最高的，尽量结合场景选择最合适的代码（效率or可读性）。</p>
+<p>send()方法表示着发送请求，不需要任何参数</p>
 </blockquote>
 </li>
-<li><p>约定</p>
-</li>
-<li><p>使用场景</p>
-</li>
-<li><p>设计</p>
-</li>
+<li><p>监听请求成功后的状态变化</p>
+<blockquote>
+<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
+<p>readyState：共有五个状态</p>
+<ul>
+<li>0：未初始化</li>
+<li>1：open方法成功调用后</li>
+<li>2：服务器已经答应客户端的请求</li>
+<li>3：交互中，http头信息已经接收，响应数据未接收</li>
+<li>4：完成</li>
 </ul>
-<h3 id="当年的left-pad事件"><a href="#当年的left-pad事件" class="headerlink" title="当年的left-pad事件"></a><strong>当年的left-pad事件</strong></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="built_in">String</span>(str);</span><br><span class="line">    <span class="keyword">var</span> i = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!ch &amp;&amp; ch !== <span class="number">0</span>) ch=<span class="string">&quot; &quot;</span>;</span><br><span class="line">    len = len - str.length;</span><br><span class="line">    <span class="keyword">while</span>(++i&lt;len)&#123;</span><br><span class="line">        str = ch + str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="事件本身的槽点"><a href="#事件本身的槽点" class="headerlink" title="事件本身的槽点"></a><strong>事件本身的槽点</strong></h4><ul>
-<li><p>NPM模块粒度</p>
-<blockquote>
-<p>说npm模块粒度太细了，单个函数的模块。</p>
-<p>当年模块化跟打包工具不是很成熟</p>
-</blockquote>
-</li>
-<li><p>代码风格</p>
-<blockquote>
-<p>可读性还好</p>
-</blockquote>
-</li>
-<li><p>代码质量/效率</p>
-<blockquote>
-<p>这个效率还可以，因为正常场景中不会拼接太长的字符串</p>
+<p>responseText：服务器端返回的文本内容，默认是字符串</p>
+<p>status：服务器端返回的状态码</p>
+<p>statusText：服务器端返回的状态码文本说明信息</p>
 </blockquote>
 </li>
 </ul>
-<h4 id="提高效率与代码简洁性"><a href="#提高效率与代码简洁性" class="headerlink" title="提高效率与代码简洁性"></a><strong>提高效率与代码简洁性</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="string">&quot;&quot;</span> + str;</span><br><span class="line">    <span class="keyword">const</span> padLen = len - str.length;</span><br><span class="line">    <span class="keyword">if</span>(padLen &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&quot;&quot;</span>+ch).repeat(padLen) + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="交通灯：状态切换"><a href="#交通灯：状态切换" class="headerlink" title="交通灯：状态切换"></a><strong>交通灯：状态切换</strong></h3><p>实现一个切换<strong>多个</strong>交通灯<strong>状态切换</strong>的功能</p>
-<h4 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h4><blockquote>
-<p>不知道为什么听这个课，我现在觉得版本一就等于很垃圾</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    traffic.className = <span class="string">&#x27;s1&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        traffic.className = <span class="string">&#x27;s2&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            traffic.className = <span class="string">&#x27;s3&#x27;</span>;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                traffic.className = <span class="string">&#x27;s4&#x27;</span>;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    traffic.className = <span class="string">&#x27;s5&#x27;</span>;</span><br><span class="line">                    <span class="built_in">setTimeout</span>(reset,<span class="number">1000</span>)</span><br><span class="line">                &#125;,<span class="number">1000</span>)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
+</li>
+<li><p>setRequestHeader()：设置请求头</p>
+</li>
+<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
+</li>
+<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
+<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
+</ul>
+<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
 <blockquote>
-<p>setTimeout本身是异步，将代码这样嵌套，会造成回调地狱的问题，而且代码很丑，可读性差，不方便维护。</p>
-<p>看来跟我上边说的一样，版本一，都是垃圾，哈哈哈哈</p>
+<p>每日一问：今日你卷了没？</p>
 </blockquote>
-<h4 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> stateList = [</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;wait&#x27;</span>, <span class="attr">last</span>: <span class="number">1000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;stop&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;pass&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">traffic,stateList</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">applyState</span>(<span class="params">steteIdx</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state,last&#125; = stateList[stateIdx];</span><br><span class="line">        traffic.className = state;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            applyState((stateIdx + <span class="number">1</span>) % stateList.length);</span><br><span class="line">        &#125;,last)</span><br><span class="line">    &#125;</span><br><span class="line">    applyState(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">start(traffic,stateList);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>采用的函数封装的方法</p>
-</blockquote>
-<h4 id="版本三"><a href="#版本三" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">...fnList</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stateIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fn = fnList[stateIndex++ % fnList.length];</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> trafficStatePoll = poll(setState.bind(<span class="literal">null</span>,<span class="string">&#x27;wait&#x27;</span>),</span><br><span class="line">setState.bind(<span class="literal">null</span>,<span class="string">&#x27;stop&#x27;</span>),setState.bind(<span class="literal">null</span>,<span class="string">&#x27;pass&#x27;</span>));</span><br><span class="line"><span class="built_in">setInterval</span>(trafficStatePoll,<span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>抽象出一个轮巡的方法，采用高阶函数</p>
-</blockquote>
-<h4 id="版本四"><a href="#版本四" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve,time));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        setState(<span class="string">&#x27;wait&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">1000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;stop&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>知道了异步，就肯定好做了呀，用async和await，命令式的写法。</p>
-<p>可以继续保持异步采用声明式的封装继续去做出版本567.</p>
-</blockquote>
-<h3 id="判断是否是4的幂"><a href="#判断是否是4的幂" class="headerlink" title="判断是否是4的幂"></a><strong>判断是否是4的幂</strong></h3><h4 id="版本一-1"><a href="#版本一-1" class="headerlink" title="版本一"></a>版本一</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">4</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        num /= <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>很中规中矩的写法，每次对4取余，结果还是要能被4整除。</p>
-</blockquote>
-<h4 id="版本二-1"><a href="#版本二-1" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="keyword">if</span>(num&amp; <span class="number">0b11</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       num &gt;&gt;&gt;=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将对4取余数变成了判断二进制数的后两位，后两位是00就肯定是4的倍数，除以四变成右移两位。</p>
-</blockquote>
-<h4 id="版本三-1"><a href="#版本三-1" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">return</span> num &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp;(num - <span class="number">1</span>)) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp; <span class="number">0xAAAAAAAA</span>) === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>刚刚是 log的复杂度算法，这个是常数复杂度的算法</p>
-<p>如果一个数是4的幂的话，转化二进制肯定只有首位是1的，并且后面跟着偶数个0，所以在这种情况下，判断只有一个1，并且还有偶数个0即可。</p>
-</blockquote>
-<h4 id="版本四-1"><a href="#版本四-1" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num).toString(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1(?:00)*$/</span>.test(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>理论与上一个同理，但是我真的震惊了，原来一个思路可以有这么多种解决方法。</p>
-<p>但是相对来说，正则的开销会比数值的要大，但是在这个情景中还是可以接受的。</p>
-</blockquote>
-<h3 id="洗牌"><a href="#洗牌" class="headerlink" title="洗牌"></a><strong>洗牌</strong></h3><p>简单实现</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(shuffle(cards));</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果这是个抽奖程序的话，是会被打的。</p>
-<p>因为不公平。和原来的位置相关。</p>
-</blockquote>
-<p>我们来验证一下</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
-
-<p>我们来调用上面的洗牌算法一万次，完后将每个位置上出现牌的点数都相加，如果他公平，我们相加的结果应该都差不多，对吧。</p>
-<blockquote>
-<p>[<br> 38511, 38548, 45148,<br> 46416, 46551, 44174,<br> 43456, 46877, 48894,<br> 51425<br>]</p>
-</blockquote>
-<p>这确是我打印出来的数据，连续跑了好几组都是某某要大，你将一万次改的越大，最后位置的数字就会越大，也就是说，小数字会出现在靠前的位置，大数字会出现在靠后的位置。</p>
-<p>如果还不确认的小伙伴可以去做一下概率统计。</p>
-<blockquote>
-<p>这是因为sort会两两交换，每个位置上交换的次数是不同的，所以最后的数字在交换到前面的概率是比较小的，当次数被无限放大的时候，这个差距就是越来越大。所以导致刚刚的洗牌算法是不公平的。</p>
-</blockquote>
-<p>如果想要公平的话，有一种算法是这样的，每次随机抽取一张牌把它放到最后的位置去。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> c =[...cards];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = c.length; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">const</span> pIdx = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * i);</span><br><span class="line">        [c[pIdx],c[i-<span class="number">1</span>]] = [c[i-<span class="number">1</span>], c[pIdx]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>[<br> 45466, 44956, 44753,<br> 45253, 45179, 44765,<br> 45147, 44469, 45404,<br> 44608<br>]</p>
-</blockquote>
-<p>可以看出这个打印出来的结果，大小都是差不大多的。</p>
-<h4 id="分红包"><a href="#分红包" class="headerlink" title="分红包"></a><strong>分红包</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generate</span>(<span class="params">amount, count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ret = [amount];</span><br><span class="line">    <span class="keyword">while</span>(count &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">// 挑选出最大的一块进行切分</span></span><br><span class="line">        <span class="keyword">let</span> cake = <span class="built_in">Math</span>.max(...ret),</span><br><span class="line">            idx = ret.indexOf(cake),</span><br><span class="line">            part = <span class="number">1</span> + <span class="built_in">Math</span>.floor((cake/<span class="number">2</span>) * <span class="built_in">Math</span>.random()),</span><br><span class="line">            rest = cake - part;</span><br><span class="line">        ret.splice(idx,<span class="number">1</span>,part,rest);</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不停的切分最大的金额。</p>
-<blockquote>
-<p>这个会带来一个问题，就是金额很平均。</p>
-<p>不会有人拿了很大的红包，少了一丝趣味性。</p>
-<p>不够刺激~</p>
-</blockquote>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
-<p>是我菜了，继续加油！</p>
+<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
-        <tag>字节青训营</tag>
       </tags>
   </entry>
   <entry>
@@ -1713,129 +1635,151 @@
       </tags>
   </entry>
   <entry>
-    <title>前端知识链条中少不了的一环--Ajax</title>
-    <url>/posts/1172116075.html/</url>
-    <content><![CDATA[<blockquote>
-<p>不知不觉中又好久没写博客了，这几日因为在看计网，没有记录，于是又觉得自己没有学到什么东西，正好今天在牛客刷面经的时候看见了手撕Ajax，题材有了，于是文章它来了！</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当我们步入前端大门，走过HTML，看过CSS，翻过JavaScript，接下来你该遇到的，就是它了–Ajax。<br>​这个也是前端与后端交互所必需的东西，非常之重要。所以才有了标题的说法，它是前端知识链条中少不了的一环。</p>
-<h2 id="什么是Ajax？"><a href="#什么是Ajax？" class="headerlink" title="什么是Ajax？"></a>什么是Ajax？</h2><p>Ajax的核心是JavaScript对象XmlHttpRequest，XmlHttp使我们可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。<br>​通过XMLHttpRequest对象，前端开发人员就可以在页面加载以后进行页面的局部更新等操作。</p>
+    <title>如何写好JavaScript（下）</title>
+    <url>/posts/3177970664.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
+<p>有听懂的，有没懂的，先记下来，留着梳理。</p>
+<h3 id="看一段代码"><a href="#看一段代码" class="headerlink" title="看一段代码"></a>看一段代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断一个mat2d矩阵是否是单位矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUnitMatrix2d</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">0</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">1</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">2</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">3</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">4</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">5</span>] === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码好不好？ 为什么？</p>
 <span id="more"></span>
 
-<h2 id="Ajax作用是什么？"><a href="#Ajax作用是什么？" class="headerlink" title="Ajax作用是什么？"></a>Ajax作用是什么？</h2><ul>
-<li>通过异步模式，提升了用户体验</li>
-<li>不在使用form表单提交（会出现跳转情况），提升了用户体验</li>
-<li>Ajax可以实现局部刷新，不用在更新整个页面，传统的网页（不适用Ajax），想要更新内容必须重载整个页面。</li>
+<blockquote>
+<p>这个代码从优雅程度上来说确实是有些过于长了，看起来不是十分的美观，我们可以使用类似于for循环的方式将其变得美观起来。</p>
+<p>但是如果他是写在代码底层（spritejs）的话，这么写的性能是最好的，因为他直接拿到索引就可以来比较，是循环所比拟不了的。</p>
+</blockquote>
+<p><strong>月影大佬：我们所有的代码风格，都是根据场合来的，如果是一些框架或者开源的库中，看见了不是很优雅的代码，我们应该结合场景去分析，因为有的时候这么写是有理由的。</strong></p>
+<p>写代码最应关注什么？</p>
+<ul>
+<li><p>风格：</p>
+<blockquote>
+<p>很重要，尤其是多人协作。关键在于风格要统一，否则会增加代码维护的成本。</p>
+</blockquote>
+</li>
+<li><p>效率：</p>
+<blockquote>
+<p>要在心中明白，什么样子的代码效率是最高的，尽量结合场景选择最合适的代码（效率or可读性）。</p>
+</blockquote>
+</li>
+<li><p>约定</p>
+</li>
+<li><p>使用场景</p>
+</li>
+<li><p>设计</p>
+</li>
 </ul>
-<p>这就使得web应用程序能够更加敏捷的回应用户操作，避免了多次向服务端发送那些重复的数据。</p>
-<h2 id="详解Ajax创建请求步骤"><a href="#详解Ajax创建请求步骤" class="headerlink" title="详解Ajax创建请求步骤"></a>详解Ajax创建请求步骤</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.发送请求<br>    4.监听请求成功后的状态变化</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">request.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;url&quot;</span>)</span><br><span class="line">request.send()</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (<span class="built_in">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="built_in">this</span>.status == <span class="number">200</span>) &#123;</span><br><span class="line">   		<span class="built_in">console</span>.log(request.responseText)</span><br><span class="line"> 		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="当年的left-pad事件"><a href="#当年的left-pad事件" class="headerlink" title="当年的left-pad事件"></a><strong>当年的left-pad事件</strong></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="built_in">String</span>(str);</span><br><span class="line">    <span class="keyword">var</span> i = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!ch &amp;&amp; ch !== <span class="number">0</span>) ch=<span class="string">&quot; &quot;</span>;</span><br><span class="line">    len = len - str.length;</span><br><span class="line">    <span class="keyword">while</span>(++i&lt;len)&#123;</span><br><span class="line">        str = ch + str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>open()</p>
+<h4 id="事件本身的槽点"><a href="#事件本身的槽点" class="headerlink" title="事件本身的槽点"></a><strong>事件本身的槽点</strong></h4><ul>
+<li><p>NPM模块粒度</p>
 <blockquote>
-<p>open()方法创建了http请求，它有三个参数，第一个参数指定了提交的方式是POST还是GET，第二个参数是指定要提交的地址是哪，第三个参数是指定异步还是同步（true or false）【目前已经废弃第三个参数】</p>
+<p>说npm模块粒度太细了，单个函数的模块。</p>
+<p>当年模块化跟打包工具不是很成熟</p>
 </blockquote>
 </li>
-<li><p>send()</p>
+<li><p>代码风格</p>
 <blockquote>
-<p>send()方法表示着发送请求，不需要任何参数</p>
+<p>可读性还好</p>
 </blockquote>
 </li>
-<li><p>监听请求成功后的状态变化</p>
+<li><p>代码质量/效率</p>
 <blockquote>
-<p>onreadystatechange：监听请求状态改变，readyState改变时会调用此方法，一般用于指定回调函数</p>
-<p>readyState：共有五个状态</p>
-<ul>
-<li>0：未初始化</li>
-<li>1：open方法成功调用后</li>
-<li>2：服务器已经答应客户端的请求</li>
-<li>3：交互中，http头信息已经接收，响应数据未接收</li>
-<li>4：完成</li>
-</ul>
-<p>responseText：服务器端返回的文本内容，默认是字符串</p>
-<p>status：服务器端返回的状态码</p>
-<p>statusText：服务器端返回的状态码文本说明信息</p>
+<p>这个效率还可以，因为正常场景中不会拼接太长的字符串</p>
 </blockquote>
 </li>
 </ul>
-<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>步骤如下：<br>    1.创建一个对象<br>    2.设置请求参数<br>    3.设置请求头<br>    4.发送请求<br>    5.监听请求成功后的状态变化<br>可以看出，post请求比get请求多出了一个设置请求头的步骤，也请大家记住，这个步骤千万不要忘记！</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let XHR = new XMLHttpRequest(); </span><br><span class="line">XHR.open(&quot;POST&quot;, &quot;url&quot;); </span><br><span class="line">XHR.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;); </span><br><span class="line">XHR.send(data);</span><br><span class="line">XHR.onreadystatechange = function () &#123;</span><br><span class="line">	if (XHR.readyState == 4 &amp;&amp; XHR.status == 200) &#123;</span><br><span class="line">		console.log(XHR.responseText); </span><br><span class="line">		XHR = null; // 此处是为了释放对象，不写也行，js本身也会进行回收</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>send()：解释一下这里send里为什么有个data，这是我们通过Ajax发送post请求给服务器发送了一组data数据。</p>
-</li>
-<li><p>setRequestHeader()：设置请求头</p>
-</li>
-<li><p>readyState值说明 ：<br>  0.初始化,XHR对象已经创建,还未执行open<br>  1.载入,已经调用open方法,但是还没发送请求<br>  2.载入完成,请求已经发送完成<br>  3.交互,可以接收到部分数据<br>  4.数据全部返回</p>
-</li>
-<li><p>status值说明:<br>  1.200：成功<br>  2.404：没有发现文件、查询或url<br>  3.500：服务器内部发生错误</p>
-<h2 id="Ajax中-GET与POST请求的区别"><a href="#Ajax中-GET与POST请求的区别" class="headerlink" title="Ajax中 GET与POST请求的区别"></a>Ajax中 GET与POST请求的区别</h2></li>
-</ul>
-<p>1.刚刚我们已经说过，get请求我们不用设置请求头，而post请求需要。<br>2.使用get请求的时候，参数在url中显示，而使用post方式则不会显示出来。<br>3.使用get请求发送的数据量小，post请求发送的数据量大。<br>4.get请求能够被缓存，post不进行缓存。get请求能够被保存在浏览器的历史记录中（密码等私密数据采用get方式提交，别人查看历史记录就能直接看到这些数据，造成数据泄漏）。<br>5.get产生一个TCP数据包，post产生两个tcp数据包。<br>    a. 对于get，浏览器会把header跟data一起发出去，服务器响应200，并返回数据。<br>    b. 对于post，浏览器先发送header，服务器响应continue，浏览器再发送data，服务器响应200，并返回数据。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>于端午前在牛客购买的课程，如今已经看完了百分之80，随着课程将基础滚了一遍，觉得差不大多了emm，下次回滚就应该是在面试前期了，跟随着面经来复习了！最近跟小伙伴们的风气真是越来越快乐了，卷的要命！</p>
-<blockquote>
-<p>每日一问：今日你卷了没？</p>
+<h4 id="提高效率与代码简洁性"><a href="#提高效率与代码简洁性" class="headerlink" title="提高效率与代码简洁性"></a><strong>提高效率与代码简洁性</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="string">&quot;&quot;</span> + str;</span><br><span class="line">    <span class="keyword">const</span> padLen = len - str.length;</span><br><span class="line">    <span class="keyword">if</span>(padLen &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&quot;&quot;</span>+ch).repeat(padLen) + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="交通灯：状态切换"><a href="#交通灯：状态切换" class="headerlink" title="交通灯：状态切换"></a><strong>交通灯：状态切换</strong></h3><p>实现一个切换<strong>多个</strong>交通灯<strong>状态切换</strong>的功能</p>
+<h4 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h4><blockquote>
+<p>不知道为什么听这个课，我现在觉得版本一就等于很垃圾</p>
 </blockquote>
-<p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    traffic.className = <span class="string">&#x27;s1&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        traffic.className = <span class="string">&#x27;s2&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            traffic.className = <span class="string">&#x27;s3&#x27;</span>;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                traffic.className = <span class="string">&#x27;s4&#x27;</span>;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    traffic.className = <span class="string">&#x27;s5&#x27;</span>;</span><br><span class="line">                    <span class="built_in">setTimeout</span>(reset,<span class="number">1000</span>)</span><br><span class="line">                &#125;,<span class="number">1000</span>)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>setTimeout本身是异步，将代码这样嵌套，会造成回调地狱的问题，而且代码很丑，可读性差，不方便维护。</p>
+<p>看来跟我上边说的一样，版本一，都是垃圾，哈哈哈哈</p>
+</blockquote>
+<h4 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> stateList = [</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;wait&#x27;</span>, <span class="attr">last</span>: <span class="number">1000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;stop&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;pass&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">traffic,stateList</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">applyState</span>(<span class="params">steteIdx</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state,last&#125; = stateList[stateIdx];</span><br><span class="line">        traffic.className = state;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            applyState((stateIdx + <span class="number">1</span>) % stateList.length);</span><br><span class="line">        &#125;,last)</span><br><span class="line">    &#125;</span><br><span class="line">    applyState(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">start(traffic,stateList);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>采用的函数封装的方法</p>
+</blockquote>
+<h4 id="版本三"><a href="#版本三" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">...fnList</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stateIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fn = fnList[stateIndex++ % fnList.length];</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> trafficStatePoll = poll(setState.bind(<span class="literal">null</span>,<span class="string">&#x27;wait&#x27;</span>),</span><br><span class="line">setState.bind(<span class="literal">null</span>,<span class="string">&#x27;stop&#x27;</span>),setState.bind(<span class="literal">null</span>,<span class="string">&#x27;pass&#x27;</span>));</span><br><span class="line"><span class="built_in">setInterval</span>(trafficStatePoll,<span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>抽象出一个轮巡的方法，采用高阶函数</p>
+</blockquote>
+<h4 id="版本四"><a href="#版本四" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve,time));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        setState(<span class="string">&#x27;wait&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">1000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;stop&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>知道了异步，就肯定好做了呀，用async和await，命令式的写法。</p>
+<p>可以继续保持异步采用声明式的封装继续去做出版本567.</p>
+</blockquote>
+<h3 id="判断是否是4的幂"><a href="#判断是否是4的幂" class="headerlink" title="判断是否是4的幂"></a><strong>判断是否是4的幂</strong></h3><h4 id="版本一-1"><a href="#版本一-1" class="headerlink" title="版本一"></a>版本一</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">4</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        num /= <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>很中规中矩的写法，每次对4取余，结果还是要能被4整除。</p>
+</blockquote>
+<h4 id="版本二-1"><a href="#版本二-1" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="keyword">if</span>(num&amp; <span class="number">0b11</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       num &gt;&gt;&gt;=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将对4取余数变成了判断二进制数的后两位，后两位是00就肯定是4的倍数，除以四变成右移两位。</p>
+</blockquote>
+<h4 id="版本三-1"><a href="#版本三-1" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">return</span> num &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp;(num - <span class="number">1</span>)) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp; <span class="number">0xAAAAAAAA</span>) === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>刚刚是 log的复杂度算法，这个是常数复杂度的算法</p>
+<p>如果一个数是4的幂的话，转化二进制肯定只有首位是1的，并且后面跟着偶数个0，所以在这种情况下，判断只有一个1，并且还有偶数个0即可。</p>
+</blockquote>
+<h4 id="版本四-1"><a href="#版本四-1" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num).toString(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1(?:00)*$/</span>.test(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>理论与上一个同理，但是我真的震惊了，原来一个思路可以有这么多种解决方法。</p>
+<p>但是相对来说，正则的开销会比数值的要大，但是在这个情景中还是可以接受的。</p>
+</blockquote>
+<h3 id="洗牌"><a href="#洗牌" class="headerlink" title="洗牌"></a><strong>洗牌</strong></h3><p>简单实现</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(shuffle(cards));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果这是个抽奖程序的话，是会被打的。</p>
+<p>因为不公平。和原来的位置相关。</p>
+</blockquote>
+<p>我们来验证一下</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>我们来调用上面的洗牌算法一万次，完后将每个位置上出现牌的点数都相加，如果他公平，我们相加的结果应该都差不多，对吧。</p>
+<blockquote>
+<p>[<br> 38511, 38548, 45148,<br> 46416, 46551, 44174,<br> 43456, 46877, 48894,<br> 51425<br>]</p>
+</blockquote>
+<p>这确是我打印出来的数据，连续跑了好几组都是某某要大，你将一万次改的越大，最后位置的数字就会越大，也就是说，小数字会出现在靠前的位置，大数字会出现在靠后的位置。</p>
+<p>如果还不确认的小伙伴可以去做一下概率统计。</p>
+<blockquote>
+<p>这是因为sort会两两交换，每个位置上交换的次数是不同的，所以最后的数字在交换到前面的概率是比较小的，当次数被无限放大的时候，这个差距就是越来越大。所以导致刚刚的洗牌算法是不公平的。</p>
+</blockquote>
+<p>如果想要公平的话，有一种算法是这样的，每次随机抽取一张牌把它放到最后的位置去。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> c =[...cards];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = c.length; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">const</span> pIdx = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * i);</span><br><span class="line">        [c[pIdx],c[i-<span class="number">1</span>]] = [c[i-<span class="number">1</span>], c[pIdx]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>[<br> 45466, 44956, 44753,<br> 45253, 45179, 44765,<br> 45147, 44469, 45404,<br> 44608<br>]</p>
+</blockquote>
+<p>可以看出这个打印出来的结果，大小都是差不大多的。</p>
+<h4 id="分红包"><a href="#分红包" class="headerlink" title="分红包"></a><strong>分红包</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generate</span>(<span class="params">amount, count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ret = [amount];</span><br><span class="line">    <span class="keyword">while</span>(count &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">// 挑选出最大的一块进行切分</span></span><br><span class="line">        <span class="keyword">let</span> cake = <span class="built_in">Math</span>.max(...ret),</span><br><span class="line">            idx = ret.indexOf(cake),</span><br><span class="line">            part = <span class="number">1</span> + <span class="built_in">Math</span>.floor((cake/<span class="number">2</span>) * <span class="built_in">Math</span>.random()),</span><br><span class="line">            rest = cake - part;</span><br><span class="line">        ret.splice(idx,<span class="number">1</span>,part,rest);</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不停的切分最大的金额。</p>
+<blockquote>
+<p>这个会带来一个问题，就是金额很平均。</p>
+<p>不会有人拿了很大的红包，少了一丝趣味性。</p>
+<p>不够刺激~</p>
+</blockquote>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
+<p>是我菜了，继续加油！</p>
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>微信小程序相关</title>
-    <url>/posts/2713850416.html/</url>
-    <content><![CDATA[<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
-<ul>
-<li>1.修改数据的行为始终是同步的</li>
-</ul>
-<p>3.数据流：</p>
-<ul>
-<li>1.单项： Model —&gt; View</li>
-</ul>
-<span id="more"></span>
-
-<h4 id="2-Vue"><a href="#2-Vue" class="headerlink" title="2. Vue"></a>2. Vue</h4><p>1.data中初始化数据<br>2.修改数据: this.key = value<br>3.数据流：</p>
-<ul>
-<li>1.Vue是单项数据流： Model —&gt; View</li>
-<li>2.Vue中实现了双向数据绑定： v-model</li>
-</ul>
-<h4 id="3-React"><a href="#3-React" class="headerlink" title="3. React"></a>3. React</h4><p>1.state中初始化状态数据<br>2.修改数据: this.setState()</p>
-<ul>
-<li>1.自身钩子函数中(componentDidMount)异步的</li>
-<li>2.非自身的钩子函数中(定时器的回调)同步的</li>
-</ul>
-<p>3.数据流：</p>
-<ul>
-<li>1.单项： Model —&gt; View</li>
-</ul>
-<h2 id="2-获取用户基本信息"><a href="#2-获取用户基本信息" class="headerlink" title="2. 获取用户基本信息"></a>2. 获取用户基本信息</h2><p>1.用户未授权(首次登陆)</p>
-<ul>
-<li>1.button open-type=‘getUserInfo’</li>
-</ul>
-<p>2.用户已经授权(再次登陆)</p>
-<ul>
-<li>1.wx.getUserInfo</li>
-</ul>
-<h2 id="3-前后端交互"><a href="#3-前后端交互" class="headerlink" title="3. 前后端交互"></a>3. 前后端交互</h2><p>1.语法: wx.request()<br>2.注意点:</p>
-<ul>
-<li>1.协议必须是https协议</li>
-<li>2.一个接口最多配置20个域名</li>
-<li>3.并发限制上限是10个</li>
-<li><ol>
-<li><strong>开发过程中设置不校验合法域名</strong>： 开发工具 —&gt; 右上角详情 —-&gt; 本地设置 —&gt; 不校验</li>
-</ol>
-</li>
-</ul>
-<h2 id="4-本地存储"><a href="#4-本地存储" class="headerlink" title="4. 本地存储"></a>4. 本地存储</h2><p>1.语法: wx.setStorage() || wx.setStorageSync() || …..<br>2.注意点：</p>
-<ul>
-<li>1.建议存储的数据为json数据</li>
-<li>2.单个 key 允许存储的最大数据长度为 1MB，所有数据存储上限为 10MB</li>
-<li>3.属于永久存储，同H5的localStorage一样</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>小程序</tag>
+        <tag>字节青训营</tag>
       </tags>
   </entry>
   <entry>
@@ -1904,6 +1848,62 @@
       <tags>
         <tag>Css</tag>
         <tag>Flex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信小程序相关</title>
+    <url>/posts/2713850416.html/</url>
+    <content><![CDATA[<h2 id="1-数据绑定"><a href="#1-数据绑定" class="headerlink" title="1. 数据绑定"></a>1. 数据绑定</h2><h4 id="1-小程序"><a href="#1-小程序" class="headerlink" title="1.小程序"></a>1.小程序</h4><p>1.data中初始化数据<br>2.修改数据： this.setData()</p>
+<ul>
+<li>1.修改数据的行为始终是同步的</li>
+</ul>
+<p>3.数据流：</p>
+<ul>
+<li>1.单项： Model —&gt; View</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="2-Vue"><a href="#2-Vue" class="headerlink" title="2. Vue"></a>2. Vue</h4><p>1.data中初始化数据<br>2.修改数据: this.key = value<br>3.数据流：</p>
+<ul>
+<li>1.Vue是单项数据流： Model —&gt; View</li>
+<li>2.Vue中实现了双向数据绑定： v-model</li>
+</ul>
+<h4 id="3-React"><a href="#3-React" class="headerlink" title="3. React"></a>3. React</h4><p>1.state中初始化状态数据<br>2.修改数据: this.setState()</p>
+<ul>
+<li>1.自身钩子函数中(componentDidMount)异步的</li>
+<li>2.非自身的钩子函数中(定时器的回调)同步的</li>
+</ul>
+<p>3.数据流：</p>
+<ul>
+<li>1.单项： Model —&gt; View</li>
+</ul>
+<h2 id="2-获取用户基本信息"><a href="#2-获取用户基本信息" class="headerlink" title="2. 获取用户基本信息"></a>2. 获取用户基本信息</h2><p>1.用户未授权(首次登陆)</p>
+<ul>
+<li>1.button open-type=‘getUserInfo’</li>
+</ul>
+<p>2.用户已经授权(再次登陆)</p>
+<ul>
+<li>1.wx.getUserInfo</li>
+</ul>
+<h2 id="3-前后端交互"><a href="#3-前后端交互" class="headerlink" title="3. 前后端交互"></a>3. 前后端交互</h2><p>1.语法: wx.request()<br>2.注意点:</p>
+<ul>
+<li>1.协议必须是https协议</li>
+<li>2.一个接口最多配置20个域名</li>
+<li>3.并发限制上限是10个</li>
+<li><ol>
+<li><strong>开发过程中设置不校验合法域名</strong>： 开发工具 —&gt; 右上角详情 —-&gt; 本地设置 —&gt; 不校验</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-本地存储"><a href="#4-本地存储" class="headerlink" title="4. 本地存储"></a>4. 本地存储</h2><p>1.语法: wx.setStorage() || wx.setStorageSync() || …..<br>2.注意点：</p>
+<ul>
+<li>1.建议存储的数据为json数据</li>
+<li>2.单个 key 允许存储的最大数据长度为 1MB，所有数据存储上限为 10MB</li>
+<li>3.属于永久存储，同H5的localStorage一样</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>小程序</tag>
       </tags>
   </entry>
   <entry>
