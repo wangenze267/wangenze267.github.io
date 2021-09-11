@@ -64,6 +64,50 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaScript变量提升</title>
+    <url>/posts/388126410.html/</url>
+    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
+<p>先从一个简单的例子来入手：</p>
+<blockquote>
+<p>a = 2;<br>var a;<br>console.log(a);</p>
+</blockquote>
+<span id="more"></span>
+
+<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
+<blockquote>
+<p>var a;<br>a = 2;<br>console.log(a);</p>
+</blockquote>
+<p>那么我们再看一个例子：</p>
+<blockquote>
+<p>console.log(a);<br>var a = 2;</p>
+</blockquote>
+<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
+<blockquote>
+<p>var a;<br>console.log(a);<br>a = 2;</p>
+</blockquote>
+<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
+</blockquote>
+<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
+<p>那么多个函数声明怎么办呢？</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
+</blockquote>
+<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
+<p>还有最后一个例子了：</p>
+<blockquote>
+<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
+</blockquote>
+<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript中的设计模式-策略模式</title>
     <url>/posts/3322122302.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p>
@@ -167,50 +211,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript变量提升</title>
-    <url>/posts/388126410.html/</url>
-    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
-<p>先从一个简单的例子来入手：</p>
-<blockquote>
-<p>a = 2;<br>var a;<br>console.log(a);</p>
-</blockquote>
-<span id="more"></span>
-
-<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
-<blockquote>
-<p>var a;<br>a = 2;<br>console.log(a);</p>
-</blockquote>
-<p>那么我们再看一个例子：</p>
-<blockquote>
-<p>console.log(a);<br>var a = 2;</p>
-</blockquote>
-<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
-<blockquote>
-<p>var a;<br>console.log(a);<br>a = 2;</p>
-</blockquote>
-<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
-<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
-</blockquote>
-<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
-<p>那么多个函数声明怎么办呢？</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
-</blockquote>
-<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
-<p>还有最后一个例子了：</p>
-<blockquote>
-<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
-</blockquote>
-<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -659,96 +659,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用Hexo搭建自己的博客</title>
-    <url>/posts/735412972.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
-<h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
-<span id="more"></span>
-
-<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><p>在安装hexo前，电脑上具备有git与node两个环境才行</p>
-<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，我觉得建议每个人都去了解一下。廖雪峰老师的Git教程写的非常好，大家可以了解一下。<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></p>
-<p>windows：到git官网上下载,<a href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
-<p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p>Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。</p>
-<p>windows：<a href="https://nodejs.org/en/download/">nodejs</a>  </p>
-<p>linux:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
-
-<p>安装完后，打开命令行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<p>检查一下有没有安装成功</p>
-<p>顺便说一下，windows在git安装完后，就可以直接使用git bash来敲命令行了。</p>
-<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>现在我们就可以安装hexo了</p>
-<p>前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹blog，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
-<p>输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>依旧用<code>hexo -v</code>查看一下版本</p>
-<p>至此就全部安装完了。</p>
-<p>接下来初始化一个blog吧！</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init myblog(myblog是你创建的文件夹的名字，可以随意命名)</span><br></pre></td></tr></table></figure>
-
-<p>然后</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd myblog //进入这个myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>新建完成后，指定文件夹目录下有：</p>
-<ul>
-<li>node_modules: 依赖包</li>
-<li>public：存放生成的页面</li>
-<li>scaffolds：生成文章的一些模板</li>
-<li>source：用来存放你的文章</li>
-<li>themes：主题</li>
-<li>_config.yml: 博客的配置文件</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>打开hexo的服务，在浏览器输入<code>localhost:4000</code>就可以看到你生成的博客了。</p>
-<p>使用ctrl+c可以把服务关掉。</p>
-<p>注：可以使用 <code>hexo command</code> 来查看hexo全部命令</p>
-<h3 id="准备好GitHub"><a href="#准备好GitHub" class="headerlink" title="准备好GitHub"></a>准备好GitHub</h3><p>首先，你先要有一个GitHub账户，去注册一个吧。</p>
-<p>注册完登录后，在GitHub.com中看到一个New repository，新建仓库</p>
-<p>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，xxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
-<p>点击create repository。</p>
-<p>回到你的git bash中</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
-
-<p>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户。</p>
-<p>可以用以下两条，检查一下你有没有输对:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
-
-<h3 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h3><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，修改为<br>YourgithubName就是你的GitHub账户</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>然后：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加。<br><code>hexo generate</code> 顾名思义，生成静态文章，可以用 <code>hexo g</code>缩写<br><code>hexo deploy</code> 部署文章，可以用<code>hexo d</code>缩写</p>
-<p>注意deploy时可能要你输入username和password。</p>
-<p>过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！</p>
-<h3 id="关联个人域名"><a href="#关联个人域名" class="headerlink" title="关联个人域名"></a>关联个人域名</h3><p>如果你想自己的域名与博客也关联起来的话，可以看这里</p>
-<p>在source里创建一个叫CNAME的文件（注意没有任何后缀，名字就叫CNAME）</p>
-<p>在CNAME里面写上你的域名，例如：</p>
-<blockquote>
-<p>blog.wangez.site</p>
-</blockquote>
-<p>之后打开git bash</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p>在GitHub上你创建的仓库里就会多一个叫做CNAME的文件了</p>
-<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
-]]></content>
-      <tags>
-        <tag>踩坑日记</tag>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>假期总结（暑假结束！）</title>
     <url>/posts/1009533019.html/</url>
     <content><![CDATA[<h2 id="假期总结"><a href="#假期总结" class="headerlink" title="假期总结"></a>假期总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>短暂的暑假就这么结束了，简单做个复盘，看看自己暑假都做了什么。</p>
@@ -875,6 +785,178 @@
       </tags>
   </entry>
   <entry>
+    <title>使用Hexo搭建自己的博客</title>
+    <url>/posts/735412972.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
+<h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
+<span id="more"></span>
+
+<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><p>在安装hexo前，电脑上具备有git与node两个环境才行</p>
+<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大，我觉得建议每个人都去了解一下。廖雪峰老师的Git教程写的非常好，大家可以了解一下。<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></p>
+<p>windows：到git官网上下载,<a href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
+<p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p>Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。</p>
+<p>windows：<a href="https://nodejs.org/en/download/">nodejs</a>  </p>
+<p>linux:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+
+<p>安装完后，打开命令行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>检查一下有没有安装成功</p>
+<p>顺便说一下，windows在git安装完后，就可以直接使用git bash来敲命令行了。</p>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>现在我们就可以安装hexo了</p>
+<p>前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹blog，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
+<p>输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>依旧用<code>hexo -v</code>查看一下版本</p>
+<p>至此就全部安装完了。</p>
+<p>接下来初始化一个blog吧！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init myblog(myblog是你创建的文件夹的名字，可以随意命名)</span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd myblog //进入这个myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>新建完成后，指定文件夹目录下有：</p>
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：用来存放你的文章</li>
+<li>themes：主题</li>
+<li>_config.yml: 博客的配置文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>打开hexo的服务，在浏览器输入<code>localhost:4000</code>就可以看到你生成的博客了。</p>
+<p>使用ctrl+c可以把服务关掉。</p>
+<p>注：可以使用 <code>hexo command</code> 来查看hexo全部命令</p>
+<h3 id="准备好GitHub"><a href="#准备好GitHub" class="headerlink" title="准备好GitHub"></a>准备好GitHub</h3><p>首先，你先要有一个GitHub账户，去注册一个吧。</p>
+<p>注册完登录后，在GitHub.com中看到一个New repository，新建仓库</p>
+<p>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，xxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
+<p>点击create repository。</p>
+<p>回到你的git bash中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户。</p>
+<p>可以用以下两条，检查一下你有没有输对:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
+
+<h3 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h3><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，修改为<br>YourgithubName就是你的GitHub账户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>hexo clean</code>清除了你之前生成的东西，也可以不加。<br><code>hexo generate</code> 顾名思义，生成静态文章，可以用 <code>hexo g</code>缩写<br><code>hexo deploy</code> 部署文章，可以用<code>hexo d</code>缩写</p>
+<p>注意deploy时可能要你输入username和password。</p>
+<p>过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！</p>
+<h3 id="关联个人域名"><a href="#关联个人域名" class="headerlink" title="关联个人域名"></a>关联个人域名</h3><p>如果你想自己的域名与博客也关联起来的话，可以看这里</p>
+<p>在source里创建一个叫CNAME的文件（注意没有任何后缀，名字就叫CNAME）</p>
+<p>在CNAME里面写上你的域名，例如：</p>
+<blockquote>
+<p>blog.wangez.site</p>
+</blockquote>
+<p>之后打开git bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>在GitHub上你创建的仓库里就会多一个叫做CNAME的文件了</p>
+<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
+]]></content>
+      <tags>
+        <tag>踩坑日记</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于作用域与作用域链的理解</title>
+    <url>/posts/1077228788.html/</url>
+    <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
+<p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
+<span id="more"></span>
+
+<p>在<strong>ES6</strong>之前，JavaScript中有两种作用域，分别叫做<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
+<ul>
+<li>全局作用域：<strong>全局作用域</strong>中的对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期，页面被关闭才会被销毁。</li>
+<li>函数作用域：<strong>函数作用域</strong>就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。</li>
+</ul>
+<p>作用域给我的最大感觉就是隔离变量，在不同作用域的<strong>同名变量</strong>是不会冲突的。</p>
+<p>在ES6中，提出了<strong>块级作用域</strong>的概念。</p>
+<ul>
+<li><p><strong>块级作用域的特点</strong>：在代码块内部定义的变量在外部是访问不到的，并且变量会在该代码块执行完后被销毁掉。</p>
+</li>
+<li><p><strong>块级作用域形式</strong>：就是使用大括号包裹的代码块<code>&#123;&#125;</code>，比如函数，判断语句，循环语句，甚至单独的一个<code>&#123;&#125;</code>，包裹的也可以看作是一个块级作用域。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// if块</span></span><br><span class="line"><span class="keyword">if</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// while 块</span></span><br><span class="line"><span class="keyword">while</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// 函数块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// for循环块</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;&#125;</span><br><span class="line"><span class="comment">// 单独的&#123;&#125;</span></span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>如何让块级作用域生效，ES6给我们提供了两个关键字：<strong>let和const</strong></p>
+<p>来看看例子吧</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>我们来思考一道题：每隔一秒钟，打印出来一个自然数，自然数递增。</p>
+<p>是不是用一个for循环，里面设置好一个定时器？</p>
+<p>是这样？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还是这样？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>let、const关键字解决var变量提升的问题</strong></p>
+<p>之前有说过变量提升的问题，现在来看一下let与const是怎么解决问题的。</p>
+<p>首先举一下都会产生什么问题：</p>
+<ul>
+<li><p>变量提升会导致变量值被覆盖</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;张三&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">var</span> a = <span class="string">&quot;李四&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">showA() <span class="comment">// undefined  undefined</span></span><br></pre></td></tr></table></figure></li>
+<li><p>该销毁的变量销毁不掉</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>那么let、const是如何解决问题的呢？</p>
+<p>先来看一下这段代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">11</span>;</span><br><span class="line">	<span class="keyword">let</span> b = <span class="number">22</span>;</span><br><span class="line">	&#123; 	</span><br><span class="line">		<span class="keyword">let</span> b = <span class="number">33</span>;</span><br><span class="line">		<span class="keyword">var</span> c = <span class="number">44</span>;</span><br><span class="line">        <span class="keyword">let</span> d = <span class="number">55</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line">        <span class="built_in">console</span>.log(b); <span class="comment">// 33</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 22</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 44</span></span><br><span class="line">	<span class="built_in">console</span>.log(d); <span class="comment">// not defined</span></span><br><span class="line">&#125; </span><br><span class="line">fun()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>let与const关键字创建的变量是存储在词法环境的，而var创建的变量是存储在变量环境中的，访问变量的时候，先从执行上下文的词法环境中查找，再到变量环境中进行查找。</p>
+</li>
+<li><p>当块级内部代码执行结束后，内部let与const创建的变量会被销毁。</p>
+</li>
+<li><p>let跟const创建的变量，初始化不提升，创建提升，所以会造成<strong>暂时性死区</strong></p>
+<p>来看一下什么是暂时性死区吧</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候，我们的浏览器报错与之前的not defined就不一样了，它会报 <code> Cannot access &#39;a&#39; before initialization</code>这个错误，告诉我们在初始化前不能访问a这个变量，这是因为let与const只有创建提升，没有初始化提升，所以造成了这个问题。</p>
+</li>
+</ul>
+<p><strong>再次说明一下变量提升的问题</strong></p>
+<ul>
+<li>var的创建和初始化被提升，赋值不会被提升</li>
+<li>let的创建被提升，初始化和赋值不会被提升，所以会有暂时性死区的问题（就是访问不到变量）</li>
+<li>function的创建、初始化、赋值都会被提升</li>
+</ul>
+<p><strong>作用域的特点：是代码编译阶段就决定好的，和函数是如何调用的没有关系</strong></p>
+<p>看下面这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">biqibao</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;海绵宝宝&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test1 = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span>) &#123; </span><br><span class="line">    	<span class="keyword">let</span> myName = <span class="string">&quot;派大星&quot;</span>; </span><br><span class="line">    	<span class="built_in">console</span>.log(test);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;章鱼哥&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test = <span class="number">2</span>;</span><br><span class="line">    &#123; </span><br><span class="line">    	<span class="keyword">let</span> test = <span class="number">3</span>;</span><br><span class="line">        biqibao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot;珊迪&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> myAge = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> test =<span class="number">1</span>;</span><br><span class="line">fn(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>解释一下流程，biqibao函数在fn函数中被调用，要打印test变量，首先查找biqibao函数的内部作用域，没有找到，于是去到全局作用域进行查找，找到了let test = 1这句话，于是，打印1。与fn函数中的let test = 2这句话，一点关系都没有。</p>
+<p>这就是在诠释上面<strong>作用域特点</strong>的那句话。</p>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><strong>作用域链</strong>：当一个函数中使用了某个变量，首先会在自己内部作用域查找，然后再向外部一层一层查找，直到全局作用域，这个链式查找就是作用域链</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(num);</span><br><span class="line">		&#125;</span><br><span class="line">		fn3();</span><br><span class="line">	&#125;</span><br><span class="line">	fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>fn3要打印num变量，于是他从fn3的函数作用域，找到fn2的函数作用域，再找到fn1的函数作用域，再找到全局作用域，终于找到了num变量，成功将其打印。</p>
+<h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于Hexo配置使用Next主题</title>
     <url>/posts/2781919463.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了个如何搭建Hexo的博客，后来想了想，既然写了就写到底吧，我自己用的是next这款主题，所以就说一下有关next的配置问题。并且，使用这个主题的过程中，我真的踩了不少的水坑！</p>
@@ -966,88 +1048,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于作用域与作用域链的理解</title>
-    <url>/posts/1077228788.html/</url>
-    <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
-<p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
-<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
-<span id="more"></span>
-
-<p>在<strong>ES6</strong>之前，JavaScript中有两种作用域，分别叫做<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
-<ul>
-<li>全局作用域：<strong>全局作用域</strong>中的对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期，页面被关闭才会被销毁。</li>
-<li>函数作用域：<strong>函数作用域</strong>就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。</li>
-</ul>
-<p>作用域给我的最大感觉就是隔离变量，在不同作用域的<strong>同名变量</strong>是不会冲突的。</p>
-<p>在ES6中，提出了<strong>块级作用域</strong>的概念。</p>
-<ul>
-<li><p><strong>块级作用域的特点</strong>：在代码块内部定义的变量在外部是访问不到的，并且变量会在该代码块执行完后被销毁掉。</p>
-</li>
-<li><p><strong>块级作用域形式</strong>：就是使用大括号包裹的代码块<code>&#123;&#125;</code>，比如函数，判断语句，循环语句，甚至单独的一个<code>&#123;&#125;</code>，包裹的也可以看作是一个块级作用域。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// if块</span></span><br><span class="line"><span class="keyword">if</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// while 块</span></span><br><span class="line"><span class="keyword">while</span>()&#123;&#125;</span><br><span class="line"><span class="comment">// 函数块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// for循环块</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;&#125;</span><br><span class="line"><span class="comment">// 单独的&#123;&#125;</span></span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>如何让块级作用域生效，ES6给我们提供了两个关键字：<strong>let和const</strong></p>
-<p>来看看例子吧</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">// not defined</span></span><br></pre></td></tr></table></figure>
-
-<p>我们来思考一道题：每隔一秒钟，打印出来一个自然数，自然数递增。</p>
-<p>是不是用一个for循环，里面设置好一个定时器？</p>
-<p>是这样？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还是这样？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i)</span><br><span class="line">	&#125;,<span class="number">1000</span>*i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>let、const关键字解决var变量提升的问题</strong></p>
-<p>之前有说过变量提升的问题，现在来看一下let与const是怎么解决问题的。</p>
-<p>首先举一下都会产生什么问题：</p>
-<ul>
-<li><p>变量提升会导致变量值被覆盖</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&quot;张三&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">var</span> a = <span class="string">&quot;李四&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">showA() <span class="comment">// undefined  undefined</span></span><br></pre></td></tr></table></figure></li>
-<li><p>该销毁的变量销毁不掉</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>那么let、const是如何解决问题的呢？</p>
-<p>先来看一下这段代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">11</span>;</span><br><span class="line">	<span class="keyword">let</span> b = <span class="number">22</span>;</span><br><span class="line">	&#123; 	</span><br><span class="line">		<span class="keyword">let</span> b = <span class="number">33</span>;</span><br><span class="line">		<span class="keyword">var</span> c = <span class="number">44</span>;</span><br><span class="line">        <span class="keyword">let</span> d = <span class="number">55</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line">        <span class="built_in">console</span>.log(b); <span class="comment">// 33</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">console</span>.log(b); <span class="comment">// 22</span></span><br><span class="line">	<span class="built_in">console</span>.log(c); <span class="comment">// 44</span></span><br><span class="line">	<span class="built_in">console</span>.log(d); <span class="comment">// not defined</span></span><br><span class="line">&#125; </span><br><span class="line">fun()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>let与const关键字创建的变量是存储在词法环境的，而var创建的变量是存储在变量环境中的，访问变量的时候，先从执行上下文的词法环境中查找，再到变量环境中进行查找。</p>
-</li>
-<li><p>当块级内部代码执行结束后，内部let与const创建的变量会被销毁。</p>
-</li>
-<li><p>let跟const创建的变量，初始化不提升，创建提升，所以会造成<strong>暂时性死区</strong></p>
-<p>来看一下什么是暂时性死区吧</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>这个时候，我们的浏览器报错与之前的not defined就不一样了，它会报 <code> Cannot access &#39;a&#39; before initialization</code>这个错误，告诉我们在初始化前不能访问a这个变量，这是因为let与const只有创建提升，没有初始化提升，所以造成了这个问题。</p>
-</li>
-</ul>
-<p><strong>再次说明一下变量提升的问题</strong></p>
-<ul>
-<li>var的创建和初始化被提升，赋值不会被提升</li>
-<li>let的创建被提升，初始化和赋值不会被提升，所以会有暂时性死区的问题（就是访问不到变量）</li>
-<li>function的创建、初始化、赋值都会被提升</li>
-</ul>
-<p><strong>作用域的特点：是代码编译阶段就决定好的，和函数是如何调用的没有关系</strong></p>
-<p>看下面这段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">biqibao</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;海绵宝宝&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test1 = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span>) &#123; </span><br><span class="line">    	<span class="keyword">let</span> myName = <span class="string">&quot;派大星&quot;</span>; </span><br><span class="line">    	<span class="built_in">console</span>.log(test);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> myName = <span class="string">&quot;章鱼哥&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> test = <span class="number">2</span>;</span><br><span class="line">    &#123; </span><br><span class="line">    	<span class="keyword">let</span> test = <span class="number">3</span>;</span><br><span class="line">        biqibao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&quot;珊迪&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> myAge = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> test =<span class="number">1</span>;</span><br><span class="line">fn(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>解释一下流程，biqibao函数在fn函数中被调用，要打印test变量，首先查找biqibao函数的内部作用域，没有找到，于是去到全局作用域进行查找，找到了let test = 1这句话，于是，打印1。与fn函数中的let test = 2这句话，一点关系都没有。</p>
-<p>这就是在诠释上面<strong>作用域特点</strong>的那句话。</p>
-<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><strong>作用域链</strong>：当一个函数中使用了某个变量，首先会在自己内部作用域查找，然后再向外部一层一层查找，直到全局作用域，这个链式查找就是作用域链</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(num);</span><br><span class="line">		&#125;</span><br><span class="line">		fn3();</span><br><span class="line">	&#125;</span><br><span class="line">	fn2();</span><br><span class="line">&#125;</span><br><span class="line">fn1(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>fn3要打印num变量，于是他从fn3的函数作用域，找到fn2的函数作用域，再找到fn1的函数作用域，再找到全局作用域，终于找到了num变量，成功将其打印。</p>
-<h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于浏览器的渲染进程</title>
     <url>/posts/3321770798.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近都在跟着青训营学习，不跟着学习的时候也去看node的相关课程了，很少有自己去学一些别的知识，刚好今天的学习任务量较少，进度赶出来了，晚上无聊，看了看之前感兴趣的重绘重排的相关知识，梳理了一下浏览器的相关原理，挑出一部分，记录在博客上。</p>
@@ -1121,72 +1121,6 @@
 ]]></content>
       <tags>
         <tag>浏览器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于闭包的一些理解</title>
-    <url>/posts/400024894.html/</url>
-    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
-<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
-<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
-
-<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
-<p>先来看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
-
-<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
-<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
-<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
-<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
-<p>而这，就是闭包。</p>
-<p><strong>闭包：这就是我</strong>✌</p>
-<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
-<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
-<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
-<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
-<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
-<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
-<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
-<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
-<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
-<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
-<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
-<p><strong>请注意：闭包一定要慎用</strong></p>
-<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
-<ul>
-<li><p>模仿块级作用域</p>
-<ul>
-<li>计时器的一个应用</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>打印一组li的下标</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p>埋点计数器</p>
-<ul>
-<li>产品让做的网站分析的一种常用的数据采集方法</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>柯里化</p>
-<ul>
-<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
-<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
-<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
-<p>因为全局变量会被污染或者被修改。</p>
-<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
-<p><strong>闭包能够造成内存泄漏</strong></p>
-<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1291,6 +1225,72 @@
       <tags>
         <tag>踩坑日记</tag>
         <tag>uni-app</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于闭包的一些理解</title>
+    <url>/posts/400024894.html/</url>
+    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
+<p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
+<h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
+
+<p>闭包是什么？ ——可简单理解为：<strong>有权访问另一个函数作用域内变量的函数都是闭包。</strong></p>
+<p>先来看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beerName = <span class="string">&quot;雪花啤酒&quot;</span>;</span><br><span class="line">	<span class="keyword">let</span> beerNum1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> beerNum2 = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">var</span> innerBeer = &#123;</span><br><span class="line">		<span class="attr">getBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(beerNum1)</span><br><span class="line">			<span class="keyword">return</span> beerName</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="attr">setBeer</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newBeer</span>) </span>&#123;</span><br><span class="line">			beerName = newBeer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> innerBeer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> go = drink();</span><br><span class="line">go.setbeer(<span class="string">&quot;闷倒驴&quot;</span>);</span><br><span class="line">go.getBeer();</span><br><span class="line"><span class="built_in">console</span>.log(go.getBeer())</span><br></pre></td></tr></table></figure>
+
+<p>当我们使用到getBeer与setBeer这两个函数的时候，它们内部是没有变量beerNum1与beerName的，那么它们这个时候会怎么办呢，学过作用域链的小伙伴可能会了解，它们这个时候就会到外层去找，也就是去drink函数中去找，找到了，于是乎可以使用了。</p>
+<p>但是呢，问题又来了，drink是个函数，它的作用域叫做函数作用域，在drink函数执行完，这个作用域是要被销毁的，那么这个时候，innerBeer又该怎么做呢？</p>
+<p>还是因为作用域链的原因，即使drink已经执行完了，当innerBeer再次调用其下的两个方法时，它用到的变量，是不能被销毁的，也就是说，beerNum1与beerName被迫成为了<strong>钉子户</strong>。</p>
+<p><strong>innerBeer：我只要在用，你就不能销毁！</strong>🤣</p>
+<p>而这，就是闭包。</p>
+<p><strong>闭包：这就是我</strong>✌</p>
+<h2 id="为什么说闭包容易产生内存泄漏？"><a href="#为什么说闭包容易产生内存泄漏？" class="headerlink" title="为什么说闭包容易产生内存泄漏？"></a>为什么说闭包容易产生内存泄漏？</h2><p>首先我们要知道一个概念：什么是内存泄漏？</p>
+<p><strong>当内存中产生了不能被回收的变量，就叫内存泄漏</strong></p>
+<p>还是看刚刚的那个例子，<code>var go = drink();</code></p>
+<p>go是一个全局变量，无论在什么时候都可以调用setBeer与getBeer，因为我们将函数的返回值赋值给了它，只要页面没有销毁，它就会一直存在。而setBeer跟getBeer又会用到beerNum1与beerName，也就是前文中我们提到的，钉子户理论。结合JavaScript的垃圾回收机制，我们现在知道，它们两个钉子户是不可能被清除掉的了。</p>
+<p>这块存有beerNum1与beerName的内存，只有setBeer与getBeer才能访问到，别人是访问不到的。而它也不属于哪一个执行上下文中，所以它也销毁不掉。</p>
+<p>所以就说，<strong>闭包容易产生内存泄漏的问题</strong></p>
+<p><strong>只要页面不关闭，这个变量就一直在，导致存在内存泄漏的问题</strong></p>
+<h2 id="为什么还要使用闭包？"><a href="#为什么还要使用闭包？" class="headerlink" title="为什么还要使用闭包？"></a>为什么还要使用闭包？</h2><p>张三（👀没错就是法外狂徒本三）就说了：<strong>闭包既然会产生内存泄漏的问题，那我们为什么还要去使用它呢？</strong></p>
+<p>还不是因为，我们<strong>在某些情况下，希望某些函数内的变量在函数执行后不被销毁</strong>(我也知道，好像有那么一丝🗡意)。</p>
+<p>张三又有疑问了：那为什么干脆不定义成全局变量呢？现在搞得你还回收不了。</p>
+<p>如果创建全局变量的话，它很容易就会被污染，同名变量，或者被一些函数修改等。为了避免它被篡改，又想让它长时间保存，让他变得形似一个全局变量，可以随时去用，我们就会在这个时候，使用闭包！</p>
+<p><strong>请注意：闭包一定要慎用</strong></p>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><p>查了几个闭包的应用，学习一下ing</p>
+<ul>
+<li><p>模仿块级作用域</p>
+<ul>
+<li>计时器的一个应用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; <span class="number">1</span> &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, <span class="number">1000</span> * j)</span><br><span class="line">      &#125;)(i)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打印一组li的下标</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) &#123;</span><br><span class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">		lis[j].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			alert(j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>埋点计数器</p>
+<ul>
+<li>产品让做的网站分析的一种常用的数据采集方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++num</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getNum = count();  <span class="comment">// 第一个需要统计的地方</span></span><br><span class="line"><span class="keyword">var</span> getNewNum = count(); <span class="comment">//第二个需要统计的地方</span></span><br><span class="line"> <span class="comment">// 如果我们统计的是两个button的点击次数</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮1的次数：&#x27;</span>+getNum());</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">&#x27;点击按钮2的次数：&#x27;</span>+getNewNum());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>柯里化</p>
+<ul>
+<li>把一个多参数的函数转化成单参数函数的方法，使得更灵活方便</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原函数 用来检验文本是否符合规范</span></span><br><span class="line"><span class="comment">// reg 传入的正则表达式  txt 需要被检测的文本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params">reg,txt</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(check(电话号码的正则,<span class="number">13923456789</span>));</span><br><span class="line"><span class="built_in">console</span>.log(check(邮箱的正则,youxiang@<span class="number">163.</span>com));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现如今</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nowCheck</span>(<span class="params">reg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> reg.test(txt)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> isPhone = nowCheck(电话号码的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isPhone(<span class="string">&#x27;13923456789&#x27;</span>))</span><br><span class="line"><span class="keyword">var</span> isEmail = nowCheck(邮箱的正则)</span><br><span class="line"><span class="built_in">console</span>.log(isEmail(<span class="string">&#x27;youxiang@163.com&#x27;</span>))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="总结：简单说一下闭包吧"><a href="#总结：简单说一下闭包吧" class="headerlink" title="总结：简单说一下闭包吧"></a>总结：简单说一下闭包吧</h2><p><strong>闭包产生的原因</strong></p>
+<p>函数中的局部变量在函数执行完后会被销毁，有时候，我们不希望这个局部变量会被销毁，我们还想在外部进行持续的操作和访问，我们就会用到闭包这种方式。</p>
+<p><strong>为什么不创建一个全局变量来代替这个局部变量？</strong></p>
+<p>因为全局变量会被污染或者被修改。</p>
+<p>闭包能够访问里面的变量，是由于作用域链，用到了函数嵌套中，内部函数能够访问父级函数作用域的变量这个理念。</p>
+<p><strong>闭包能够造成内存泄漏</strong></p>
+<p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1467,6 +1467,154 @@
       </tags>
   </entry>
   <entry>
+    <title>如何写好JavaScript（下）</title>
+    <url>/posts/3177970664.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
+<p>有听懂的，有没懂的，先记下来，留着梳理。</p>
+<h3 id="看一段代码"><a href="#看一段代码" class="headerlink" title="看一段代码"></a>看一段代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断一个mat2d矩阵是否是单位矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUnitMatrix2d</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">0</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">1</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">2</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">3</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">4</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">5</span>] === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码好不好？ 为什么？</p>
+<span id="more"></span>
+
+<blockquote>
+<p>这个代码从优雅程度上来说确实是有些过于长了，看起来不是十分的美观，我们可以使用类似于for循环的方式将其变得美观起来。</p>
+<p>但是如果他是写在代码底层（spritejs）的话，这么写的性能是最好的，因为他直接拿到索引就可以来比较，是循环所比拟不了的。</p>
+</blockquote>
+<p><strong>月影大佬：我们所有的代码风格，都是根据场合来的，如果是一些框架或者开源的库中，看见了不是很优雅的代码，我们应该结合场景去分析，因为有的时候这么写是有理由的。</strong></p>
+<p>写代码最应关注什么？</p>
+<ul>
+<li><p>风格：</p>
+<blockquote>
+<p>很重要，尤其是多人协作。关键在于风格要统一，否则会增加代码维护的成本。</p>
+</blockquote>
+</li>
+<li><p>效率：</p>
+<blockquote>
+<p>要在心中明白，什么样子的代码效率是最高的，尽量结合场景选择最合适的代码（效率or可读性）。</p>
+</blockquote>
+</li>
+<li><p>约定</p>
+</li>
+<li><p>使用场景</p>
+</li>
+<li><p>设计</p>
+</li>
+</ul>
+<h3 id="当年的left-pad事件"><a href="#当年的left-pad事件" class="headerlink" title="当年的left-pad事件"></a><strong>当年的left-pad事件</strong></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="built_in">String</span>(str);</span><br><span class="line">    <span class="keyword">var</span> i = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!ch &amp;&amp; ch !== <span class="number">0</span>) ch=<span class="string">&quot; &quot;</span>;</span><br><span class="line">    len = len - str.length;</span><br><span class="line">    <span class="keyword">while</span>(++i&lt;len)&#123;</span><br><span class="line">        str = ch + str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件本身的槽点"><a href="#事件本身的槽点" class="headerlink" title="事件本身的槽点"></a><strong>事件本身的槽点</strong></h4><ul>
+<li><p>NPM模块粒度</p>
+<blockquote>
+<p>说npm模块粒度太细了，单个函数的模块。</p>
+<p>当年模块化跟打包工具不是很成熟</p>
+</blockquote>
+</li>
+<li><p>代码风格</p>
+<blockquote>
+<p>可读性还好</p>
+</blockquote>
+</li>
+<li><p>代码质量/效率</p>
+<blockquote>
+<p>这个效率还可以，因为正常场景中不会拼接太长的字符串</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="提高效率与代码简洁性"><a href="#提高效率与代码简洁性" class="headerlink" title="提高效率与代码简洁性"></a><strong>提高效率与代码简洁性</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="string">&quot;&quot;</span> + str;</span><br><span class="line">    <span class="keyword">const</span> padLen = len - str.length;</span><br><span class="line">    <span class="keyword">if</span>(padLen &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&quot;&quot;</span>+ch).repeat(padLen) + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="交通灯：状态切换"><a href="#交通灯：状态切换" class="headerlink" title="交通灯：状态切换"></a><strong>交通灯：状态切换</strong></h3><p>实现一个切换<strong>多个</strong>交通灯<strong>状态切换</strong>的功能</p>
+<h4 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h4><blockquote>
+<p>不知道为什么听这个课，我现在觉得版本一就等于很垃圾</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    traffic.className = <span class="string">&#x27;s1&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        traffic.className = <span class="string">&#x27;s2&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            traffic.className = <span class="string">&#x27;s3&#x27;</span>;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                traffic.className = <span class="string">&#x27;s4&#x27;</span>;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    traffic.className = <span class="string">&#x27;s5&#x27;</span>;</span><br><span class="line">                    <span class="built_in">setTimeout</span>(reset,<span class="number">1000</span>)</span><br><span class="line">                &#125;,<span class="number">1000</span>)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>setTimeout本身是异步，将代码这样嵌套，会造成回调地狱的问题，而且代码很丑，可读性差，不方便维护。</p>
+<p>看来跟我上边说的一样，版本一，都是垃圾，哈哈哈哈</p>
+</blockquote>
+<h4 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> stateList = [</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;wait&#x27;</span>, <span class="attr">last</span>: <span class="number">1000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;stop&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;pass&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">traffic,stateList</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">applyState</span>(<span class="params">steteIdx</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state,last&#125; = stateList[stateIdx];</span><br><span class="line">        traffic.className = state;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            applyState((stateIdx + <span class="number">1</span>) % stateList.length);</span><br><span class="line">        &#125;,last)</span><br><span class="line">    &#125;</span><br><span class="line">    applyState(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">start(traffic,stateList);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>采用的函数封装的方法</p>
+</blockquote>
+<h4 id="版本三"><a href="#版本三" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">...fnList</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stateIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fn = fnList[stateIndex++ % fnList.length];</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> trafficStatePoll = poll(setState.bind(<span class="literal">null</span>,<span class="string">&#x27;wait&#x27;</span>),</span><br><span class="line">setState.bind(<span class="literal">null</span>,<span class="string">&#x27;stop&#x27;</span>),setState.bind(<span class="literal">null</span>,<span class="string">&#x27;pass&#x27;</span>));</span><br><span class="line"><span class="built_in">setInterval</span>(trafficStatePoll,<span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>抽象出一个轮巡的方法，采用高阶函数</p>
+</blockquote>
+<h4 id="版本四"><a href="#版本四" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve,time));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        setState(<span class="string">&#x27;wait&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">1000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;stop&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>知道了异步，就肯定好做了呀，用async和await，命令式的写法。</p>
+<p>可以继续保持异步采用声明式的封装继续去做出版本567.</p>
+</blockquote>
+<h3 id="判断是否是4的幂"><a href="#判断是否是4的幂" class="headerlink" title="判断是否是4的幂"></a><strong>判断是否是4的幂</strong></h3><h4 id="版本一-1"><a href="#版本一-1" class="headerlink" title="版本一"></a>版本一</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">4</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        num /= <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>很中规中矩的写法，每次对4取余，结果还是要能被4整除。</p>
+</blockquote>
+<h4 id="版本二-1"><a href="#版本二-1" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="keyword">if</span>(num&amp; <span class="number">0b11</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       num &gt;&gt;&gt;=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将对4取余数变成了判断二进制数的后两位，后两位是00就肯定是4的倍数，除以四变成右移两位。</p>
+</blockquote>
+<h4 id="版本三-1"><a href="#版本三-1" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">return</span> num &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp;(num - <span class="number">1</span>)) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp; <span class="number">0xAAAAAAAA</span>) === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>刚刚是 log的复杂度算法，这个是常数复杂度的算法</p>
+<p>如果一个数是4的幂的话，转化二进制肯定只有首位是1的，并且后面跟着偶数个0，所以在这种情况下，判断只有一个1，并且还有偶数个0即可。</p>
+</blockquote>
+<h4 id="版本四-1"><a href="#版本四-1" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num).toString(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1(?:00)*$/</span>.test(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>理论与上一个同理，但是我真的震惊了，原来一个思路可以有这么多种解决方法。</p>
+<p>但是相对来说，正则的开销会比数值的要大，但是在这个情景中还是可以接受的。</p>
+</blockquote>
+<h3 id="洗牌"><a href="#洗牌" class="headerlink" title="洗牌"></a><strong>洗牌</strong></h3><p>简单实现</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(shuffle(cards));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果这是个抽奖程序的话，是会被打的。</p>
+<p>因为不公平。和原来的位置相关。</p>
+</blockquote>
+<p>我们来验证一下</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>我们来调用上面的洗牌算法一万次，完后将每个位置上出现牌的点数都相加，如果他公平，我们相加的结果应该都差不多，对吧。</p>
+<blockquote>
+<p>[<br> 38511, 38548, 45148,<br> 46416, 46551, 44174,<br> 43456, 46877, 48894,<br> 51425<br>]</p>
+</blockquote>
+<p>这确是我打印出来的数据，连续跑了好几组都是某某要大，你将一万次改的越大，最后位置的数字就会越大，也就是说，小数字会出现在靠前的位置，大数字会出现在靠后的位置。</p>
+<p>如果还不确认的小伙伴可以去做一下概率统计。</p>
+<blockquote>
+<p>这是因为sort会两两交换，每个位置上交换的次数是不同的，所以最后的数字在交换到前面的概率是比较小的，当次数被无限放大的时候，这个差距就是越来越大。所以导致刚刚的洗牌算法是不公平的。</p>
+</blockquote>
+<p>如果想要公平的话，有一种算法是这样的，每次随机抽取一张牌把它放到最后的位置去。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> c =[...cards];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = c.length; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">const</span> pIdx = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * i);</span><br><span class="line">        [c[pIdx],c[i-<span class="number">1</span>]] = [c[i-<span class="number">1</span>], c[pIdx]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>[<br> 45466, 44956, 44753,<br> 45253, 45179, 44765,<br> 45147, 44469, 45404,<br> 44608<br>]</p>
+</blockquote>
+<p>可以看出这个打印出来的结果，大小都是差不大多的。</p>
+<h4 id="分红包"><a href="#分红包" class="headerlink" title="分红包"></a><strong>分红包</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generate</span>(<span class="params">amount, count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ret = [amount];</span><br><span class="line">    <span class="keyword">while</span>(count &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">// 挑选出最大的一块进行切分</span></span><br><span class="line">        <span class="keyword">let</span> cake = <span class="built_in">Math</span>.max(...ret),</span><br><span class="line">            idx = ret.indexOf(cake),</span><br><span class="line">            part = <span class="number">1</span> + <span class="built_in">Math</span>.floor((cake/<span class="number">2</span>) * <span class="built_in">Math</span>.random()),</span><br><span class="line">            rest = cake - part;</span><br><span class="line">        ret.splice(idx,<span class="number">1</span>,part,rest);</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不停的切分最大的金额。</p>
+<blockquote>
+<p>这个会带来一个问题，就是金额很平均。</p>
+<p>不会有人拿了很大的红包，少了一丝趣味性。</p>
+<p>不够刺激~</p>
+</blockquote>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
+<p>是我菜了，继续加油！</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>字节青训营</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何写好JavaScript（上）</title>
     <url>/posts/98016397.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>课程记录笔记第三弹——《跟月影学JavaScript》</p>
@@ -1628,154 +1776,6 @@
 <li>命令式/声明式</li>
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这次笔记记录的很匆忙，再加上理解的也不是很懂，所以导致后面的高阶函数部分基本没有自己的梳理，后面梳理过后会过来补上更新的。</p>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>字节青训营</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何写好JavaScript（下）</title>
-    <url>/posts/3177970664.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在打开这个视频之前，我真没想到讲的是优化算法之类的东西，可能是<a href="https://blog.wangez.site/posts/98016397.html/#more">如何写好JavaScript（上 ）</a>迷惑了我。</p>
-<p>有听懂的，有没懂的，先记下来，留着梳理。</p>
-<h3 id="看一段代码"><a href="#看一段代码" class="headerlink" title="看一段代码"></a>看一段代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断一个mat2d矩阵是否是单位矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUnitMatrix2d</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">0</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">1</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">2</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">3</span>] === <span class="number">1</span> &amp;&amp; m[<span class="number">4</span>] === <span class="number">0</span> &amp;&amp; m[<span class="number">5</span>] === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段代码好不好？ 为什么？</p>
-<span id="more"></span>
-
-<blockquote>
-<p>这个代码从优雅程度上来说确实是有些过于长了，看起来不是十分的美观，我们可以使用类似于for循环的方式将其变得美观起来。</p>
-<p>但是如果他是写在代码底层（spritejs）的话，这么写的性能是最好的，因为他直接拿到索引就可以来比较，是循环所比拟不了的。</p>
-</blockquote>
-<p><strong>月影大佬：我们所有的代码风格，都是根据场合来的，如果是一些框架或者开源的库中，看见了不是很优雅的代码，我们应该结合场景去分析，因为有的时候这么写是有理由的。</strong></p>
-<p>写代码最应关注什么？</p>
-<ul>
-<li><p>风格：</p>
-<blockquote>
-<p>很重要，尤其是多人协作。关键在于风格要统一，否则会增加代码维护的成本。</p>
-</blockquote>
-</li>
-<li><p>效率：</p>
-<blockquote>
-<p>要在心中明白，什么样子的代码效率是最高的，尽量结合场景选择最合适的代码（效率or可读性）。</p>
-</blockquote>
-</li>
-<li><p>约定</p>
-</li>
-<li><p>使用场景</p>
-</li>
-<li><p>设计</p>
-</li>
-</ul>
-<h3 id="当年的left-pad事件"><a href="#当年的left-pad事件" class="headerlink" title="当年的left-pad事件"></a><strong>当年的left-pad事件</strong></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="built_in">String</span>(str);</span><br><span class="line">    <span class="keyword">var</span> i = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!ch &amp;&amp; ch !== <span class="number">0</span>) ch=<span class="string">&quot; &quot;</span>;</span><br><span class="line">    len = len - str.length;</span><br><span class="line">    <span class="keyword">while</span>(++i&lt;len)&#123;</span><br><span class="line">        str = ch + str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="事件本身的槽点"><a href="#事件本身的槽点" class="headerlink" title="事件本身的槽点"></a><strong>事件本身的槽点</strong></h4><ul>
-<li><p>NPM模块粒度</p>
-<blockquote>
-<p>说npm模块粒度太细了，单个函数的模块。</p>
-<p>当年模块化跟打包工具不是很成熟</p>
-</blockquote>
-</li>
-<li><p>代码风格</p>
-<blockquote>
-<p>可读性还好</p>
-</blockquote>
-</li>
-<li><p>代码质量/效率</p>
-<blockquote>
-<p>这个效率还可以，因为正常场景中不会拼接太长的字符串</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="提高效率与代码简洁性"><a href="#提高效率与代码简洁性" class="headerlink" title="提高效率与代码简洁性"></a><strong>提高效率与代码简洁性</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leftpad</span>(<span class="params">str, len, ch</span>)</span>&#123;</span><br><span class="line">    str = <span class="string">&quot;&quot;</span> + str;</span><br><span class="line">    <span class="keyword">const</span> padLen = len - str.length;</span><br><span class="line">    <span class="keyword">if</span>(padLen &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&quot;&quot;</span>+ch).repeat(padLen) + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="交通灯：状态切换"><a href="#交通灯：状态切换" class="headerlink" title="交通灯：状态切换"></a><strong>交通灯：状态切换</strong></h3><p>实现一个切换<strong>多个</strong>交通灯<strong>状态切换</strong>的功能</p>
-<h4 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h4><blockquote>
-<p>不知道为什么听这个课，我现在觉得版本一就等于很垃圾</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    traffic.className = <span class="string">&#x27;s1&#x27;</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        traffic.className = <span class="string">&#x27;s2&#x27;</span>;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            traffic.className = <span class="string">&#x27;s3&#x27;</span>;</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                traffic.className = <span class="string">&#x27;s4&#x27;</span>;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    traffic.className = <span class="string">&#x27;s5&#x27;</span>;</span><br><span class="line">                    <span class="built_in">setTimeout</span>(reset,<span class="number">1000</span>)</span><br><span class="line">                &#125;,<span class="number">1000</span>)</span><br><span class="line">            &#125;,<span class="number">1000</span>)</span><br><span class="line">        &#125;,<span class="number">1000</span>)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>setTimeout本身是异步，将代码这样嵌套，会造成回调地狱的问题，而且代码很丑，可读性差，不方便维护。</p>
-<p>看来跟我上边说的一样，版本一，都是垃圾，哈哈哈哈</p>
-</blockquote>
-<h4 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> stateList = [</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;wait&#x27;</span>, <span class="attr">last</span>: <span class="number">1000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;stop&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">state</span>: <span class="string">&#x27;pass&#x27;</span>, <span class="attr">last</span>: <span class="number">3000</span>&#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params">traffic,stateList</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">applyState</span>(<span class="params">steteIdx</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state,last&#125; = stateList[stateIdx];</span><br><span class="line">        traffic.className = state;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            applyState((stateIdx + <span class="number">1</span>) % stateList.length);</span><br><span class="line">        &#125;,last)</span><br><span class="line">    &#125;</span><br><span class="line">    applyState(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">start(traffic,stateList);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>采用的函数封装的方法</p>
-</blockquote>
-<h4 id="版本三"><a href="#版本三" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">...fnList</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stateIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> fn = fnList[stateIndex++ % fnList.length];</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> trafficStatePoll = poll(setState.bind(<span class="literal">null</span>,<span class="string">&#x27;wait&#x27;</span>),</span><br><span class="line">setState.bind(<span class="literal">null</span>,<span class="string">&#x27;stop&#x27;</span>),setState.bind(<span class="literal">null</span>,<span class="string">&#x27;pass&#x27;</span>));</span><br><span class="line"><span class="built_in">setInterval</span>(trafficStatePoll,<span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>抽象出一个轮巡的方法，采用高阶函数</p>
-</blockquote>
-<h4 id="版本四"><a href="#版本四" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> traffic = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;traffic&#x27;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve,time));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setState</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">    traffic.className = state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        setState(<span class="string">&#x27;wait&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">1000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;stop&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">        setState(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="keyword">await</span> wait(<span class="number">3000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">start();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>知道了异步，就肯定好做了呀，用async和await，命令式的写法。</p>
-<p>可以继续保持异步采用声明式的封装继续去做出版本567.</p>
-</blockquote>
-<h3 id="判断是否是4的幂"><a href="#判断是否是4的幂" class="headerlink" title="判断是否是4的幂"></a><strong>判断是否是4的幂</strong></h3><h4 id="版本一-1"><a href="#版本一-1" class="headerlink" title="版本一"></a>版本一</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num%<span class="number">4</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        num /= <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>很中规中矩的写法，每次对4取余，结果还是要能被4整除。</p>
-</blockquote>
-<h4 id="版本二-1"><a href="#版本二-1" class="headerlink" title="版本二"></a>版本二</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">while</span>(num&gt;<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="keyword">if</span>(num&amp; <span class="number">0b11</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       num &gt;&gt;&gt;=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将对4取余数变成了判断二进制数的后两位，后两位是00就肯定是4的倍数，除以四变成右移两位。</p>
-</blockquote>
-<h4 id="版本三-1"><a href="#版本三-1" class="headerlink" title="版本三"></a>版本三</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num);</span><br><span class="line">    <span class="keyword">return</span> num &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp;(num - <span class="number">1</span>)) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (num&amp; <span class="number">0xAAAAAAAA</span>) === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>刚刚是 log的复杂度算法，这个是常数复杂度的算法</p>
-<p>如果一个数是4的幂的话，转化二进制肯定只有首位是1的，并且后面跟着偶数个0，所以在这种情况下，判断只有一个1，并且还有偶数个0即可。</p>
-</blockquote>
-<h4 id="版本四-1"><a href="#版本四-1" class="headerlink" title="版本四"></a>版本四</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPowerOfFour</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    num = <span class="built_in">parseInt</span>(num).toString(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1(?:00)*$/</span>.test(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>理论与上一个同理，但是我真的震惊了，原来一个思路可以有这么多种解决方法。</p>
-<p>但是相对来说，正则的开销会比数值的要大，但是在这个情景中还是可以接受的。</p>
-</blockquote>
-<h3 id="洗牌"><a href="#洗牌" class="headerlink" title="洗牌"></a><strong>洗牌</strong></h3><p>简单实现</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(shuffle(cards));</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果这是个抽奖程序的话，是会被打的。</p>
-<p>因为不公平。和原来的位置相关。</p>
-</blockquote>
-<p>我们来验证一下</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...cards].sort(<span class="function">()=&gt;</span> <span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? -<span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
-
-<p>我们来调用上面的洗牌算法一万次，完后将每个位置上出现牌的点数都相加，如果他公平，我们相加的结果应该都差不多，对吧。</p>
-<blockquote>
-<p>[<br> 38511, 38548, 45148,<br> 46416, 46551, 44174,<br> 43456, 46877, 48894,<br> 51425<br>]</p>
-</blockquote>
-<p>这确是我打印出来的数据，连续跑了好几组都是某某要大，你将一万次改的越大，最后位置的数字就会越大，也就是说，小数字会出现在靠前的位置，大数字会出现在靠后的位置。</p>
-<p>如果还不确认的小伙伴可以去做一下概率统计。</p>
-<blockquote>
-<p>这是因为sort会两两交换，每个位置上交换的次数是不同的，所以最后的数字在交换到前面的概率是比较小的，当次数被无限放大的时候，这个差距就是越来越大。所以导致刚刚的洗牌算法是不公平的。</p>
-</blockquote>
-<p>如果想要公平的话，有一种算法是这样的，每次随机抽取一张牌把它放到最后的位置去。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cards = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">cards</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> c =[...cards];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = c.length; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">const</span> pIdx = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * i);</span><br><span class="line">        [c[pIdx],c[i-<span class="number">1</span>]] = [c[i-<span class="number">1</span>], c[pIdx]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> c = shuffle(cards);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">        result[j] += c[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>[<br> 45466, 44956, 44753,<br> 45253, 45179, 44765,<br> 45147, 44469, 45404,<br> 44608<br>]</p>
-</blockquote>
-<p>可以看出这个打印出来的结果，大小都是差不大多的。</p>
-<h4 id="分红包"><a href="#分红包" class="headerlink" title="分红包"></a><strong>分红包</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generate</span>(<span class="params">amount, count</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ret = [amount];</span><br><span class="line">    <span class="keyword">while</span>(count &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">// 挑选出最大的一块进行切分</span></span><br><span class="line">        <span class="keyword">let</span> cake = <span class="built_in">Math</span>.max(...ret),</span><br><span class="line">            idx = ret.indexOf(cake),</span><br><span class="line">            part = <span class="number">1</span> + <span class="built_in">Math</span>.floor((cake/<span class="number">2</span>) * <span class="built_in">Math</span>.random()),</span><br><span class="line">            rest = cake - part;</span><br><span class="line">        ret.splice(idx,<span class="number">1</span>,part,rest);</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不停的切分最大的金额。</p>
-<blockquote>
-<p>这个会带来一个问题，就是金额很平均。</p>
-<p>不会有人拿了很大的红包，少了一丝趣味性。</p>
-<p>不够刺激~</p>
-</blockquote>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
-<p>是我菜了，继续加油！</p>
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
@@ -2137,6 +2137,52 @@
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>组件库计划，启航！</title>
+    <url>/posts/2713460185.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在大一下，第一次尝试饿了么团队的element-ui的时候，我就有想过在未来自己尝试参与开发一款属于自己的组件库，但是由于种种原因，就一直没能开始啃这块饼，终于这次开学，开始尝试着自己去做一个组件库，目的有二，一是实现自己当初的梦想，二是能够进一步锻炼自己的能力。</p>
+<p>那么，组件库计划，正式起航！</p>
+<p>在开始之前，去网上找了许多资料，要么是不太详细，要么是讲的太高深导致我看不大懂，挑选了很久，在掘金找到了篇自己觉得对小白很友好的博客，会在文中放给大家，本文是对我开发的组件库的一个简介。</p>
+<span id="more"></span>
+
+<h3 id="建立项目"><a href="#建立项目" class="headerlink" title="建立项目"></a>建立项目</h3><p>组件库选定为基于Vue开发的组件库，所以我们要建立一个vue项目。</p>
+<p>这里我参考了：<a href="https://juejin.cn/post/6844904085808742407#heading-4">从零到一教你基于vue开发一个组件库 </a></p>
+<p>我是参考这位大佬的博客来进行构建项目目录，并做出了一些修改，修改后我的目录如下：</p>
+<img src="/posts/2713460185.html/目录.png" alt="s" style="zoom:80%;">
+
+<p>建立一个style目录，存放所有的样式文件，包括目前的主题样式，单个组件样式，跟以后可能会有的icon样式等，早些抽离出来以方便后期维护。</p>
+<p>建立一个utils目录，存放用到的自己封装的一些工具函数，例如日期，随机数，遍历数组等。</p>
+<h3 id="关于组件"><a href="#关于组件" class="headerlink" title="关于组件"></a>关于组件</h3><p>我们做组件库同平时自己封装项目中的组件是不一样的，做组件库的时候要想的是公共需求，也就是，一个组件库最基本应该具备什么，其次才是你针对于某些业务而做出的优化，这些优化会成为你的特点，然而目前我要做的，仅仅是努力做到基本，我觉得就很好了。</p>
+<p>拿一个简单的button举例子，他应该有哪些<code>type</code>呢？</p>
+<p>我认为：最基本的应该是：<code>default</code>、<code>success</code>、<code>error</code>、<code>warning</code>、<code>primary</code>，分别对应着：默认、成功、失败、警告和主要。</p>
+<blockquote>
+<p>毕竟，日后也是可以在这个基础上进行增加的嘛。</p>
+</blockquote>
+<p>除了<code>type</code>，一个button还应该具有哪些？</p>
+<p>我还写了以下这些，方便开发者能够迅速的开发：</p>
+<ul>
+<li><code>size</code>：default，large，small</li>
+<li><code>width</code>、<code>height</code>、<code>color</code>、<code>background</code>：一些基础的样式</li>
+<li><code>borderColor</code>：最近在网上看那种幽灵按钮很好看，于是也把这个写了进去，但是还没做</li>
+<li><code>disabled</code>：用来做按钮禁用的</li>
+<li><code>handleClick</code>：点击事件</li>
+</ul>
+<p>暂时，这个button组件仅支持这些内容，日后还会更新一些新的type和一些样式的参数方便大家使用。</p>
+<h3 id="关于我们"><a href="#关于我们" class="headerlink" title="关于我们"></a>关于我们</h3><p>组件库名字暂时定为：<strong>vstu-ui</strong></p>
+<blockquote>
+<p>起名鬼才的我，v：是Vue的组件，stu：学生，代表这个组件库，是由身为学生的我们开发的。</p>
+</blockquote>
+<p>开发者：我和我的三个小学弟</p>
+<blockquote>
+<p>秉持着边开发边学习的理念，提高自己。</p>
+</blockquote>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这个组件库暂时未发布到npm上，也暂时没有开源到github/gitee上呢，当这个组件库具有一定数量的组件后会同时上传，发布后希望大家给与支持，你们的issue是我们坚持下去的动力！</p>
+]]></content>
+      <tags>
+        <tag>经历</tag>
+        <tag>自己做一个组件库</tag>
       </tags>
   </entry>
   <entry>
