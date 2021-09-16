@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="跨域写在最前啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！  （拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）  跨域问题真的成了我一段时">
+  <meta name="description" content="前言webpack在框架中多半被脚手架所集成，例如vue中的vue-cli，但是在面试中，还是会被问到，所以我们还是要了解一些必要知识，能让我们对此类技术有一个更深的认识。 不得不说，在学习过程中，我了解到了许多我之前仅仅知道那是配置文件的东西，但是经过学习了解之后，已经可以知道哪些配置是为了什么目的的了。  古人云：学吧，学会了都是你的~ 古人又云：学吧，学不死就往死里学！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="跨域的问题终于能解决了">
-<meta property="og:url" content="https://wangenze267.github.io/posts/876750285.html/index.html">
+<meta property="og:title" content="webpack基础认识">
+<meta property="og:url" content="https://wangenze267.github.io/posts/3206731080.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="跨域写在最前啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！  （拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）  跨域问题真的成了我一段时">
+<meta property="og:description" content="前言webpack在框架中多半被脚手架所集成，例如vue中的vue-cli，但是在面试中，还是会被问到，所以我们还是要了解一些必要知识，能让我们对此类技术有一个更深的认识。 不得不说，在学习过程中，我了解到了许多我之前仅仅知道那是配置文件的东西，但是经过学习了解之后，已经可以知道哪些配置是为了什么目的的了。  古人云：学吧，学会了都是你的~ 古人又云：学吧，学不死就往死里学！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangez.site/img/img/image-20210605180026687.png">
-<meta property="article:published_time" content="2021-08-03T10:39:53.917Z">
-<meta property="article:modified_time" content="2021-08-11T08:36:52.394Z">
+<meta property="article:published_time" content="2021-09-16T12:31:24.719Z">
+<meta property="article:modified_time" content="2021-09-16T12:31:07.624Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wangez.site/img/img/image-20210605180026687.png">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/876750285.html/">
+<link rel="canonical" href="https://wangenze267.github.io/posts/3206731080.html/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>跨域的问题终于能解决了 | Wangez-Blog</title>
+  <title>webpack基础认识 | Wangez-Blog</title>
   
 
 
@@ -211,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/876750285.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/3206731080.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -224,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          跨域的问题终于能解决了
+          webpack基础认识
         </h1>
 
         <div class="post-meta">
@@ -233,16 +231,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-08-03 18:39:53" itemprop="dateCreated datePublished" datetime="2021-08-03T18:39:53+08:00">2021-08-03</time>
+              <time title="创建时间：2021-09-16 20:31:24 / 修改时间：20:31:07" itemprop="dateCreated datePublished" datetime="2021-09-16T20:31:24+08:00">2021-09-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-11 16:36:52" itemprop="dateModified" datetime="2021-08-11T16:36:52+08:00">2021-08-11</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -260,8 +252,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/876750285.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/876750285.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/3206731080.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/3206731080.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -271,14 +263,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -290,89 +282,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>webpack在框架中多半被脚手架所集成，例如vue中的vue-cli，但是在面试中，还是会被问到，所以我们还是要了解一些必要知识，能让我们对此类技术有一个更深的认识。</p>
+<p>不得不说，在学习过程中，我了解到了许多我之前仅仅知道那是配置文件的东西，但是经过学习了解之后，已经可以知道哪些配置是为了什么目的的了。</p>
 <blockquote>
-<p>（拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）</p>
+<p>古人云：学吧，学会了都是你的~</p>
+<p>古人又云：学吧，学不死就往死里学！</p>
 </blockquote>
-<p>跨域问题真的成了我一段时间的心里阴影，后来一谈到跨域，心里贼怕！</p>
-<p>最近复习网络部分，刷到了跨域的知识点，于是结合自己毕生所学（加上搜集的一丢资料），总结了一些关于跨域的知识。</p>
 <span id="more"></span>
 
-<h2 id="什么是跨域？"><a href="#什么是跨域？" class="headerlink" title="什么是跨域？"></a>什么是跨域？</h2><p>先举个栗子🌰，我博客的网址是：<a target="_blank" rel="noopener" href="https://blog.wangez.site:8080/">https://blog.wangez.site:8080</a><br>最前面的https叫做<strong>协议</strong>，随后的blog.wangez.site叫做域名，最后的8080叫做端口号<br>（注：真实的博客网址不带8080，<a target="_blank" rel="noopener" href="https://blog.wangez.site/">我的博客</a>，都说了是举个栗子🌰，不会有人当真了吧！！！）。</p>
-<p>当前页面中的某个接口请求的地址和当前页面的地址如果<strong>协议、域名、端口其中有一项不同</strong>，就说该接口跨域了</p>
-<h2 id="为什么有跨域？"><a href="#为什么有跨域？" class="headerlink" title="为什么有跨域？"></a>为什么有跨域？</h2><p><strong>浏览器</strong>为了保证网页的安全，出的<strong>同源协议策略</strong></p>
+<h3 id="什么是webpack"><a href="#什么是webpack" class="headerlink" title="什么是webpack"></a>什么是webpack</h3><p>可能大家了解的，百度搜到的，webpack是一个<strong>模块打包器</strong>。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。</p>
+<p>还有另一种说法：webpack是<strong>前端项目工程化的具体解决方案</strong></p>
+<p>主要功能：它提供了友好的<strong>前端模块化</strong>开发支持，以及<strong>代码压缩混淆、处理浏览器端JavaScript的兼容性、性能优化</strong>等强大的功能。</p>
 <blockquote>
-<p>这部分以下摘录自MDN，想详细了解这部分可以去[MDN](<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">浏览器的同源策略 - Web 安全 | MDN (mozilla.org)</a>)上看看。</p>
+<ul>
+<li>代码压缩混淆是为了缩减文件体积，让网页打开更迅速</li>
+<li>程序员可以放心大胆写js高级语法，webpack在具体浏览器运行的时候会有转换过程，将高级的转换成低级，没有兼容问题的代码，去浏览器里跑。</li>
+<li>css3动画，浏览器不兼容是不会显示的，不会报错，效果出不来</li>
+<li>js，如果低版本浏览器不兼容的话，浏览器会报错</li>
+<li>webpack目前有一些现有的成熟的兼容方案</li>
+</ul>
 </blockquote>
-<p><strong>同源策略</strong>是一个重要的安全策略，它用于限制一个origin的文档或者它加载的脚本如何能与另一个源的资源进行交互。它能帮助阻隔恶意文档，减少可能被攻击的媒介。</p>
-<p>如果两个 URL 的 protocol、port (en-US) (如果有指定的话)和 host 都相同的话，则这两个 URL 是<em>同源</em>。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。（“元组” 是指一组项目构成的整体，双重/三重/四重/五重/等的通用形式）。</p>
-<p>下表给出了与 URL <code>http://store.company.com/dir/page.html</code> 的源进行对比的示例:</p>
-<table>
-<thead>
-<tr>
-<th align="left">URL</th>
-<th align="left">结果</th>
-<th align="left">原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>http://store.company.com/dir2/other.html</code></td>
-<td align="left">同源</td>
-<td align="left">只有路径不同</td>
-</tr>
-<tr>
-<td align="left"><code>http://store.company.com/dir/inner/another.html</code></td>
-<td align="left">同源</td>
-<td align="left">只有路径不同</td>
-</tr>
-<tr>
-<td align="left"><code>https://store.company.com/secure.html</code></td>
-<td align="left">失败</td>
-<td align="left">协议不同</td>
-</tr>
-<tr>
-<td align="left"><code>http://store.company.com:81/dir/etc.html</code></td>
-<td align="left">失败</td>
-<td align="left">端口不同 ( <code>http://</code> 默认端口是80)</td>
-</tr>
-<tr>
-<td align="left"><code>http://news.company.com/dir/other.html</code></td>
-<td align="left">失败</td>
-<td align="left">主机不同</td>
-</tr>
-</tbody></table>
-<h2 id="跨域报错"><a href="#跨域报错" class="headerlink" title="跨域报错"></a>跨域报错</h2><p><img src="https://wangez.site/img/img/image-20210605180026687.png" alt="image-20210605180026687"></p>
-<p>当我们测接口的时候，看见数据并没有如约而至，打开我们万能的浏览器控制台，看见了这个报错，不要犹豫，就是遇见了跨域问题！</p>
-<h2 id="跨域解决办法"><a href="#跨域解决办法" class="headerlink" title="跨域解决办法"></a>跨域解决办法</h2><h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><p>  <strong>这是我目前写项目最常用的一种解决办法，也是当下最流行的方案，通过设置后端，来解决跨域，简单快捷</strong></p>
+<p>好处：让 程序员把<strong>工作重心</strong>放到具体功能的实现上，提高了前端<strong>开发效率</strong>和项目的<strong>可维护性</strong>。</p>
+<h3 id="webpack的基本使用"><a href="#webpack的基本使用" class="headerlink" title="webpack的基本使用"></a>webpack的基本使用</h3><h4 id="构建初始项目目录"><a href="#构建初始项目目录" class="headerlink" title="构建初始项目目录"></a>构建初始项目目录</h4><p>因为许多我觉得大家都会，所以在此简略一些。</p>
+<p>①新建项目空白目录，运行<code>npm init -y</code>命令，初始化包管理配置文件<code>package.json</code></p>
+<p>②新建<code>src</code>源代码目录</p>
+<p>③新建src—&gt;<code>index.html</code>首页和src—&gt;<code>index.js</code>脚本文件</p>
 <blockquote>
-<p>传说中的后端跨域！</p>
+<p>下面就是初始化和引入依赖了，我随便的引入一个jq，完后瞎写了点东西，主要还是学习webpack</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>); <span class="comment">// 允许跨域的源地址是什么，可以设置为*，也可以设成你的源地址</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;Origin, X-Requested-With, Content-Type, Accept&quot;</span>); <span class="comment">// 设置返回数据类型</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;GET, PUT, OPTIONS, POST&quot;</span>); <span class="comment">// 控制哪种请求是可以跨域的</span></span><br><span class="line"></span><br><span class="line">res.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>, <span class="literal">true</span>); <span class="comment">// 跨域的时候是否携带cookie</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p><strong>利用的原理是script标签可以跨域请求资源，将回调函数作为参数拼接在url中</strong></p>
+<p>④初始化首页的基本结构</p>
+<p>⑤运行<code>npm install jquery -S</code>命令，安装jQuery</p>
 <blockquote>
-<p>传说中的前端跨域！但是需要后端的小伙伴们来配合我们一下哦🙄</p>
+<p>之前是不是都是去网上下一个类似<code>jquery.min.js</code>的文件手动拉到文件夹？</p>
 </blockquote>
-<p>​         后端收到请求，调用该回调函数，并将数据作为参数返回去，注意设置响应头返回文档类型，应该设置成javascript</p>
+<h4 id="在项目中安装webpack"><a href="#在项目中安装webpack" class="headerlink" title="在项目中安装webpack"></a>在项目中安装webpack</h4><p>在终端运行如下命令：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack@<span class="number">5.42</span><span class="number">.1</span> webpack-cli@<span class="number">4.7</span><span class="number">.2</span> -D</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>res.setHeader(‘content-type’, ‘application/javascript’)     // 要注意不要忘了设置这个 ，否则会出错误！</p>
+<p>解释一下npm命令中-S -D的区别</p>
+<p>开发中跟上线后部署都需要的包，要-S存到dependencies节点下</p>
+<p>只在开发中使用的包，上线后不需要的包，要-D存到devDependencies节点下</p>
+<p>注：-S 是 –save的简写 -D 是 –save-dev的简写</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">JsonpCallback</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">             <span class="comment">// 在这里处理后端返回来的data数据</span></span><br><span class="line">             <span class="built_in">console</span>.log(data);</span><br><span class="line">         &#125;</span><br><span class="line">   &lt;/script&gt;</span><br><span class="line">   <span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://127.0.0.1:12345/jsonp/callback=JsonpCallback&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="在项目中配置webpack"><a href="#在项目中配置webpack" class="headerlink" title="在项目中配置webpack"></a>在项目中配置webpack</h4><p>只安装不配置当然不会生效，所以我们还要来配置一下。</p>
+<p>① 在项目根目录中，创建名字为<code>webpack.config.js</code>的webpack配置文件，并初始化如下的基本配置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span> <span class="comment">// mode用来指定构建模式，可选值：development、production</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="postmessage"><a href="#postmessage" class="headerlink" title="postmessage"></a>postmessage</h3><p>这个是我没听说过的一种方法，它是利用html5的api进行的，具有特定的使用场景。      </p>
-<p>使用场景：一个页面中嵌入另一个iframe页面，</p>
-<p>​        在主页面中使用postmessage发送数据，在iframe页面中用监听器接收数据</p>
-<pre><code>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 主页面</span><br><span class="line">iFrame.onload = function () &#123;</span><br><span class="line">	iFrame.contentWindow.postMessage(&#123; msg: &#x27;MessageFromIndexPage&#x27; &#125;, &#x27;\*&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">// iframe页面</span><br><span class="line">window.addEventListener(&quot;message&quot;, function (event) &#123;</span><br><span class="line"></span><br><span class="line">	console.log(&#x27;这里是接收到来自父页面的消息，消息内容在event.data属性中&#x27;, event)</span><br><span class="line"></span><br><span class="line">&#125;, false)</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h3 id="其他方法：node中间件、nginx反向代理、websocket等"><a href="#其他方法：node中间件、nginx反向代理、websocket等" class="headerlink" title="其他方法：node中间件、nginx反向代理、websocket等"></a>其他方法：node中间件、nginx反向代理、websocket等</h3><p>主要是因为同源策略是浏览器的限制，服务器和服务器之间没有限制</p>
-<p>这次我们举个菠萝🍍，小红想要小绿的新玩具<strong>（发出接口请求）</strong>，但是小绿不给他<strong>（同源策略）</strong>，于是小红去找了小兰，对小兰说，我想要小绿的新玩具<strong>（准备去搞中间件进行转发或者做代理了）</strong>，小兰去跟小绿要来了新玩具<strong>（拿到了想要的数据，说明方法成功）</strong>，并将新玩具交给了小红<strong>（解决了跨域）</strong>。</p>
+<p>module.exports  这个是不是很眼熟（Node.js的导出语法，如果对node有了解的话会知道），它的作用是向外导出一个配置对象，它是webpack的配置文件，当然，这个配置就是给webpack用的咯！</p>
+<p>mode的两个可选值，代表着开发的不同阶段：分别是开发模式（development）跟生产模式（production）。</p>
 <blockquote>
-<p>在这里面我只接触过node中间件跟nginx反向代理，也不算很深入的了解，所以就先不献丑啦，等日后学有所成再来填上这个坑！</p>
+<p>生产模式也就是要上线了。</p>
 </blockquote>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>跨域是很常见的一个问题，也是出现在面试问题中频率比较高的问题，希望每个小伙伴们在遇到这个问题的时候都能顺利解决。虽然我们现在写项目的时候，框架中大都为我们配置了代理（Vue的proxyTable代理等），但是我想了解其根源对于我们的自我提高是非常有帮助的！</p>
+<p>② 在package.json的scripts节点下，新增<code>dev脚本</code>如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>:&#123;</span><br><span class="line">	<span class="string">&quot;dev&quot;</span>:<span class="string">&quot;webpack&quot;</span> <span class="comment">// script 节点下的脚本，可通过npm run执行，例如npm run dev</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><code>&quot;dev&quot;:&quot;webpack&quot;</code>,冒号前面是这个脚本的名字，冒号后面是个命令，后面的命令必须是字符串，前面脚本的名字可以任意去写，不一定叫dev，合法就行。</p>
+<p>③ 在终端中运行<code>npm run dev命令</code>，启动webpack进行项目的打包构建。</p>
+<p>运行之后，会多一个<code>dist</code>目录，打开后里面有一个main.js代码。</p>
+<p>如果你之前<code>index.js</code>的代码引入到<code>index.html</code>中，出现了兼容性问题，那么不妨引入<code>main.js</code>试试，你会发现没有任何问题，这就是<strong>webpack</strong>的在起作用了，它帮着对我们的项目进行了兼容性处理。</p>
+<h4 id="mode的可选值"><a href="#mode的可选值" class="headerlink" title="mode的可选值"></a>mode的可选值</h4><p><strong>mode节点</strong>的可选值在上面已经说过了，有两个，分别是</p>
+<ul>
+<li>development<ul>
+<li>开发环境</li>
+<li>不会对打包生成的文件进行代码压缩和性能优化</li>
+<li>打包速度快，适合在开发阶段使用</li>
+</ul>
+</li>
+<li>production<ul>
+<li>生产环境</li>
+<li>会对打包生成的文件进行代码压缩和性能优化</li>
+<li>打包速度很慢，今是何在项目发布的阶段使用</li>
+</ul>
+</li>
+</ul>
+<p><strong>结论：</strong>开发的时候我们一定要用development，因为我们追求的是速度而不是体积，反过来，发布上线的时候我们一定要用production，因为上线追求的是体积和性能，而不是打包的速度。</p>
+<h3 id="webpack的entry和output"><a href="#webpack的entry和output" class="headerlink" title="webpack的entry和output"></a>webpack的entry和output</h3>
     </div>
 
     
@@ -407,7 +391,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/876750285.html/" title="跨域的问题终于能解决了">https://wangenze267.github.io/posts/876750285.html/</a>
+    <a href="https://wangenze267.github.io/posts/3206731080.html/" title="webpack基础认识">https://wangenze267.github.io/posts/3206731080.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -442,7 +426,7 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/webpack/" rel="tag"><i class="fa fa-tag"></i> webpack</a>
           </div>
 
         
@@ -451,13 +435,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/1172116075.html/" rel="prev" title="前端知识链条中少不了的一环--Ajax">
-      <i class="fa fa-chevron-left"></i> 前端知识链条中少不了的一环--Ajax
+    <a href="/posts/2713460185.html/" rel="prev" title="组件库计划，启航！">
+      <i class="fa fa-chevron-left"></i> 组件库计划，启航！
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/212671180.html/" rel="next" title="Node.js的非阻塞I/O">
-      Node.js的非阻塞I/O <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -517,7 +498,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%89%8D"><span class="nav-number">1.1.</span> <span class="nav-text">写在最前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%9F%9F%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">什么是跨域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%B7%A8%E5%9F%9F%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">为什么有跨域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E6%8A%A5%E9%94%99"><span class="nav-number">1.4.</span> <span class="nav-text">跨域报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">跨域解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cors"><span class="nav-number">1.5.1.</span> <span class="nav-text">cors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">1.5.2.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postmessage"><span class="nav-number">1.5.3.</span> <span class="nav-text">postmessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95%EF%BC%9Anode%E4%B8%AD%E9%97%B4%E4%BB%B6%E3%80%81nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81websocket%E7%AD%89"><span class="nav-number">1.5.4.</span> <span class="nav-text">其他方法：node中间件、nginx反向代理、websocket等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">1.6.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFwebpack"><span class="nav-number">2.</span> <span class="nav-text">什么是webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">webpack的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%88%9D%E5%A7%8B%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="nav-number">3.1.</span> <span class="nav-text">构建初始项目目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AE%89%E8%A3%85webpack"><span class="nav-number">3.2.</span> <span class="nav-text">在项目中安装webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%85%8D%E7%BD%AEwebpack"><span class="nav-number">3.3.</span> <span class="nav-text">在项目中配置webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mode%E7%9A%84%E5%8F%AF%E9%80%89%E5%80%BC"><span class="nav-number">3.4.</span> <span class="nav-text">mode的可选值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack%E7%9A%84entry%E5%92%8Coutput"><span class="nav-number">4.</span> <span class="nav-text">webpack的entry和output</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
