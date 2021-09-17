@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言学学设计模式，每次更一个，实在太多了。 第一次更新：单例模式 第二次更新：策略模式  打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。 计网操作系统数据结构算法还没学 vue还没盘 我还有机会吗">
+  <meta name="description" content="前言学学设计模式，每次更一个，实在太多了。 第一次更新：单例模式 第二次更新：策略模式 第三次更新：代理模式  打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。 计网操作系统数据结构算法还没学 vue还没盘 我还有机会吗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript中的设计模式-策略模式">
-<meta property="og:url" content="https://wangenze267.github.io/posts/3322122302.html/index.html">
+<meta property="og:title" content="JavaScript中的设计模式-代理模式">
+<meta property="og:url" content="https://wangenze267.github.io/posts/1278378512.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="前言学学设计模式，每次更一个，实在太多了。 第一次更新：单例模式 第二次更新：策略模式  打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。 计网操作系统数据结构算法还没学 vue还没盘 我还有机会吗">
+<meta property="og:description" content="前言学学设计模式，每次更一个，实在太多了。 第一次更新：单例模式 第二次更新：策略模式 第三次更新：代理模式  打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。 计网操作系统数据结构算法还没学 vue还没盘 我还有机会吗">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-26T05:51:53.468Z">
-<meta property="article:modified_time" content="2021-08-29T05:06:32.396Z">
+<meta property="article:modified_time" content="2021-09-17T11:59:47.800Z">
 <meta property="article:author" content="Ned">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/3322122302.html/">
+<link rel="canonical" href="https://wangenze267.github.io/posts/1278378512.html/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>JavaScript中的设计模式-策略模式 | Wangez-Blog</title>
+  <title>JavaScript中的设计模式-代理模式 | Wangez-Blog</title>
   
 
 
@@ -210,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/3322122302.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/1278378512.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -223,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript中的设计模式-策略模式
+          JavaScript中的设计模式-代理模式
         </h1>
 
         <div class="post-meta">
@@ -240,7 +240,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-29 13:06:32" itemprop="dateModified" datetime="2021-08-29T13:06:32+08:00">2021-08-29</time>
+                <time title="修改时间：2021-09-17 19:59:47" itemprop="dateModified" datetime="2021-09-17T19:59:47+08:00">2021-09-17</time>
               </span>
 
           
@@ -259,8 +259,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/3322122302.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/3322122302.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/1278378512.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/1278378512.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -270,14 +270,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
+              <span>4.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -292,6 +292,7 @@
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p>
 <p>第一次更新：<strong>单例模式</strong></p>
 <p>第二次更新：<strong>策略模式</strong></p>
+<p>第三次更新：<strong>代理模式</strong></p>
 <blockquote>
 <p>打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。</p>
 <p>计网操作系统数据结构算法还没学</p>
@@ -386,7 +387,23 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> strategies = &#123;</span><br><span class="line">    <span class="attr">s</span>: <span class="function">(<span class="params">salary</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> salary * <span class="number">4</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">a</span>: <span class="function">(<span class="params">salary</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> salary * <span class="number">3</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">b</span>: <span class="function">(<span class="params">salary</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> salary * <span class="number">2</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> caculateBonus = <span class="function">(<span class="params">level, salary</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> strategies[level][salary];</span><br><span class="line">&#125;;</span><br><span class="line">caculateBonus(<span class="string">&#x27;s&#x27;</span>,<span class="number">20000</span>)</span><br></pre></td></tr></table></figure>
 
 <p>也是有着一个<code>caculateBonus</code>函数，接收level跟salary两个参数，但是我们构建了一个策略表，在策略表中维护这个计算规则。这时候如果要加入一个新绩效等级，就去表中加入一个新等级，再加入它的计算规则即可，并且可以将表提取出来放到另一个文件中，甚至是放到公网上下发，因为这个表是可以不用程序员们来维护的，可以做成页面交给公司其他人员去维护，就有了前面说的那个下发的功能，可以去给别人展示。计算绩效的时候去读取策略表，完后根据表中规则来进行计算就行。</p>
-<h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4>
+<h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><p>定义：<strong>为一个对象提供一个代用品或者占位符，以便控制对它的访问。替身对象可对请求预先进行处理，再决定是否转交给本体对象。</strong></p>
+<blockquote>
+<p>假如项目中一个图片过大，短时间内加载不出来的时候，用户只能看见白屏，体验感就会非常糟糕，这时候我们就可以用一个替身来暂时替代图片。</p>
+<p>当真身被访问的时候，我们先访问替身对象，让替身代替真身去做一些事情，之后在转交给真身处理。     </p>
+</blockquote>
+<p>应用场景：当我们不方便直接访问某个对象时，或不满足需求时，可考虑使用一个替身对象来控制该对象的访问。</p>
+<p>来看这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原生函数</span></span><br><span class="line"><span class="keyword">const</span> rawImage = (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">	<span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		<span class="attr">setSrc</span>:<span class="function">(<span class="params">src</span>)=&gt;</span> &#123;</span><br><span class="line">			imgNode.src = <span class="string">&quot;./loading.gif&quot;</span>;</span><br><span class="line">			<span class="keyword">const</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">			img.src = src;</span><br><span class="line">			img.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">				imgNode.src = <span class="built_in">this</span>.src;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">rawImage.setSrc(<span class="string">&quot;http://xxx.gif&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个xxx.gif的加载时间可能要到10s左右，我们首先预加载了一个loading图，用户看到的过程是最开始看见loading，当xxx加载完成后，也就是onload执行完后，就会做一个替换的效果，完成了这个功能。</p>
+<p>思考：这段代码是不是耦合性太强了啊？</p>
+<p>是的，loading的逻辑跟我们实际加载的逻辑是耦合在一起的，我们要做两个事情，一个是设置loading，一个是设置图片链接。那我们给他分开，用代理函数去做预处理，加载loading，用原生函数提供一个设置图片链接的功能。</p>
+<p>实现一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原生函数</span></span><br><span class="line"><span class="keyword">const</span> rawImage = (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">	<span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		<span class="attr">setSrc</span>:<span class="function">(<span class="params">src</span>)=&gt;</span> &#123;</span><br><span class="line">			imgNode.src = src;</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理函数</span></span><br><span class="line"><span class="keyword">const</span> proxyImage = (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">	img.onload = <span class="function">() =&gt;</span>&#123;</span><br><span class="line">		rawImage.setSrc(<span class="built_in">this</span>.src);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		<span class="attr">setSrc</span>:<span class="function">(<span class="params">src</span>) =&gt;</span> &#123;</span><br><span class="line">			rawImage.setSrc(<span class="string">&quot;./loading.gif&quot;</span>);</span><br><span class="line">			img.src = src;</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">proxyImage.setSrc(<span class="string">&quot;http://xxx.gif&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们通常会进行一些请求的预处理的时候使用代理模式。</p>
+<h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4>
     </div>
 
     
@@ -421,7 +438,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/3322122302.html/" title="JavaScript中的设计模式-策略模式">https://wangenze267.github.io/posts/3322122302.html/</a>
+    <a href="https://wangenze267.github.io/posts/1278378512.html/" title="JavaScript中的设计模式-代理模式">https://wangenze267.github.io/posts/1278378512.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -604,13 +621,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">75k</span>
+    <span title="站点总字数">76k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">1:09</span>
 </div>
 
 
