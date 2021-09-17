@@ -180,6 +180,7 @@ site_state: true
 social:
   #Wangez: https://wangez.site
   Gitee: https://gitee.com/wang-enze || fab fa-git
+  掘金: https://juejin.cn/user/105972016875911 || fab fa-link
   #GitHub: https://github.com/yourname || fab fa-github
   #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo

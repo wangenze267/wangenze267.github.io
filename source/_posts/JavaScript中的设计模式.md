@@ -1,10 +1,10 @@
 ---
-title: JavaScript中的设计模式-策略模式
+title: JavaScript中的设计模式-代理模式
 author: Ned
 tag:
   - JavaScript
   - 设计模式
-abbrlink: 3322122302
+abbrlink: 1278378512
 ---
 
 ### 前言
@@ -14,6 +14,8 @@ abbrlink: 3322122302
 第一次更新：**单例模式**
 
 第二次更新：**策略模式**
+
+第三次更新：**代理模式**
 
 > 打算10月前将JavaScript滚个百分之六七十，不知道能不能学完。
 >
@@ -195,6 +197,75 @@ caculateBonus('s',20000)
 也是有着一个`caculateBonus`函数，接收level跟salary两个参数，但是我们构建了一个策略表，在策略表中维护这个计算规则。这时候如果要加入一个新绩效等级，就去表中加入一个新等级，再加入它的计算规则即可，并且可以将表提取出来放到另一个文件中，甚至是放到公网上下发，因为这个表是可以不用程序员们来维护的，可以做成页面交给公司其他人员去维护，就有了前面说的那个下发的功能，可以去给别人展示。计算绩效的时候去读取策略表，完后根据表中规则来进行计算就行。
 
 #### 代理模式
+
+定义：**为一个对象提供一个代用品或者占位符，以便控制对它的访问。替身对象可对请求预先进行处理，再决定是否转交给本体对象。**
+
+> 假如项目中一个图片过大，短时间内加载不出来的时候，用户只能看见白屏，体验感就会非常糟糕，这时候我们就可以用一个替身来暂时替代图片。
+>
+> 当真身被访问的时候，我们先访问替身对象，让替身代替真身去做一些事情，之后在转交给真身处理。	 
+
+应用场景：当我们不方便直接访问某个对象时，或不满足需求时，可考虑使用一个替身对象来控制该对象的访问。
+
+来看这段代码：
+
+```js
+// 原生函数
+const rawImage = (() => {
+	const imgNode = document.createElement("img");
+	document.body.appendChild(imgNode);
+	return {
+		setSrc:(src)=> {
+			imgNode.src = "./loading.gif";
+			const img = new Image();
+			img.src = src;
+			img.onload = () => {
+				imgNode.src = this.src;
+			}
+		}
+	}
+})();
+
+rawImage.setSrc("http://xxx.gif");
+```
+
+这个xxx.gif的加载时间可能要到10s左右，我们首先预加载了一个loading图，用户看到的过程是最开始看见loading，当xxx加载完成后，也就是onload执行完后，就会做一个替换的效果，完成了这个功能。
+
+思考：这段代码是不是耦合性太强了啊？
+
+是的，loading的逻辑跟我们实际加载的逻辑是耦合在一起的，我们要做两个事情，一个是设置loading，一个是设置图片链接。那我们给他分开，用代理函数去做预处理，加载loading，用原生函数提供一个设置图片链接的功能。
+
+实现一下：
+
+```js
+// 原生函数
+const rawImage = (() => {
+	const imgNode = document.createElement("img");
+	document.body.appendChild(imgNode);
+	return {
+		setSrc:(src)=> {
+			imgNode.src = src;
+		},
+	};
+})();
+
+// 代理函数
+const proxyImage = (() => {
+	const img = new Image();
+	img.onload = () =>{
+		rawImage.setSrc(this.src);
+	};
+	return {
+		setSrc:(src) => {
+			rawImage.setSrc("./loading.gif");
+			img.src = src;
+		},
+	};
+})();
+
+proxyImage.setSrc("http://xxx.gif");
+```
+
+我们通常会进行一些请求的预处理的时候使用代理模式。
 
 #### 发布订阅模式
 
