@@ -102,6 +102,7 @@
 <p>古人云：学吧，学会了都是你的~</p>
 <p>古人又云：学吧，学不死就往死里学！</p>
 </blockquote>
+<p><em>注：本文为摘录笔记，供学习使用。</em></p>
 <span id="more"></span>
 
 <h3 id="什么是webpack"><a href="#什么是webpack" class="headerlink" title="什么是webpack"></a>什么是webpack</h3><p>可能大家了解的，百度搜到的，webpack是一个<strong>模块打包器</strong>。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。</p>
@@ -170,7 +171,55 @@
 </li>
 </ul>
 <p><strong>结论：</strong>开发的时候我们一定要用development，因为我们追求的是速度而不是体积，反过来，发布上线的时候我们一定要用production，因为上线追求的是体积和性能，而不是打包的速度。</p>
-<h3 id="webpack的entry和output"><a href="#webpack的entry和output" class="headerlink" title="webpack的entry和output"></a>webpack的entry和output</h3>]]></content>
+<h4 id="webpack-config-js文件的作用"><a href="#webpack-config-js文件的作用" class="headerlink" title="webpack.config.js文件的作用"></a>webpack.config.js文件的作用</h4><p>webpack.config.js是webpack的配置文件。webpack在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。</p>
+<p>注意：由于webpack是基于node.js开发出来的打包工具，因此在它的配置文件中，支持使用node.js相关的语法和模块进行webpack的个性化配置。</p>
+<h4 id="webpack中的默认约定"><a href="#webpack中的默认约定" class="headerlink" title="webpack中的默认约定"></a>webpack中的默认约定</h4><p>在webpack4.x和5.x的版本中，有如下的默认约定：</p>
+<ul>
+<li>默认的打包入口文件为<code>src-&gt;index.js</code></li>
+<li>默认的输出文件路径为<code>dist-&gt;main.js</code></li>
+</ul>
+<p>注意：可以在<code>webpack.config.js</code>中修改打包的默认约定</p>
+<h4 id="自定义打包的入口与出口"><a href="#自定义打包的入口与出口" class="headerlink" title="自定义打包的入口与出口"></a>自定义打包的入口与出口</h4><p>在<code>webpack.config.js</code>配置文件中，通过<strong>entry</strong>节点指定打包的入口。通过<strong>output</strong>节点指定打包的出口。</p>
+<p>示例代码如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>) <span class="comment">// 导入node.js中专门操作路径的模块</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">entry</span>: path.join(__dirname,<span class="string">&#x27;./src/index.js&#x27;</span>), <span class="comment">// 打包入口文件路径</span></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.join(__dirname, <span class="string">&#x27;./dist&#x27;</span>), <span class="comment">// 输出文件的存取路径</span></span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;main .js&#x27;</span> <span class="comment">// 输出文件名称 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意： __dirname 是两个下划线！！代表这个文件的存放路径。</p>
+</blockquote>
+<h3 id="webpack中的插件"><a href="#webpack中的插件" class="headerlink" title="webpack中的插件"></a>webpack中的插件</h3><blockquote>
+<p>方便程序员的开发</p>
+</blockquote>
+<p>通过安装和配置第三方的插件，可以拓展webpack的能力，从而让webpack用起来方便。最常用的webpack插件有如下两个：</p>
+<ul>
+<li>webpack-dev-server<ul>
+<li>类似于node.js阶段用到的nodemon工具</li>
+<li>每当修改了源代码，webpack会自动进行项目的打包和构建</li>
+</ul>
+</li>
+<li>html-webpack-plugin<ul>
+<li>webpack中的HTML插件（类似于一个模板引擎插件）</li>
+<li>可以通过此插件自定制index.html页面内容</li>
+</ul>
+</li>
+</ul>
+<h4 id="安装webpack-dev-server"><a href="#安装webpack-dev-server" class="headerlink" title="安装webpack-dev-server"></a>安装webpack-dev-server</h4><p>运行如下命令：</p>
+<p><code>npm install webpack-dev-server@3.11.2 -D</code></p>
+<blockquote>
+<p>-D，上面有讲过，他只是在开发阶段使用的工具，并不是上线部署的时候需要的。</p>
+</blockquote>
+<h4 id="配置webpack-dev-server"><a href="#配置webpack-dev-server" class="headerlink" title="配置webpack-dev-server"></a>配置webpack-dev-server</h4><ul>
+<li><p>修改<code>package.json--&gt;scripts</code>中的<code>dev</code>命令如下</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>:&#123;</span><br><span class="line">	<span class="string">&quot;dev&quot;</span>: <span class="string">&quot;webpack serve&quot;</span>, <span class="comment">// script 节点下的脚本，可以通过npm run 执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>serve是一个参数，代表我们要通过插件实现自动打包功能，只要修改代码保存，他就会自动打包生成</p>
+</blockquote>
+<ul>
+<li>再次运行<code>npm run dev</code>命令，重新进行项目的打包</li>
+<li>在浏览器中访问<code>http://localhost:8080</code>地址，查看自动打包效果</li>
+</ul>
+<p>注意：<code>webpack-dev-server</code>会启动一个<strong>实时打包的http服务器</strong></p>
+]]></content>
       <tags>
         <tag>webpack</tag>
       </tags>
@@ -2213,8 +2262,8 @@
 <h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
 ]]></content>
       <tags>
-        <tag>Vue</tag>
         <tag>Axios</tag>
+        <tag>Vue</tag>
         <tag>踩坑日记</tag>
       </tags>
   </entry>
