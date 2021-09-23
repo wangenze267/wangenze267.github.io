@@ -94,7 +94,7 @@
       </tags>
   </entry>
   <entry>
-    <title>关于JavaScript的数据类型</title>
+    <title>关于JavaScript的数据类型（2021.9.23更新）</title>
     <url>/posts/2884264051.html/</url>
     <content><![CDATA[<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>二刷JavaScript高级了，上一次是刷的黑马pink老师的课程，这次刷的是尚硅谷的课程，都是B站的课程，对课程进行了些许总结。</p>
 <p>可能是课程有些老的原因，例如视频中仅有5个基本类型，但是目前好像是有7种。</p>
@@ -184,6 +184,48 @@
 <li>特点：适用于所有类型的判断检测</li>
 <li>原理：Object.prototype.toString 表示一个返回对象类型的字符串，call()方法可以改变this的指向，那么把Object.prototype.toString()方法指向不同的数据类型上面，返回不同的结果</li>
 </ul>
+<h2 id="补充，相关问题（2021-9-23）"><a href="#补充，相关问题（2021-9-23）" class="headerlink" title="补充，相关问题（2021.9.23）"></a>补充，相关问题（2021.9.23）</h2><h3 id="undefined与null的区别？"><a href="#undefined与null的区别？" class="headerlink" title="undefined与null的区别？"></a>undefined与null的区别？</h3><ul>
+<li>undefined表示定义未赋值</li>
+<li>null表示定义并赋值了，只是值为null</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// undefined</span></span><br><span class="line">a = <span class="literal">null</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="什么时候给变量赋值为null呢？"><a href="#什么时候给变量赋值为null呢？" class="headerlink" title="什么时候给变量赋值为null呢？"></a>什么时候给变量赋值为null呢？</h3><ul>
+<li>初始赋值，表明将要赋值为对象</li>
+<li>结束前，让对象成为垃圾对象，被回收掉。</li>
+</ul>
+<p>不知道大家是否还记得，typeof 一个null的时候，返回的是什么？</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a) <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+
+<p>没错，是object。</p>
+<p>所以当我们将一个变量的初始值赋值为null的时候，我们是向其他程序员表明，这个变量将会被赋值为对象。</p>
+<blockquote>
+<p>不这么做行不行？ 当然可以。</p>
+<p>那为什么还要这么做？</p>
+<p>当然是因为，编程也是很严谨的。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="literal">null</span> <span class="comment">// 初始赋值为null，表明将要赋值为对象</span></span><br><span class="line">b = [<span class="string">&#x27;Ned&#x27;</span>,<span class="number">20</span>] <span class="comment">// 确定对象就赋值</span></span><br><span class="line">b = <span class="literal">null</span> <span class="comment">// 最后，让b指向的对象成为垃圾对象（被垃圾回收器回收）</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="严格区别变量类型与数据类型"><a href="#严格区别变量类型与数据类型" class="headerlink" title="严格区别变量类型与数据类型"></a>严格区别变量类型与数据类型</h3><ul>
+<li>数据的类型<ul>
+<li>基本类型</li>
+<li>对象类型</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>变量的类型（变量内存值的类型）<ul>
+<li>基本类型：保存就是基本类型的数据</li>
+<li>引用类型：保存的是地址值</li>
+</ul>
+</li>
+</ul>
+<p>平时的时候我们不会去区分这个概念（要不是视频里看见了我都不知道:crying_cat_face:）。</p>
+<p>简单的了解到这个概念就行吧~。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = fuction ()&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;这是一个函数&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a) <span class="comment">// function</span></span><br></pre></td></tr></table></figure>
+
+
+
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
