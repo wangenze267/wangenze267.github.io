@@ -94,6 +94,102 @@
       </tags>
   </entry>
   <entry>
+    <title>ES6模块化</title>
+    <url>/posts/3892826279.html/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在之前的JavaScript中是没有模块化概念的，无法将一个大程序拆分成互相依赖的小文件，再用简单的方法拼装起来。如果要进行模块化操作，就需要引入第三方的类库。随着技术的发展，前后端分离，前端的业务变的越来越复杂化，于是才有了ES6模块化的诞生。</p>
+<p>为什么要有模块化，或者模块化的好处是什么呢？</p>
+<blockquote>
+<p> 大家都遵守同样的模块化规范写代码，降低了沟通的成本，极大方便了各个模块间的相互调用，利人利己。</p>
+<p>可以将一段复杂的程序拆解开来，方便维护可拓展。</p>
+</blockquote>
+<h2 id="前端模块化规范"><a href="#前端模块化规范" class="headerlink" title="前端模块化规范"></a>前端模块化规范</h2><p>在<strong>ES6模块化</strong>诞生之前，JavaScript社区尝试并提出了<strong>AMD、CMD、commonJS</strong>等模块化规范。</p>
+<p>但是，这些模块化规范，存在一定的差异性与局限性，并不能通用。</p>
+<p>例如：</p>
+<ul>
+<li><p>AMD和CMD适用于浏览器端的JavaScript模块化</p>
+</li>
+<li><p>commonJS适用于服务器端的JavaScript模块化</p>
+<blockquote>
+<p>Node.js 就是遵循的这个规范</p>
+<p>导入其它模块使用require()</p>
+<p>导出使用module.exports对象</p>
+</blockquote>
+</li>
+</ul>
+<p>太多的模块化规范给开发者增加了学习的难度与开发的成本。所以，ES6模块化规范诞生了！</p>
+<h3 id="什么是ES6模块化规范"><a href="#什么是ES6模块化规范" class="headerlink" title="什么是ES6模块化规范"></a>什么是ES6模块化规范</h3><p>ES6模块化规范是浏览器端与服务端通用的模块化开发规范。它的出现极大的降低了前端开发者的模块化学习成本，开发者不需要在额外学习AMD、CMD或者commonJS等模块化规范。</p>
+<p>ES6中模块化规范中定义：</p>
+<ul>
+<li>每个js文件都是一个独立的模块</li>
+<li>导入其他模块成员使用<code>import</code>关键字</li>
+<li>向外共享模块成员使用<code>export</code>关键字</li>
+</ul>
+<h2 id="在node-js中体验ES6模块化"><a href="#在node-js中体验ES6模块化" class="headerlink" title="在node.js中体验ES6模块化"></a>在node.js中体验ES6模块化</h2><p>node.js中默认仅支持commonJS模块化规范，若想在node中进行体验，要按照如下两步骤进行配置：</p>
+<ul>
+<li><p>确保安装了<code>v14.15.1</code>或者更高版本的node.js</p>
+<blockquote>
+<p>可以使用在cmd窗口中使用<code>node -v</code>命令查看当前版本号哦~</p>
+</blockquote>
+</li>
+<li><p>在package.json的根节点中添加<code>&quot;type&quot;:&quot;module&quot;</code>节点</p>
+<blockquote>
+<p>不知道如何添加的小伙伴看这里：</p>
+<p>首先我们要在一个空文件夹内，执行<code>npm init -y</code>，这时候我们就能看见已经自动生成了<code>package.json</code>文件了</p>
+<p>完后在vs-code打开，在内添加<code>&quot;type&quot;:&quot;module&quot;</code>节点即可</p>
+<p>小提示：type值默认为commonJS，所以我们平时node遵循的模块化规范都是commonJS</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="ES6模块化的基本语法"><a href="#ES6模块化的基本语法" class="headerlink" title="ES6模块化的基本语法"></a>ES6模块化的基本语法</h2><p>ES6的模块化主要包含如下3种用法：</p>
+<ul>
+<li>默认导出与默认导入</li>
+<li>按需导出与按需导入</li>
+<li>直接导入并执行模块中的代码</li>
+</ul>
+<h3 id="默认导出"><a href="#默认导出" class="headerlink" title="默认导出"></a>默认导出</h3><p>语法：<code>export default</code> <font color="nred">默认导出的成员</font></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> n1 = <span class="number">10</span> <span class="comment">// 定义模块私有成员 n1</span></span><br><span class="line"><span class="keyword">let</span> n2 = <span class="number">20</span> <span class="comment">// 定义模块私有成员 n2 因为没有共享出去，所以外界访问不到</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;  <span class="comment">// 定义模块私有方法 show</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123; <span class="comment">// 使用export default 默认导出语法 向外共享n1 和 show 两个成员</span></span><br><span class="line">	n1,</span><br><span class="line">    show</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<p>每个模块中，只允许用唯一的一次 <code>export default</code>，否则会报错！</p>
+<h3 id="默认导入"><a href="#默认导入" class="headerlink" title="默认导入"></a>默认导入</h3><p>语法：<code>import</code><font color="nred">接收名称</font><code>form</code><font color="nred">模块标识符</font></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 从 m1.js 模块中导入 export default 向外共享的成员</span></span><br><span class="line"><span class="comment">// 并使用 m1 进行接收</span></span><br><span class="line"><span class="keyword">import</span> m1 form <span class="string">&#x27;./m1.js&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(m1)</span><br><span class="line"><span class="comment">// 输出为: &#123; n1: 10, show: [Function:show]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<p>默认导入的时候，接收名字可以任意写，注意是合法的成员名称就行。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// m1 合法 不报错</span></span><br><span class="line"><span class="keyword">import</span> m1 form <span class="string">&#x27;./m1.js&#x27;</span></span><br><span class="line"><span class="comment">// 成员名称不能用数字开头，所以会直接报错</span></span><br><span class="line"><span class="keyword">import</span> <span class="number">123</span> form <span class="string">&#x27;./m1.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="按需导出"><a href="#按需导出" class="headerlink" title="按需导出"></a>按需导出</h3><p>语法：<code>export</code><font color="nred">按需导出的成员</font></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 向外按需导出变量 s</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> s = <span class="string">&#x27;Ned&#x27;</span></span><br><span class="line"><span class="comment">// 向外按需导出方法 show</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="按需导入"><a href="#按需导入" class="headerlink" title="按需导入"></a>按需导入</h3><p>语法：<code>import &#123;s&#125; from</code><font color="nred">模块标识符 </font></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; s, show &#125; form <span class="string">&#x27;./m1.js&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(s) <span class="comment">// Ned</span></span><br><span class="line"><span class="built_in">console</span>.log(show) <span class="comment">// [Function: show]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<ul>
+<li>每个模块中可以使用多次按需导出</li>
+<li>按需导入的成员名称必须跟按需导出的名称一致</li>
+<li>按需导入时，可以使用<code>as</code>关键字进行重命名</li>
+<li>按需导入可以和默认导入一起使用</li>
+</ul>
+<p>重命名：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; s <span class="keyword">as</span> str &#125; form <span class="string">&#x27;./m1.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用as关键字，将s重命名为str，所以接下来我们使用str就好了，不能再使用s这个名字。</p>
+<p>按需导入和默认导入一起使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> info,&#123; s <span class="keyword">as</span> str &#125; form <span class="string">&#x27;./m1.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>info就是默认导入，后面带大括号的就是按需导入。</p>
+<h3 id="直接导入并执行模块中的代码"><a href="#直接导入并执行模块中的代码" class="headerlink" title="直接导入并执行模块中的代码"></a>直接导入并执行模块中的代码</h3><p>如果只想单纯的执行某个模块中的代码，并不需要得到其内部向外共享的成员，可以这样做：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// m1.js:</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line">-------------------------</span><br><span class="line"><span class="comment">// 直接导入并执行模块中的代码</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./m1.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>没错，就是直接导入即可。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这篇文章简单介绍一下模块化的概念和语法，过几天我还会出一篇文章来告诉大家模块化在实际应用里是如何使用的。</p>
+]]></content>
+      <tags>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>什么？你还不知道Symbol？</title>
     <url>/posts/2670144936.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ES6引入了一种新的原始数据类型<code>Symbol</code>表示独一无二的值。它是JavaScript语言的第七种数据类型，是一种类似于字符串的数据类型。</p>
@@ -146,8 +242,8 @@
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望总结的这些知识可以让大家对symbol类型的数据有一个简单的了解。</p>
 ]]></content>
       <tags>
-        <tag>JavaScript</tag>
         <tag>ES6</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1764,8 +1860,8 @@
 <p>快乐的暑假，开始了！</p>
 ]]></content>
       <tags>
-        <tag>JavaScript</tag>
         <tag>ES6</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1846,8 +1942,8 @@
 <h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
 ]]></content>
       <tags>
-        <tag>JavaScript</tag>
         <tag>ES6</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1892,8 +1988,8 @@
 <h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
 ]]></content>
       <tags>
-        <tag>JavaScript</tag>
         <tag>ES6</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
