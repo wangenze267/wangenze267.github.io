@@ -20,24 +20,24 @@
     var CONFIG = {"hostname":"wangenze267.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="起因自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。 去找了axios的介绍 由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一">
+  <meta name="description" content="前言在我们写项目遇到不听话的用户的时候，例如一个登录按钮，他就偏偏要反复点好几次，调用了&#x2F;login接口好多次，是不是很烦？ 因为涉及到ajax请求，就会有这样的情况，假设 1 秒触发了 60 次，每个回调就必须在 1000 &#x2F; 60 &#x3D; 16.67ms 内完成，否则就会有卡顿出现。 那么只有请求需要写防抖吗？ 当然不是，凡是（可能）涉及到频繁事件触发的地方，都需要写防抖。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Axios踩坑日记">
-<meta property="og:url" content="https://wangenze267.github.io/posts/2698809561.html/index.html">
+<meta property="og:title" content="都2021年了，你还不会防抖吗？">
+<meta property="og:url" content="https://wangenze267.github.io/posts/647457095.html/index.html">
 <meta property="og:site_name" content="Wangez-Blog">
-<meta property="og:description" content="起因自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。 去找了axios的介绍 由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一">
+<meta property="og:description" content="前言在我们写项目遇到不听话的用户的时候，例如一个登录按钮，他就偏偏要反复点好几次，调用了&#x2F;login接口好多次，是不是很烦？ 因为涉及到ajax请求，就会有这样的情况，假设 1 秒触发了 60 次，每个回调就必须在 1000 &#x2F; 60 &#x3D; 16.67ms 内完成，否则就会有卡顿出现。 那么只有请求需要写防抖吗？ 当然不是，凡是（可能）涉及到频繁事件触发的地方，都需要写防抖。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-06-09T05:40:40.412Z">
-<meta property="article:modified_time" content="2021-08-08T14:05:09.316Z">
+<meta property="og:image" content="https://wangenze267.github.io/posts/647457095.html/%E6%9C%AA%E9%98%B2%E6%8A%96.gif">
+<meta property="og:image" content="https://wangenze267.github.io/posts/647457095.html/%E9%98%B2%E6%8A%96%E6%9C%AA%E4%BC%98%E5%8C%96.gif">
+<meta property="article:published_time" content="2021-09-28T08:12:44.000Z">
+<meta property="article:modified_time" content="2021-09-28T08:15:10.433Z">
 <meta property="article:author" content="Ned">
-<meta property="article:tag" content="Vue">
-<meta property="article:tag" content="Axios">
-<meta property="article:tag" content="踩坑日记">
+<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://wangenze267.github.io/posts/647457095.html/%E6%9C%AA%E9%98%B2%E6%8A%96.gif">
 
-<link rel="canonical" href="https://wangenze267.github.io/posts/2698809561.html/">
+<link rel="canonical" href="https://wangenze267.github.io/posts/647457095.html/">
 
 
 <script id="page-configurations">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>Axios踩坑日记 | Wangez-Blog</title>
+  <title>都2021年了，你还不会防抖吗？ | Wangez-Blog</title>
   
 
 
@@ -213,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/2698809561.html/">
+    <link itemprop="mainEntityOfPage" href="https://wangenze267.github.io/posts/647457095.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Axios踩坑日记
+          都2021年了，你还不会防抖吗？
         </h1>
 
         <div class="post-meta">
@@ -236,16 +236,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-06-09 13:40:40" itemprop="dateCreated datePublished" datetime="2021-06-09T13:40:40+08:00">2021-06-09</time>
+              <time title="创建时间：2021-09-28 16:12:44 / 修改时间：16:15:10" itemprop="dateCreated datePublished" datetime="2021-09-28T16:12:44+08:00">2021-09-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 22:05:09" itemprop="dateModified" datetime="2021-08-08T22:05:09+08:00">2021-08-08</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -263,8 +257,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/2698809561.html/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/2698809561.html/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/647457095.html/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/647457095.html/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -274,7 +268,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -293,21 +287,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>自己写项目的时候，axios向后端发送post请求时，后端无法接收到数据，同样的请求在我使用postman测的时候是正常的，不信邪的我又用原生的form表单提交试了一试，也是正常的，想了想，也查了查百度，觉得可能是form表单与axios请求，有哪里不一样。</p>
-<h4 id="去找了axios的介绍"><a href="#去找了axios的介绍" class="headerlink" title="去找了axios的介绍"></a>去找了axios的介绍</h4><p><img src="https://img-blog.csdnimg.cn/20190907170037504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3plbXByb2dyYW0=,size_16,color_FFFFFF,t_70" alt="axios"></p>
-<p>由图片可以看出，它大概是对请求和响应的数据进行了一个转换，而且会对json进行自动转换，我去github上找了一下源码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">transformRequest: [<span class="function"><span class="keyword">function</span> <span class="title">transformRequest</span>(<span class="params">data, headers</span>) </span>&#123;</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Accept&#x27;</span>);</span><br><span class="line">        normalizeHeaderName(headers, <span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (utils.isFormData(data) ||</span><br><span class="line">          utils.isArrayBuffer(data) ||</span><br><span class="line">          utils.isBuffer(data) ||</span><br><span class="line">          utils.isStream(data) ||</span><br><span class="line">          utils.isFile(data) ||</span><br><span class="line">          utils.isBlob(data)</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">return</span> data;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isArrayBufferView(data)) &#123;</span><br><span class="line">          <span class="keyword">return</span> data.buffer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (utils.isURLSearchParams(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/x-www-form-urlencoded;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> data.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 看这里------------------------------------------</span></span><br><span class="line">        <span class="keyword">if</span> (utils.isObject(data)) &#123;</span><br><span class="line">          setContentTypeIfUnset(headers, <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;]</span><br></pre></td></tr></table></figure>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在我们写项目遇到不听话的用户的时候，例如一个登录按钮，他就偏偏要反复点好几次，调用了<code>/login</code>接口好多次，是不是很烦？</p>
+<p>因为涉及到ajax请求，就会有这样的情况，假设 1 秒触发了 60 次，每个回调就必须在 1000 / 60 = 16.67ms 内完成，否则就会有卡顿出现。</p>
+<p>那么只有请求需要写防抖吗？</p>
+<p>当然不是，凡是（可能）涉及到频繁事件触发的地方，都需要写防抖。</p>
 <span id="more"></span>
 
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>当判断为对象时，会把headers设置为application/json;charset=utf-8，也就是Content-Type，而根据后端同学所说的，服务端要求的是Content-Type’: ‘application/x-www-form-urlencoded，我试着在发送请求前将headers设置为application/x-www-form-urlencoded，结果还是不行，大概是因为源码中对headers的修改在自己的设置之后实现的，但是这样写的话，要写出一串很长的字符串，感觉挺麻烦的，那就可以尝试下面的方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.headers.post[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line"> axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>window 的 resize、scroll</li>
+<li>mousedown、mousemove</li>
+<li>keyup、keydown</li>
+<li>click事件</li>
+<li>……</li>
+</ol>
+</blockquote>
+<p>我们简单的写一个小demo，看一下没有防抖跟有防抖的效果。</p>
+<p>代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// html</span></span><br><span class="line">&lt;button id=<span class="string">&quot;btn&quot;</span> onclick=<span class="string">&quot;shake()&quot;</span>&gt;</span><br><span class="line">		<span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span>点击我<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;/button&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// js</span></span><br><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;container&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shake</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    container.innerHTML = count++;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>这样会在你post请求的时候，加上这个头，并调用了qs库，将你请求的数据转换为字符串，但是可能有问题，这段代码是要加在main.js中的，那么我项目中想使用其他的请求头，或者转换为字符串会导致我其他的请求会有bug，应该如何去解决呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isFormData = config.data <span class="keyword">instanceof</span> FormData</span><br><span class="line">  <span class="keyword">if</span> (isFormData) &#123;</span><br><span class="line">    config.headers[<span class="string">&#x27;content-type&#x27;</span>] = <span class="string">&#x27;multipart/form-data&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (config.method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">    config.data = qs.stringify(config.data)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<p><img src="/posts/647457095.html/%E6%9C%AA%E9%98%B2%E6%8A%96.gif"></p>
+<hr>
+<h2 id="如何实现防抖"><a href="#如何实现防抖" class="headerlink" title="如何实现防抖"></a>如何实现防抖</h2><p>实现防抖，就要了解防抖的原理。</p>
+<p>防抖就是，不管你触发了几次，我只看你最后触发的那一次，并且在若干时间后去执行此次事件。</p>
+<p>根据这个原理，我们可以写出这段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preventShake</span>(<span class="params">todo,time</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> timeout;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(todo, time);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
-<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a target="_blank" rel="noopener" href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
+<p>设置一个延迟操作的事件，并且如果再次触发就把之前的延迟取消掉，重新进入计时。</p>
+<p>将它运用在刚刚的例子上：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;container&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shake</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    container.innerHTML = count++;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preventShake</span>(<span class="params">todo,time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(todo, time);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">btn.onclick = preventShake(shake,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><img src="/posts/647457095.html/%E9%98%B2%E6%8A%96%E6%9C%AA%E4%BC%98%E5%8C%96.gif"></p>
+<hr>
+<p>我们已经实现了基础的它，那么我们继续优化一下吧！</p>
+<h2 id="this指向优化"><a href="#this指向优化" class="headerlink" title="this指向优化"></a>this指向优化</h2><p>看似上面的结果没有什么太大问题，但是我们打印一下原先的<code>shake</code>和使用了<code>preventShake</code>后的this就会知道，他们指向的并不是一个东西。</p>
+<ul>
+<li><p>原先指向的是</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span>点击我<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用了<code>preventShake</code>后this指向的是<strong>Window</strong>对象！</p>
+</li>
+</ul>
+<p>于是我们要加一步，就是改变this指向。</p>
+<blockquote>
+<p>欸，这个是不是又是一篇文章？？</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preventShake</span>(<span class="params">todo,time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            todo.apply(that);</span><br><span class="line">        &#125;, time);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就解决了this指向可能带来的问题。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>至此，这个简易的防抖函数就写完了，可能我想的还不太完善，希望大家给予建议，我也会及时学习，之后将其完善，争取做的更好。</p>
 
     </div>
 
@@ -343,7 +372,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wangenze267.github.io/posts/2698809561.html/" title="Axios踩坑日记">https://wangenze267.github.io/posts/2698809561.html/</a>
+    <a href="https://wangenze267.github.io/posts/647457095.html/" title="都2021年了，你还不会防抖吗？">https://wangenze267.github.io/posts/647457095.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -378,9 +407,8 @@
       
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
-              <a href="/tags/Axios/" rel="tag"><i class="fa fa-tag"></i> Axios</a>
-              <a href="/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 踩坑日记</a>
+              <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           </div>
 
         
@@ -389,13 +417,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/388126410.html/" rel="prev" title="JavaScript变量提升">
-      <i class="fa fa-chevron-left"></i> JavaScript变量提升
+    <a href="/posts/3892826279.html/" rel="prev" title="快速了解ES6模块化少不了这篇文章">
+      <i class="fa fa-chevron-left"></i> 快速了解ES6模块化少不了这篇文章
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2713850416.html/" rel="next" title="微信小程序相关">
-      微信小程序相关 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -455,7 +480,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E6%89%BE%E4%BA%86axios%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">去找了axios的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E5%A4%96"><span class="nav-number">3.</span> <span class="nav-text">另外</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%98%B2%E6%8A%96"><span class="nav-number">2.</span> <span class="nav-text">如何实现防抖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E6%8C%87%E5%90%91%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">this指向优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
