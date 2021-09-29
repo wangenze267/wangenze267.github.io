@@ -94,6 +94,61 @@
       </tags>
   </entry>
   <entry>
+    <title>都2021年了，节流是不是也应该了解一下了</title>
+    <url>/posts/335803086.html/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨天发了有关防抖的文章，很多人都问为啥节流不一起写了呢？这当然是因为昨天那个是上实验课摸鱼写的，节流不没摸出来嘛，嘿嘿。</p>
+<p>不过不要慌，节流，它来了！</p>
+<p>个人理解：节流的作用与防抖相似，都是为了限制事件的频繁触发。</p>
+<span id="more"></span>
+
+<h2 id="如何实现节流"><a href="#如何实现节流" class="headerlink" title="如何实现节流"></a>如何实现节流</h2><p>实现节流，就要先了解节流的原理。</p>
+<p>节流就是，在一定的时间内，只执行一次事件。</p>
+<p>或者说是，每隔一段时间，只执行一次事件。</p>
+<blockquote>
+<p>要与防抖做一下区分哦~</p>
+<p>防抖是，不管你触发了几次，我只看你最后触发的那一次，并且在若干时间后去执行此次事件。</p>
+</blockquote>
+<p>我了解到的节流，有两种方式，分别是<strong>时间戳</strong>与<strong>定时器</strong>。</p>
+<p>那么我们来实现一下看看吧~</p>
+<h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><p>使用时间戳，当触发事件的时候，我们记录当前的时间戳，然后减去之前记录的时间戳(最一开始值一定不要忘了设为 0 )，如果大于设置的时间周期(也就是那个间隔的时间段)，就执行函数，然后更新时间戳为当前的时间戳，如果小于，就不执行。</p>
+<p>看完是不是觉得很简单？那我们来写一下。</p>
+<blockquote>
+<p>具体的例子还是使用防抖的那个，懒得再写一个啦，嘿嘿~   将防抖函数换成节流就可</p>
+<p>防抖文章链接：<a href="https://blog.wangez.site/posts/647457095.html">都2021年了，不会还有人不知道防抖吧？</a></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">todo, time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pre = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> now = +<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">if</span> (now - pre &gt; time) &#123;</span><br><span class="line">            todo.apply(that);</span><br><span class="line">            pre = now;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用的话还是跟之前相同：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">btn.onclick = throttle(shake,<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>为什么设置3000，当然想让效果看起来明显一些，下面来看看效果吧：</p>
+<p><img src="/posts/335803086.html/%E6%97%B6%E9%97%B4%E6%88%B3%E8%8A%82%E6%B5%81.gif"></p>
+<p>好了好了，别在心里数123了，我们接着往下来。</p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p>当触发事件的时候，我们设置一个定时器，再触发事件的时候，如果定时器存在，就不执行，直到定时器执行，然后执行函数，清空定时器，这样就可以设置下个定时器。</p>
+<p>上代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">todo, time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout,that;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        that = <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">if</span> (!timeout) &#123;</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                timeout = <span class="literal">null</span>;</span><br><span class="line">                todo.apply(that)</span><br><span class="line">            &#125;, time)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看看效果：</p>
+<p><img src="/posts/335803086.html/%E5%AE%9A%E6%97%B6%E5%99%A8%E8%8A%82%E6%B5%81.gif"></p>
+<p>可以看出，它是过了3s才生效的，但是不知道为什么，这种方式给我的体验感不是很好，可能是因为不是点击的下一刻就有了反馈吧~</p>
+<blockquote>
+<p>这块要加上一个过渡动画，是不是会好很多？</p>
+</blockquote>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>既然有两种方法，那就要说一下他们的区别。</p>
+<p>第一种：在例子中可以清楚的看到，点击触发后立即有反馈（执行第一次），连续触发直到过了等待时间才会进行下一次执行，停止触发就不会执行。</p>
+<p>第二种：过了等待时间才会执行第一次，停止触发还会执行一次。</p>
+<p>在网上看到了这样的形容词：<strong>有头无尾，和无头有尾</strong>，是不是很形象。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>啊，终于结束了！还是那句话，可能我想到的或者写的不是很完善，希望大家能够指出，我会及时更正哒。</p>
+<blockquote>
+<p>要是以后的我觉得某处可以优化，也会回来更新的！</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>ES6</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>都2021年了，你还不会防抖吗？</title>
     <url>/posts/647457095.html/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在我们写项目遇到不听话的用户的时候，例如一个登录按钮，他就偏偏要反复点好几次，调用了<code>/login</code>接口好多次，是不是很烦？</p>
