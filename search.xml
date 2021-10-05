@@ -94,6 +94,172 @@
       </tags>
   </entry>
   <entry>
+    <title>网络安全 | XSS基础知识</title>
+    <url>/posts/1710773078.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>今天又到了我最喜欢的东西，一些网络安全有关的东西。</p>
+<blockquote>
+<p>小时候就特别喜欢黑客，觉得特帅~ </p>
+<p>大学报计算机相关专业可能也是这方面的原因，但是阴差阳错，没有走网络安全的方向。</p>
+</blockquote>
+<p>今天来说一说，XSS攻击的事情，我有幸，曾经用php搭建的博客（typecho），被我同学挂了脚本，xss了一下，完后，什么什么的，啊，你们懂得。</p>
+<p>从那以后，我就知道，网络安全，是不可避免的，是一定要考虑到的，是一定要去了解的东西。</p>
+<blockquote>
+<p>身处网络时代，谁又能置身事外！</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="什么是xss攻击？"><a href="#什么是xss攻击？" class="headerlink" title="什么是xss攻击？"></a>什么是xss攻击？</h3><p>XSS又叫CSS（Cross Site Script），跨站脚本攻击：指恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</p>
+<img src="/posts/1710773078.html/image-20210617162454870.png" alt="image-20210617162454870" style="zoom: 33%;">
+
+<p>那么，当当前的网页弹出1的时候，我们就知道，这个网页是可以执行js脚本的了，那么我们是不是就可以通过document去盗取一些信息，来帮助我们<strong>更进一步</strong>的去潜入进去呢？例如盗取一下cookie等。</p>
+<p><strong>先来看一下XSS有几种吧</strong>：</p>
+<ul>
+<li><strong>持久型</strong>：一些可以提交的地方，文章评论，个人信息填写等，如果没有加过滤的话，嵌入的脚本就会被提交到服务器上，之后用户每次访问都会触发脚本（例如图中的alert(1)，每个用户打开都会弹出1）</li>
+<li><strong>非持久型</strong>：反射型跨站脚本漏洞，是最普遍的类型。大多是链接的方式，需要用户点击，才能返回脚本进行操作（用户访问服务器–&gt;点击跨站链接—&gt;返回脚本代码）</li>
+<li><strong>DOM型</strong>：客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，如果DOM中的数据没有经过严格确认，就会产生DOM XSS漏洞（很少见emm，反正我没见过hhh，日后见到了来补上，再细说）</li>
+</ul>
+<h3 id="XSS可能会带来的危害"><a href="#XSS可能会带来的危害" class="headerlink" title="XSS可能会带来的危害"></a>XSS可能会带来的危害</h3><p><strong>使网页无法正常运行</strong>：这个就是我们上面中图示的内容，如果不仅仅是一个<code>alert(1)</code>呢？外部来一个永久循环，这个网页的弹窗就会永远关不掉，导致无法正常的实现整体业务流程。</p>
+<p><strong>获取cookie信息</strong>：这个我们也在上文中说过，如果网页上可以执行js脚本的话，那么我们是可以通过<code>document.cookie</code>来实现获取用户cookie的。</p>
+<blockquote>
+<p>试想下如果像QQ空间说说中能够写入xss攻击语句，那岂不是看了你说说的人的号你都可以登录</p>
+<p>一个字：爽~</p>
+</blockquote>
+<p><strong>劫持流量恶意跳转</strong>：</p>
+<p>像这样，在网页中想办法插入一句像这样的语句，访问的网页就会直接跳转到百度去。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">window</span>.location.href=<span class="string">&quot;http://www.baidu.com&quot;</span>;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="XSS的攻击应该具备这样的条件"><a href="#XSS的攻击应该具备这样的条件" class="headerlink" title="XSS的攻击应该具备这样的条件"></a>XSS的攻击应该具备这样的条件</h3><p>网页内部有输入框，内容可存储在服务器上</p>
+<p>输入框内的内容，才能被<strong>提交</strong>到他的服务器上，才能改变这个网页内部的文件内容。</p>
+<blockquote>
+<p>前提是这个输入，没有被过滤，才会成功哦！</p>
+<p>可以自己写demo尝试一下，不建议直接在网络上开搞emm，自己玩玩就行哈~</p>
+</blockquote>
+<h3 id="XSS防御措施（对用户输入内容和服务端返回内容进行过滤和转译）"><a href="#XSS防御措施（对用户输入内容和服务端返回内容进行过滤和转译）" class="headerlink" title="XSS防御措施（对用户输入内容和服务端返回内容进行过滤和转译）"></a><strong>XSS防御措施（对用户输入内容和服务端返回内容进行过滤和转译）</strong></h3><p><strong>现代大部分浏览器都自带 XSS 筛选器</strong>（vue/react等主流框架已经避免类似问题，vue举例：不能在template中写script标签，无法在js中通过ref或append等方式动态改变或添加script标签）</p>
+<p><strong>过滤</strong>，对诸如<strong>script</strong>、<strong>img</strong>、<strong>a</strong>等标签进行过滤。</p>
+<p><strong>编码</strong>，像一些常见的符号，如&lt;&gt;在输入的时候要对其进行转换编码，这样做浏览器是不会对该标签进行解释执行的，同时也不影响显示效果。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>学习网络安全是为了保护好自己，在这个网络时代，避免自己的信息被不法分子盗取，而不是说我们学会如何去<strong>攻击别人</strong>。</p>
+<blockquote>
+<p> 还有更多的网络安全知识等着我们去学习呢，冲！</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>网络安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript的继承，原型和原型链</title>
+    <url>/posts/2566346867.html/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>想必，学过 java 和 C++ 的小伙伴们，对于继承这个词应该不陌生，最近我也是一直在巩固JavaScript的知识，今天就来一起学习一下JavaScript里的继承吧。</p>
+<span id="more"></span>
+
+<h2 id="继承是什么？"><a href="#继承是什么？" class="headerlink" title="继承是什么？"></a>继承是什么？</h2><p>首先我们要明确继承的概念：</p>
+<p><strong>继承就是一个对象可以访问另外一个对象中的属性和方法</strong></p>
+<img src="/posts/2566346867.html/01.png" alt="image-20210617142202137" style="zoom: 50%;">
+
+<p>B继承了A，所以B也有A具有的<code>color</code>属性，这个是不是我们接触CSS的时候，会有样式继承这个东西，可以这么理解一下下~</p>
+<h2 id="继承的目的？"><a href="#继承的目的？" class="headerlink" title="继承的目的？"></a>继承的目的？</h2><p>继承的目的我觉得殊途同归，都是实现了父类的设计，并且进行代码复用。</p>
+<h2 id="继承的方式"><a href="#继承的方式" class="headerlink" title="继承的方式"></a>继承的方式</h2><p>java、c++等：java是通过<code>class</code>类，C++是通过<code>:</code></p>
+<p>而我们的JavaScript，是通过<strong>原型链</strong> ，ES2015/ES6 中引入了 class 关键字，但那只是语法糖，JavaScript 的继承依然和基于类的继承没有一点关系。</p>
+<h2 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h2><p><strong>JavaScript 只有一种结构：对象。</strong></p>
+<p>JavaScript 的每个对象都包含了一个隐藏属性__proto__，我们就把该隐藏属性 <strong>proto</strong> 称之为该<strong>对象的原型</strong> (prototype)，<strong>proto</strong> 指向了内存中的另外一个对象，我们就把 <strong>proto</strong> 指向的对象称为该<strong>对象的原型</strong>，那么该对象就可以直接访问其原型对象的方法或者属性。</p>
+<p><img src="/posts/2566346867.html/02.png" alt="image-20210617143041487"></p>
+<p>我们可以看到使用 C.name 和 C.color 时，给人的感觉属性 <code>name</code> 和 <code>color</code> 都是对象 C 本身的属性，但实际上这些属性都是位于原型对象上，我们把这个查找属性的路径称为<strong>原型链</strong></p>
+<p>每个实例对象（ <strong>object</strong> ）都有一个私有属性（称之为 <strong>proto</strong> ）指向它的构造函数的原型对象（<strong>prototype</strong> ）。该原型对象也有一个自己的原型对象( <strong>proto</strong> ) ，层层向上直到一个对象的原型对象为 <code>null</code>。根据定义，<code>null</code> 没有原型，并作为这个<strong>原型链</strong>中的最后一个环节。</p>
+<blockquote>
+<p>查到到null，证明链子到头啦~</p>
+</blockquote>
+<p>总结一下：<strong>继承</strong>就是一个对象可以访问另外一个对象中的属性和方法，在JavaScript 中，我们通过<strong>原型和原型链</strong>的方式来实现了继承特性。</p>
+<h2 id="继承的方式-1"><a href="#继承的方式-1" class="headerlink" title="继承的方式"></a>继承的方式</h2><h3 id="构造函数如何创建对象"><a href="#构造函数如何创建对象" class="headerlink" title="构造函数如何创建对象"></a>构造函数如何创建对象</h3><blockquote>
+<p>有一点java基础的看这块会不会特别得劲~，我当初是学过java之后接触到的这个概念，就很顺利的就理解了。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DogFactory</span>(<span class="params">type, color</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.type = type;</span><br><span class="line">    <span class="built_in">this</span>.color = color</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> DogFactory(<span class="string">&#x27;Dog&#x27;</span>,<span class="string">&#x27;Black&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>创建实例的过程</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dog = &#123;&#125;;</span><br><span class="line">dog.__proto__ = DogFactory.prototype;</span><br><span class="line">DogFactory.call(dog,<span class="string">&#x27;Dog&#x27;</span>,<span class="string">&#x27;Black&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/posts/2566346867.html/03.png" alt="image-20210617153157853" style="zoom: 33%;">
+
+<p>观察这个图，我们可以看到执行流程分为三步：</p>
+<ul>
+<li><p><strong>首先，创建了一个空白对象 dog；</strong></p>
+</li>
+<li><p><strong>然后，将 DogFactory 的 prototype 属性设置为 dog 的原型对象，这就是给 dog 对象设置原型对象的关键一步；</strong></p>
+</li>
+<li><p><strong>最后，再使用 dog 来调用 DogFactory，这时候 DogFactory 函数中的 this 就指向了对象 dog，然后在 DogFactory 函数中，利用 this 对对象 dog 执行属性填充操作，最终就创建了对象 dog。</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>每个函数对象中都有一个公开的 prototype 属性，当你将这个函数作为构造函数来创建一个新的对象时，新创建对象的原型对象就指向了该函数的 prototype 属性，所以通过该构造函数创建的任何实例都可以通过原型链找到构造函数的prototype上的属性</p>
+</blockquote>
+<p><strong>实例的proto属性 ==  构造函数的proyotype</strong></p>
+<p>也就是说<strong>dog.__proto == DogFactory.prototype</strong></p>
+<h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><p><strong>原理：</strong> 实现的本质是<strong>将子类的原型指向了父类的实例</strong></p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>父类新增原型方法/原型属性，子类都能访问到</li>
+<li>简单容易实现</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>不能实现多重继承</li>
+<li>来自原型对象的所有属性被所有实例共享</li>
+<li>创建子类实例时，无法向父类构造函数传参</li>
+</ul>
+<img src="/posts/2566346867.html/image-20210617154553631.png" alt="image-20210617154553631" style="zoom:50%;">
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//父类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name,</span><br><span class="line">    <span class="built_in">this</span>.age = age,</span><br><span class="line">    <span class="built_in">this</span>.play = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    <span class="built_in">this</span>.setName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.setAge = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line"><span class="comment">//子类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">price</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.price = price</span><br><span class="line">    <span class="built_in">this</span>.setScore = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person(<span class="string">&#x27;wang&#x27;</span>,<span class="number">23</span>) <span class="comment">// 子类型的原型为父类型的一个实例对象</span></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> Student(<span class="number">15000</span>)</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> Student(<span class="number">14000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s1,s2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="借用构造函数实现继承"><a href="#借用构造函数实现继承" class="headerlink" title="借用构造函数实现继承"></a>借用构造函数实现继承</h3><p><strong>原理</strong>：在子类型构造函数中通用call()调用父类型构造函数</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>解决了原型链继承中子类实例共享父类引用属性的问题</li>
+<li>创建子类实例时，可以向父类传递参数</li>
+<li>可以实现多重继承(call多个父类对象)</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>实例并不是父类的实例，只是子类的实例</li>
+<li>只能继承父类的实例属性和方法，不能继承父类原型属性和方法</li>
+<li>无法实现函数复用，每个子类都有父类实例函数的副本，影响性能</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name,</span><br><span class="line">    <span class="built_in">this</span>.age = age,</span><br><span class="line">    <span class="built_in">this</span>.setName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  Person.prototype.setAge = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, price</span>) </span>&#123;</span><br><span class="line">    Person.call(<span class="built_in">this</span>, name, age) </span><br><span class="line">    <span class="comment">// 相当于: </span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    this.Person(name, age)</span></span><br><span class="line"><span class="comment">    this.name = name</span></span><br><span class="line"><span class="comment">    this.age = age*/</span></span><br><span class="line">    <span class="built_in">this</span>.price = price</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> s1 = <span class="keyword">new</span> Student(<span class="string">&#x27;Tom&#x27;</span>, <span class="number">20</span>, <span class="number">15000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="原型链-借用构造函数的组合继承"><a href="#原型链-借用构造函数的组合继承" class="headerlink" title="原型链+借用构造函数的组合继承"></a>原型链+借用构造函数的组合继承</h3><p><strong>原理</strong>：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用。</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以继承实例属性/方法，也可以继承原型属性/方法</li>
+<li>不存在引用属性共享问题</li>
+<li>可传参</li>
+<li>父类原型上的函数可复用</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>调用了两次父类构造函数，生成了两份实例</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name,</span><br><span class="line">    <span class="built_in">this</span>.age = age,</span><br><span class="line">    <span class="built_in">this</span>.setAge = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.setAge = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;111&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, price</span>) </span>&#123;</span><br><span class="line">    Person.call(<span class="built_in">this</span>,name,age)</span><br><span class="line">    <span class="built_in">this</span>.price = price</span><br><span class="line">    <span class="built_in">this</span>.setScore = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person()</span><br><span class="line">Student.prototype.constructor = Student<span class="comment">//组合继承也是需要修复构造函数指向的</span></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> Student(<span class="string">&#x27;Tom&#x27;</span>, <span class="number">20</span>, <span class="number">15000</span>)</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> Student(<span class="string">&#x27;Jack&#x27;</span>, <span class="number">22</span>, <span class="number">14000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s1)</span><br><span class="line"><span class="built_in">console</span>.log(s1.constructor) <span class="comment">//Student</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ES6-class继承"><a href="#ES6-class继承" class="headerlink" title="ES6 class继承"></a>ES6 class继承</h3><p><strong>原理：</strong> ES6中引入了class关键字，class可以通过extends关键字实现继承，还可以通过static关键字定义类的静态方法,这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。</p>
+<blockquote>
+<p>我当时第一次见的时候，还以为是java</p>
+<p>其实我还是觉得，class写起来得劲多了，哈哈哈</p>
+</blockquote>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>语法简单易懂,操作更方便</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>并不是所有的浏览器都支持class关键字</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//调用类的构造方法</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name, age</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">        <span class="built_in">this</span>.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义一般的方法</span></span><br><span class="line">    <span class="function"><span class="title">showName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;调用父类的方法&quot;</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span>  Person(<span class="string">&#x27;kobe&#x27;</span>, <span class="number">39</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p1)</span><br><span class="line"><span class="comment">//定义一个子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name, age, salary</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name, age)<span class="comment">//通过super调用父类的构造方法</span></span><br><span class="line">        <span class="built_in">this</span>.salary = salary</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">showName</span>(<span class="params"></span>)</span> &#123;<span class="comment">//在子类自身定义方法</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;调用子类的方法&quot;</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age, <span class="built_in">this</span>.salary);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> s1 = <span class="keyword">new</span> Student(<span class="string">&#x27;wade&#x27;</span>, <span class="number">38</span>, <span class="number">1000000000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s1)</span><br><span class="line">s1.showName()</span><br></pre></td></tr></table></figure>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>其实我没有在平时写的项目中，用过继承，所以不太懂具体的应用场景，希望大佬们可以指点一下。</p>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>学会这些，再也不怕水平垂直居中了</title>
     <url>/posts/4281072405.html/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天来看看一个之前困扰我很久的问题，在CSS中，水平垂直居中，能有几种写法。</p>
@@ -2844,8 +3010,8 @@
 <h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
 ]]></content>
       <tags>
-        <tag>Axios</tag>
         <tag>Vue</tag>
+        <tag>Axios</tag>
         <tag>踩坑日记</tag>
       </tags>
   </entry>
