@@ -326,14 +326,14 @@
 
   
   <url>
-    <loc>https://wangenze267.github.io/tags/ES6/</loc>
+    <loc>https://wangenze267.github.io/tags/JavaScript/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/JavaScript/</loc>
+    <loc>https://wangenze267.github.io/tags/ES6/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -354,14 +354,14 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Vue/</loc>
+    <loc>https://wangenze267.github.io/tags/Axios/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Axios/</loc>
+    <loc>https://wangenze267.github.io/tags/Vue/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -382,14 +382,14 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Css/</loc>
+    <loc>https://wangenze267.github.io/tags/Hexo/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Hexo/</loc>
+    <loc>https://wangenze267.github.io/tags/Css/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -410,6 +410,13 @@
   </url>
   
   <url>
+    <loc>https://wangenze267.github.io/tags/uni-app/</loc>
+    <lastmod>2021-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangenze267.github.io/tags/%E5%AD%97%E8%8A%82%E9%9D%92%E8%AE%AD%E8%90%A5/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -417,7 +424,7 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/uni-app/</loc>
+    <loc>https://wangenze267.github.io/tags/Flex/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -432,13 +439,6 @@
   
   <url>
     <loc>https://wangenze267.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</loc>
-    <lastmod>2021-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangenze267.github.io/tags/Flex/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
