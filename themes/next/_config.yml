@@ -180,7 +180,7 @@ site_state: true
 social:
   #Wangez: https://wangez.site
   Gitee: https://gitee.com/wang-enze || fab fa-git
-  掘金: https://juejin.cn/user/105972016875911 || fab fa-link
+  掘金: https://juejin.cn/user/105972016875911 || fab fa-book
   #GitHub: https://github.com/yourname || fab fa-github
   #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
@@ -193,7 +193,7 @@ social:
   #Skype: skype:yourname?call|chat || fab fa-skype
 
 social_icons:
-  enable: true
+  enable: false
   icons_only: false
   transition: false
 
@@ -1062,3 +1062,7 @@ friendslinks:
     avatar: https://avatars.githubusercontent.com/u/40832831?v=4
     site: https://note.fzf404.top/#/
     info: 小f的笔记本
+  - nickname: BoW
+    avatar: https://blog.bo6.top/img/avatar/avatar.jpg
+    site: https://blog.bo6.top/
+    info: 小博的个人博客

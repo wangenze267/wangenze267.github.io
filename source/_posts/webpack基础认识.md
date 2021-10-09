@@ -5,8 +5,6 @@ tag: webpack
 abbrlink: 3206731080
 ---
 
-
-
 ### 前言
 
 webpack在框架中多半被脚手架所集成，例如vue中的vue-cli，但是在面试中，还是会被问到，所以我们还是要了解一些必要知识，能让我们对此类技术有一个更深的认识。
@@ -16,6 +14,8 @@ webpack在框架中多半被脚手架所集成，例如vue中的vue-cli，但是
 > 古人云：学吧，学会了都是你的~
 >
 > 古人又云：学吧，学不死就往死里学！
+
+*注：本文为摘录笔记，供学习使用。*
 
 <!--more-->
 
@@ -120,4 +120,76 @@ mode的两个可选值，代表着开发的不同阶段：分别是开发模式�
 
 **结论：**开发的时候我们一定要用development，因为我们追求的是速度而不是体积，反过来，发布上线的时候我们一定要用production，因为上线追求的是体积和性能，而不是打包的速度。
 
-### webpack的entry和output
+#### webpack.config.js文件的作用
+
+webpack.config.js是webpack的配置文件。webpack在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。
+
+注意：由于webpack是基于node.js开发出来的打包工具，因此在它的配置文件中，支持使用node.js相关的语法和模块进行webpack的个性化配置。
+
+#### webpack中的默认约定
+
+在webpack4.x和5.x的版本中，有如下的默认约定：
+
+- 默认的打包入口文件为`src->index.js`
+- 默认的输出文件路径为`dist->main.js`
+
+注意：可以在`webpack.config.js`中修改打包的默认约定
+
+#### 自定义打包的入口与出口
+
+在`webpack.config.js`配置文件中，通过**entry**节点指定打包的入口。通过**output**节点指定打包的出口。
+
+示例代码如下：
+
+```js
+const path = require('path') // 导入node.js中专门操作路径的模块
+
+module.exports = {
+    entry: path.join(__dirname,'./src/index.js'), // 打包入口文件路径
+    output: {
+        path: path.join(__dirname, './dist'), // 输出文件的存取路径
+        filename: 'main .js' // 输出文件名称 
+    }
+}
+```
+
+> 注意： __dirname 是两个下划线！！代表这个文件的存放路径。
+
+### webpack中的插件
+
+> 方便程序员的开发
+
+通过安装和配置第三方的插件，可以拓展webpack的能力，从而让webpack用起来方便。最常用的webpack插件有如下两个：
+
+- webpack-dev-server
+  - 类似于node.js阶段用到的nodemon工具
+  - 每当修改了源代码，webpack会自动进行项目的打包和构建
+- html-webpack-plugin
+  - webpack中的HTML插件（类似于一个模板引擎插件）
+  - 可以通过此插件自定制index.html页面内容
+
+#### 安装webpack-dev-server
+
+运行如下命令：
+
+`npm install webpack-dev-server@3.11.2 -D`
+
+> -D，上面有讲过，他只是在开发阶段使用的工具，并不是上线部署的时候需要的。
+
+ #### 配置webpack-dev-server
+
+- 修改`package.json-->scripts`中的`dev`命令如下
+
+  ```js
+  "scripts":{
+  	"dev": "webpack serve", // script 节点下的脚本，可以通过npm run 执行
+  }
+  ```
+
+> serve是一个参数，代表我们要通过插件实现自动打包功能，只要修改代码保存，他就会自动打包生成
+
+- 再次运行`npm run dev`命令，重新进行项目的打包
+- 在浏览器中访问`http://localhost:8080`地址，查看自动打包效果
+
+注意：`webpack-dev-server`会启动一个**实时打包的http服务器**
+
