@@ -235,7 +235,41 @@
               <a href="/tags/Axios/" style="font-size: 12px; color: #ccc">Axios</a> <a href="/tags/CSS/" style="font-size: 12px; color: #ccc">CSS</a> <a href="/tags/Css/" style="font-size: 16.5px; color: #9d9d9d">Css</a> <a href="/tags/ES6/" style="font-size: 25.5px; color: #404040">ES6</a> <a href="/tags/Flex/" style="font-size: 12px; color: #ccc">Flex</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #9d9d9d">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 30px; color: #111">JavaScript</a> <a href="/tags/Node-js/" style="font-size: 21px; color: #6f6f6f">Node.js</a> <a href="/tags/Vue/" style="font-size: 16.5px; color: #9d9d9d">Vue</a> <a href="/tags/uni-app/" style="font-size: 12px; color: #ccc">uni-app</a> <a href="/tags/webpack/" style="font-size: 12px; color: #ccc">webpack</a> <a href="/tags/%E5%AD%97%E8%8A%82%E9%9D%92%E8%AE%AD%E8%90%A5/" style="font-size: 16.5px; color: #9d9d9d">字节青训营</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12px; color: #ccc">小程序</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 12px; color: #ccc">浏览器</a> <a href="/tags/%E7%AE%97%E6%B3%95-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12px; color: #ccc">算法/数据结构</a> <a href="/tags/%E7%BB%8F%E5%8E%86/" style="font-size: 21px; color: #6f6f6f">经历</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 12px; color: #ccc">网络安全</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E5%81%9A%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 12px; color: #ccc">自己做一个组件库</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 12px; color: #ccc">设计模式</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/" style="font-size: 16.5px; color: #9d9d9d">踩坑日记</a>
             </div>
           </div>
-          
+        <script type="text/javascript">
+     var alltags = document.getElementsByClassName('tag-cloud-tags');
+     var tags = alltags[0].getElementsByTagName('a');
+     for (var i = tags.length - 1; i >= 0; i--) {
+       var r=Math.floor(Math.random()*75+130);
+       var g=Math.floor(Math.random()*75+100);
+       var b=Math.floor(Math.random()*75+80);
+       tags[i].style.background = "rgb("+r+","+g+","+b+")";
+     }
+</script>
+
+<style>
+  .tag-cloud-tags{
+    /*font-family: Helvetica, Tahoma, Arial;*/
+    /*font-weight: 100;*/
+    text-align: center;
+    counter-reset: tags;
+  }
+  .tag-cloud-tags a{
+    border-radius: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin: 8px 5px 0px 0px;
+  }
+  .tag-cloud-tags a:before{
+    content: "🔖";
+  }
+
+  .tag-cloud-tags a:hover{
+     box-shadow: 0px 5px 15px 0px rgba(0,0,0,.4);
+     transform: scale(1.1);
+     /*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/
+     transition-duration: 0.15s;
+  }
+</style>
         
       </div>
       
