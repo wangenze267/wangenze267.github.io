@@ -4,6 +4,8 @@ author: Ned
 tags:
   - Hexo
   - 踩坑日记
+categories:
+ - Hexo
 abbrlink: 735412972
 ---
 

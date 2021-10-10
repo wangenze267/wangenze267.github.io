@@ -2,6 +2,8 @@
 title: Node.js学习笔记之异步编程部分（一）
 author: Ned
 tags: Node.js
+categories:
+ - Node.js
 abbrlink: 3168823204
 ---
 

@@ -2,6 +2,8 @@
 title: Node.js异步编程之Promise
 author: Ned
 tags: Node.js
+categories:
+ - Node.js
 abbrlink: 697311807
 date: 2021-08-15 00:22:58
 ---

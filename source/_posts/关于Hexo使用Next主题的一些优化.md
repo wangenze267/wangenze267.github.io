@@ -3,6 +3,8 @@ title: 关于Hexo使用Next主题的一些优化
 author: Ned
 tags:
   - Hexo
+categories:
+ - Hexo
 abbrlink: 1559886533
 ---
 

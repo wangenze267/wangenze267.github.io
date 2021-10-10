@@ -3,6 +3,8 @@ title: JavaScript数组去重问题
 author: Ned
 tag:
   - JavaScript
+categories:
+ - JavaScript进阶
 abbrlink: 1826147754
 ---
 

@@ -4,6 +4,8 @@ author: Ned
 tag:
   - JavaScript
   - 设计模式
+categories:
+ - 设计模式
 abbrlink: 1278378512
 ---
 

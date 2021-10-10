@@ -2,6 +2,8 @@
 title: JavaScript变量提升
 author: Ned
 tags: 'JavaScript'
+categories:
+ - JavaScript进阶
 abbrlink: 388126410
 ---
 

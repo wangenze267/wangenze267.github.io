@@ -108,7 +108,7 @@ limit: 10000
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: butterfly
 plugins: hexo-generate-feed
 
 # Deployment

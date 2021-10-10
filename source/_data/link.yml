@@ -1,0 +1,55 @@
+- class_name: 博主本人
+  class_desc: 
+  link_list:
+    - name: Ned
+      link: https://wangez.link
+      avatar: https://blog.wangez.site/image/avatar.jpg
+      descr: 小小前端成长日记
+
+- class_name: 博主的朋友们
+  class_desc: 
+  link_list:
+    - name: Cambria     # 昵称
+      avatar: https://cambriad.github.io/medias/avatar.jpg  # 头像地址
+      link: https://cambriad.github.io/ #友链地址
+      descr: 
+    - name: 良良的小窝     # 昵称
+      avatar: https://blog.ghl.asia/uploads/avatar.jpg   # 头像地址
+      link: http://blog.ghl.asia #友链地址
+      descr: 良良不是猪猪
+    - name: Caicai     # 昵称
+      avatar: https://blog.cai2.wang/img/avatar.jpg   # 头像地址
+      link: https://blog.cai2.wang #友链地址
+      descr: 你现在的你努力，是为了以后有更多的选择
+    - name: 五年工作三年摸鱼     # 昵称
+      avatar: https://wangez.site/img/shangke/zh.jpg  # 头像地址
+      link: http://mrzzzzh.work:8090 #友链地址
+      descr: 啥也不会的菜鸟程序员......
+    - name: 凯老板的室友    # 昵称
+      avatar: https://portrait.gitee.com/uploads/avatars/user/1014/3042723_Shaoshaolj_1618845889.png  # 头像地址
+      link: http://blog.sshao.tech #友链地址
+      descr: 
+    - name: 活脱的鳄龟     # 昵称
+      avatar: https://wangez.site/img/shangke/wsb.jpg   # 头像地址
+      link: http://1.117.35.77:8090/ #友链地址
+      descr: 
+    - name: 祁乐的博客    # 昵称
+      avatar: http://blog.52i.xyz/logo.ico  # 头像地址
+      link: http://www.52i.xyz/ #友链地址
+      descr: 奔向更优秀的自己
+    - name: 长寿
+      avatar: http://49.232.157.194/wordpress/wp-content/uploads/2021/05/logo.png
+      link: http://49.232.157.194/
+      descr: 摸鱼ing
+    - name: 刘政驰
+      avatar: https://www.lzcwy.cn/img/avatar.jpg
+      link: https://www.lzcwy.cn/
+      descr: 有理想在的地方，地狱就是天堂
+    - name: 你们的小f
+      avatar: https://avatars.githubusercontent.com/u/40832831?v=4
+      link: https://note.fzf404.top/#/
+      descr: 小f的笔记本
+    - name: BoW
+      avatar: https://blog.bo6.top/img/avatar/avatar.jpg
+      link: https://blog.bo6.top/
+      descr: 小博的个人博客

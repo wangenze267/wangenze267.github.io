@@ -3,6 +3,8 @@ title: 前端知识链条中少不了的一环--Ajax
 author: Ned
 tags:
   - JavaScript
+categories:
+ - JavaScript基础
 abbrlink: 1172116075
 ---
 

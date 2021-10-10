@@ -3,6 +3,8 @@ title: 关于Hexo配置使用Next主题
 author: Ned
 tags:
   - Hexo
+categories:
+ - Hexo
 abbrlink: 2781919463
 ---
 

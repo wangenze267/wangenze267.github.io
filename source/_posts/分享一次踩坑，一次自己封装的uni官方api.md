@@ -4,6 +4,9 @@ author: Ned
 tag:
   - 踩坑日记
   - uni-app
+categories:
+ - 移动端
+ - uni-app
 abbrlink: 1196783753
 ---
 

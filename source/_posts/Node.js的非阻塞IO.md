@@ -2,6 +2,8 @@
 title: Node.js的非阻塞I/O
 author: Ned
 tags: Node.js
+categories:
+ - Node.js
 abbrlink: 212671180
 ---
 
