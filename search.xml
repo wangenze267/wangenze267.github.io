@@ -89,9 +89,6 @@
 <p>也希望看到这篇博客的小伙伴，都能做出最正确的人生选择，过上自己想要的理想生活。</p>
 <p>明天七夕拉，提前祝大家七夕快乐！</p>
 <img src="https://img0.baidu.com/it/u=3335154325,3530608547&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="zoom" style="zoom:50%;">]]></content>
-      <categories>
-        <category>经历</category>
-      </categories>
       <tags>
         <tag>经历</tag>
       </tags>
@@ -99,7 +96,7 @@
   <entry>
     <title>简单的了解一下递归</title>
     <url>/posts/3902425944.html/</url>
-    <content><![CDATA[<h1 id="简单的了解一下递归"><a href="#简单的了解一下递归" class="headerlink" title="简单的了解一下递归"></a>简单的了解一下递归</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在编程中，递归大家肯定都不陌生了吧，今天我们来总结总结有关于递归的东西。</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在编程中，递归大家肯定都不陌生了吧，今天我们来总结总结有关于递归的东西。</p>
 <blockquote>
 <p>什么？！ 你陌生， 去刷题去，完后你就熟了。</p>
 </blockquote>
@@ -138,9 +135,6 @@
 <p>点个赞，一起学习进步吧♥</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>算法/数据结构</category>
-      </categories>
       <tags>
         <tag>算法/数据结构</tag>
       </tags>
@@ -148,7 +142,7 @@
   <entry>
     <title>关于promise的使用方法</title>
     <url>/posts/3499638177.html/</url>
-    <content><![CDATA[<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>好几天前就想写一个promise的笔记了，但是一直以来就仅仅知道它是用来解决回调地狱问题的，没有一个详细的了解，所以在这几天学习的时候，针对它名下的几个方法，做了一个简要的使用介绍。</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>好几天前就想写一个promise的笔记了，但是一直以来就仅仅知道它是用来解决回调地狱问题的，没有一个详细的了解，所以在这几天学习的时候，针对它名下的几个方法，做了一个简要的使用介绍。</p>
 <blockquote>
 <p>promise：这就是我的说明书！</p>
 <p>我：可能说的不是太全，多包涵~</p>
@@ -224,9 +218,6 @@
 <p>点个赞，一起努力进步吧♥</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -317,9 +308,6 @@
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>“abc”的使用，具体还是要看个人运用，理解了之后，那它们就变成了工具，怎么顺手怎么来了~</p>
 <p>顺便说一下本人，我还是喜欢apply多一点hhh，用它的次数多一点，所以在场景用谁都行的时候，我一般都会选择apply。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -373,9 +361,6 @@
 <p> 还有更多的网络安全知识等着我们去学习呢，冲！</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
       <tags>
         <tag>网络安全</tag>
       </tags>
@@ -489,9 +474,6 @@
 
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>其实我没有在平时写的项目中，用过继承，所以不太懂具体的应用场景，希望大佬们可以指点一下。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -563,9 +545,6 @@
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>说一下我自己的感受吧，这一共是五种方法，我用过1、2、3、5，其中2和5我用的较多，又以2为最多。</p>
 <p>日后如果见到还有别的，也会记录在此的。</p>
 ]]></content>
-      <categories>
-        <category>Css</category>
-      </categories>
       <tags>
         <tag>Css</tag>
         <tag>CSS</tag>
@@ -617,9 +596,6 @@
 <p>大家有什么好的建议嘛~</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
       <tags>
         <tag>Node.js</tag>
         <tag>经历</tag>
@@ -674,9 +650,6 @@
 <p>点个赞，我们一起学习进步吧~</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -731,9 +704,6 @@
 <p>要是以后的我觉得某处可以优化，也会回来更新的！</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -793,9 +763,6 @@
 <p>这样就解决了this指向可能带来的问题。</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>至此，这个简易的防抖函数就写完了，可能我想的还不太完善，希望大家给予建议，我也会及时学习，之后将其完善，争取做的更好。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -895,9 +862,6 @@
 <p>没错，就是直接导入即可。</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这篇文章简单介绍一下模块化的概念和语法，过几天我还会出一篇文章来告诉大家模块化在实际应用里是如何使用的。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
       </tags>
@@ -954,9 +918,6 @@
 </blockquote>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望总结的这些知识可以让大家对symbol类型的数据有一个简单的了解。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -965,7 +926,7 @@
   <entry>
     <title>关于JavaScript的数据类型（2021.9.23更新）</title>
     <url>/posts/2884264051.html/</url>
-    <content><![CDATA[<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>二刷JavaScript高级了，上一次是刷的黑马pink老师的课程，这次刷的是尚硅谷的课程，都是B站的课程，对课程进行了些许总结。</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>二刷JavaScript高级了，上一次是刷的黑马pink老师的课程，这次刷的是尚硅谷的课程，都是B站的课程，对课程进行了些许总结。</p>
 <p>可能是课程有些老的原因，例如视频中仅有5个基本类型，但是目前好像是有7种。</p>
 <p>所以结合之前所学的一些知识，对内容进行了补充。</p>
 <p><em>如有错误，还望指正。</em></p>
@@ -1096,9 +1057,6 @@
 
 
 ]]></content>
-      <categories>
-        <category>JavaScript基础</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -1230,9 +1188,6 @@
 </ul>
 <p>注意：<code>webpack-dev-server</code>会启动一个<strong>实时打包的http服务器</strong></p>
 ]]></content>
-      <categories>
-        <category>webpack</category>
-      </categories>
       <tags>
         <tag>webpack</tag>
       </tags>
@@ -1278,9 +1233,6 @@
 </blockquote>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这个组件库暂时未发布到npm上，也暂时没有开源到github/gitee上呢，当这个组件库具有一定数量的组件后会同时上传，发布后希望大家给与支持，你们的issue是我们坚持下去的动力！</p>
 ]]></content>
-      <categories>
-        <category>经历</category>
-      </categories>
       <tags>
         <tag>经历</tag>
       </tags>
@@ -1288,7 +1240,7 @@
   <entry>
     <title>假期总结（暑假结束！）</title>
     <url>/posts/1009533019.html/</url>
-    <content><![CDATA[<h2 id="假期总结"><a href="#假期总结" class="headerlink" title="假期总结"></a>假期总结</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>短暂的暑假就这么结束了，简单做个复盘，看看自己暑假都做了什么。</p>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>短暂的暑假就这么结束了，简单做个复盘，看看自己暑假都做了什么。</p>
 <blockquote>
 <p>关于我</p>
 <p>一个在校生（开学大三）</p>
@@ -1365,9 +1317,6 @@
 <p>就酱！上学！</p>
 <img src="/posts/1009533019.html/kaixue.webp" alt="z" style="zoom:60%;">
 ]]></content>
-      <categories>
-        <category>经历</category>
-      </categories>
       <tags>
         <tag>经历</tag>
       </tags>
@@ -1422,10 +1371,6 @@
 <p>不出意外的话，这应该是开学前的倒数第二篇啦，开学前应该还有一篇来做一下假期总结的（情感博主再次上线）</p>
 <p><img src="/posts/3558445990.html/holiday.webp"></p>
 ]]></content>
-      <categories>
-        <category>Css</category>
-        <category>经历</category>
-      </categories>
       <tags>
         <tag>Css</tag>
       </tags>
@@ -1548,9 +1493,6 @@
 
 <p>我们通常会进行一些请求的预处理的时候使用代理模式。</p>
 <h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4>]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
         <tag>设计模式</tag>
@@ -1655,10 +1597,6 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.username = getCache(<span class="string">&#x27;username&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 ]]></content>
-      <categories>
-        <category>移动端</category>
-        <category>uni-app</category>
-      </categories>
       <tags>
         <tag>踩坑日记</tag>
         <tag>uni-app</tag>
@@ -1736,9 +1674,6 @@
 <h4 id="浏览器事件触发线程"><a href="#浏览器事件触发线程" class="headerlink" title="浏览器事件触发线程"></a>浏览器事件触发线程</h4><p>当一个事件被触发时该线程会把事件添加到待处理队列的队尾，等待 JavaScript 引擎的处理。这些事件可以是当前执行的代码块如定时任务、也可来自浏览器内核的其他线程如鼠标点击、AJAX 异步请求等，但由于 JavaScript 的单线程关系所有这些事件都得排队等待 JavaScript 引擎处理。</p>
 <h4 id="浏览器-http-异步请求线程"><a href="#浏览器-http-异步请求线程" class="headerlink" title="浏览器 http 异步请求线程"></a>浏览器 http 异步请求线程</h4><p>在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求， 将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件放到 JavaScript 引擎的处理队列中等待处理。</p>
 ]]></content>
-      <categories>
-        <category>浏览器</category>
-      </categories>
       <tags>
         <tag>浏览器</tag>
       </tags>
@@ -1886,10 +1821,6 @@
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听君一席话，如听一席话。他好似讲了许多，又好像什么也没讲。</p>
 <p>是我菜了，继续加油！</p>
 ]]></content>
-      <categories>
-        <category>经历</category>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
         <tag>字节青训营</tag>
@@ -2058,10 +1989,6 @@
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这次笔记记录的很匆忙，再加上理解的也不是很懂，所以导致后面的高阶函数部分基本没有自己的梳理，后面梳理过后会过来补上更新的。</p>
 ]]></content>
-      <categories>
-        <category>经历</category>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
         <tag>字节青训营</tag>
@@ -2165,9 +2092,6 @@
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>听完了这节课真的觉得挺有用的，虽然说讲的是设计理念，没有一丝css代码在其中，可是我觉得我的css能力上升了一个层面~</p>
 <p>最后留下这份笔记，留给以后的自己进行梳理，也顺便分享出来给更多的前端小伙伴们，让更多之前与我一样的人了解到，前端也要懂UI。</p>
 ]]></content>
-      <categories>
-        <category>经历</category>
-      </categories>
       <tags>
         <tag>经历</tag>
         <tag>字节青训营</tag>
@@ -2176,7 +2100,7 @@
   <entry>
     <title>Node.js异步编程之Promise</title>
     <url>/posts/697311807.html/</url>
-    <content><![CDATA[<h2 id="Node-js异步编程之Promise"><a href="#Node-js异步编程之Promise" class="headerlink" title="Node.js异步编程之Promise"></a>Node.js异步编程之Promise</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>先来介绍一下Promise是什么？</p>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>先来介绍一下Promise是什么？</p>
 <p>Promise：</p>
 <ul>
 <li>当前事件循环得不到的结果，但未来的事件循环会给到你结果</li>
@@ -2239,9 +2163,6 @@
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>肝不动了，睡了睡了，总觉得上面那个例子，面试通过一家，第二家挂了他会给我返回到catch里面去呢，明天在研究一下。</p>
 ]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
       <tags>
         <tag>Node.js</tag>
       </tags>
@@ -2249,7 +2170,7 @@
   <entry>
     <title>Node.js之事件循环</title>
     <url>/posts/3309484712.html/</url>
-    <content><![CDATA[<h1 id="Node-js之事件循环"><a href="#Node-js之事件循环" class="headerlink" title="Node.js之事件循环"></a>Node.js之事件循环</h1><h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
+    <content><![CDATA[<h3 id="简单叙述一下什么是事件循环"><a href="#简单叙述一下什么是事件循环" class="headerlink" title="简单叙述一下什么是事件循环"></a>简单叙述一下什么是事件循环</h3><p>还是拿之前的餐厅来举例，我们去点了个番茄炒蛋，服务生告诉后厨做一个番茄炒蛋，张三也去了餐厅，点了个麻辣小龙虾，服务生又告诉后厨做一份麻辣小龙虾，小李也去了，点了个蛋炒饭。</p>
 <span id="more"></span>
 
 <p>解析一下这个情景，餐厅是一个事件循环，其中我们的点餐叫做线程。服务生第一个把我要的番茄炒蛋端过来了，于是我的线程结束了，因为麻辣小龙虾做的慢，蛋炒饭做完了，服务生又给小李端上来了蛋炒饭，小李虽然是后来的，但是他的过程要比张三快，最后小龙虾好了，服务生给张三端上来小龙虾，至此三个线程都结束了。</p>
@@ -2258,9 +2179,6 @@
 <h3 id="有话说"><a href="#有话说" class="headerlink" title="有话说"></a>有话说</h3><p>当然，在真实情况中会比这复杂的多，不会每50毫秒去检测一次，要快的多，添加的事件也不会只有回调函数，例如一些文件读写操作等。我们的事件队列可能还会有文件处理队列，定时操作队列等多种不同的队列。</p>
 <p>就先到这，下次见~</p>
 ]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
       <tags>
         <tag>Node.js</tag>
       </tags>
@@ -2268,7 +2186,7 @@
   <entry>
     <title>Node.js学习笔记之异步编程部分（一）</title>
     <url>/posts/3168823204.html/</url>
-    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
+    <content><![CDATA[<ul>
 <li><p>回调函数格式规范</p>
 <ul>
 <li>error-first callback</li>
@@ -2313,9 +2231,6 @@
 <p>现在好像这两个方式都不用了😭</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
       <tags>
         <tag>Node.js</tag>
       </tags>
@@ -2323,7 +2238,7 @@
   <entry>
     <title>Node.js的非阻塞I/O</title>
     <url>/posts/212671180.html/</url>
-    <content><![CDATA[<h1 id="Node-js的非阻塞I-O"><a href="#Node-js的非阻塞I-O" class="headerlink" title="Node.js的非阻塞I/O"></a>Node.js的非阻塞I/O</h1><blockquote>
+    <content><![CDATA[<blockquote>
 <p>写在最前</p>
 <p>老早就想学Node.js了，觉得前端一定要是懂服务端知识，并且可以自己独立完成一个小型全栈项目的，但是碍于时间因素，上学期学了点基础之后，就再也没空学，正好今天科二过了，Node.js我又来卷你了！！！</p>
 </blockquote>
@@ -2398,9 +2313,6 @@
 <p>凡事没有绝对，不是说非阻塞I/O就一定是好的，还是拿餐厅举例子，比如服务员中间发生意外，所有的客人都要等这一个服务员，这样就会影响餐厅整体质量（可以理解为服务器奔溃）；阻塞I/O由于有多个服务员，一对一的服务，即使有一个发生意外，也不会影响整体质量，而雇多个服务员也要相应的付出成本。</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
       <tags>
         <tag>Node.js</tag>
       </tags>
@@ -2408,7 +2320,7 @@
   <entry>
     <title>跨域的问题终于能解决了</title>
     <url>/posts/876750285.html/</url>
-    <content><![CDATA[<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！</p>
+    <content><![CDATA[<h2 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h2><p>啊😭！在我大一学习前端，刚入门的时候，尝试着用jquery做一些小项目，这个东西困扰了我一个寒假！！！！当时没有跨域这个概念，于是乎就开始疯狂的百度。。。。为了不拖进度，把一个前后端分离的项目被逼成了不分离，后来还好，在开学前夕顺利解决，把不分离的“不”字去掉了，并也按时完成了项目！！！</p>
 <blockquote>
 <p>（拖了一个月左右应该也叫按时完成吧，不管了，先奖励自己一个🍗~）</p>
 </blockquote>
@@ -2491,9 +2403,6 @@
 </blockquote>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>跨域是很常见的一个问题，也是出现在面试问题中频率比较高的问题，希望每个小伙伴们在遇到这个问题的时候都能顺利解决。虽然我们现在写项目的时候，框架中大都为我们配置了代理（Vue的proxyTable代理等），但是我想了解其根源对于我们的自我提高是非常有帮助的！</p>
 ]]></content>
-      <categories>
-        <category>JavaScript基础</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -2564,9 +2473,6 @@
 </blockquote>
 <p>都是一群为了自己未来拼命的人，希望未来的我们会因为当时的环境而感激在大一大二就开始耗费时光，开始奋斗的自己！</p>
 ]]></content>
-      <categories>
-        <category>JavaScript基础</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -2629,9 +2535,6 @@
 <p>还是那句话，你可以暂时不使用这种方法来写代码，但是你不能不会用，因为你不会知道什么时候会突然要求你用这种方法去进行业务操作。</p>
 <p>快乐的暑假，开始了！</p>
 ]]></content>
-      <categories>
-        <category>JavaScript基础</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -2640,7 +2543,7 @@
   <entry>
     <title>关于作用域与作用域链的理解</title>
     <url>/posts/1077228788.html/</url>
-    <content><![CDATA[<h1 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续来了解一下ES6，顺便把前段时间留下作用域的坑也填上。</p>
 <p>JavaScript中，有一个被称之为作用域(scope)的特性，在之前闭包的文章中提到过，现在来梳理一下。</p>
 <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><strong>作用域</strong>是指在程序中定义变量的区域，该位置决定了变量的生命周期。通俗地理解，作用域就是变量与函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期。</p>
 <span id="more"></span>
@@ -2714,9 +2617,6 @@
 <p>fn3要打印num变量，于是他从fn3的函数作用域，找到fn2的函数作用域，再找到fn1的函数作用域，再找到全局作用域，终于找到了num变量，成功将其打印。</p>
 <h2 id="有话想说"><a href="#有话想说" class="headerlink" title="有话想说"></a>有话想说</h2><p>终于把心心念念的坑填上了一个，了解完作用域与作用域链，再去了解闭包就会轻松很多了，继续努力学习吧。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -2725,7 +2625,7 @@
   <entry>
     <title>解构运算符的理解与运用</title>
     <url>/posts/1586874348.html/</url>
-    <content><![CDATA[<h1 id="解构符号"><a href="#解构符号" class="headerlink" title="解构符号"></a>解构符号</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近一直在学JavaScript，看到了ES6中的解构符号，觉得这个给我们的代码简洁性带来了一个飞跃式的提升，而且它已经运用在了企业开发中，假如未来你工作中，别人在用，你却读不懂别人的代码，这造成的影响还是很大的。因此，好好学习一下吧。</p>
 <p><strong>你可以不用，但是你不能不懂✔</strong></p>
 <p>JavaScript ES6中，有很多特性都是为了简化代码，方便程序员去书写的。解构运算符就是其中很好的特性，它可以通过减少赋值语句的使用，或者减少访问数据下标、对象属性的方式，使得代码更加简洁，增强了代码的可读性。</p>
 <span id="more"></span>
@@ -2763,9 +2663,6 @@
 <p><code>arr.push(...arr1)</code>这个方法会将arr1的数组元素全部解析出来，然后依次添加到arr中去，完成两个数组的合并。</p>
 <h3 id="交换变量值"><a href="#交换变量值" class="headerlink" title="交换变量值"></a>交换变量值</h3><p>再来看看<strong>交换变量值这个应用</strong>，我依稀记得一位学长的面试题：不占用额外内存空间的情况下，交换a与b的值。当时有两种解法，一是使用异或，二是用数学方法，将ab相加，再分别减之，(a=a+b,b=a-b,a=a-b)，现在使用解构符号的这个方法<code>[a,b] = [b,a]</code>，是不是也可以呢？</p>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>ES6</tag>
         <tag>JavaScript</tag>
@@ -2774,7 +2671,7 @@
   <entry>
     <title>关于闭包的一些理解</title>
     <url>/posts/400024894.html/</url>
-    <content><![CDATA[<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我是在大一下，一个学姐面试的时候，第一次听闻闭包这个名词。当时听了一些学长的解释（虽然没怎么听懂），但是觉得，似乎很高级的样子。</p>
 <p>如今时隔一年，跟闭包也打了不少交道，终于也能谈一谈自己对于它的理解了。</p>
 <h2 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h2><span id="more"></span>
 
@@ -2833,9 +2730,6 @@
 <p><strong>闭包能够造成内存泄漏</strong></p>
 <p>页面不关闭，变量就一直在，不能被垃圾回收机制回收或者手动清除。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript高级</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -2843,7 +2737,7 @@
   <entry>
     <title>框架简介之Vue.js</title>
     <url>/posts/2624959054.html/</url>
-    <content><![CDATA[<h1 id="框架介绍"><a href="#框架介绍" class="headerlink" title="框架介绍"></a>框架介绍</h1><h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
+    <content><![CDATA[<h2 id="前端框架有哪些？"><a href="#前端框架有哪些？" class="headerlink" title="前端框架有哪些？"></a>前端框架有哪些？</h2><h3 id="React（GitHub-No-1）"><a href="#React（GitHub-No-1）" class="headerlink" title="React（GitHub No.1）"></a>React（GitHub No.1）</h3><p>React起源于Facebook的内部消息。React官方是这样介绍的它：一个声明式、高效、灵活的、创建用户界面的JavaScript库，即使React的主要作用是构建UI，但是项目的逐渐成长已经使得react成为前后端通吃的WebApp解决方案。</p>
 <h3 id="Vue（GitHub-No-2）"><a href="#Vue（GitHub-No-2）" class="headerlink" title="Vue（GitHub No.2）"></a>Vue（GitHub No.2）</h3><p>vue官网说：Vue.js 是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。<br>渐进式，我个人理解就是阶梯式向前。vue是轻量级的，它有很多独立的功能或库，我们会根据我们的项目来选用vue的一些功能。就像我们开发项目时如果只用到vue的声明式渲染，我就只用vue的声明渲染，而我们要用他的组件系统，我们可以引用它的组件系统。<br>vue的渐进式表现为：</p>
 <span id="more"></span>
 
@@ -2886,9 +2780,6 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4, 5]</span><br><span class="line">  var newArr = arr.map(function (item) &#123;</span><br><span class="line">    return item * 2</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(newArr)</span><br></pre></td></tr></table></figure>
 
 ]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
       <tags>
         <tag>Vue</tag>
       </tags>
@@ -2896,7 +2787,7 @@
   <entry>
     <title>Vue.js基础环境的搭建以及简单使用Element-ui</title>
     <url>/posts/3896443464.html/</url>
-    <content><![CDATA[<h1 id="Vue（2-x）"><a href="#Vue（2-x）" class="headerlink" title="Vue（2.x）"></a>Vue（2.x）</h1><h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
+    <content><![CDATA[<h2 id="Vue的环境配置"><a href="#Vue的环境配置" class="headerlink" title="Vue的环境配置"></a>Vue的环境配置</h2><h3 id="Node-js的安装"><a href="#Node-js的安装" class="headerlink" title="Node.js的安装"></a>Node.js的安装</h3><p>Vue的运行是依赖node进行的，所以安装Vue之前，要先去node的官网去安装node。安装结束之后可以使用下面的命令查看安装是否成功。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
 
 <h3 id="npm-yarn"><a href="#npm-yarn" class="headerlink" title="npm/yarn"></a>npm/yarn</h3><p>npm（node package manager），俗称包管理器（类比于java里的maven），顾名思义，主要功能就是管理node包，包括：安装、卸载、更新等等。</p>
@@ -3035,9 +2926,6 @@
 <p>这样，我们的element就是引用成功的。</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>组件库提高了前端人员的开发效率，这个是肯定的，但是这并不是说前端开发就不需要掌握CSS的知识了，组件不是万能的，在项目中，肯定要依据项目状态对组件有或多或少的修改，所以还是建议想学前端的同学要学好CSS，打好基础很重要（以后封装一个自己的组件库，还不是想怎么改就怎么改）。</p>
 ]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
       <tags>
         <tag>Vue</tag>
       </tags>
@@ -3080,9 +2968,6 @@
 
 <p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
 ]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
       <tags>
         <tag>Hexo</tag>
       </tags>
@@ -3174,9 +3059,6 @@
 
 <p>这样，就设置完成了，站点访客数、访问次数显示在网址底部，文章阅读次数在文章开头。</p>
 ]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
       <tags>
         <tag>Hexo</tag>
       </tags>
@@ -3266,9 +3148,6 @@
 <p>在GitHub上你创建的仓库里就会多一个叫做CNAME的文件了</p>
 <p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
 ]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
       <tags>
         <tag>踩坑日记</tag>
         <tag>Hexo</tag>
@@ -3326,9 +3205,6 @@
 <li>3.属于永久存储，同H5的localStorage一样</li>
 </ul>
 ]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
       <tags>
         <tag>小程序</tag>
       </tags>
@@ -3352,10 +3228,6 @@
 <p>这是我在项目中，有一处请求对象需要是formData对象的时候，伙伴对上边代码做出的修改，避免了所有的请求都会被强制转换成字符串的问题。</p>
 <h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><p>我百度查阅了一下，csdn上有一博主是这样做的，他在请求的时候修改了axios源码中的transformRequest方法，把对data的处理变成了自己想要的样子，我觉得这样也很好，但是我当初没想到emm<br>附上该博主的链接：<a href="https://blog.csdn.net/zemprogram/article/details/100599613">https://blog.csdn.net/zemprogram/article/details/100599613</a><br>附上本小白项目的链接，入门菜鸟，请多指教：<a href="https://gitee.com/wang-enze/rank">https://gitee.com/wang-enze/rank</a></p>
 ]]></content>
-      <categories>
-        <category>踩坑日记</category>
-        <category>Vue</category>
-      </categories>
       <tags>
         <tag>Vue</tag>
         <tag>Axios</tag>
@@ -3402,9 +3274,6 @@
 <p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
 ]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
       <tags>
         <tag>JavaScript</tag>
       </tags>
@@ -3472,9 +3341,6 @@
 <p>两列布局的要点就是设置两个项目的宽度，其中左侧项目通过flex-basis属性设置为固定宽度，另一个项目将flex-grow设置为1，让其根据剩余空间自动撑满。为了让右侧元素先加载，可以使用order属性调整其位置。</p>
 <h5 id="3-三列布局"><a href="#3-三列布局" class="headerlink" title="3.三列布局"></a>3.三列布局</h5><p>三列布局的处理思路和两列布局是一致的，这里就不多做阐述，都是利用项目之间的比例关系来实现。</p>
 ]]></content>
-      <categories>
-        <category>Css</category>
-      </categories>
       <tags>
         <tag>Css</tag>
         <tag>Flex</tag>
