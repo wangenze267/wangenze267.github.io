@@ -168,6 +168,53 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaScript变量提升</title>
+    <url>/posts/388126410.html/</url>
+    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
+<p>先从一个简单的例子来入手：</p>
+<blockquote>
+<p>a = 2;<br>var a;<br>console.log(a);</p>
+</blockquote>
+<span id="more"></span>
+
+<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
+<blockquote>
+<p>var a;<br>a = 2;<br>console.log(a);</p>
+</blockquote>
+<p>那么我们再看一个例子：</p>
+<blockquote>
+<p>console.log(a);<br>var a = 2;</p>
+</blockquote>
+<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
+<blockquote>
+<p>var a;<br>console.log(a);<br>a = 2;</p>
+</blockquote>
+<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
+</blockquote>
+<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
+<p>那么多个函数声明怎么办呢？</p>
+<blockquote>
+<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
+</blockquote>
+<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
+<p>还有最后一个例子了：</p>
+<blockquote>
+<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
+</blockquote>
+<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
+]]></content>
+      <categories>
+        <category>JavaScript进阶</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript中的设计模式-代理模式</title>
     <url>/posts/1278378512.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学学设计模式，每次更一个，实在太多了。</p>
@@ -291,53 +338,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript变量提升</title>
-    <url>/posts/388126410.html/</url>
-    <content><![CDATA[<h2 id="js变量提升"><a href="#js变量提升" class="headerlink" title="js变量提升"></a>js变量提升</h2><p>JavaScript是单线程语言，所以执行肯定是按顺序执行。但是并不是逐行的分析和执行，而是一段一段地分析执行，会先进行编译阶段然后才是执行阶段。在编译阶段阶段，代码真正执行前的几毫秒，会检测到所有的变量和函数声明，所有这些函数和变量声明都被添加到名为Lexical Environment的JavaScript数据结构内的内存中。所以这些变量和函数能在它们真正被声明之前使用。</p>
-<p>先从一个简单的例子来入手：</p>
-<blockquote>
-<p>a = 2;<br>var a;<br>console.log(a);</p>
-</blockquote>
-<span id="more"></span>
-
-<p>以上的代码会输出什么，假如这段代码是从上到下执行的话，肯定会输出undefined，然而JavaScript却不是自上而下执行的语言。<br>这段代码的输出结果是2，意外吗？那么，为什么会这样，这个关键点就在于–<strong>变量提升</strong>。他会将当前作用域的所有变量的声明，提升到程序的顶部，因此，上面的代码等价于以下代码，这样是不是就能明白一些了？</p>
-<blockquote>
-<p>var a;<br>a = 2;<br>console.log(a);</p>
-</blockquote>
-<p>那么我们再看一个例子：</p>
-<blockquote>
-<p>console.log(a);<br>var a = 2;</p>
-</blockquote>
-<p>这段代码又会输出什么？输出2吗？<br>其实这段代码会输出undefined。这又是为什么呢？刚刚说过，JavaScript会将变量的声明提升到顶部，但是赋值语句是不会提升的，对于js来说，var a = 2是分为<strong>两步解析</strong>的：<br>1.var a;<br>2.a = 2;<br>而js只会提升 var a 这句，所以刚刚的语句等价于：</p>
-<blockquote>
-<p>var a;<br>console.log(a);<br>a = 2;</p>
-</blockquote>
-<h3 id="那么，为什么会有变量提升？"><a href="#那么，为什么会有变量提升？" class="headerlink" title="那么，为什么会有变量提升？"></a>那么，为什么会有变量提升？</h3><p>为什么会出现变量提升这个现象呢？<br>因为js与其他语言一样，都要经历编译跟执行阶段。而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量，而其他的语句都不会改变他们的顺序，因此，在编译阶段的时候，第一步就已经执行了，而第二部则是在执行阶段执行到该语句的时候才执行。</p>
-<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>js的变量声明应该大体上可以分三种：var声明、let与const声明和函数声明。<br>函数声明与其他声明一起出现的时候，就可能会引起一些冲突。我们接着往下看：</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘fn’);<br>}<br>var fn = 2;</p>
-</blockquote>
-<p>你觉得会输出什么？这么写会报错吗？<br>其实输出的结果是fn。这就解释了我们刚刚的问题，当函数声明与其他声明一起出现的时候，是以谁为准呢？答案就是，<strong>函数声明高于一切，毕竟函数是js的贵族阶级</strong>。</p>
-<p>那么多个函数声明怎么办呢？</p>
-<blockquote>
-<p>fn();<br>function fn () {<br>console.log(‘1’);<br>}<br>function fn () {<br>console.log(‘2’);<br>}</p>
-</blockquote>
-<p>以上代码输出结果为2。这是因为<strong>有多个函数声明的时候，是由最后的函数声明来替代前面的</strong>。</p>
-<p>还有最后一个例子了：</p>
-<blockquote>
-<p>fn();<br>var fn = function () {<br>console.log(‘fn’);<br>}</p>
-</blockquote>
-<p>经过了上面的理解，再看这个是不是就很简单了呀？这个跟第二个例子是一样的，var fn = function() {}这种格式我们叫做函数表达式。<br>它其实也分为两部分：<br>1.var fn;<br>2.fn = function() {};<br>参考例2，我们可以知道，这个的结果应该是报错了(因为fn声明但未赋值，因此fn是undefined)。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>那么，来总结一下吧。<br>1.js会将变量的声明提升到js顶部执行，对于var a = 2这种语句，会拆分开，将var a这步进行提升。<br>2.变量提升的本质其实是js引擎在编译的时候，就将所有的变量声明了，因此在执行的时候，所有的变量都已经完成声明。<br>3.当有多个同名变量的时候，函数声明会覆盖其他的声明。如果有多个函数声明，则由最后一个函数声明覆盖之前的所有声明。</p>
-]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -513,6 +513,61 @@
       </tags>
   </entry>
   <entry>
+    <title>Node.js学习笔记之异步编程部分（一）</title>
+    <url>/posts/3168823204.html/</url>
+    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
+<li><p>回调函数格式规范</p>
+<ul>
+<li>error-first callback</li>
+<li>Node-style callback</li>
+</ul>
+</li>
+<li><p>第一个参数是error，后面的参数才是结果</p>
+</li>
+</ul>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p>
+<span id="more"></span>
+
+<p>结果：</p>
+<ul>
+<li>过</li>
+<li>不过</li>
+</ul>
+<p>ps：面试过了我们就笑一下，面试不过我们就哭！</p>
+<p>先上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">	interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(err)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">			callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个正常的面试流程：</p>
+<ul>
+<li>一面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li>
+<li>一面——-&gt;二面——&gt;三面——&gt;入职</li>
+</ul>
+<p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p>
+<p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p>
+<p>简单描述一下张三的代码结构：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p>
+<ul>
+<li><p>npm包：<code>async.js</code></p>
+</li>
+<li><p>thunk编程方式</p>
+</li>
+</ul>
+<blockquote>
+<p>现在好像这两个方式都不用了😭</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Node.js异步编程之Promise</title>
     <url>/posts/697311807.html/</url>
     <content><![CDATA[<h2 id="Node-js异步编程之Promise"><a href="#Node-js异步编程之Promise" class="headerlink" title="Node.js异步编程之Promise"></a>Node.js异步编程之Promise</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>先来介绍一下Promise是什么？</p>
@@ -577,61 +632,6 @@
 <li>catch只能返回第一个面试挂的公司，如果都想知道就要存好所有的promise的状态并且打印出来哦。</li>
 </ul>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>肝不动了，睡了睡了，总觉得上面那个例子，面试通过一家，第二家挂了他会给我返回到catch里面去呢，明天在研究一下。</p>
-]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js学习笔记之异步编程部分（一）</title>
-    <url>/posts/3168823204.html/</url>
-    <content><![CDATA[<h1 id="Node-js学习笔记之异步编程部分（一）"><a href="#Node-js学习笔记之异步编程部分（一）" class="headerlink" title="Node.js学习笔记之异步编程部分（一）"></a>Node.js学习笔记之异步编程部分（一）</h1><ul>
-<li><p>回调函数格式规范</p>
-<ul>
-<li>error-first callback</li>
-<li>Node-style callback</li>
-</ul>
-</li>
-<li><p>第一个参数是error，后面的参数才是结果</p>
-</li>
-</ul>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>你在面试之后，面试官让你回去等消息。</p>
-<span id="more"></span>
-
-<p>结果：</p>
-<ul>
-<li>过</li>
-<li>不过</li>
-</ul>
-<p>ps：面试过了我们就笑一下，面试不过我们就哭！</p>
-<p>先上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">	interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 1st&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 2nd&#x27;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			interview(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(err)&#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry at 3rd&#x27;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;smile&#x27;</span>);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">interview</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.8</span>)&#123;</span><br><span class="line">			callback(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			callback( <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;fail&#x27;</span>)); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是一个正常的面试流程：</p>
-<ul>
-<li>一面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;三面——&gt;挂掉</li>
-<li>一面——-&gt;二面——&gt;三面——&gt;入职</li>
-</ul>
-<p>看是看着这种嵌套是真的恶心，这种问题就叫做<code>回调地狱</code>，这也是比较容易出现在异步中的问题，另外一个问题就是并发了，我们用同时面试两家公司为例，毕竟这也是正常能够出现的现象。</p>
-<p>这时候张三说了：我会写我会写，还是上面代码的理念，我加一个计数器，面试过了就count++，count为2的时候，就证明两个面试都过了，这样可以用if判断并写一些逻辑。</p>
-<p>简单描述一下张三的代码结构：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">&#125;)</span><br><span class="line">interview(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;cry&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    count++</span><br><span class="line">    <span class="keyword">if</span>(count)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>大致是这个样子，看起来很麻烦。这个问题就涉及到异步流程控制问题，也就是异步的并发，针对这个问题，我们强大的社区当然是有解决方案的。</p>
-<ul>
-<li><p>npm包：<code>async.js</code></p>
-</li>
-<li><p>thunk编程方式</p>
-</li>
-</ul>
-<blockquote>
-<p>现在好像这两个方式都不用了😭</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>Node.js</category>
@@ -1202,66 +1202,6 @@
       </tags>
   </entry>
   <entry>
-    <title>什么？你还不知道Symbol？</title>
-    <url>/posts/2670144936.html/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ES6引入了一种新的原始数据类型<code>Symbol</code>表示独一无二的值。它是JavaScript语言的第七种数据类型，是一种类似于字符串的数据类型。</p>
-<h3 id="Symbol的特点"><a href="#Symbol的特点" class="headerlink" title="Symbol的特点"></a>Symbol的特点</h3><ul>
-<li>Symbol的值是唯一的，用来解决命名冲突的问题</li>
-<li>Symbol值不能与其他数据进行运算</li>
-<li>Symbol定义的对象属性不能使用<code>for...in</code>循环遍历，但是可以使用<code>Reflect.ownKeys</code>来获取对象的所有键名</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="创建Symbol的两种方式"><a href="#创建Symbol的两种方式" class="headerlink" title="创建Symbol的两种方式"></a>创建Symbol的两种方式</h3><h4 id="创建Symbol"><a href="#创建Symbol" class="headerlink" title="创建Symbol"></a>创建Symbol</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建Symbol</span></span><br><span class="line"><span class="keyword">let</span> s = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="built_in">console</span>.log(s, <span class="keyword">typeof</span> s); <span class="comment">// Symbol() &#x27;symbol&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>打印出来的数据跟想象中是不是不一样？是不是觉得<code>s</code>应该是一个很长的东西？这是因为它的唯一性在这里是不可见的，所以我们才看不见。</p>
-<p>不要慌，继续往下看，我们继续创建Symbol。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s2 = <span class="built_in">Symbol</span>(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> s3 = <span class="built_in">Symbol</span>(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s2 === s3); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>我们现在传入了两个字符串，想看看返回的值是不是一样的，发现是不一样的。</p>
-<blockquote>
-<p>我的理解：<br>虽然传入两个字符串内容一样，但是他们的编号未必一样，啊不，应该是一定不一样。</p>
-</blockquote>
-<h4 id="使用Symbol-for创建Symbol"><a href="#使用Symbol-for创建Symbol" class="headerlink" title="使用Symbol.for创建Symbol"></a>使用Symbol.for创建Symbol</h4><p>这样创建的Symbol是一个对象。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s4 = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s4, <span class="keyword">typeof</span> s4); <span class="comment">// Symbol(Ned) &#x27;symbol&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>通过<code>Symbol.for</code>创建的，我们可以通过传入同一字符串来得到唯一的symbol值的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s4 = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> s5 = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s4 === s5); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h4 id="【强调】Symbol值不能与其他数据进行运算"><a href="#【强调】Symbol值不能与其他数据进行运算" class="headerlink" title="【强调】Symbol值不能与其他数据进行运算"></a>【强调】Symbol值不能与其他数据进行运算</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> b = a + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> c = a + <span class="string">&#x27;100&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>这都是不行的，会直接在浏览器中报错。</p>
-<h3 id="Symbol的基本使用"><a href="#Symbol的基本使用" class="headerlink" title="Symbol的基本使用"></a>Symbol的基本使用</h3><blockquote>
-<p>symbol的使用场景就是给对象加属性或者方法</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> game = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;石头剪刀布&#x27;</span>，</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">up</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;这是up函数&#x27;</span>);</span><br><span class="line">    &#125;，</span><br><span class="line">    <span class="attr">down</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;这是down函数&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>现在有一个对象<code>game</code>,我们想往里添加两个方法，分别是<code>up</code>和<code>down</code>，但是我们不清楚现在对象中是否已经具有<code>up</code>和<code>down</code>两个方法，按照以往的方法，我们是不是应该打开这个对象，去里面一一查找是否具有这两个方法，如果找到了，我们是不是就应该换个名字，如果没找到，我们就可以向内添加方法，但是这个对象结构简单还好，如果稍微复杂一点的话，这个操作就会非常复杂，会耗费许多时间。</p>
-<p>在这种应用场景下，我们就应该应用<code>Symbol</code>来创建唯一值，完成这个需求。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明一个method对象</span></span><br><span class="line"><span class="keyword">let</span> methods = &#123;</span><br><span class="line">    <span class="attr">up</span>: <span class="built_in">Symbol</span>(),</span><br><span class="line">    <span class="attr">down</span>: <span class="built_in">Symbol</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向game对象中，注入方法</span></span><br><span class="line">game[methods.up] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我要上升！&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">game[methods.down] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我要下降！&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们使用这样的方式，给<code>game</code>对象添加方法，是不会破坏<code>game</code>原有的一些属性的，是非常安全快速的。</p>
-<p>下面我们打印一下<code>game</code>对象，看一下他内部是什么样子的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">name: <span class="string">&quot;石头剪刀布&quot;</span></span><br><span class="line"><span class="attr">down</span>: f()</span><br><span class="line"><span class="attr">up</span>: f()</span><br><span class="line"><span class="built_in">Symbol</span>(): f()</span><br><span class="line"><span class="built_in">Symbol</span>(): f()</span><br></pre></td></tr></table></figure>
-<p>可以看到，多出了两个Symbol函数，没有对原函数造成影响。</p>
-<h3 id="数据类型小诀窍"><a href="#数据类型小诀窍" class="headerlink" title="数据类型小诀窍"></a>数据类型小诀窍</h3><p>送大家一个记住JavaScript数据类型的小诀窍</p>
-<p>共八种</p>
-<blockquote>
-<p><strong>USONB: you are so niu bility</strong> </p>
-<p><strong>U: undefined</strong></p>
-<p><strong>S: string  symbol</strong></p>
-<p><strong>O: object</strong></p>
-<p><strong>N: null  number</strong></p>
-<p><strong>B: boolean  bigint</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>想顺便复习数据类型的话也可以看我的这篇文章：<a href="https://blog.wangez.site/posts/2884264051.html/#more">一文带你了解JavaScript的数据类型</a></strong></p>
-</blockquote>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望总结的这些知识可以让大家对symbol类型的数据有一个简单的了解。</p>
-]]></content>
-      <categories>
-        <category>JavaScript进阶</category>
-      </categories>
-      <tags>
-        <tag>ES6</tag>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Hexo搭建自己的博客</title>
     <url>/posts/735412972.html/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前一直在用typecho来做自己的博客，因为他操作比较简单，但是前几日修改一些配置的时候，看着满屏的php代码实在有些头疼，在朋友的推荐下，我成功的入坑了hexo，下面分享一些自己搭建博客的过程，尽量让读者避开一些坑。</p>
@@ -1352,6 +1292,66 @@
       <tags>
         <tag>踩坑日记</tag>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么？你还不知道Symbol？</title>
+    <url>/posts/2670144936.html/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ES6引入了一种新的原始数据类型<code>Symbol</code>表示独一无二的值。它是JavaScript语言的第七种数据类型，是一种类似于字符串的数据类型。</p>
+<h3 id="Symbol的特点"><a href="#Symbol的特点" class="headerlink" title="Symbol的特点"></a>Symbol的特点</h3><ul>
+<li>Symbol的值是唯一的，用来解决命名冲突的问题</li>
+<li>Symbol值不能与其他数据进行运算</li>
+<li>Symbol定义的对象属性不能使用<code>for...in</code>循环遍历，但是可以使用<code>Reflect.ownKeys</code>来获取对象的所有键名</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="创建Symbol的两种方式"><a href="#创建Symbol的两种方式" class="headerlink" title="创建Symbol的两种方式"></a>创建Symbol的两种方式</h3><h4 id="创建Symbol"><a href="#创建Symbol" class="headerlink" title="创建Symbol"></a>创建Symbol</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建Symbol</span></span><br><span class="line"><span class="keyword">let</span> s = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="built_in">console</span>.log(s, <span class="keyword">typeof</span> s); <span class="comment">// Symbol() &#x27;symbol&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>打印出来的数据跟想象中是不是不一样？是不是觉得<code>s</code>应该是一个很长的东西？这是因为它的唯一性在这里是不可见的，所以我们才看不见。</p>
+<p>不要慌，继续往下看，我们继续创建Symbol。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s2 = <span class="built_in">Symbol</span>(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> s3 = <span class="built_in">Symbol</span>(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s2 === s3); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>我们现在传入了两个字符串，想看看返回的值是不是一样的，发现是不一样的。</p>
+<blockquote>
+<p>我的理解：<br>虽然传入两个字符串内容一样，但是他们的编号未必一样，啊不，应该是一定不一样。</p>
+</blockquote>
+<h4 id="使用Symbol-for创建Symbol"><a href="#使用Symbol-for创建Symbol" class="headerlink" title="使用Symbol.for创建Symbol"></a>使用Symbol.for创建Symbol</h4><p>这样创建的Symbol是一个对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s4 = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s4, <span class="keyword">typeof</span> s4); <span class="comment">// Symbol(Ned) &#x27;symbol&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>通过<code>Symbol.for</code>创建的，我们可以通过传入同一字符串来得到唯一的symbol值的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s4 = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> s5 = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;Ned&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s4 === s5); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="【强调】Symbol值不能与其他数据进行运算"><a href="#【强调】Symbol值不能与其他数据进行运算" class="headerlink" title="【强调】Symbol值不能与其他数据进行运算"></a>【强调】Symbol值不能与其他数据进行运算</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> b = a + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> c = a + <span class="string">&#x27;100&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>这都是不行的，会直接在浏览器中报错。</p>
+<h3 id="Symbol的基本使用"><a href="#Symbol的基本使用" class="headerlink" title="Symbol的基本使用"></a>Symbol的基本使用</h3><blockquote>
+<p>symbol的使用场景就是给对象加属性或者方法</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> game = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;石头剪刀布&#x27;</span>，</span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">up</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;这是up函数&#x27;</span>);</span><br><span class="line">    &#125;，</span><br><span class="line">    <span class="attr">down</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;这是down函数&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在有一个对象<code>game</code>,我们想往里添加两个方法，分别是<code>up</code>和<code>down</code>，但是我们不清楚现在对象中是否已经具有<code>up</code>和<code>down</code>两个方法，按照以往的方法，我们是不是应该打开这个对象，去里面一一查找是否具有这两个方法，如果找到了，我们是不是就应该换个名字，如果没找到，我们就可以向内添加方法，但是这个对象结构简单还好，如果稍微复杂一点的话，这个操作就会非常复杂，会耗费许多时间。</p>
+<p>在这种应用场景下，我们就应该应用<code>Symbol</code>来创建唯一值，完成这个需求。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明一个method对象</span></span><br><span class="line"><span class="keyword">let</span> methods = &#123;</span><br><span class="line">    <span class="attr">up</span>: <span class="built_in">Symbol</span>(),</span><br><span class="line">    <span class="attr">down</span>: <span class="built_in">Symbol</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向game对象中，注入方法</span></span><br><span class="line">game[methods.up] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我要上升！&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">game[methods.down] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我要下降！&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们使用这样的方式，给<code>game</code>对象添加方法，是不会破坏<code>game</code>原有的一些属性的，是非常安全快速的。</p>
+<p>下面我们打印一下<code>game</code>对象，看一下他内部是什么样子的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">name: <span class="string">&quot;石头剪刀布&quot;</span></span><br><span class="line"><span class="attr">down</span>: f()</span><br><span class="line"><span class="attr">up</span>: f()</span><br><span class="line"><span class="built_in">Symbol</span>(): f()</span><br><span class="line"><span class="built_in">Symbol</span>(): f()</span><br></pre></td></tr></table></figure>
+<p>可以看到，多出了两个Symbol函数，没有对原函数造成影响。</p>
+<h3 id="数据类型小诀窍"><a href="#数据类型小诀窍" class="headerlink" title="数据类型小诀窍"></a>数据类型小诀窍</h3><p>送大家一个记住JavaScript数据类型的小诀窍</p>
+<p>共八种</p>
+<blockquote>
+<p><strong>USONB: you are so niu bility</strong> </p>
+<p><strong>U: undefined</strong></p>
+<p><strong>S: string  symbol</strong></p>
+<p><strong>O: object</strong></p>
+<p><strong>N: null  number</strong></p>
+<p><strong>B: boolean  bigint</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>想顺便复习数据类型的话也可以看我的这篇文章：<a href="https://blog.wangez.site/posts/2884264051.html/#more">一文带你了解JavaScript的数据类型</a></strong></p>
+</blockquote>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望总结的这些知识可以让大家对symbol类型的数据有一个简单的了解。</p>
+]]></content>
+      <categories>
+        <category>JavaScript进阶</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
