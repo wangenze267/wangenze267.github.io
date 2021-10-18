@@ -4,9 +4,6 @@ author: Ned
 tag:
   - 字节青训营
   - JavaScript
-categories:
- - 经历
- - JavaScript进阶
 abbrlink: 98016397
 ---
 

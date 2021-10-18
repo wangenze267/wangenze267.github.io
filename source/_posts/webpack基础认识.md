@@ -2,8 +2,6 @@
 title: webpack基础认识
 author: Ned
 tag: webpack
-categories:
- - webpack
 abbrlink: 3206731080
 ---
 

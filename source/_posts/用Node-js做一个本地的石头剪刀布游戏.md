@@ -3,8 +3,6 @@ title: 用Node.js做一个本地的石头剪刀布游戏
 tags:
   - Node.js
   - 经历
-categories:
- - Node.js
 abbrlink: 2316163776
 date: 2021-10-02 23:59:41
 ---

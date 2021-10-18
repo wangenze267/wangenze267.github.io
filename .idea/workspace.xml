@@ -2,8 +2,52 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c73015b8-2dd0-47f2-9f2d-58df3315a0fb" name="默认变更列表" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/ES6模块化.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/ES6模块化.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/JS中，函数原来有这么多种定义方法（暑假开始！）.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/JS中，函数原来有这么多种定义方法（暑假开始！）.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/JavaScript中的设计模式.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/JavaScript中的设计模式.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/JavaScript变量提升.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/JavaScript变量提升.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/JavaScript数组去重问题.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/JavaScript数组去重问题.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/JavaScript的继承，原型和原型链.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/JavaScript的继承，原型和原型链.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/Node-js异步编程之Promise.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Node-js异步编程之Promise.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/Node.js之callback.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Node.js之callback.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/Node.js之事件循环.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Node.js之事件循环.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/Node.js的非阻塞IO.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Node.js的非阻塞IO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/Vue.js基础环境的搭建以及简单使用Element-ui.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Vue.js基础环境的搭建以及简单使用Element-ui.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/axios踩坑日记.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/axios踩坑日记.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/promise使用方法.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/promise使用方法.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/_posts/webpack基础认识.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/webpack基础认识.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/中秋想赏月却不想出门怎么办.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/中秋想赏月却不想出门怎么办.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/什么？你还不知道Symbol？.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/什么？你还不知道Symbol？.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/使用Hexo搭建自己的博客.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/使用Hexo搭建自己的博客.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/假期总结（暑假结束！）.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/假期总结（暑假结束！）.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/关于Hexo使用Next主题的一些优化.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/关于Hexo使用Next主题的一些优化.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/关于Hexo配置使用Next主题.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/关于Hexo配置使用Next主题.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/关于作用域与作用域链的理解.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/关于作用域与作用域链的理解.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/关于浏览器的渲染进程.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/关于浏览器的渲染进程.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/关于闭包的一些理解.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/关于闭包的一些理解.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/分享一次踩坑，一次自己封装的uni官方api.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/分享一次踩坑，一次自己封装的uni官方api.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/前端也要学习基本的UI设计原则与实践套路.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/前端也要学习基本的UI设计原则与实践套路.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/前端知识链条中少不了的一环--Ajax.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/前端知识链条中少不了的一环--Ajax.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/如何写好JavaScript（上）.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/如何写好JavaScript（上）.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/如何写好JavaScript（下）.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/如何写好JavaScript（下）.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/学会这些，再也不怕水平垂直居中了.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/学会这些，再也不怕水平垂直居中了.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/弹性盒模型-flex.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/弹性盒模型-flex.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/微信小程序相关.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/微信小程序相关.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/我与前端那割舍不开的情缘.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/我与前端那割舍不开的情缘.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/数据类型.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/数据类型.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/框架简介之Vue.js.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/框架简介之Vue.js.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/用Node-js做一个本地的石头剪刀布游戏.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/用Node-js做一个本地的石头剪刀布游戏.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/用那么久this了，来详细了解一下.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/用那么久this了，来详细了解一下.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/简单的了解一下递归.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/简单的了解一下递归.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/组件库计划，启航！.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/组件库计划，启航！.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/网络安全-XSS基础知识.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/网络安全-XSS基础知识.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/解构运算符的理解与运用.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/解构运算符的理解与运用.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/跨域的问题终于能解决了.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/跨域的问题终于能解决了.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/都2021年了，你还不会防抖吗？.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/都2021年了，你还不会防抖吗？.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/都2021年了，节流是不是也应该了解一下了.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/都2021年了，节流是不是也应该了解一下了.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/link/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/link/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/butterfly/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/butterfly/_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +68,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
       <changelist id="c73015b8-2dd0-47f2-9f2d-58df3315a0fb" name="默认变更列表" comment="" />
@@ -32,7 +77,11 @@
       <option name="presentableId" value="Default" />
       <updated>1633444440284</updated>
       <workItem from="1633444441382" duration="3000" />
+      <workItem from="1633942593567" duration="919000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

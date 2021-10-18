@@ -3,8 +3,6 @@ title: 用那么久this了，来详细了解一下
 author: Ned
 tags:
   - JavaScript
-categories:
- - JavaScript高级
 abbrlink: 724479206
 date: 2021-10-06 08:00:15
 ---

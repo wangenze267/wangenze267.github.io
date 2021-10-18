@@ -5,9 +5,6 @@ tags:
   - Axios
   - Vue
   - 踩坑日记
-categories:
- - 踩坑日记
- - Vue
 abbrlink: 2698809561
 ---
 

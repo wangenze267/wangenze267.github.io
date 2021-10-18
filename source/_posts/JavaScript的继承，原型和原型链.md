@@ -2,8 +2,6 @@
 title: JavaScript的继承，原型和原型链
 tags:
   - JavaScript
-categories:
- - JavaScript进阶
 abbrlink: 2566346867
 date: 2021-10-04 12:26:58
 ---

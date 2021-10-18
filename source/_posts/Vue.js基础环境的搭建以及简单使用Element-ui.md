@@ -2,12 +2,8 @@
 title: Vue.js基础环境的搭建以及简单使用Element-ui
 author: Ned
 tags: Vue
-categories:
- - Vue
 abbrlink: 3896443464
 ---
-
-# Vue（2.x）
 
 ## Vue的环境配置
 

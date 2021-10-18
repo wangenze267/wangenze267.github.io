@@ -4,13 +4,9 @@ author: Ned
 tags:
   - ES6
   - JavaScript
-categories:
- - JavaScript高级
 abbrlink: 3499638177
 date: 2021-10-08 17:19:49
 ---
-
-# Promise
 
 ## 前言
 

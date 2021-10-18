@@ -2,12 +2,8 @@
 title: Node.js学习笔记之异步编程部分（一）
 author: Ned
 tags: Node.js
-categories:
- - Node.js
 abbrlink: 3168823204
 ---
-
-# Node.js学习笔记之异步编程部分（一）
 
 - 回调函数格式规范
   - error-first callback

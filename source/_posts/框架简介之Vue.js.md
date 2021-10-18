@@ -2,12 +2,8 @@
 title: 框架简介之Vue.js
 author: Ned
 tags: Vue
-categories:
- - Vue
 abbrlink: 2624959054
 ---
-
-# 框架介绍
 
 ## 前端框架有哪些？
 

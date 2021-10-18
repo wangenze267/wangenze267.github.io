@@ -3,8 +3,6 @@ title: 快速了解ES6模块化少不了这篇文章
 author: Ned
 tags:
   - ES6
-categories:
- - JavaScript进阶
 abbrlink: 3892826279
 ---
 

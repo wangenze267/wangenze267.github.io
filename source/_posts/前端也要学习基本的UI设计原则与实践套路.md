@@ -4,8 +4,6 @@ author: Ned
 tag:
  - 经历
  - 字节青训营
-categories:
- - 经历
 abbrlink: 2086971120
 ---
 

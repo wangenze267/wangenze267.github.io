@@ -2,12 +2,8 @@
 title: Node.js之事件循环
 author: Ned
 tags: Node.js
-categories:
- - Node.js
 abbrlink: 3309484712
 ---
-
-# Node.js之事件循环
 
 ### 简单叙述一下什么是事件循环
 

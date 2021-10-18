@@ -4,8 +4,6 @@ author: Ned
 tags:
   - JavaScript
   - ES6
-categories:
- - JavaScript基础
 abbrlink: 1173819435
 ---
 
