@@ -4,7 +4,35 @@
   <url>
     <loc>https://wangenze267.github.io/posts/2621331394.html/</loc>
     
-    <lastmod>2021-11-25</lastmod>
+    <lastmod>2022-01-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangenze267.github.io/posts/4000447826.html/</loc>
+    
+    <lastmod>2022-01-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangenze267.github.io/posts/2834145920.html/</loc>
+    
+    <lastmod>2022-01-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangenze267.github.io/posts/3575722895.html/</loc>
+    
+    <lastmod>2022-01-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangenze267.github.io/posts/2223466213.html/</loc>
+    
+    <lastmod>2022-01-01</lastmod>
     
   </url>
   
@@ -410,14 +438,14 @@
 
   
   <url>
-    <loc>https://wangenze267.github.io/tags/ES6/</loc>
+    <loc>https://wangenze267.github.io/tags/JavaScript/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/JavaScript/</loc>
+    <loc>https://wangenze267.github.io/tags/ES6/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -439,6 +467,20 @@
   
   <url>
     <loc>https://wangenze267.github.io/tags/Vue/</loc>
+    <lastmod>2022-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangenze267.github.io/tags/CSS/</loc>
+    <lastmod>2022-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangenze267.github.io/tags/%E6%95%B4%E6%B4%BB%E7%B3%BB%E5%88%97/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -494,13 +536,6 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/uni-app/</loc>
-    <lastmod>2022-01-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://wangenze267.github.io/tags/%E5%AD%97%E8%8A%82%E9%9D%92%E8%AE%AD%E8%90%A5/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
@@ -508,14 +543,14 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/CSS/</loc>
+    <loc>https://wangenze267.github.io/tags/uni-app/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/Flex/</loc>
+    <loc>https://wangenze267.github.io/tags/%E9%9D%A2%E8%AF%95%E4%B8%93%E6%A0%8F/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -529,7 +564,7 @@
   </url>
   
   <url>
-    <loc>https://wangenze267.github.io/tags/%E6%95%B4%E6%B4%BB%E7%B3%BB%E5%88%97/</loc>
+    <loc>https://wangenze267.github.io/tags/Flex/</loc>
     <lastmod>2022-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
