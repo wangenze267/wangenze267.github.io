@@ -2,11 +2,11 @@
   class_desc: 
   link_list:
     - name: Ned
-      link: https://wangez.link
+      link: https://wangez.site
       avatar: https://blog.wangez.site/image/avatar.jpg
       descr: 小小前端成长日记
 
-- class_name: 博主的朋友们
+- class_name: 博主的同学们
   class_desc: 
   link_list:
     - name: Cambria     # 昵称
@@ -50,6 +50,17 @@
       link: https://note.fzf404.top/#/
       descr: 小f的笔记本
     - name: BoW
-      avatar: https://blog.bo6.top/img/avatar/avatar.jpg
+      avatar: http://blog.bo6.top/images/avatar.jpg
       link: https://blog.bo6.top/
       descr: 小博的个人博客
+    - name: Jeckie
+      avatar: https://blog.wangez.site/img/friend_404.gif
+      link: http://blog.Jeckie.top
+      descr: 后端萌新瑟瑟发抖
+- class_name: 博主的朋友们
+  class_desc: 
+  link_list:
+    - name: 小黑说Java
+      avatar: https://gitee.com/heiz123/heizpic/raw/master/wechat/blog_logo.png
+      link: http://heiz123.com
+      descr: 小黑说Java
