@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>对宏任务和微任务的理解 | Wangez-Blog</title><meta name="keywords" content="JavaScript"><meta name="author" content="Ned"><meta name="copyright" content="Ned"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="欢迎小伙伴们持续关注我的面试专栏，地址：Ned的面试加油站  前言宏任务（macroTask）和微任务（microTask），都是JavaScript中异步中的一些概念，如果你对其还一头雾水，那就跟着我在捋一遍，加深一下印象。 老规矩，先上图：  梳理这块主要还是为了让自己对代码执行的逻辑能够更加的清晰，当然，某些原因的还是应对一些面试题。 什么是宏任务，什么是微任务？我们来以题入手，这应该是一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对宏任务和微任务的理解">
+<meta property="og:url" content="https://wangenze267.github.io/posts/1628596249.html/index.html">
+<meta property="og:site_name" content="Wangez-Blog">
+<meta property="og:description" content="欢迎小伙伴们持续关注我的面试专栏，地址：Ned的面试加油站  前言宏任务（macroTask）和微任务（microTask），都是JavaScript中异步中的一些概念，如果你对其还一头雾水，那就跟着我在捋一遍，加深一下印象。 老规矩，先上图：  梳理这块主要还是为了让自己对代码执行的逻辑能够更加的清晰，当然，某些原因的还是应对一些面试题。 什么是宏任务，什么是微任务？我们来以题入手，这应该是一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.wangez.site/img/11.jpg">
+<meta property="article:published_time" content="2022-02-15T03:16:10.583Z">
+<meta property="article:modified_time" content="2022-02-15T03:20:12.935Z">
+<meta property="article:author" content="Ned">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.wangez.site/img/11.jpg"><link rel="shortcut icon" href="/image/favicon.ico"><link rel="canonical" href="https://wangenze267.github.io/posts/1628596249.html/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ebc804bb1afaa8fa7c3ca146640388cc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ned","link":"链接: ","source":"来源: Wangez-Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '对宏任务和微任务的理解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-15 11:20:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2942330_r9846b4pm7.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Wangez-Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://blog.wangez.site/image/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">57</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Wangez-Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">对宏任务和微任务的理解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-15T03:16:10.583Z" title="发表于 2022-02-15 11:16:10">2022-02-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-15T03:20:12.935Z" title="更新于 2022-02-15 11:20:12">2022-02-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="对宏任务和微任务的理解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><blockquote>
+<p>欢迎小伙伴们持续关注我的面试专栏，地址：<a target="_blank" rel="noopener" href="https://juejin.cn/column/7032653725189537805">Ned的面试加油站</a></p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宏任务（macroTask）和微任务（microTask），都是JavaScript中异步中的一些概念，如果你对其还一头雾水，那就跟着我在捋一遍，加深一下印象。</p>
+<p>老规矩，先上图：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ff5789dbf514ac09c6449d594fe6cea~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>梳理这块主要还是为了让自己对代码执行的逻辑能够更加的清晰，当然，某些原因的还是应对一些面试题。</p>
+<h2 id="什么是宏任务，什么是微任务？"><a href="#什么是宏任务，什么是微任务？" class="headerlink" title="什么是宏任务，什么是微任务？"></a>什么是宏任务，什么是微任务？</h2><p>我们来以题入手，这应该是一道比较常见的题了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">100</span>)</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">200</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">300</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">400</span>)</span><br><span class="line"><span class="comment">// 答案为： 100 400 300 200</span></span><br></pre></td></tr></table></figure>
+<p>问的就是，这段代码执行后，打印出来的顺序是什么？如果你心中的结果跟答案不一样的话，不要慌，首先对于<strong>同步异步</strong>有些了解的可以看出，先打印出100 400肯定是没有毛病的了，问题应该就出在200跟300上，它俩之间300为什么要比200打印的早呢？</p>
+<p><strong>异步跟出场顺序有关系，不同类型的异步跟出场顺序就没关系了</strong></p>
+<p>这就是为什么<code>setTimeout</code>在<code>promise</code>之上，但是200却在300之后打印出来的原因。假如我在打印200的那个<code>setTimeout</code>后立刻跟一个打印222的<code>setTimeout</code>，那么在同样的<code>setTimeout</code>之间，打印顺序是由你写的顺序决定的（<strong>定时时间记得一致</strong>）。</p>
+<p>那这个<strong>不同类型</strong>，就是宏任务和微任务两种了。<br>我们直接来看一看，哪些是宏任务，哪些是微任务：</p>
+<ul>
+<li>宏任务：setTimeout，setInterval，Ajax，DOM事件</li>
+<li>微任务：Promise，async/await</li>
+</ul>
+<blockquote>
+<p>微任务的执行时机要比宏任务早！（可以先记一哈，后面会继续说这点）</p>
+<p>Dom事件不是异步操作，但是它依赖了eventloop机制，所以也归在这点里了</p>
+</blockquote>
+<p>可以看出，宏任务和微任务组合起来，就是我们说的异步。先直接记住结果，再去探究为什么，看到这里应该可以回头去做出来之前那个题了，<code>setTimeout</code>是个宏任务，而<code>pormise</code>是个微任务，<strong>微任务要比宏任务执行的要早</strong>，所以先打印出来300后打印200。</p>
+<h2 id="eventloop和DOM渲染"><a href="#eventloop和DOM渲染" class="headerlink" title="eventloop和DOM渲染"></a>eventloop和DOM渲染</h2><p><code>eventloop和DOM渲染</code>是与<code>为什么宏任务比微任务执行的晚</code>有联系的，所以我们先来弄懂这个。<br>再举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> div1 = $(<span class="string">&#x27;&lt;div&gt;1234&lt;/div&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> div2 = $(<span class="string">&#x27;&lt;div&gt;1234&lt;/div&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> div3 = $(<span class="string">&#x27;&lt;div&gt;1234&lt;/div&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> div4 = $(<span class="string">&#x27;&lt;div&gt;1234&lt;/div&gt;&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> div5 = $(<span class="string">&#x27;&lt;div&gt;1234&lt;/div&gt;&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#divs&#x27;</span>).append(div1).append(div2).append(div3).append(div4).append(div5)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;length&#x27;</span>, $(divs).children().length) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>我们用js建几个div，之后添加到一个节点下，再立刻打印一下这个节点下子元素的个数，这几行执行完之后，我们可以看出打印了5，页面上也显示了五段话，这没有什么问题。</p>
+<p>但是我们这里要get的一点是，<strong>我们的眼睛是在什么时刻看到这五段话的</strong>。</p>
+<p>要了解的一点是：DOM渲染就是将DOM结构或者是js操作的内容渲染到浏览器上，让我们的眼睛可以看见。</p>
+<p>其实如果只执行这一段js，到打印那行为止，我们是能打印出来5的，但是<strong>此时此刻</strong>我们是看不见页面上新增的那五段话的。所以我们需要时机去执行这个DOM渲染的过程，就要去了解一下eventloop的过程。</p>
+<p>大概画了一下，在eventloop中主要有这么几个东西，我们再详细说一下它。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/667ed72693cb45ce802f6afef84b612f~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>首先我们知道，js是单线程了，按照顺序一行一行执行，如果某行报错则停止后续执行，然后就是<strong>先执行同步，再执行异步</strong>，看图，我们会将同步代码一行一行放入<code>Call Stack</code>中执行，遇到异步，就会移动到<code>Web APIs</code>中记录下来，等待时机，如果时机到了，将其移动到<code>Callback Queue</code>中，如果同步代码执行完，也就是<code>Call Stack</code>为空，<strong>这时候首先会尝试DOM渲染，之后再触发<code>Event Loop</code>机制</strong>，<code>Event Loop</code>开始工作，轮询查找<code>Callback Queue</code>，如果有就移动到<code>Call Stack</code>中执行。</p>
+<blockquote>
+<p>请注意：为什么是尝试DOM渲染，因为可能这一段js里并没有修改DOM，尝试是代表着如果有对DOM的操作，那么去渲染，没有的话，忽略这一步。</p>
+</blockquote>
+<h2 id="为什么宏任务比微任务执行的晚"><a href="#为什么宏任务比微任务执行的晚" class="headerlink" title="为什么宏任务比微任务执行的晚"></a>为什么宏任务比微任务执行的晚</h2><p>这段代码接着上面建立的那一堆DIV去执行，<code>alert</code>会阻断js执行，也会阻断DOM渲染，利用这一点，我们可以直观的去看出谁先谁后和DOM渲染在什么时候执行的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 微任务：DOM渲染之前执行</span></span><br><span class="line">    <span class="built_in">Promise</span>.resolve().then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> length = $(<span class="string">&#x27;#divs&#x27;</span>).children().length</span><br><span class="line">        alert(<span class="string">`微任务 <span class="subst">$&#123;length&#125;</span>`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 宏任务：DOM渲染之后执行</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> length = $(<span class="string">&#x27;#divs&#x27;</span>).children().length</span><br><span class="line">        alert(<span class="string">`宏任务 <span class="subst">$&#123;length&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="宏任务和微任务的区别"><a href="#宏任务和微任务的区别" class="headerlink" title="宏任务和微任务的区别"></a>宏任务和微任务的区别</h2><p>还是要从eventloop的角度来看，首先我们来看<code>setTimeout</code></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010351172350408483dd282884c25dfc~tplv-k3u1fbpfcp-watermark.image" alt="image.png"><br>首先要进入<code>Web APIs</code>中等待时机，完后进入<code>Callback Queue</code>中，等待<code>EventLoop</code>机制被触发之后执行，而尝试DOM渲染刚刚好，卡在了<code>Call Stack</code>空闲下来，跟执行<code>EventLoop</code>机制中间，这就是为什么<code>setTimeout</code>在DOM渲染之后执行的原因</p>
+<p>接着我们来看<code>Promise.then</code></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8cfe3389453241638131c35d30f4e0d1~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p><code>Promise</code>是<code>ES6</code>规范的，不是W3C规范的所以不经过<code>Web APIs</code>，此外与宏任务不同的一点是，有自己独特的<code>micro task queue</code>，这是为什么呢？</p>
+<ul>
+<li>微任务是ES6语法规定的</li>
+<li>宏任务是由浏览器规定的<br>规定的地方不一样导致存放位置的不一样，所以才有了图中存放位置的不同。</li>
+</ul>
+<p>所以最终我们的<code>EventLoop</code>应该是这样：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/30e4a523e05a438a9913d4cbe5950971~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p>当<code>Call Stack</code>清空之后，首先<code>执行当前的微任务</code>，再去<code>尝试DOM渲染</code>，最后<code>触发EventLoop机制</code>，执行宏任务。</p>
+<h2 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h2><p>学完了来看看自己会不会吧？</p>
+<ul>
+<li>宏任务跟微任务分别有哪些？</li>
+<li>为什么微任务的触发时机更早？</li>
+<li>微任务宏任务和DOM渲染的关系？</li>
+<li>微任务宏任务和DOM渲染，在EventLoop中的过程？<h2 id="结束啦"><a href="#结束啦" class="headerlink" title="结束啦"></a>结束啦</h2>宏任务跟微任务是JavaScript异步中的一个大块，所以快来学习吧！</li>
+</ul>
+<p>梳理好每一个知识点，稳扎稳打，才不会被面试官问倒😰~</p>
+<p>如果文章有误欢迎在评论区指出，感谢指正🔔</p>
+<p>这是我面试专栏的第二篇文章，后续会陆陆续续继续整理的，欢迎大家关注📢</p>
+<p>👉专栏地址：<a target="_blank" rel="noopener" href="https://juejin.cn/column/7032653725189537805">Ned的面试加油站</a>👈</p>
+<p>如果您觉得以上的内容还不错，不妨点个赞支持一下哦~~😇</p>
+<p>我们下期再见👋</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ned</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://wangenze267.github.io/posts/1628596249.html/">https://wangenze267.github.io/posts/1628596249.html/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wangenze267.github.io" target="_blank">Wangez-Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="http://img.wangez.site/img/11.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/image/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/image/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/image/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/image/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/2834145920.html/"><img class="next-cover" src="http://img.wangez.site/img/5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSS实现星空背景</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/2621331394.html/" title="做个PC端打字小游戏"><img class="cover" src="http://img.wangez.site/img/9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-25</div><div class="title">做个PC端打字小游戏</div></div></a></div><div><a href="/posts/1068581590.html/" title="封装一个日期格式化的工具函数"><img class="cover" src="http://img.wangez.site/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-07</div><div class="title">封装一个日期格式化的工具函数</div></div></a></div><div><a href="/posts/1583006393.html/" title="JavaScript | 让数组扁平化的三个方法"><img class="cover" src="http://img.wangez.site/img/15.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-23</div><div class="title">JavaScript | 让数组扁平化的三个方法</div></div></a></div><div><a href="/posts/1248388575.html/" title="一张图让我重学了函数表达式和函数声明"><img class="cover" src="http://img.wangez.site/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-12</div><div class="title">一张图让我重学了函数表达式和函数声明</div></div></a></div><div><a href="/posts/3499638177.html/" title="关于promise的使用方法"><img class="cover" src="http://img.wangez.site/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-08</div><div class="title">关于promise的使用方法</div></div></a></div><div><a href="/posts/724479206.html/" title="用那么久this了，来详细了解一下"><img class="cover" src="http://img.wangez.site/img/7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-06</div><div class="title">用那么久this了，来详细了解一下</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%8F%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E4%BB%BB%E5%8A%A1%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是宏任务，什么是微任务？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eventloop%E5%92%8CDOM%E6%B8%B2%E6%9F%93"><span class="toc-number">3.</span> <span class="toc-text">eventloop和DOM渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%8F%E4%BB%BB%E5%8A%A1%E6%AF%94%E5%BE%AE%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E7%9A%84%E6%99%9A"><span class="toc-number">4.</span> <span class="toc-text">为什么宏任务比微任务执行的晚</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">宏任务和微任务的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%97%AE"><span class="toc-number">6.</span> <span class="toc-text">提问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E5%95%A6"><span class="toc-number">7.</span> <span class="toc-text">结束啦</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Ned</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '3MMJqbdcNtEnRAvDBioROECS-gzGzoHsz',
+      appKey: 'K4hk4upWc4PLUI7OOfdIfbVo',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复哦！',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
