@@ -57,6 +57,14 @@
       avatar: https://blog.wangez.site/img/friend_404.gif
       link: http://blog.Jeckie.top
       descr: 后端萌新瑟瑟发抖
+    - name: More
+      avatar: http://www.m0re.work/images/favicon.ico
+      link: http://m0re.work
+      descr: 业余运维工程师、业余产品经理
+    - name: 低熵体的博客 
+      link: https://falling42.top/ 
+      avatar: https://npm.elemecdn.com/falling42-cdn@2.0.0/avatar.png 
+      descr: 低熵体的博客-藏好自己，做好清理
 - class_name: 博主的朋友们
   class_desc: 
   link_list:

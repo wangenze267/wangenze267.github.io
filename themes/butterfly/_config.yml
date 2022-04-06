@@ -668,7 +668,7 @@ aside:
   card_announcement:
     enable: true
     content:
-      - 欢迎关注我的公众号：前端成长日记<br/><img src="http://img.wangez.site/img/wxgzh.jpg" />
+      - 欢迎关注我的公众号：<b>前端成长日记</b><br/><img src="http://img.wangez.site/img/wxgzh.jpg" />
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
